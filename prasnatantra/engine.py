@@ -427,6 +427,8 @@ class PrasnaChart:
             "karyesa": karyesa,
             "direct_relationship": None,
             "yogas": [],
+            "verdict": "MAYBE",           # Classical YES / NO / MAYBE / CANNOT BE ANSWERED
+            "verdict_reason": "",         # One-line classical basis
             "success_probability": "Medium",
             "score_pct": 50,
             "timing": "Immediate / Self-realization",
@@ -471,10 +473,14 @@ class PrasnaChart:
 
             # Sincerity gate
             if not sinc_res.get("is_sincere", True):
+                evaluation["verdict"] = "CANNOT BE ANSWERED"
+                evaluation["verdict_reason"] = "Query is insincere/test — Prasna chart invalid"
                 evaluation["success_probability"] = "Inconclusive"
                 evaluation["score_pct"] = 0
                 evaluation["timing"] = "Not determinable — query marked insincere"
             else:
+                evaluation["verdict"] = "YES"
+                evaluation["verdict_reason"] = "Swami Yoga (Lagnapathi = Karyesa) — strongest possible indicator [Shatpanchasika I.3]"
                 evaluation["success_probability"] = "Very High"
                 evaluation["score_pct"] = 100
             return evaluation
@@ -840,14 +846,60 @@ class PrasnaChart:
 
         score = max(0, min(100, 50 + score + house_score_adj + shatpanchasika_adj + special_adj))
         evaluation["score_pct"] = score
-        
+
+        # ── Classical YES / NO / MAYBE verdict (Shatpanchasika Ch. I-II) ──────
+        if rel and rel["is_applying"] and rel["is_friendly"]:
+            if score >= 80:
+                evaluation["verdict"] = "YES"
+                evaluation["verdict_reason"] = (
+                    f"Ithasala (applying {rel['aspect_type']}) between {lagnapathi} and {karyesa} — "
+                    f"friendly aspect, full success. [Shatpanchasika I.3]"
+                )
+            else:
+                evaluation["verdict"] = "YES, but partially"
+                evaluation["verdict_reason"] = (
+                    f"Ithasala (applying {rel['aspect_type']}) between {lagnapathi} and {karyesa} — "
+                    f"friendly but weakened by other factors. Partial success. [Shatpanchasika II.5-8]"
+                )
+        elif rel and rel["is_applying"] and not rel["is_friendly"]:
+            evaluation["verdict"] = "YES, with struggle"
+            evaluation["verdict_reason"] = (
+                f"Hostile Ithasala ({rel['aspect_type']}) between {lagnapathi} and {karyesa} — "
+                f"success is possible but only after obstacles and effort. [Prasna Tantra Ch. II]"
+            )
+        elif rel and not rel["is_applying"]:
+            evaluation["verdict"] = "NO"
+            evaluation["verdict_reason"] = (
+                f"Easarapha (separating {rel['aspect_type']}) between {lagnapathi} and {karyesa} — "
+                f"the opportunity has passed or the matter will not materialise. [Shatpanchasika I.3]"
+            )
+        elif kamboola or nakta or yamaya:
+            yoga_name = "Kamboola" if kamboola else ("Nakta" if nakta else "Yamaya")
+            evaluation["verdict"] = "YES, through intermediary"
+            evaluation["verdict_reason"] = (
+                f"No direct Ithasala, but {yoga_name} Yoga found — matter achievable "
+                f"through a third party or after delay. [Prasna Tantra Ch. II — Intermediary Yogas]"
+            )
+        elif score >= 50:
+            evaluation["verdict"] = "MAYBE"
+            evaluation["verdict_reason"] = (
+                "Mixed indicators — no clear Ithasala or Easarapha. "
+                "Benefic placements give some hope but outcome is uncertain."
+            )
+        else:
+            evaluation["verdict"] = "NO"
+            evaluation["verdict_reason"] = (
+                f"No aspect between {lagnapathi} and {karyesa}, no intermediary Yoga, "
+                f"and unfavorable benefic/malefic balance. [Shatpanchasika I.3-4]"
+            )
+
         if score >= 80:
             evaluation["success_probability"] = "High / Certain"
         elif score >= 50:
             evaluation["success_probability"] = "Medium / Obstacles"
         else:
             evaluation["success_probability"] = "Low / Failure"
-            
+
         # 5. Timing of event calculation
         lagna_chara = self.lagna_sign % 3  # 0 = Movable, 1 = Fixed, 2 = Common
         intervening_signs = (query_sign - ref_sign) % 12
@@ -858,9 +910,9 @@ class PrasnaChart:
             mult_unit = "Weeks"
         else:
             mult_unit = "Months"
-            
+
         evaluation["timing_details"] = f"Sign Multiplication timing: {mult_val} {mult_unit} (based on {intervening_signs} intervening signs)."
-        
+
         if score >= 50:
             if lagnapathi == karyesa:
                 evaluation["timing"] = "Immediate / Self-realization"
@@ -879,19 +931,17 @@ class PrasnaChart:
         else:
             evaluation["timing"] = "Undetermined / Event Unlikely"
 
-        # 6. Final sincerity gate — ALWAYS applied last
-        # An insincere or test query must never display a meaningful verdict.
+        # 6. Final sincerity gate — overrides everything
         if not sinc_res.get("is_sincere", True):
+            evaluation["verdict"] = "CANNOT BE ANSWERED"
+            evaluation["verdict_reason"] = (
+                "Query is insincere or a test — Prasna Tantra: only a genuine first-time "
+                "question produces a valid chart. No verdict can be given."
+            )
             evaluation["success_probability"] = "Inconclusive (Insincere Query)"
             evaluation["score_pct"] = 0
             evaluation["timing"] = "Not determinable — query flagged as insincere/test"
-            evaluation["details"].insert(0,
-                "INSINCERE QUERY: Astrological indicators suggest this question is a test, "
-                "repeated query, or is not genuinely meant. Per Prasna Tantra tradition, "
-                "only a sincere first-time question produces a valid Prasna chart. "
-                "The planetary positions below are recorded but no verdict is given."
-            )
-            
+
         return evaluation
 
 # Helper function to get sign index from longitude

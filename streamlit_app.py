@@ -570,28 +570,63 @@ if st.session_state.chart and st.session_state.evaluation:
     # ------------------ CENTER PANEL: Evaluation Summary ------------------
     st.markdown("<div class='glass-card'>", unsafe_allow_html=True)
     st.markdown("<h4>✦ Evaluation Summary</h4>", unsafe_allow_html=True)
-    
-    # Display Key Metrics
+
+    # ── Classical Verdict Banner (the primary answer) ──────────────────────
+    verdict = eval_res.get("verdict", "MAYBE")
+    verdict_reason = eval_res.get("verdict_reason", "")
+
+    VERDICT_STYLES = {
+        "YES":                    ("✅", "#00c853", "#0a2e1a", "YES — The matter will succeed"),
+        "YES, but partially":     ("🟡", "#ffd600", "#1a1500", "YES (Partial) — Partial success likely"),
+        "YES, with struggle":     ("⚠️", "#ff9100", "#1a0d00", "YES (with struggle) — Success after obstacles"),
+        "YES, through intermediary": ("🔄", "#00bcd4", "#001a1f", "YES (via intermediary) — Through a third party"),
+        "MAYBE":                  ("🔮", "#9c27b0", "#12001a", "MAYBE — Outcome uncertain"),
+        "NO":                     ("❌", "#f44336", "#1a0000", "NO — The matter will not succeed"),
+        "CANNOT BE ANSWERED":     ("🚫", "#607d8b", "#0a0f12", "CANNOT BE ANSWERED — Query is insincere/test"),
+    }
+    icon, color, bg, label = VERDICT_STYLES.get(verdict, ("🔮", "#9c27b0", "#12001a", verdict))
+
+    st.markdown(f"""
+    <div style="
+        background: {bg};
+        border: 2px solid {color};
+        border-radius: 16px;
+        padding: 1.4rem 2rem;
+        margin-bottom: 1.2rem;
+        text-align: center;
+    ">
+        <div style="font-size: 3rem; line-height: 1;">{icon}</div>
+        <div style="font-size: 2rem; font-weight: 900; color: {color}; letter-spacing: 0.05em; margin-top: 0.4rem;">
+            {label}
+        </div>
+        <div style="font-size: 0.85rem; color: #aaa; margin-top: 0.6rem; font-style: italic;">
+            {verdict_reason}
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+
+    # Display Supporting Metrics
     col_m1, col_m2 = st.columns(2)
     with col_m1:
         st.metric(label="Success Chance", value=eval_res.get("success_probability", "Medium"))
     with col_m2:
         st.metric(label="Score Percentage", value=f"{eval_res.get('score_pct', 50)}%")
-        
+
     # Display Timing
     st.markdown(f"<div class='timing-highlight'>⏰ <strong>Estimated Timing:</strong> {eval_res.get('timing', 'N/A')}</div>", unsafe_allow_html=True)
-    
+
     # Coordinates details
     st.markdown(f"**Ayanamsha:** `{format_longitude(chart.ayanamsha)}` | **Lagna:** `{format_longitude(chart.lagna_sidereal)}` in **{get_sign_name(chart.lagna_sign)}**", unsafe_allow_html=True)
     st.markdown("<br>", unsafe_allow_html=True)
 
-    # Combinations Log
+    # Astrological Rationale Details
     st.markdown("##### Astrological Rationale Details")
     st.markdown("<ul class='details-list'>", unsafe_allow_html=True)
     for detail in eval_res.get("details", []):
         st.markdown(f"<li>✦ {detail}</li>", unsafe_allow_html=True)
     st.markdown("</ul>", unsafe_allow_html=True)
     st.markdown("</div>", unsafe_allow_html=True)
+
 
     # ------------------ BOTTOM PANEL: AI Astrological Interpretation ------------------
     st.markdown("<div class='glass-card'>", unsafe_allow_html=True)
