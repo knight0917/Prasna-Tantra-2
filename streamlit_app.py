@@ -31,6 +31,13 @@ st.markdown("""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap');
 
+/* Sidebar width adjustment */
+[data-testid="stSidebar"] {
+    min-width: 340px !important;
+    max-width: 340px !important;
+    width: 340px !important;
+}
+
 /* Main Streamlit container background and stars effect */
 .stApp {
     background-color: #080711;
