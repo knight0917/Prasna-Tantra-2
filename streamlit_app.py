@@ -353,65 +353,88 @@ with st.sidebar:
         time_val = time(12, 0, 0)
         st.warning("Invalid time format. Defaulted to 12:00:00")
 
-    # Geocoding Autocomplete Section
+    # Geocoding Autocomplete Section — uses Photon API (photon.komoot.io)
+    # Photon is OpenStreetMap-based like Nominatim but has no 429 rate-limit issues on cloud
     st.markdown("---")
     st.markdown("##### 📍 Resolve Location")
     search_query = st.text_input("Type City/Town Name", value="Bangalore")
-    
+
     if st.button("Search Location"):
         with st.spinner("Fetching coordinates..."):
-            url = (
-                f"https://nominatim.openstreetmap.org/search"
-                f"?q={urllib.parse.quote(search_query)}"
-                f"&format=json&addressdetails=1&limit=10"
+            # Primary: Photon (generous limits, designed for apps)
+            photon_url = (
+                f"https://photon.komoot.io/api/"
+                f"?q={urllib.parse.quote(search_query)}&limit=10&lang=en"
             )
-            headers = {"User-Agent": "PrasnaTantraAstrologyDashboard/1.0", "Accept-Language": "en"}
+            headers = {"User-Agent": "PrasnaTantraAstrologyDashboard/1.0"}
             try:
-                r = requests.get(url, headers=headers)
+                r = requests.get(photon_url, headers=headers, timeout=10)
                 if r.status_code == 200:
-                    results = r.json()
-                    if results:
-                        # Prioritise proper city/town/village results over hamlets, roads, etc.
-                        PREFERRED_TYPES = {"city", "town", "village", "suburb", "municipality",
-                                           "administrative", "county", "state"}
-                        preferred = [x for x in results if x.get("type", "") in PREFERRED_TYPES
-                                     or x.get("class", "") == "place"]
+                    data = r.json()
+                    features = data.get("features", [])
+                    if features:
+                        # Normalise GeoJSON features → {lat, lon, display_name, type}
+                        PREFERRED_TYPES = {"city", "town", "village", "suburb",
+                                           "municipality", "administrative"}
+                        results = []
+                        for f in features:
+                            props = f.get("properties", {})
+                            coords = f.get("geometry", {}).get("coordinates", [0, 0])
+                            lon_v, lat_v = coords[0], coords[1]
+                            parts = [p for p in [
+                                props.get("name", ""),
+                                props.get("city") or props.get("county", ""),
+                                props.get("state", ""),
+                                props.get("country", "")
+                            ] if p]
+                            display = ", ".join(dict.fromkeys(parts))  # deduplicate
+                            place_type = props.get("type", props.get("osm_type", "place"))
+                            results.append({
+                                "lat": str(lat_v),
+                                "lon": str(lon_v),
+                                "display_name": display,
+                                "type": place_type,
+                                "class": props.get("osm_key", "place"),
+                            })
+                        # Sort cities/towns first
+                        preferred = [x for x in results if x.get("type") in PREFERRED_TYPES]
                         rest = [x for x in results if x not in preferred]
                         st.session_state.suggestions = (preferred + rest)[:7]
-                        st.success(f"Found {len(st.session_state.suggestions)} matches!")
+                        st.success(f"Found {len(st.session_state.suggestions)} locations!")
                     else:
                         st.session_state.suggestions = []
-                        st.error("No locations found.")
+                        st.error("No locations found. Try a different spelling.")
+                elif r.status_code == 429:
+                    st.error("Search rate limit hit — please wait a moment and try again.")
                 else:
-                    st.error(f"Geocoding server error: status {r.status_code}")
+                    st.error(f"Geocoding error: HTTP {r.status_code}")
             except Exception as ex:
                 st.error(f"Geocoding failed: {ex}")
 
     # Display geocoding options if found
     if st.session_state.suggestions:
-        # Build labels that include type + coordinates so users can distinguish results
         def _label(res):
-            lat_f = float(res['lat'])
-            lon_f = float(res['lon'])
-            place_type = res.get('type', res.get('class', '?'))
+            lat_f = float(res["lat"])
+            lon_f = float(res["lon"])
+            place_type = res.get("type", "?")
             return f"{res['display_name']}  [{place_type} | {lat_f:.4f}°N, {lon_f:.4f}°E]"
 
         options_map = {_label(res): res for res in st.session_state.suggestions}
         selected = st.selectbox("Select precise location:", list(options_map.keys()))
         if selected:
             sel_res = options_map[selected]
-            lat_f = float(sel_res['lat'])
-            lon_f = float(sel_res['lon'])
+            lat_f = float(sel_res["lat"])
+            lon_f = float(sel_res["lon"])
             st.session_state.latitude = sel_res["lat"]
             st.session_state.longitude = sel_res["lon"]
-            # Auto-resolve timezone
             offset, tz_name = resolve_timezone_offset(lat_f, lon_f, date_val, time_val)
             st.session_state.tz_offset = offset
             st.session_state.tz_name = tz_name
-            st.success(f"✅ Configured: {tz_name} (UTC+{offset})")
-            # Show exact coordinates as sanity check
-            st.info(f"📍 Coordinates in use: **{lat_f:.5f}° N**, **{lon_f:.5f}° E**  \n"
-                    f"If these look wrong, use *Show Advanced Coordinates Override* below to correct them.")
+            st.success(f"Configured: {tz_name} (UTC+{offset})")
+            st.info(
+                f"Coordinates in use: **{lat_f:.5f} N**, **{lon_f:.5f} E**\n\n"
+                f"If these look wrong, use *Show Advanced Coordinates Override* below."
+            )
 
     # Advanced Coordinates Expander
     with st.expander("✦ Show Advanced Coordinates Override"):
