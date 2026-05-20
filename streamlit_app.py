@@ -33,9 +33,8 @@ st.markdown("""
 
 /* Sidebar width adjustment */
 [data-testid="stSidebar"] {
-    min-width: 340px !important;
-    max-width: 340px !important;
-    width: 340px !important;
+    min-width: 340px;
+    max-width: 50vw;
 }
 
 /* Main Streamlit container background and stars effect */
