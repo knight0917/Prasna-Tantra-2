@@ -42,8 +42,10 @@ st.markdown("""
 
 /* Sidebar width adjustment */
 [data-testid="stSidebar"] {
-    min-width: 340px;
-    max-width: 50vw;
+    min-width: 380px !important;
+    max-width: 55vw !important;
+    width: clamp(380px, 28vw, 520px) !important;
+    transition: width 0.2s ease;
 }
 
 /* Main Streamlit container background and stars effect */
@@ -454,20 +456,33 @@ if st.session_state.chart and st.session_state.evaluation:
     q_num = eval_res.get("query_num", 1)
     ref_pt = eval_res.get("ref_point_name", "Ascendant (Lagna)")
     ref_sign = eval_res.get("ref_sign_name", "Aries")
+    house_num = eval_res.get("house", 1)
+    
+    # Prasna Tantra sequential query rules
+    query_rules = {
+        1: "Q1 → Ascendant (Lagna): The 1st question always uses the rising sign as the reference point.",
+        2: "Q2 → Moon's Sign: The 2nd question counts all houses from the Moon's sign at the time of the query.",
+        3: "Q3 → Sun's Sign: The 3rd question uses the Sun's current sign as the starting reference.",
+        4: "Q4 → Jupiter's Sign: The 4th question uses Jupiter's current sign as the counting base.",
+    }
+    rule_note = query_rules.get(q_num, f"Q{q_num}+ → Stronger of Mercury/Venus: For 5th query onwards, the stronger (by Avastha) of Mercury or Venus sets the reference point.")
     
     st.markdown(f"""
-    <div class='glass-card' style='margin-bottom: 1rem; border-left: 5px solid #22d3ee;'>
-        <div style='display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;'>
-            <div>
-                <h4 style='margin: 0; color: #22d3ee; font-family: "Outfit", sans-serif;'>✦ Question #{q_num}</h4>
-                <p style='margin: 0.25rem 0 0 0; color: #e2e8f0; font-size: 0.95rem;'>
-                    Evaluating sequential question details. Houses and aspects are counted starting from: <strong>{ref_pt}</strong> (in <strong>{ref_sign}</strong>)
+    <div class='glass-card' style='margin-bottom: 1rem; border-left: 5px solid #22d3ee; padding: 1.25rem 1.5rem;'>
+        <div style='display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 0.75rem;'>
+            <div style='flex: 1; min-width: 220px;'>
+                <div style='display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.5rem;'>
+                    <span style='background: #22d3ee; color: #080711; font-weight: 800; padding: 0.2rem 0.65rem; border-radius: 20px; font-size: 0.9rem; font-family: "Outfit", sans-serif; white-space: nowrap;'>Question #{q_num}</span>
+                    <h4 style='margin: 0; color: #f3f4f6; font-family: "Outfit", sans-serif; font-size: 1.05rem;'>Prasna Analysis</h4>
+                </div>
+                <p style='margin: 0 0 0.5rem 0; color: #cbd5e1; font-size: 0.93rem; line-height: 1.5;'>
+                    🏠 Houses counted from: <strong style='color: #22d3ee;'>{ref_pt}</strong> &nbsp;|&nbsp;
+                    ♈ Sign: <strong style='color: #a78bfa;'>{ref_sign}</strong> &nbsp;|&nbsp;
+                    🎯 Queried House: <strong style='color: #fb923c;'>House {house_num}</strong>
                 </p>
-            </div>
-            <div>
-                <span style='background: rgba(34, 211, 238, 0.15); color: #22d3ee; border: 1px solid rgba(34, 211, 238, 0.3); font-weight: 600; padding: 0.35rem 0.75rem; border-radius: 6px; font-size: 0.85rem; font-family: "Outfit", sans-serif;'>
-                    Reference: {ref_pt}
-                </span>
+                <p style='margin: 0; color: #64748b; font-size: 0.82rem; font-style: italic; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 0.5rem;'>
+                    📜 {rule_note}
+                </p>
             </div>
         </div>
     </div>
