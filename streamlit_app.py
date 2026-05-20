@@ -18,6 +18,15 @@ from timezonefinder import TimezoneFinder
 import pytz
 tf = TimezoneFinder()
 
+
+def format_longitude(deg):
+    """Formats decimal degrees into Dd Mm Ss format."""
+    d = int(deg)
+    m = int((deg - d) * 60)
+    s = int(((deg - d) * 60 - m) * 60)
+    return f"{d}° {m}' {s}\""
+
+
 # Set Page Config
 st.set_page_config(
     page_title="Prasna Tantra - Vedic Horary Astrology",
@@ -454,42 +463,31 @@ if st.session_state.chart and st.session_state.evaluation:
                 st.markdown(f"<div class='indicator-item indicator-insincere'>✗ {r}</div>", unsafe_allow_html=True)
     st.markdown("</div>", unsafe_allow_html=True)
     
-    # ------------------ CENTER PANEL: Kundali & Metrics ------------------
-    col_c1, col_c2 = st.columns([1, 1])
+    # ------------------ CENTER PANEL: Evaluation Summary ------------------
+    st.markdown("<div class='glass-card'>", unsafe_allow_html=True)
+    st.markdown("<h4>✦ Evaluation Summary</h4>", unsafe_allow_html=True)
     
-    with col_c1:
-        st.markdown("<div class='glass-card' style='text-align: center;'>", unsafe_allow_html=True)
-        st.markdown("<h4>✦ North Indian Kundali</h4>", unsafe_allow_html=True)
+    # Display Key Metrics
+    col_m1, col_m2 = st.columns(2)
+    with col_m1:
+        st.metric(label="Success Chance", value=eval_res.get("success_probability", "Medium"))
+    with col_m2:
+        st.metric(label="Score Percentage", value=f"{eval_res.get('score_pct', 50)}%")
         
-        # Draw dynamic SVG Kundali
-        svg_code = generate_kundali_svg(chart)
-        st.markdown(f"<div class='kundali-container'>{svg_code}</div>", unsafe_allow_html=True)
-        
-        st.markdown("<br>", unsafe_allow_html=True)
-        st.markdown(f"**Ayanamsha:** `{chart.ayanamsha_formatted}` | **Lagna:** `{chart.lagna_longitude_formatted}` in **{get_sign_name(chart.lagna_sign)}**", unsafe_allow_html=True)
-        st.markdown("</div>", unsafe_allow_html=True)
-        
-    with col_c2:
-        st.markdown("<div class='glass-card'>", unsafe_allow_html=True)
-        st.markdown("<h4>✦ Evaluation Summary</h4>", unsafe_allow_html=True)
-        
-        # Display Key Metrics
-        col_m1, col_m2 = st.columns(2)
-        with col_m1:
-            st.metric(label="Success Chance", value=eval_res.get("success_probability", "Medium"))
-        with col_m2:
-            st.metric(label="Score Percentage", value=f"{eval_res.get('score_pct', 50)}%")
-            
-        # Display Timing
-        st.markdown(f"<div class='timing-highlight'>⏰ <strong>Estimated Timing:</strong> {eval_res.get('timing', 'N/A')}</div>", unsafe_allow_html=True)
-        
-        # Combinations Log
-        st.markdown("##### Astrological Rationale Details")
-        st.markdown("<ul class='details-list'>", unsafe_allow_html=True)
-        for detail in eval_res.get("details", []):
-            st.markdown(f"<li>✦ {detail}</li>", unsafe_allow_html=True)
-        st.markdown("</ul>", unsafe_allow_html=True)
-        st.markdown("</div>", unsafe_allow_html=True)
+    # Display Timing
+    st.markdown(f"<div class='timing-highlight'>⏰ <strong>Estimated Timing:</strong> {eval_res.get('timing', 'N/A')}</div>", unsafe_allow_html=True)
+    
+    # Coordinates details
+    st.markdown(f"**Ayanamsha:** `{format_longitude(chart.ayanamsha)}` | **Lagna:** `{format_longitude(chart.lagna_sidereal)}` in **{get_sign_name(chart.lagna_sign)}**", unsafe_allow_html=True)
+    st.markdown("<br>", unsafe_allow_html=True)
+
+    # Combinations Log
+    st.markdown("##### Astrological Rationale Details")
+    st.markdown("<ul class='details-list'>", unsafe_allow_html=True)
+    for detail in eval_res.get("details", []):
+        st.markdown(f"<li>✦ {detail}</li>", unsafe_allow_html=True)
+    st.markdown("</ul>", unsafe_allow_html=True)
+    st.markdown("</div>", unsafe_allow_html=True)
 
     # ------------------ BOTTOM PANEL: AI Astrological Interpretation ------------------
     st.markdown("<div class='glass-card'>", unsafe_allow_html=True)
@@ -569,21 +567,24 @@ if st.session_state.chart and st.session_state.evaluation:
     tab1, tab2, tab3 = st.tabs(["🪐 Planetary Longitudes & Avasthas", "📜 Shatpanchasika & Special Predictions", "🧬 Aspect & Combustion Logs"])
     
     with tab1:
-        st.markdown("##### Astronomical Coordinates and 10-State Avasthas")
+        st.markdown("##### Planetary Positions: Planets, Rashi (Sign), Nakshatra, Pada, and House")
         rows = []
         # Add Lagna row
         rows.append({
-            "Body": "Lagna (Ascendant)",
-            "Longitude (Lahiri)": chart.lagna_longitude_formatted,
-            "Sign": get_sign_name(chart.lagna_sign),
+            "Planet / Body": "Lagna (Ascendant)",
+            "House": 1,
+            "Rashi (Sign)": get_sign_name(chart.lagna_sign),
             "Nakshatra": "—",
             "Pada": "—",
-            "Speed (deg/day)": "—",
-            "State (Avastha)": "—"
+            "State (Avastha)": "—",
+            "Longitude": format_longitude(chart.lagna_sidereal),
+            "Speed (deg/day)": "—"
         })
         # Add Planet rows
         for p, pdata in chart.planets.items():
             lon = pdata["longitude"]
+            p_sign = get_sign(lon)
+            p_house = ((p_sign - chart.lagna_sign + 12) % 12) + 1
             nak, pada, abbr = get_nakshatra_pada(lon)
             sun_lon = chart.planets["Sun"]["longitude"]
             avastha = get_planetary_avastha(p, lon, pdata, sun_lon, chart.planets)
@@ -592,13 +593,14 @@ if st.session_state.chart and st.session_state.evaluation:
                 speed_str += " (Retro)"
                 
             rows.append({
-                "Body": p,
-                "Longitude (Lahiri)": f"{int(lon%30)}° {int((lon%30-int(lon%30))*60)}' {int(((lon%30-int(lon%30))*60-int((lon%30-int(lon%30))*60))*60)}\"",
-                "Sign": get_sign_name(get_sign(lon)),
+                "Planet / Body": p,
+                "House": p_house,
+                "Rashi (Sign)": get_sign_name(p_sign),
                 "Nakshatra": nak,
                 "Pada": pada,
-                "Speed (deg/day)": speed_str,
-                "State (Avastha)": avastha
+                "State (Avastha)": avastha,
+                "Longitude": format_longitude(lon),
+                "Speed (deg/day)": speed_str
             })
             
         df = pd.DataFrame(rows)
