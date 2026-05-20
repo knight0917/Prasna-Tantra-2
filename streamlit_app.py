@@ -323,6 +323,10 @@ if "ai_reading" not in st.session_state:
     st.session_state.ai_reading = ""
 if "query_counter" not in st.session_state:
     st.session_state.query_counter = 1
+if "query_date" not in st.session_state:
+    st.session_state.query_date = date.today()
+if "query_time_str" not in st.session_state:
+    st.session_state.query_time_str = datetime.now().strftime("%H:%M:%S")
 
 # Header Section
 st.markdown("<h1 class='glow-text' style='text-align: center; margin-bottom: 0.5rem;'>✦ PRASNA TANTRA ✦</h1>", unsafe_allow_html=True)
@@ -333,8 +337,16 @@ with st.sidebar:
     st.markdown("<h3 class='glow-text'>✦ Astronomical Inputs</h3>", unsafe_allow_html=True)
     
     # Date & Time Pickers
-    date_val = st.date_input("Select Query Date", date.today())
-    time_str = st.text_input("Select Query Time (HH:MM:SS)", datetime.now().strftime("%H:%M:%S"))
+    date_val = st.date_input(
+        "Select Query Date",
+        value=st.session_state.query_date,
+        key="query_date"
+    )
+    time_str = st.text_input(
+        "Select Query Time (HH:MM:SS)",
+        value=st.session_state.query_time_str,
+        key="query_time_str"
+    )
     try:
         time_val = datetime.strptime(time_str, "%H:%M:%S").time()
     except ValueError:
