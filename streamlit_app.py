@@ -172,6 +172,40 @@ h1, h2, h3, h4, h5, h6 {
     line-height: 1.6;
     margin-bottom: 1.5rem;
 }
+
+/* Lost Property box styling */
+.lost-property-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+.lost-metric-box {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 1.25rem 1rem;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.25);
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+.lost-metric-box:hover {
+    transform: translateY(-2px);
+    border-color: rgba(255, 255, 255, 0.12);
+}
+.lost-metric-label {
+    font-size: 0.78rem;
+    color: #9ca3af;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 0.4rem;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 600;
+}
+.lost-metric-value {
+    font-size: 1.25rem;
+    font-weight: 700;
+}
 </style>
 """, unsafe_allow_html=True)
 
@@ -319,6 +353,8 @@ if "chart" not in st.session_state:
     st.session_state.chart = None
 if "evaluation" not in st.session_state:
     st.session_state.evaluation = None
+if "lost_analysis" not in st.session_state:
+    st.session_state.lost_analysis = None
 if "ai_reading" not in st.session_state:
     st.session_state.ai_reading = ""
 if "query_counter" not in st.session_state:
@@ -456,6 +492,14 @@ with st.sidebar:
         placeholder="e.g. Will my travel be safe? Will it rain today?"
     )
 
+    # Auto-detect lost property keywords
+    has_lost_kw = any(w in question_text.lower() for w in ["lost", "stolen", "theft", "missing", "find", "stole", "robbed", "where is my"])
+    analyze_lost = st.checkbox(
+        "Lost / Stolen Property Analysis (Adhyaya VI)", 
+        value=has_lost_kw, 
+        help="Check this to calculate direction, distance, recovery chances, and thief profile for lost objects/persons."
+    )
+
     # Core Action Button
     col_sub1, col_sub2 = st.columns([2, 1])
     with col_sub1:
@@ -465,6 +509,7 @@ with st.sidebar:
             st.session_state.query_counter = 1
             st.session_state.chart = None
             st.session_state.evaluation = None
+            st.session_state.lost_analysis = None
             st.session_state.ai_reading = ""
             st.rerun()
 
@@ -494,10 +539,17 @@ if submit_btn:
                 query_num=st.session_state.query_counter, 
                 special_category=special_category
             )
+
+            # Evaluate lost property if requested or if house is 6 (theft/debts)
+            lost_res = None
+            if analyze_lost or house_num == 6:
+                from prasnatantra.lost_objects import evaluate_lost_property
+                lost_res = evaluate_lost_property(chart)
             
             # 5. Save variables in session state
             st.session_state.chart = chart
             st.session_state.evaluation = evaluation
+            st.session_state.lost_analysis = lost_res
             st.session_state.query_counter += 1
             st.session_state.ai_reading = "" # Reset reading to force a new stream
             
@@ -627,6 +679,72 @@ if st.session_state.chart and st.session_state.evaluation:
     st.markdown("</ul>", unsafe_allow_html=True)
     st.markdown("</div>", unsafe_allow_html=True)
 
+    # ------------------ OPTIONAL PANEL: Lost / Stolen Property Analysis ------------------
+    if st.session_state.lost_analysis:
+        lost = st.session_state.lost_analysis
+        st.markdown("<div class='glass-card'>", unsafe_allow_html=True)
+        st.markdown("<h3 class='glow-text'>✦ Lost Property & Recovery Analysis (Adhyaya VI)</h3>", unsafe_allow_html=True)
+        
+        # Display Recovery Banner
+        rec_verdict = lost["recovery_verdict"]
+        rec_color = "#34d399" if "YES" in rec_verdict else "#f87171"
+        rec_bg = "rgba(52, 211, 153, 0.08)" if "YES" in rec_verdict else "rgba(248, 113, 113, 0.08)"
+        
+        st.markdown(f"""
+        <div style="background: {rec_bg}; border: 1px solid {rec_color}; border-radius: 12px; padding: 1rem; margin-bottom: 1.5rem;">
+            <strong>Recovery Verdict:</strong> <span style="color: {rec_color}; font-weight: 700; font-size: 1.1rem;">{rec_verdict}</span><br>
+            <small style="color: #cbd5e1; font-style: italic;">{lost['recovery_reason']}</small>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        # Key Parameters Columns
+        col_lp1, col_lp2, col_lp3 = st.columns(3)
+        with col_lp1:
+            st.markdown(f"""
+            <div class='lost-metric-box'>
+                <div class='lost-metric-label'>🧭 Stolen Direction</div>
+                <div class='lost-metric-value' style='color: #a78bfa;'>{lost['direction']}</div>
+                <small style='color: #64748b; font-size: 0.75rem;'>Basis: {lost['direction_source']}</small>
+            </div>
+            """, unsafe_allow_html=True)
+            
+        with col_lp2:
+            st.markdown(f"""
+            <div class='lost-metric-box'>
+                <div class='lost-metric-label'>📏 Distance Removed</div>
+                <div class='lost-metric-value' style='color: #38bdf8;'>{lost['distance_desc']}</div>
+                <small style='color: #64748b; font-size: 0.75rem;'>Lagna Navamsa: {lost['nav_sign_name']} (Nav # {lost['distance_yojanas'] + 5 if lost['distance_yojanas'] > 0 else '1-5'})</small>
+            </div>
+            """, unsafe_allow_html=True)
+            
+        with col_lp3:
+            st.markdown(f"""
+            <div class='lost-metric-box'>
+                <div class='lost-metric-label'>👤 Thief Association</div>
+                <div class='lost-metric-value' style='color: #f43f5e;'>{"Insider 🏠" if lost['is_insider'] else "Outsider 👥"}</div>
+                <small style='color: #64748b; font-size: 0.75rem;'>{lost['thief_source']}</small>
+            </div>
+            """, unsafe_allow_html=True)
+            
+        st.markdown("<br>", unsafe_allow_html=True)
+        
+        # Detailed Grid for Thief Profile and Substance
+        col_lp_det1, col_lp_det2 = st.columns(2)
+        with col_lp_det1:
+            st.markdown("##### 👤 Suspected Thief Profile")
+            st.markdown(f"- **Age:** {lost['thief_age']}")
+            st.markdown(f"- **Class / Caste:** {lost['thief_class']}")
+            st.markdown(f"- **Location inside property:** {lost['drekkana_location']}")
+            st.markdown(f"- **Description:** Determined by the rising sign and decanate configurations.")
+            
+        with col_lp_det2:
+            st.markdown("##### 📦 Stolen Substance & Nature")
+            st.markdown(f"- **Substance Type:** {lost['substance_type']}")
+            st.markdown(f"- **Dominant Color:** {lost['color']}")
+            st.markdown(f"- **Physical Size:** {lost['size']} Sign / Navamsa proportions")
+            st.markdown(f"- **State:** Determined by Lagna Lord's strength and combustion status.")
+            
+        st.markdown("</div>", unsafe_allow_html=True)
 
     # ------------------ BOTTOM PANEL: AI Astrological Interpretation ------------------
     st.markdown("<div class='glass-card'>", unsafe_allow_html=True)
