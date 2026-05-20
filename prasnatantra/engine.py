@@ -150,7 +150,206 @@ class PrasnaChart:
             "reasons_sincere": reasons_sincere
         }
 
+    def _build_narrative(self, ref_sign, ref_point_name, house_num, query_sign,
+                          lagnapathi, karyesa, rel, kamboola, nakta, yamaya,
+                          merc_combust, sinc_res):
+        """
+        Generates a book-style Prasna Tantra narrative for evaluation["details"].
+        Follows the classical analytical flow used in B.V. Raman's Prasna Tantra
+        and Prithuyasas's Shatpanchasika.
+        """
+        from .astronomy import get_nakshatra_pada
+        details = []
+
+        def planet_desc(p_name):
+            """Returns a full description: Planet in Sign (House N), Nakshatra Pada N, Direct/Retro."""
+            lon  = self.planets[p_name]["longitude"]
+            spd  = self.planets[p_name]["speed"]
+            sign = int(lon / 30) % 12
+            sign_name = get_sign_name(sign)
+            nak, pada, _ = get_nakshatra_pada(lon)
+            house = ((sign - ref_sign + 12) % 12) + 1
+            motion = "Retrograde (R)" if spd < 0 else "Direct"
+            deg = lon % 30
+            d = int(deg); m = int((deg - d) * 60); s = int(((deg - d) * 60 - m) * 60)
+            return (f"{p_name} in {sign_name} {d}\u00b0{m:02d}'{s:02d}\" "
+                    f"(House {house} from {get_sign_name(ref_sign)}), "
+                    f"{nak} Nakshatra Pada {pada}, {motion}")
+
+        def sign_type(s):
+            t = ["Moveable", "Fixed", "Dual"][s % 3]
+            sr = "Sirshodaya (head-rising — quick results)" if s in [2,4,5,6,7,10] else "Prishtodaya (back-rising — delayed results)"
+            return f"{t}, {sr}"
+
+        # ── 1. CHART SETUP ────────────────────────────────────────────────────
+        lagna_sn = get_sign_name(ref_sign)
+        details.append(
+            f"[CHART SETUP | Ref. Point: {ref_point_name}] "
+            f"Reference Lagna: {lagna_sn} — {sign_type(ref_sign)}. "
+            f"Lagnapathi (lord of {lagna_sn}): {lagnapathi}. "
+            f">> {planet_desc(lagnapathi)}"
+        )
+
+        # ── 2. QUERY HOUSE & KARYESA ─────────────────────────────────────────
+        query_sn = get_sign_name(query_sign)
+        details.append(
+            f"[QUERY HOUSE {house_num} | {query_sn}] "
+            f"The {house_num}{'st' if house_num==1 else ('nd' if house_num==2 else ('rd' if house_num==3 else 'th'))} "
+            f"house from {lagna_sn} is {query_sn}. "
+            f"Karyesa (lord of {query_sn}): {karyesa}. "
+            f">> {planet_desc(karyesa)}"
+        )
+
+        # ── 3. DIRECT RELATION (Ithasala / Easarapha) ────────────────────────
+        if lagnapathi == karyesa:
+            details.append(
+                f"[DIRECT RELATION | Swami Yoga] Lagnapathi and Karyesa are the SAME planet "
+                f"({lagnapathi}). This is Swami Yoga (Self-realization) — the querent is the "
+                f"lord of both the reference Lagna and the query house. Per Shatpanchasika I.3: "
+                f"'Whichever Bhava is aspected or occupied by its lord, the prosperity of that "
+                f"Bhava is ensured.' This is the strongest possible indicator."
+            )
+        elif rel:
+            aspect     = rel["aspect_type"]
+            friendly   = "friendly" if rel["is_friendly"] else "hostile"
+            applying   = "APPLYING (Ithasala)" if rel["is_applying"] else "SEPARATING (Easarapha)"
+            orb        = rel["orb_diff"]
+            if rel["is_applying"] and rel["is_friendly"]:
+                verdict = "SUCCESS strongly indicated."
+            elif rel["is_applying"] and not rel["is_friendly"]:
+                verdict = "Success possible but with obstacles (hostile Ithasala)."
+            else:
+                verdict = "FAILURE indicated — Easarapha: the opportunity has passed or will not materialise."
+            details.append(
+                f"[DIRECT RELATION | Tajaka Aspect] {lagnapathi} (Lagnapathi) and {karyesa} (Karyesa) "
+                f"share a {friendly} {aspect} — {applying}, within {orb:.1f}° orb. "
+                f"{verdict} "
+                f"[Shatpanchasika I.3; Prasna Tantra Ch. II: Ithasala = applying aspect = fulfilment; "
+                f"Easarapha = separating = matter concluded/failed.]"
+            )
+        else:
+            details.append(
+                f"[DIRECT RELATION | No Aspect] No Tajaka aspect (Conjunction / Sextile / Square / "
+                f"Trine / Opposition) exists between {lagnapathi} (Lagnapathi) and {karyesa} (Karyesa) "
+                f"within operative orbs (Deepthamsas). This is unfavorable — the lords of the Lagna "
+                f"and the query house are unconnected. Check for intermediary Yogas below. "
+                f"[Shatpanchasika I.3]"
+            )
+
+        # ── 4. INTERMEDIARY YOGAS ────────────────────────────────────────────
+        if kamboola:
+            translator = kamboola[0].get("translator", "Moon")
+            details.append(
+                f"[YOGA — Kamboola] Moon ({planet_desc('Moon')}) "
+                f"acts as the intermediary, translating strength between {lagnapathi} and {karyesa} "
+                f"via {translator}. The matter will be fulfilled through a third party or after some delay. "
+                f"[Prasna Tantra Ch. II — Kamboola Yoga: Moon mediates between the two lords.]"
+            )
+        if nakta:
+            translator = nakta[0].get("translator", "?")
+            details.append(
+                f"[YOGA — Nakta] {translator} acts as a nocturnal translator of light between "
+                f"{lagnapathi} and {karyesa}. Achievement is possible through an intermediary agent. "
+                f"[Prasna Tantra Ch. II — Nakta Yoga]"
+            )
+        if yamaya:
+            translator = yamaya[0].get("translator", "?")
+            details.append(
+                f"[YOGA — Yamaya] {translator} coordinates the transfer of strength "
+                f"between {lagnapathi} and {karyesa}. Success may come through authority or officialdom. "
+                f"[Prasna Tantra Ch. II — Yamaya Yoga]"
+            )
+        if not (kamboola or nakta or yamaya) and not rel and lagnapathi != karyesa:
+            details.append(
+                "[YOGA — None] No Kamboola, Nakta, or Yamaya Yoga detected. "
+                "Without either a direct Ithasala or an intermediary Yoga, the matter is unlikely to succeed."
+            )
+
+        # ── 5. MOON ANALYSIS ─────────────────────────────────────────────────
+        moon_lon  = self.planets["Moon"]["longitude"]
+        moon_sign = int(moon_lon / 30) % 12
+        moon_sn   = get_sign_name(moon_sign)
+        moon_house = ((moon_sign - ref_sign + 12) % 12) + 1
+        moon_nak, moon_pada, _ = get_nakshatra_pada(moon_lon)
+        moon_combust = abs(moon_lon - self.planets["Sun"]["longitude"]) % 360 <= 12.0
+        sun_lon = self.planets["Sun"]["longitude"]
+
+        moon_aspects_recv = []
+        for p in ["Jupiter", "Venus", "Mercury", "Sun", "Mars", "Saturn"]:
+            if p not in self.planets:
+                continue
+            p_sign = int(self.planets[p]["longitude"] / 30) % 12
+            diff = (moon_sign - p_sign) % 12
+            if diff in [0, 2, 3, 4, 6, 8, 9, 10]:
+                is_b = p in ["Jupiter", "Venus"] or (p == "Mercury" and not merc_combust)
+                moon_aspects_recv.append(("+" if is_b else "-") + p)
+
+        moon_aff = moon_combust or any(a.startswith("-") for a in moon_aspects_recv)
+        moon_status = "AFFLICTED" if moon_aff else "FREE from affliction"
+        asp_str = f" Aspects received: {', '.join(moon_aspects_recv)}." if moon_aspects_recv else " No planetary aspects on Moon."
+
+        details.append(
+            f"[MOON ANALYSIS] Moon in {moon_sn} (House {moon_house} from ref.), "
+            f"{moon_nak} Nakshatra Pada {moon_pada}.{asp_str} "
+            f"Moon is {moon_status}{'— combust, severely weakened' if moon_combust else ''}. "
+            f"[Shatpanchasika I.4–5: Moon aspected by Jupiter/Venus in Lagna restores lost matters; "
+            f"Moon afflicted by malefics indicates obstacles.]"
+        )
+
+        # ── 6. LAGNA OCCUPANTS ───────────────────────────────────────────────
+        lagna_occ = []
+        for p, pd in self.planets.items():
+            if p in ["Rahu", "Ketu"]:
+                continue
+            if int(pd["longitude"] / 30) % 12 == ref_sign:
+                is_b = p in ["Jupiter", "Venus"] or (p == "Mercury" and not merc_combust) or p == "Moon"
+                lagna_occ.append(("+" if is_b else "-") + p)
+
+        if lagna_occ:
+            details.append(
+                f"[LAGNA OCCUPANTS] Planets in reference Lagna ({lagna_sn}): {', '.join(lagna_occ)}. "
+                f"(+ benefic, - malefic). [Shatpanchasika I.4: benefics in Lagna ensure success; "
+                f"malefics ensure failure.]"
+            )
+        else:
+            details.append(f"[LAGNA OCCUPANTS] No planets occupy the reference Lagna ({lagna_sn}).")
+
+        # ── 7. QUERY HOUSE OCCUPANTS ─────────────────────────────────────────
+        query_occ = []
+        for p, pd in self.planets.items():
+            if p in ["Rahu", "Ketu"]:
+                continue
+            if int(pd["longitude"] / 30) % 12 == query_sign:
+                is_b = p in ["Jupiter", "Venus"] or (p == "Mercury" and not merc_combust) or p == "Moon"
+                query_occ.append(("+" if is_b else "-") + p)
+
+        if query_occ:
+            details.append(
+                f"[QUERY HOUSE OCCUPANTS] Planets in House {house_num} ({query_sn}): {', '.join(query_occ)}. "
+                f"[Shatpanchasika I.3: the lord and occupants of the Bhava determine its prosperity or ruin.]"
+            )
+        else:
+            details.append(f"[QUERY HOUSE OCCUPANTS] No planets occupy House {house_num} ({query_sn}).")
+
+        # ── 8. SINCERITY SUMMARY ─────────────────────────────────────────────
+        if not sinc_res.get("is_sincere", True):
+            details.append(
+                f"[SINCERITY — INSINCERE] The Prasna chart indicates an INSINCERE or test query. "
+                f"Insincere indicators ({len(sinc_res['reasons_insincere'])}): "
+                + "; ".join(sinc_res["reasons_insincere"])
+                + ". Per Prasna Tantra tradition: only a genuine, first-time question yields "
+                f"a valid Prasna chart. The verdict below is marked Inconclusive."
+            )
+        else:
+            details.append(
+                f"[SINCERITY — SINCERE] Query appears genuine. "
+                + (f"Sincere indicators: {'; '.join(sinc_res['reasons_sincere'])}." if sinc_res["reasons_sincere"] else "No explicit insincere indicators found.")
+            )
+
+        return details
+
     def evaluate_query(self, house_num, query_num=1, special_category=None):
+
         """
         Evaluates a query corresponding to a specific house.
         house_num: 1 to 12
@@ -238,6 +437,14 @@ class PrasnaChart:
         
         # 1. Check if Lagnapathi and Karyesa are the same planet (Self-realization)
         if lagnapathi == karyesa:
+            # Build narrative first (needs rel/yoga inputs — use None for self-realization)
+            evaluation["details"] = self._build_narrative(
+                ref_sign, ref_point_name, house_num, query_sign,
+                lagnapathi, karyesa,
+                rel=None, kamboola=None, nakta=None, yamaya=None,
+                merc_combust=merc_combust, sinc_res=sinc_res
+            )
+
             sp_res = evaluate_shatpanchasika(self, house_num)
             evaluation["shatpanchasika_predictions"] = sp_res["predictions"]
             evaluation["details"].extend(sp_res["details"])
@@ -262,80 +469,62 @@ class PrasnaChart:
                     evaluation["shatpanchasika_predictions"].extend(sp_rules_res["predictions"])
                     evaluation["details"].extend(sp_rules_res["details"])
 
-            # Sincerity gate: an insincere query must not receive a favourable verdict
+            # Sincerity gate
             if not sinc_res.get("is_sincere", True):
                 evaluation["success_probability"] = "Inconclusive"
                 evaluation["score_pct"] = 0
                 evaluation["timing"] = "Not determinable — query marked insincere"
-                evaluation["details"].insert(0,
-                    "Query marked INSINCERE: astrological indicators suggest this is a "
-                    "test or repeated query. The chart cannot be read for concrete results "
-                    "(Prasna Tantra: only a genuine, first-time question yields a valid Prasna chart)."
-                )
             else:
                 evaluation["success_probability"] = "Very High"
                 evaluation["score_pct"] = 100
-                evaluation["details"].insert(0,
-                    "Lagnapathi and Karyesa are the same planet — Self-realization (Swami Yoga). "
-                    "The querent already holds the answer within."
-                )
             return evaluation
             
         # 2. Check direct relationship
         rel = get_planet_relationship(lagnapathi, self.planets[lagnapathi], karyesa, self.planets[karyesa])
         evaluation["direct_relationship"] = rel
-        
+
         # 3. Check for Yogas
         moon_data = self.planets["Moon"]
         kamboola = detect_kamboola_yoga(lagnapathi, self.planets[lagnapathi], karyesa, self.planets[karyesa], moon_data)
         if kamboola:
             evaluation["yogas"].append({"name": "Kamboola Yoga", "details": kamboola})
-            
+
         nakta = detect_nakta_yoga(lagnapathi, self.planets[lagnapathi], karyesa, self.planets[karyesa], self.planets)
         if nakta:
             evaluation["yogas"].append({"name": "Nakta Yoga", "details": nakta})
-            
+
         yamaya = detect_yamaya_yoga(lagnapathi, self.planets[lagnapathi], karyesa, self.planets[karyesa], self.planets)
         if yamaya:
             evaluation["yogas"].append({"name": "Yamaya Yoga", "details": yamaya})
+
+        # Build full narrative now that rel and yogas are known
+        evaluation["details"] = self._build_narrative(
+            ref_sign, ref_point_name, house_num, query_sign,
+            lagnapathi, karyesa, rel, kamboola, nakta, yamaya,
+            merc_combust=merc_combust, sinc_res=sinc_res
+        )
             
-        # 4. Calculate Success Score
+        # 4. Calculate Success Score (details narrative already built above)
         score = 0
-        
-        # Base aspect logic
+
+        # Base aspect scoring
         if rel:
             if rel["aspect_type"] == "Conjunction":
                 p1_malefic = lagnapathi in ["Sun", "Mars", "Saturn"]
                 p2_malefic = karyesa in ["Sun", "Mars", "Saturn"]
-                if p1_malefic or p2_malefic:
-                    score += 20
-                    evaluation["details"].append(f"Applying conjunction ({rel['aspect_type']}) between Lagnapathi and Karyesa (Mixed results due to malefic presence).")
-                else:
-                    score += 45
-                    evaluation["details"].append(f"Applying benefic conjunction ({rel['aspect_type']}) between Lagnapathi and Karyesa (Highly favorable).")
+                score += 20 if (p1_malefic or p2_malefic) else 45
             elif rel["is_applying"]:
-                if rel["is_friendly"]:
-                    score += 50
-                    evaluation["details"].append(f"Applying friendly aspect ({rel['aspect_type']}) between Lagnapathi and Karyesa.")
-                else:
-                    score += 20
-                    evaluation["details"].append(f"Applying hostile aspect ({rel['aspect_type']}) between Lagnapathi and Karyesa (Success with obstacles).")
+                score += 50 if rel["is_friendly"] else 20
             else:
                 score -= 20
-                evaluation["details"].append(f"Separating aspect ({rel['aspect_type']}) between Lagnapathi and Karyesa (Easarapha Yoga - Failure).")
-        else:
-            evaluation["details"].append("No direct aspect between Lagnapathi and Karyesa.")
-            
-        # Yoga additions
+
+        # Yoga score additions
         if kamboola:
             score += 30
-            evaluation["details"].append("Kamboola Yoga present: Moon translates strength and coordinates the outcome.")
         if nakta:
             score += 20
-            evaluation["details"].append(f"Nakta Yoga present: achieved through the mediation of {nakta[0]['translator']}.")
         if yamaya:
             score += 15
-            evaluation["details"].append(f"Yamaya Yoga present: achieved through the authority/mediation of {yamaya[0]['translator']}.")
             
         # Check specific Prasna Tantra rules from the book
         # Rule 1: Lagnapathi aspects Ascendant (ref_sign) and Karyesa aspects target house (query_sign)
