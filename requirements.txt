@@ -1,6 +1,6 @@
 streamlit>=1.30.0
 pandas>=2.0.0
-pyswisseph>=2.0.0
+libephemeris
 timezonefinder>=6.0.0
 pytz>=2023.3
 requests>=2.31.0
