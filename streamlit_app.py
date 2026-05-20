@@ -355,6 +355,10 @@ if "evaluation" not in st.session_state:
     st.session_state.evaluation = None
 if "lost_analysis" not in st.session_state:
     st.session_state.lost_analysis = None
+if "traveler_analysis" not in st.session_state:
+    st.session_state.traveler_analysis = None
+if "misc_analysis" not in st.session_state:
+    st.session_state.misc_analysis = None
 if "ai_reading" not in st.session_state:
     st.session_state.ai_reading = ""
 if "query_counter" not in st.session_state:
@@ -500,6 +504,22 @@ with st.sidebar:
         help="Check this to calculate direction, distance, recovery chances, and thief profile for lost objects/persons."
     )
 
+    # Auto-detect traveler keywords
+    has_traveler_kw = any(w in question_text.lower() for w in ["travel", "abroad", "return", "journey", "enemy", "war", "battle", "siege", "invad", "soldier", "marching"])
+    analyze_traveler = st.checkbox(
+        "Traveler & Abroad Analysis (Adhyayas II & V)",
+        value=has_traveler_kw,
+        help="Check this to calculate traveler health/confinement, timing of return (in days), and enemy army status."
+    )
+
+    # Auto-detect pregnancy, marriage, misc keywords
+    has_misc_kw = any(w in question_text.lower() for w in ["pregnant", "birth", "child", "boy", "girl", "marriage", "wife", "rain", "weather", "thinking", "mind", "think"])
+    analyze_misc = st.checkbox(
+        "Pregnancy & Marriage & Misc Analysis (Adhyaya VII)",
+        value=has_misc_kw,
+        help="Check this to evaluate pregnancy confirmation/gender, marriage success, weather/rain indication, and thought reading."
+    )
+
     # Core Action Button
     col_sub1, col_sub2 = st.columns([2, 1])
     with col_sub1:
@@ -510,6 +530,8 @@ with st.sidebar:
             st.session_state.chart = None
             st.session_state.evaluation = None
             st.session_state.lost_analysis = None
+            st.session_state.traveler_analysis = None
+            st.session_state.misc_analysis = None
             st.session_state.ai_reading = ""
             st.rerun()
 
@@ -545,11 +567,23 @@ if submit_btn:
             if analyze_lost or house_num == 6:
                 from prasnatantra.lost_objects import evaluate_lost_property
                 lost_res = evaluate_lost_property(chart)
+
+            # Evaluate traveler/abroad status if requested or if house is 9 or 3
+            traveler_res = None
+            if analyze_traveler or house_num in [3, 9]:
+                traveler_res = chart.evaluate_traveler()
+
+            # Evaluate pregnancy, marriage, misc if requested or if house is 5 or 7
+            misc_res = None
+            if analyze_misc or house_num in [5, 7]:
+                misc_res = chart.evaluate_miscellaneous()
             
             # 5. Save variables in session state
             st.session_state.chart = chart
             st.session_state.evaluation = evaluation
             st.session_state.lost_analysis = lost_res
+            st.session_state.traveler_analysis = traveler_res
+            st.session_state.misc_analysis = misc_res
             st.session_state.query_counter += 1
             st.session_state.ai_reading = "" # Reset reading to force a new stream
             
@@ -746,6 +780,86 @@ if st.session_state.chart and st.session_state.evaluation:
             
         st.markdown("</div>", unsafe_allow_html=True)
 
+    # ------------------ OPTIONAL PANEL: Traveler & Abroad Analysis ------------------
+    if st.session_state.traveler_analysis:
+        trav = st.session_state.traveler_analysis
+        st.markdown("<div class='glass-card'>", unsafe_allow_html=True)
+        st.markdown("<h3 class='glow-text'>✦ Traveler & Abroad Analysis (Adhyayas II & V)</h3>", unsafe_allow_html=True)
+        
+        # Display Traveler Status Banner
+        trav_status = trav["traveler_status"]
+        trav_color = "#34d399" if "SAFE" in trav_status or "STABLE" in trav_status else "#f87171"
+        trav_bg = "rgba(52, 211, 153, 0.08)" if "SAFE" in trav_status or "STABLE" in trav_status else "rgba(248, 113, 113, 0.08)"
+        
+        st.markdown(f"""
+        <div style="background: {trav_bg}; border: 1px solid {trav_color}; border-radius: 12px; padding: 1rem; margin-bottom: 1.5rem;">
+            <strong>Traveler Status:</strong> <span style="color: {trav_color}; font-weight: 700; font-size: 1.1rem;">{trav_status}</span>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        col_t1, col_t2 = st.columns(2)
+        with col_t1:
+            st.markdown(f"""
+            <div class='lost-metric-box'>
+                <div class='lost-metric-label'>⏰ Return Timing</div>
+                <div class='lost-metric-value' style='color: #22d3ee; font-size: 1rem; line-height: 1.4; font-weight: bold;'>{trav['return_timing_desc']}</div>
+            </div>
+            """, unsafe_allow_html=True)
+            
+        with col_t2:
+            st.markdown(f"""
+            <div class='lost-metric-box'>
+                <div class='lost-metric-label'>⚔️ Enemy March / Action</div>
+                <div class='lost-metric-value' style='color: #a78bfa; font-size: 1rem; line-height: 1.4; font-weight: bold;'>{trav['enemy_verdict']}</div>
+                <small style='color: #64748b; font-size: 0.75rem;'>Details: {trav['enemy_details']}</small>
+            </div>
+            """, unsafe_allow_html=True)
+            
+        st.markdown("<br>", unsafe_allow_html=True)
+        
+        col_t_det1, col_t_det2 = st.columns(2)
+        with col_t_det1:
+            st.markdown("##### 🛡️ Siege / Battle Outcome")
+            st.markdown(f"- **Outcome:** {trav['siege_verdict']}")
+            st.markdown(f"- **Defenders (Pauras) Score:** {trav['paura_score']}")
+            st.markdown(f"- **Invaders (Yayinas) Score:** {trav['yayina_score']}")
+            
+        with col_t_det2:
+            st.markdown("##### 🌍 Transit Indicators")
+            st.markdown(f"- **Lagna Sign:** {trav['lagna_sign_name']} (Reference Base)")
+            st.markdown(f"- **Moon Sign:** {trav['moon_sign_name']} (Activity Sign)")
+            st.markdown(f"- **Rules:** Based on movable/fixed/dual combinations of Lagna & Moon.")
+            
+        st.markdown("</div>", unsafe_allow_html=True)
+
+    # ------------------ OPTIONAL PANEL: Pregnancy, Marriage & Misc Analysis ------------------
+    if st.session_state.misc_analysis:
+        misc = st.session_state.misc_analysis
+        st.markdown("<div class='glass-card'>", unsafe_allow_html=True)
+        st.markdown("<h3 class='glow-text'>✦ Pregnancy, Marriage & Misc Analysis (Adhyaya VII)</h3>", unsafe_allow_html=True)
+        
+        col_m1, col_m2 = st.columns(2)
+        with col_m1:
+            st.markdown("##### 👶 Childbirth & Pregnancy")
+            st.markdown(f"- **Status:** {misc['pregnancy_status']}")
+            st.markdown(f"- **Gender Prediction:** <strong style='color: #f472b6;'>{misc['gender_verdict']}</strong>", unsafe_allow_html=True)
+            st.markdown(f"- **Basis:** {misc['gender_reason']}")
+            
+            st.markdown("##### 🔮 Thought Reading (Mind of Querist)")
+            st.markdown(f"- **Subject:** {misc['thought_desc']}")
+            st.markdown(f"- **Relational Focus:** {misc['thought_relation']}")
+            
+        with col_m2:
+            st.markdown("##### 💍 Marriage Prospects")
+            st.markdown(f"- **Success Verdict:** {misc['marriage_verdict']}")
+            st.markdown(f"- **Rule Basis:** {misc['marriage_reason']}")
+            
+            st.markdown("##### 🌧️ Weather / Advent of Rain")
+            st.markdown(f"- **Rain Verdict:** {misc['rain_verdict']}")
+            st.markdown(f"- **Atmospheric Indicators:** {misc['rain_reason']}")
+            
+        st.markdown("</div>", unsafe_allow_html=True)
+
     # ------------------ BOTTOM PANEL: AI Astrological Interpretation ------------------
     st.markdown("<div class='glass-card'>", unsafe_allow_html=True)
     st.markdown("<h3 class='glow-text'>✦ AI Astrological Reading (Prasna Tantra & Shatpanchasika Analysis)</h3>", unsafe_allow_html=True)
@@ -800,7 +914,10 @@ if st.session_state.chart and st.session_state.evaluation:
                 "details": eval_res.get("details"),
                 "direct_relationship": eval_res.get("direct_relationship"),
                 "yogas": eval_res.get("yogas"),
-                "shatpanchasika_predictions": eval_res.get("shatpanchasika_predictions")
+                "shatpanchasika_predictions": eval_res.get("shatpanchasika_predictions"),
+                "lost_property_analysis": st.session_state.lost_analysis,
+                "traveler_analysis": st.session_state.traveler_analysis,
+                "misc_analysis": st.session_state.misc_analysis
             }
             
             # Run streaming read

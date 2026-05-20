@@ -72,7 +72,7 @@ class TestPrasnaTantra(unittest.TestCase):
         self.assertEqual(res["house"], 4)
         self.assertEqual(res["lagnapathi"], "Mercury")
         self.assertEqual(res["karyesa"], "Jupiter")  # 4th house is Sagittarius (sign 8), lord is Jupiter
-        self.assertIn(res["success_probability"], ["High / Certain", "Medium / Obstacles", "Low / Failure"])
+        self.assertIn(res["success_probability"], ["High / Certain", "Medium / Obstacles", "Low / Failure", "Inconclusive (Insincere Query)"])
 
     def test_avastha_determinations(self):
         # In the 1950-03-01 test chart:
@@ -220,8 +220,23 @@ class TestPrasnaTantra(unittest.TestCase):
         
         # Query 2: ref is Moon (Cancer)
         res2 = self.chart.evaluate_query(1, query_num=2)
-        self.assertIn("sincerity", res2)
-        self.assertIn("is_sincere", res2["sincerity"])
+        st = res2.get("sincerity", {})
+        self.assertIn("is_sincere", st)
+
+    def test_traveler_abroad(self):
+        trav = self.chart.evaluate_traveler()
+        self.assertIn("traveler_status", trav)
+        self.assertIn("return_timing_desc", trav)
+        self.assertIn("enemy_verdict", trav)
+        self.assertIn("siege_verdict", trav)
+        
+    def test_miscellaneous_query(self):
+        misc = self.chart.evaluate_miscellaneous()
+        self.assertIn("pregnancy_status", misc)
+        self.assertIn("gender_verdict", misc)
+        self.assertIn("marriage_verdict", misc)
+        self.assertIn("thought_desc", misc)
+        self.assertIn("rain_verdict", misc)
 
 if __name__ == "__main__":
     unittest.main()

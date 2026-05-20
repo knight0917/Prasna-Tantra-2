@@ -45,24 +45,7 @@ SIGN_SIZES = {
     4: "Long", 5: "Long", 6: "Long", 7: "Long"
 }
 
-# Sign Classifications (Dhatu/Moola/Jeeva)
-# Movable = Dhatu (Mineral), Fixed = Moola (Root/Vegetation), Dual = Jeeva (Animal/Human)
-SIGN_CLASSES = {
-    0: "Dhatu (Mineral / Metal / Jewellery)",
-    3: "Dhatu (Mineral / Metal / Jewellery)",
-    6: "Dhatu (Mineral / Metal / Jewellery)",
-    9: "Dhatu (Mineral / Metal / Jewellery)",
-    
-    1: "Moola (Vegetable / Plants / Paper / Wood)",
-    4: "Moola (Vegetable / Plants / Paper / Wood)",
-    7: "Moola (Vegetable / Plants / Paper / Wood)",
-    10: "Moola (Vegetable / Plants / Paper / Wood)",
-    
-    2: "Jeeva (Animal / Human / Living / Leather)",
-    5: "Jeeva (Animal / Human / Living / Leather)",
-    8: "Jeeva (Animal / Human / Living / Leather)",
-    11: "Jeeva (Animal / Human / Living / Leather)"
-}
+# Sign Classifications (Dhatu/Moola/Jeeva) are now calculated dynamically in evaluate_lost_property using Shatpanchasika I.7 rules.
 
 # Drekkana locations in house
 DREKKANA_LOCATIONS = {
@@ -260,8 +243,18 @@ def evaluate_lost_property(chart):
     thief_age = PLANET_AGES.get(lagna_lord, "Unknown")
     thief_class = PLANET_CLASSES.get(lagna_lord, "Unknown")
     
-    # Substance from rising Navamsa sign classification
-    substance_type = SIGN_CLASSES.get(nav_sign, "Unknown")
+    # Substance from rising Navamsa sign classification dynamically calculated using Shatpanchasika I.7
+    is_odd_lagna = lagna_sign in [0, 2, 4, 6, 8, 10]
+    substance_map = {
+        0: "Dhatu (Mineral / Metal / Jewellery / Clay)",
+        1: "Moola (Vegetable / Plants / Paper / Wood)",
+        2: "Jeeva (Animal / Human / Living / Leather)"
+    }
+    if is_odd_lagna:
+        substance_idx = nav_idx % 3
+    else:
+        substance_idx = (2 - nav_idx) % 3
+    substance_type = substance_map[substance_idx]
     color = SIGN_COLORS.get(lagna_sign, "Unknown")
     size = SIGN_SIZES.get(nav_sign, "Unknown")
 

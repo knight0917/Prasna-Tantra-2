@@ -6,6 +6,8 @@
 # Large PDF documents and Ephemeris data
 *.pdf
 de421.bsp
+de440.bsp
+*.bsp
 
 # Python caches and virtual environments
 __pycache__/
@@ -17,3 +19,6 @@ env/
 
 # Markdown documentation files that shouldn't go to git
 *.md
+
+# Scratch directory
+scratch/

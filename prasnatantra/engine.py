@@ -944,6 +944,16 @@ class PrasnaChart:
 
         return evaluation
 
+    def evaluate_traveler(self):
+        """Evaluates traveling, marching, and return status based on Shatpanchasika."""
+        from .traveler import evaluate_traveler_abroad
+        return evaluate_traveler_abroad(self)
+
+    def evaluate_miscellaneous(self):
+        """Evaluates pregnancy, marriage, thought reading, and rain prospects based on Shatpanchasika."""
+        from .miscellaneous import evaluate_miscellaneous_query
+        return evaluate_miscellaneous_query(self)
+
 # Helper function to get sign index from longitude
 def get_sign(longitude):
     return int(longitude / 30.0) % 12
