@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sri Neelakanta's Prasna Tantra Astrological Dashboard</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="stars"></div>
+    <div class="glowing-orb-1"></div>
+    <div class="glowing-orb-2"></div>
+    
+    <div class="container">
+        <!-- Premium Header -->
+        <header>
+            <div class="logo">
+                <span class="symbol">✧</span> PRASNA TANTRA <span class="symbol">✧</span>
+            </div>
+            <h1>Vedic Horary Astrological Dashboard</h1>
+            <p class="subtitle">Swiss Ephemeris Sidereal Lahiri calculations & classical Tajaka interpretations</p>
+        </header>
+
+        <!-- Main Workspace Grid -->
+        <div class="dashboard-grid">
+            
+            <!-- Left Panel: Input & Controls -->
+            <section class="card glass input-card">
+                <h2 class="card-title">✦ Query Configuration</h2>
+                <form id="chart-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="date">Local Date</label>
+                            <input type="date" id="date" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="time">Local Time</label>
+                            <input type="time" id="time" step="1" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group" style="position: relative;">
+                            <label for="location-input">Location Search</label>
+                            <input type="text" id="location-input" placeholder="Type city name (e.g. Bangalore, London...)" autocomplete="off" value="Bangalore, India">
+                            <div id="location-suggestions" class="suggestions-dropdown hidden"></div>
+                        </div>
+                    </div>
+
+                    <div class="advanced-toggle-wrapper">
+                        <button type="button" id="advanced-toggle" class="toggle-link">✦ Show Advanced Coordinates</button>
+                    </div>
+
+                    <div id="advanced-coordinates" class="hidden">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="latitude">Latitude</label>
+                                <input type="text" id="latitude" value="12:58:18" placeholder="12:58:18 N or decimal">
+                            </div>
+                            <div class="form-group">
+                                <label for="longitude">Longitude</label>
+                                <input type="text" id="longitude" value="77:35:41" placeholder="77:35:41 E or decimal">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="tz_offset">Timezone Offset (Hours East)</label>
+                                <input type="number" id="tz_offset" step="0.5" value="5.5" placeholder="+5.5">
+                                <small class="help-text">Hours East of UTC (e.g. +5.5 for India, -5 for EST)</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" id="calculate-btn">
+                        <span>Calculate Prasna Chart</span>
+                    </button>
+                </form>
+
+                <hr class="divider">
+
+                <div class="query-section">
+                    <h3 class="section-title">✦ Step 2: Ask Your Question</h3>
+                    <div class="form-group">
+                        <label for="free-question">Type your question in plain English</label>
+                        <textarea id="free-question" rows="3" placeholder="e.g. Will I get the job I interviewed for yesterday? Will my crops do well?"></textarea>
+                        <small class="help-text">Our engine will automatically identify the relevant astrological house and evaluate Tajaka aspects and Shatpanchasika rules for you.</small>
+                    </div>
+
+                    <button type="button" class="btn btn-secondary" id="evaluate-btn" disabled>
+                        <span>Evaluate Query</span>
+                    </button>
+                </div>
+            </section>
+
+            <!-- Center Panel: Kundali Visualization -->
+            <section class="card glass visual-card">
+                <h2 class="card-title">✦ North Indian Kundali (Whole Sign)</h2>
+                
+                <div class="kundali-container">
+                    <svg id="kundali-svg" viewBox="0 0 400 400" width="100%" height="100%">
+                        <!-- Base Grid Lines -->
+                        <rect x="10" y="10" width="380" height="380" class="chart-border" />
+                        <line x1="10" y1="10" x2="390" y2="390" class="chart-line" />
+                        <line x1="390" y1="10" x2="10" y2="390" class="chart-line" />
+                        <polygon points="200,10 390,200 200,390 10,200" class="chart-line" />
+                        
+                        <!-- House Numbers (Fixed Layout positions) -->
+                        <text x="200" y="105" class="house-label">H1</text>
+                        <text x="135" y="55" class="house-label">H2</text>
+                        <text x="65" y="125" class="house-label">H3</text>
+                        <text x="115" y="205" class="house-label">H4</text>
+                        <text x="65" y="285" class="house-label">H5</text>
+                        <text x="135" y="355" class="house-label">H6</text>
+                        <text x="200" y="305" class="house-label">H7</text>
+                        <text x="265" y="355" class="house-label">H8</text>
+                        <text x="335" y="285" class="house-label">H9</text>
+                        <text x="285" y="205" class="house-label">H10</text>
+                        <text x="335" y="125" class="house-label">H11</text>
+                        <text x="265" y="55" class="house-label">H12</text>
+
+                        <!-- Dynamically Injected Sign Labels (corners) and occupants -->
+                        <g id="chart-dynamic-content">
+                            <text x="200" y="220" class="placeholder-text">Please calculate the chart</text>
+                        </g>
+                    </svg>
+                </div>
+
+                <div class="chart-meta">
+                    <div><strong>Ayanamsha:</strong> <span id="meta-ayan">—</span></div>
+                    <div><strong>Lagna:</strong> <span id="meta-lagna">—</span></div>
+                </div>
+            </section>
+
+            <!-- Right Panel: Results & Interpretation -->
+            <section class="card glass results-card">
+                <h2 class="card-title">✦ Evaluation Results</h2>
+                
+                <!-- Query Header -->
+                <div class="eval-header-wrapper hidden" id="eval-header">
+                    <h3 id="eval-title">Evaluating Query</h3>
+                    <p class="eval-subtitle" id="eval-ref-point">Reference: Ascendant</p>
+                </div>
+
+                <div id="results-placeholder" class="placeholder-text-center">
+                    <span class="symbol" style="font-size: 2.5rem; display: block; margin-bottom: 1rem;">✦</span>
+                    Generate a chart and click "Evaluate Query" to view detailed Tajaka aspects, avasthas, and timing forecasts.
+                </div>
+
+                <!-- Detailed Results Panel -->
+                <div class="results-content hidden" id="results-content">
+                    <div class="metrics-grid">
+                        <div class="metric-box">
+                            <span class="metric-label">Success Chance</span>
+                            <span class="metric-val" id="metric-prob">Medium</span>
+                        </div>
+                        <div class="metric-box">
+                            <span class="metric-label">Score Percentage</span>
+                            <span class="metric-val" id="metric-score">50%</span>
+                        </div>
+                        <div class="metric-box">
+                            <span class="metric-label">Sincerity</span>
+                            <span class="metric-val" id="metric-sincere">Sincere</span>
+                        </div>
+                    </div>
+
+                    <!-- Genuinity Details -->
+                    <div class="info-block" id="sincerity-info-block">
+                        <h4 class="block-title">Genuinity Indicators</h4>
+                        <ul class="indicators-list" id="sincerity-indicators">
+                            <!-- Injected -->
+                        </ul>
+                    </div>
+
+                    <div class="timing-box">
+                        <strong>Timing of Realization:</strong> <span id="val-timing">—</span>
+                    </div>
+
+                    <!-- Tab details -->
+                    <div class="details-section">
+                        <h4 class="block-title">Astrological Combinations</h4>
+                        <ul class="details-list" id="val-details">
+                            <!-- Injected -->
+                        </ul>
+                    </div>
+
+                    <!-- Shatpanchasika Details -->
+                    <div class="details-section hidden" id="shat-section">
+                        <h4 class="block-title">Shatpanchasika Predictions</h4>
+                        <ul class="details-list" id="val-shat">
+                            <!-- Injected -->
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+        </div> <!-- End dashboard-grid -->
+
+        <!-- AI Interpretation Container -->
+        <section class="card glass ai-card hidden" id="ai-section">
+            <h2 class="card-title">✦ Live AI Astrological Reading (Groq Streamed)</h2>
+            <div class="ai-reading-box" id="ai-reading-text">
+                [Awaiting query evaluation...]
+            </div>
+        </section>
+
+        <!-- Planetary Positions Table -->
+        <section class="card glass table-card hidden" id="table-section">
+            <h2 class="card-title">✦ Planetary & House Positions</h2>
+            <div class="table-container">
+                <table class="astro-table">
+                    <thead>
+                        <tr>
+                            <th>Planet</th>
+                            <th>Longitude</th>
+                            <th>Sign / Rasi</th>
+                            <th>Nakshatra</th>
+                            <th>Pada</th>
+                            <th>Avastha (10-States)</th>
+                            <th>Speed</th>
+                        </tr>
+                    </thead>
+                    <tbody id="planets-tbody">
+                        <!-- Injected -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <footer>
+            <p>Designed with premium dark cosmic aesthetics. Powered by Swiss Ephemeris & Llama-3.3-70b-versatile.</p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+# Secrets
+.env
+.env.*
+.streamlit/secrets.toml
+
+# Large PDF documents and Ephemeris data
+*.pdf
+de421.bsp
+
+# Python caches and virtual environments
+__pycache__/
+*.pyc
+venv/
+.venv/
+env/
+.pytest_cache/
+
+# Markdown documentation files that shouldn't go to git
+*.md
