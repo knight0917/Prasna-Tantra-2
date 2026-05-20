@@ -360,15 +360,25 @@ with st.sidebar:
     
     if st.button("Search Location"):
         with st.spinner("Fetching coordinates..."):
-            url = f"https://nominatim.openstreetmap.org/search?q={urllib.parse.quote(search_query)}&format=json&addressdetails=1&limit=5"
+            url = (
+                f"https://nominatim.openstreetmap.org/search"
+                f"?q={urllib.parse.quote(search_query)}"
+                f"&format=json&addressdetails=1&limit=10"
+            )
             headers = {"User-Agent": "PrasnaTantraAstrologyDashboard/1.0", "Accept-Language": "en"}
             try:
                 r = requests.get(url, headers=headers)
                 if r.status_code == 200:
                     results = r.json()
                     if results:
-                        st.session_state.suggestions = results
-                        st.success(f"Found {len(results)} matches!")
+                        # Prioritise proper city/town/village results over hamlets, roads, etc.
+                        PREFERRED_TYPES = {"city", "town", "village", "suburb", "municipality",
+                                           "administrative", "county", "state"}
+                        preferred = [x for x in results if x.get("type", "") in PREFERRED_TYPES
+                                     or x.get("class", "") == "place"]
+                        rest = [x for x in results if x not in preferred]
+                        st.session_state.suggestions = (preferred + rest)[:7]
+                        st.success(f"Found {len(st.session_state.suggestions)} matches!")
                     else:
                         st.session_state.suggestions = []
                         st.error("No locations found.")
@@ -379,17 +389,29 @@ with st.sidebar:
 
     # Display geocoding options if found
     if st.session_state.suggestions:
-        options_map = {res["display_name"]: res for res in st.session_state.suggestions}
+        # Build labels that include type + coordinates so users can distinguish results
+        def _label(res):
+            lat_f = float(res['lat'])
+            lon_f = float(res['lon'])
+            place_type = res.get('type', res.get('class', '?'))
+            return f"{res['display_name']}  [{place_type} | {lat_f:.4f}°N, {lon_f:.4f}°E]"
+
+        options_map = {_label(res): res for res in st.session_state.suggestions}
         selected = st.selectbox("Select precise location:", list(options_map.keys()))
         if selected:
             sel_res = options_map[selected]
+            lat_f = float(sel_res['lat'])
+            lon_f = float(sel_res['lon'])
             st.session_state.latitude = sel_res["lat"]
             st.session_state.longitude = sel_res["lon"]
             # Auto-resolve timezone
-            offset, tz_name = resolve_timezone_offset(sel_res["lat"], sel_res["lon"], date_val, time_val)
+            offset, tz_name = resolve_timezone_offset(lat_f, lon_f, date_val, time_val)
             st.session_state.tz_offset = offset
             st.session_state.tz_name = tz_name
-            st.success(f"Configured: {tz_name} (UTC+{offset})")
+            st.success(f"✅ Configured: {tz_name} (UTC+{offset})")
+            # Show exact coordinates as sanity check
+            st.info(f"📍 Coordinates in use: **{lat_f:.5f}° N**, **{lon_f:.5f}° E**  \n"
+                    f"If these look wrong, use *Show Advanced Coordinates Override* below to correct them.")
 
     # Advanced Coordinates Expander
     with st.expander("✦ Show Advanced Coordinates Override"):
