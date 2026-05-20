@@ -398,7 +398,16 @@ with st.sidebar:
     )
 
     # Core Action Button
-    submit_btn = st.button("✦ Analyze Prasna Chart", use_container_width=True)
+    col_sub1, col_sub2 = st.columns([2, 1])
+    with col_sub1:
+        submit_btn = st.button("✦ Analyze Prasna Chart", use_container_width=True)
+    with col_sub2:
+        if st.button("🔄 Reset", use_container_width=True, help="Reset sequential query counter back to Question #1"):
+            st.session_state.query_counter = 1
+            st.session_state.chart = None
+            st.session_state.evaluation = None
+            st.session_state.ai_reading = ""
+            st.rerun()
 
 # Process query on submission
 if submit_btn:
@@ -440,6 +449,29 @@ if submit_btn:
 if st.session_state.chart and st.session_state.evaluation:
     chart = st.session_state.chart
     eval_res = st.session_state.evaluation
+    
+    # ------------------ QUERY COUNTER & REFERENCE INDICATOR ------------------
+    q_num = eval_res.get("query_num", 1)
+    ref_pt = eval_res.get("ref_point_name", "Ascendant (Lagna)")
+    ref_sign = eval_res.get("ref_sign_name", "Aries")
+    
+    st.markdown(f"""
+    <div class='glass-card' style='margin-bottom: 1rem; border-left: 5px solid #22d3ee;'>
+        <div style='display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;'>
+            <div>
+                <h4 style='margin: 0; color: #22d3ee; font-family: "Outfit", sans-serif;'>✦ Question #{q_num}</h4>
+                <p style='margin: 0.25rem 0 0 0; color: #e2e8f0; font-size: 0.95rem;'>
+                    Evaluating sequential question details. Houses and aspects are counted starting from: <strong>{ref_pt}</strong> (in <strong>{ref_sign}</strong>)
+                </p>
+            </div>
+            <div>
+                <span style='background: rgba(34, 211, 238, 0.15); color: #22d3ee; border: 1px solid rgba(34, 211, 238, 0.3); font-weight: 600; padding: 0.35rem 0.75rem; border-radius: 6px; font-size: 0.85rem; font-family: "Outfit", sans-serif;'>
+                    Reference: {ref_pt}
+                </span>
+            </div>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
     
     # ------------------ TOP PANEL: Genuinity/Sincerity Card ------------------
     sinc = eval_res.get("sincerity", {"is_sincere": True})
@@ -530,6 +562,7 @@ if st.session_state.chart and st.session_state.evaluation:
                 })
                 
             chart_summary_data = {
+                "query_num": eval_res.get("query_num", 1),
                 "house": eval_res.get("house"),
                 "ref_point_name": eval_res.get("ref_point_name"),
                 "ref_sign_name": eval_res.get("ref_sign_name"),

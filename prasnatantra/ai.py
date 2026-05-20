@@ -182,9 +182,10 @@ def generate_astrological_reading(question: str, chart_details: dict):
     Explain the results to the client. Keep the tone professional, mystical, and reassuring, yet clear and structured.
     
     Structure the reading exactly as follows:
-    1. **The Pronouncement (Karyasiddhi)**: A direct, unambiguous answer to their question. State whether the goal will be realized, and the level of success probability.
+    1. **The Pronouncement (Karyasiddhi)**: A direct, unambiguous answer to their question. State whether the goal will be realized, and the level of success probability. Explicitly acknowledge the question number (e.g., "For your Question #2...") and state the celestial body used as the starting reference point for counting houses (e.g., "counting from the Moon").
     2. **Astrological Rationale**: Explain the mathematical/astrological configurations that decided this outcome. Speak of:
-       - The Lagnapathi (Lord of Ascendant, representing the querent) and the Karyesa (Lord of the house of query, representing the object in view).
+       - The shift in the starting reference point: explain why Vedic Horary astrology shifts the starting reference point (Lagna for 1st query, Moon for 2nd query, Sun for 3rd query, Jupiter for 4th query, etc.) to evaluate subsequent questions from the same chart.
+       - The Lagnapathi (Lord of Ascendant/Reference point, representing the querent) and the Karyesa (Lord of the house of query, representing the object in view).
        - Their respective signs, positions, and planetary conditions (Avasthas, e.g. Deeptha/Exalted, Swastha/Own sign, Deena/Debilitated, Mushita/Combust).
        - Active aspects or Tajaka Yogas (e.g. Ithasala/Applying, Easarapha/Separating, Nakta, Yamaya, Kamboola).
        - The specific Shatpanchasika predictions (e.g., child gender, insider/outsider theft details, lost property direction/distance, travel timing, or rain/weather indicators).
@@ -195,6 +196,7 @@ def generate_astrological_reading(question: str, chart_details: dict):
     
     # Strip down chart_details to keep token count clean while retaining all astrological info
     summary_data = {
+        "query_num": chart_details.get("query_num", 1),
         "house": chart_details.get("house"),
         "ref_point": chart_details.get("ref_point_name"),
         "ref_sign": chart_details.get("ref_sign_name"),
