@@ -236,15 +236,12 @@ class PrasnaChart:
             "sincerity": sinc_res
         }
         
-        # 1. Check if Lagnapathi and Karyesa are the same planet
+        # 1. Check if Lagnapathi and Karyesa are the same planet (Self-realization)
         if lagnapathi == karyesa:
-            evaluation["success_probability"] = "Very High"
-            evaluation["score_pct"] = 100
-            evaluation["details"].append("Lagnapathi and Karyesa are the same planet (Self-realization).")
             sp_res = evaluate_shatpanchasika(self, house_num)
             evaluation["shatpanchasika_predictions"] = sp_res["predictions"]
             evaluation["details"].extend(sp_res["details"])
-            
+
             # Incorporate special horary rules (Prasna Tantra Ch. III)
             active_cat = special_category
             if not active_cat:
@@ -260,10 +257,28 @@ class PrasnaChart:
                 elif active_cat == "disputes": sp_rules_res = evaluate_disputes(self)
                 elif active_cat == "crops_trade": sp_rules_res = evaluate_crops_trade(self, house_num)
                 else: sp_rules_res = None
-                
+
                 if sp_rules_res:
                     evaluation["shatpanchasika_predictions"].extend(sp_rules_res["predictions"])
                     evaluation["details"].extend(sp_rules_res["details"])
+
+            # Sincerity gate: an insincere query must not receive a favourable verdict
+            if not sinc_res.get("is_sincere", True):
+                evaluation["success_probability"] = "Inconclusive"
+                evaluation["score_pct"] = 0
+                evaluation["timing"] = "Not determinable — query marked insincere"
+                evaluation["details"].insert(0,
+                    "Query marked INSINCERE: astrological indicators suggest this is a "
+                    "test or repeated query. The chart cannot be read for concrete results "
+                    "(Prasna Tantra: only a genuine, first-time question yields a valid Prasna chart)."
+                )
+            else:
+                evaluation["success_probability"] = "Very High"
+                evaluation["score_pct"] = 100
+                evaluation["details"].insert(0,
+                    "Lagnapathi and Karyesa are the same planet — Self-realization (Swami Yoga). "
+                    "The querent already holds the answer within."
+                )
             return evaluation
             
         # 2. Check direct relationship
@@ -674,6 +689,19 @@ class PrasnaChart:
                 evaluation["timing"] = f"{mult_val} {mult_unit}"
         else:
             evaluation["timing"] = "Undetermined / Event Unlikely"
+
+        # 6. Final sincerity gate — ALWAYS applied last
+        # An insincere or test query must never display a meaningful verdict.
+        if not sinc_res.get("is_sincere", True):
+            evaluation["success_probability"] = "Inconclusive (Insincere Query)"
+            evaluation["score_pct"] = 0
+            evaluation["timing"] = "Not determinable — query flagged as insincere/test"
+            evaluation["details"].insert(0,
+                "INSINCERE QUERY: Astrological indicators suggest this question is a test, "
+                "repeated query, or is not genuinely meant. Per Prasna Tantra tradition, "
+                "only a sincere first-time question produces a valid Prasna chart. "
+                "The planetary positions below are recorded but no verdict is given."
+            )
             
         return evaluation
 
