@@ -2,7 +2,24 @@
 # 1. _rotate_equatorial_to_ecliptic is called with 2 arguments instead of 4
 # 2. _cartesian_to_spherical is called with 1 argument instead of 3
 # 3. _cartesian_velocity_to_spherical is called with 2 arguments instead of 6
+# Also fix a packaging error in libephemeris version 2.0.0 where horizons_backend.py
+# attempts to do "from .ayanamsha import get_ayanamsha_ut", but the ayanamsha module does
+# not exist (it is actually named get_ayanamsa_ut in libephemeris.planets).
 try:
+    import sys
+    import types
+    import libephemeris
+    import libephemeris.planets as planets
+    
+    # Check if get_ayanamsa_ut exists and bind it
+    get_ayanamsa_ut = getattr(planets, "get_ayanamsa_ut", None)
+    if get_ayanamsa_ut:
+        # Create a virtual libephemeris.ayanamsha module
+        ayanamsha_mod = types.ModuleType("libephemeris.ayanamsha")
+        ayanamsha_mod.get_ayanamsha_ut = get_ayanamsa_ut
+        sys.modules["libephemeris.ayanamsha"] = ayanamsha_mod
+        libephemeris.ayanamsha = ayanamsha_mod
+
     import libephemeris.fast_calc as fc
     
     # 1. Patch _rotate_equatorial_to_ecliptic
