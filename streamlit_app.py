@@ -370,7 +370,57 @@ if "query_time_str" not in st.session_state:
 
 # Header Section
 st.markdown("<h1 class='glow-text' style='text-align: center; margin-bottom: 0.5rem;'>✦ PRASNA TANTRA ✦</h1>", unsafe_allow_html=True)
-st.markdown("<p style='text-align: center; color: #9ca3af; font-size: 1.15rem; margin-bottom: 2.5rem;'>Vedic Horary Astrology and Shatpanchasika Decision Engine</p>", unsafe_allow_html=True)
+st.markdown("<p style='text-align: center; color: #9ca3af; font-size: 1.15rem; margin-bottom: 1.5rem;'>Vedic Horary Astrology and Shatpanchasika Decision Engine</p>", unsafe_allow_html=True)
+
+# Collapsible User Guide
+with st.expander("📖 View Application Guide & Horary Rules", expanded=False):
+    st.markdown("""
+    ### ✦ Prasna Tantra & Shatpanchasika Horary Engine Guide
+    
+    Welcome to the Vedic Horary Astrology Decision Engine. This application uses the classical principles of *Prasna Tantra* (Sri Neelakanta) and *Shatpanchasika* (Prithuyasas) to answer queries based on the exact astronomical chart cast for the time and place of the query.
+    
+    #### 1. ⚙️ Step-by-Step Instructions
+    1. **Set the Query Time & Date:** In the sidebar, specify the exact local date and time when the question arose or was asked.
+    2. **Resolve the Location:** 
+       - Type the city or town name under **Resolve Location** and click **Search Location**.
+       - Select the correct entry from the dropdown. The engine will automatically calculate the offline geographic coordinates and resolve the correct timezone (with DST adjustments).
+       - *Note:* If needed, you can override coordinates manually in the **Advanced Coordinates Override** section.
+    3. **Select Specialized Analysis Modules:**
+       - The engine automatically parses your question text using AI to detect if it relates to **Lost Property**, **Travel/Abroad**, or **Pregnancy/Marriage/Thought-Reading**.
+       - If you want to force these evaluations, check the corresponding boxes in the sidebar.
+    4. **Submit Query:** Click **Analyze Prasna Chart**.
+    
+    ---
+    
+    #### 2. 📜 Key Astrological Rules Implemented
+    
+    ##### 🔄 The Sequential Query System (Reference Point Shifting)
+    Horary astrology dictates that the reference point for calculating house counts must shift for consecutive questions asked in the same session:
+    - **Question #1 (Q1):** Counted from the **Ascendant (Lagna)**.
+    - **Question #2 (Q2):** Counted from the **Moon's Sign**.
+    - **Question #3 (Q3):** Counted from the **Sun's Sign**.
+    - **Question #4 (Q4):** Counted from **Jupiter's Sign**.
+    - **Question #5+:** Counted from the stronger of **Mercury or Venus**.
+    *Click **Reset** in the sidebar at any time to clear the query history and return to Question #1.*
+    
+    ##### 🕵️ Lost or Stolen Property (Adhyaya VI)
+    - **Direction:** Determined by the sign of the Lagna, Lagna Lord, or the Moon.
+    - **Distance:** Calculated in *Yojanas* using the Navamsa of the rising sign (Lagna).
+    - **Thief Profile:** Identifies if the thief is an family/insider (determined by Lagna lord and planetary placements in houses 1/7) or an outsider, their age class, and gender description.
+    - **Recovery:** Evaluates if the property will be returned, based on planets in the 11th, 8th, or aspects between the Lagna Lord and Karyesha.
+    
+    ##### 🌍 Traveler & Conflicts (Adhyayas II & V)
+    - **Traveler Status:** Evaluates if the person abroad is safe, in custody, or returning.
+    - **Return Timing:** Estimates the exact number of days/months for the traveler's return based on planetary transits and house sign properties.
+    - **Siege/Conflict:** Computes the strength of defenders (*Pauras*) versus invaders (*Yayinas*) using the quadrant placement of benefics and malefics.
+    - **Pregnancy & Marriage (Adhyaya VII):** Determines pregnancy confirmation, child's gender, and marriage prospects.
+    
+    ##### ⚖️ Genuinity (Sincerity) Audit
+    The engine validates if a query is sincere or a mock query before rendering a final decision. Sincerity checks look for:
+    - Malefics in the Ascendant, or aspects from Saturn/Mars to the Lagna/Moon.
+    - The Moon placed in the Ascendant aspected by malefics.
+    - If a query is flagged as **Insincere**, the verdict will return as *CANNOT BE ANSWERED*.
+    """)
 
 # Main Application Layout: Sidebar (Inputs) & Main Panel (Results)
 with st.sidebar:
@@ -1029,4 +1079,42 @@ if st.session_state.chart and st.session_state.evaluation:
                 status = "<span style='color: #f87171;'>Combust (Mushita)</span>" if is_comb else "<span style='color: #34d399;'>Safe</span>"
                 st.markdown(f"- **{p}**: Orb {diff:.2f}° / Limit {comb_limit}° | {status}", unsafe_allow_html=True)
 else:
-    st.info("👈 Set the time, date, location, and type your question in the sidebar, then click 'Analyze Prasna Chart' to compute calculations.")
+    st.markdown("""
+    <div class="glass-card" style="padding: 2.5rem; text-align: center; border: 1px solid rgba(129, 140, 248, 0.15); margin-top: 1.5rem;">
+        <div style="font-size: 4rem; margin-bottom: 1rem; filter: drop-shadow(0 0 10px rgba(129, 140, 248, 0.5));">🌌</div>
+        <h2 class="glow-text" style="margin-top: 0; margin-bottom: 0.5rem; font-size: 2rem;">Cast a Horary Astro-Chart</h2>
+        <p style="color: #9ca3af; font-size: 1.1rem; max-width: 600px; margin: 0 auto 2rem auto;">
+            Cast the heavens for the exact moment of your inquiry to unlock classical Vedic predictions and AI astrological readings.
+        </p>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; text-align: left; margin-bottom: 2rem;">
+            <div style="background: rgba(255,255,255,0.02); padding: 1.25rem; border-radius: 12px; border: 1px solid rgba(255,255,255,0.04);">
+                <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">📍</div>
+                <h4 style="margin: 0 0 0.5rem 0; color: #f3f4f6;">1. Setup Location & Time</h4>
+                <p style="margin: 0; color: #9ca3af; font-size: 0.88rem; line-height: 1.4;">
+                    Search your location in the sidebar to auto-calculate offline coordinates and local time zone.
+                </p>
+            </div>
+            <div style="background: rgba(255,255,255,0.02); padding: 1.25rem; border-radius: 12px; border: 1px solid rgba(255,255,255,0.04);">
+                <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">✍️</div>
+                <h4 style="margin: 0 0 0.5rem 0; color: #f3f4f6;">2. Ask in Plain English</h4>
+                <p style="margin: 0; color: #9ca3af; font-size: 0.88rem; line-height: 1.4;">
+                    Type your question naturally. The engine automatically maps the question to its astrological house.
+                </p>
+            </div>
+            <div style="background: rgba(255,255,255,0.02); padding: 1.25rem; border-radius: 12px; border: 1px solid rgba(255,255,255,0.04);">
+                <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">📜</div>
+                <h4 style="margin: 0 0 0.5rem 0; color: #f3f4f6;">3. Classical Algorithms</h4>
+                <p style="margin: 0; color: #9ca3af; font-size: 0.88rem; line-height: 1.4;">
+                    Computes Tajaka Yogas, Sincerity, Lost property direction, Traveler return, and Pregnancy signs.
+                </p>
+            </div>
+        </div>
+        
+        <div style="background: rgba(129, 140, 248, 0.08); border: 1px solid rgba(129, 140, 248, 0.2); border-radius: 12px; padding: 1rem; max-width: 650px; margin: 0 auto; text-align: left;">
+            <p style="margin: 0; color: #cbd5e1; font-size: 0.9rem; line-height: 1.5;">
+                👉 <strong>How to start:</strong> Use the sidebar controls on the left to select date/time, type a query like <em>"Will my lost object be found?"</em> or <em>"Will I change my job soon?"</em>, then click <strong>Analyze Prasna Chart</strong>.
+            </p>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
