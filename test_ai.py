@@ -33,14 +33,14 @@ class TestAIIntegration(unittest.TestCase):
     @patch('requests.post')
     def test_generate_astrological_reading(self, mock_post):
         mock_response = MagicMock()
-        mock_response.json.return_value = {
-            "choices": [{
-                "message": {
-                    "content": "Astrological interpretation: Favorable prospects predicted."
-                }
-            }]
-        }
+        # Mock SSE response streaming lines
+        mock_response.iter_lines.return_value = [
+            b'data: {"choices": [{"delta": {"content": "Astrological "}}]}',
+            b'data: {"choices": [{"delta": {"content": "interpretation: Favorable prospects predicted."}}]}',
+            b'data: [DONE]'
+        ]
         mock_response.raise_for_status = MagicMock()
+        mock_response.status_code = 200
         mock_post.return_value = mock_response
         
         dummy_chart = {
@@ -59,7 +59,8 @@ class TestAIIntegration(unittest.TestCase):
         }
         
         with patch('prasnatantra.ai.load_groq_key', return_value="dummy_key"):
-            reading = generate_astrological_reading("Will my project succeed?", dummy_chart)
+            reading_gen = generate_astrological_reading("Will my project succeed?", dummy_chart)
+            reading = "".join(list(reading_gen))
             self.assertIn("Astrological interpretation", reading)
 
 if __name__ == "__main__":

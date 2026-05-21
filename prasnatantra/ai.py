@@ -45,7 +45,8 @@ def query_groq(payload):
         try:
             response = requests.post(url, headers=headers, json=payload, timeout=15)
             # Handle rate limits (429) or temporary server errors (5xx)
-            if response.status_code == 429 or response.status_code >= 500:
+            status_code = response.status_code
+            if isinstance(status_code, int) and (status_code == 429 or status_code >= 500):
                 if attempt < max_retries - 1:
                     time.sleep(base_delay * (2 ** attempt))
                     continue
@@ -78,7 +79,8 @@ def query_groq_stream(payload):
     for attempt in range(max_retries):
         try:
             response = requests.post(url, headers=headers, json=payload, timeout=20, stream=True)
-            if response.status_code == 429 or response.status_code >= 500:
+            status_code = response.status_code
+            if isinstance(status_code, int) and (status_code == 429 or status_code >= 500):
                 if attempt < max_retries - 1:
                     time.sleep(base_delay * (2 ** attempt))
                     continue
