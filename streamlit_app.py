@@ -342,9 +342,9 @@ def generate_kundali_svg(chart):
 if "suggestions" not in st.session_state:
     st.session_state.suggestions = []
 if "latitude" not in st.session_state:
-    st.session_state.latitude = "12:58:18"
+    st.session_state.latitude = "25:35:39"
 if "longitude" not in st.session_state:
-    st.session_state.longitude = "77:35:41"
+    st.session_state.longitude = "85:08:15"
 if "tz_offset" not in st.session_state:
     st.session_state.tz_offset = 5.5
 if "tz_name" not in st.session_state:
@@ -447,7 +447,7 @@ with st.sidebar:
     # Photon is OpenStreetMap-based like Nominatim but has no 429 rate-limit issues on cloud
     st.markdown("---")
     st.markdown("##### 📍 Resolve Location")
-    search_query = st.text_input("Type City/Town Name", value="Bangalore")
+    search_query = st.text_input("Type City/Town Name", value="Patna")
 
     if st.button("Search Location"):
         with st.spinner("Fetching coordinates..."):
