@@ -50,12 +50,14 @@ st.markdown("""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap');
 
-/* Sidebar width adjustment */
-[data-testid="stSidebar"] {
-    min-width: 380px !important;
-    max-width: 55vw !important;
-    width: clamp(380px, 28vw, 520px) !important;
-    transition: width 0.2s ease;
+/* Sidebar width adjustment on desktop */
+@media (min-width: 768px) {
+    [data-testid="stSidebar"] {
+        min-width: 380px !important;
+        max-width: 55vw !important;
+        width: clamp(380px, 28vw, 520px) !important;
+        transition: width 0.2s ease;
+    }
 }
 
 /* Main Streamlit container background and stars effect */
@@ -215,6 +217,43 @@ h1, h2, h3, h4, h5, h6 {
 .lost-metric-value {
     font-size: 1.25rem;
     font-weight: 700;
+}
+
+/* Responsive adjustments for mobile/phone views */
+@media (max-width: 767px) {
+    .glass-card {
+        padding: 1rem !important;
+        border-radius: 12px !important;
+        margin-bottom: 1rem !important;
+    }
+    .lost-property-grid {
+        grid-template-columns: 1fr !important;
+        gap: 0.75rem !important;
+    }
+    .lost-metric-box {
+        padding: 1rem 0.75rem !important;
+    }
+    .lost-metric-value {
+        font-size: 1.1rem !important;
+    }
+    h1 {
+        font-size: 1.8rem !important;
+    }
+    h2 {
+        font-size: 1.4rem !important;
+    }
+    h3 {
+        font-size: 1.2rem !important;
+    }
+    h4 {
+        font-size: 1.1rem !important;
+    }
+    h5 {
+        font-size: 0.95rem !important;
+    }
+    p, li, span, div {
+        font-size: 0.88rem !important;
+    }
 }
 </style>
 """, unsafe_allow_html=True)
@@ -835,34 +874,26 @@ if st.session_state.chart and st.session_state.evaluation:
             </div>
             """, unsafe_allow_html=True)
             
-            # Key Parameters Columns
-            col_lp1, col_lp2, col_lp3 = st.columns(3)
-            with col_lp1:
-                st.markdown(f"""
+            # Key Parameters Grid
+            st.markdown(f"""
+            <div class='lost-property-grid'>
                 <div class='lost-metric-box'>
                     <div class='lost-metric-label'>🧭 Stolen Direction</div>
                     <div class='lost-metric-value' style='color: #a78bfa;'>{lost['direction']}</div>
                     <small style='color: #64748b; font-size: 0.75rem;'>Basis: {lost['direction_source']}</small>
                 </div>
-                """, unsafe_allow_html=True)
-                
-            with col_lp2:
-                st.markdown(f"""
                 <div class='lost-metric-box'>
                     <div class='lost-metric-label'>📏 Distance Removed</div>
                     <div class='lost-metric-value' style='color: #38bdf8;'>{lost['distance_desc']}</div>
                     <small style='color: #64748b; font-size: 0.75rem;'>Lagna Navamsa: {lost['nav_sign_name']} (Nav # {lost['distance_yojanas'] + 5 if lost['distance_yojanas'] > 0 else '1-5'})</small>
                 </div>
-                """, unsafe_allow_html=True)
-                
-            with col_lp3:
-                st.markdown(f"""
                 <div class='lost-metric-box'>
                     <div class='lost-metric-label'>👤 Thief Association</div>
                     <div class='lost-metric-value' style='color: #f43f5e;'>{"Insider 🏠" if lost['is_insider'] else "Outsider 👥"}</div>
                     <small style='color: #64748b; font-size: 0.75rem;'>{lost['thief_source']}</small>
                 </div>
-                """, unsafe_allow_html=True)
+            </div>
+            """, unsafe_allow_html=True)
                 
             st.markdown("<br>", unsafe_allow_html=True)
             
@@ -901,23 +932,20 @@ if st.session_state.chart and st.session_state.evaluation:
         </div>
         """, unsafe_allow_html=True)
         
-        col_t1, col_t2 = st.columns(2)
-        with col_t1:
-            st.markdown(f"""
+        # Key Parameters Grid
+        st.markdown(f"""
+        <div class='lost-property-grid'>
             <div class='lost-metric-box'>
                 <div class='lost-metric-label'>⏰ Return Timing</div>
                 <div class='lost-metric-value' style='color: #22d3ee; font-size: 1rem; line-height: 1.4; font-weight: bold;'>{trav['return_timing_desc']}</div>
             </div>
-            """, unsafe_allow_html=True)
-            
-        with col_t2:
-            st.markdown(f"""
             <div class='lost-metric-box'>
                 <div class='lost-metric-label'>⚔️ Enemy March / Action</div>
                 <div class='lost-metric-value' style='color: #a78bfa; font-size: 1rem; line-height: 1.4; font-weight: bold;'>{trav['enemy_verdict']}</div>
                 <small style='color: #64748b; font-size: 0.75rem;'>Details: {trav['enemy_details']}</small>
             </div>
-            """, unsafe_allow_html=True)
+        </div>
+        """, unsafe_allow_html=True)
             
         st.markdown("<br>", unsafe_allow_html=True)
         
