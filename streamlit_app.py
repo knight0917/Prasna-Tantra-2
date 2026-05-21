@@ -1079,42 +1079,38 @@ if st.session_state.chart and st.session_state.evaluation:
                 status = "<span style='color: #f87171;'>Combust (Mushita)</span>" if is_comb else "<span style='color: #34d399;'>Safe</span>"
                 st.markdown(f"- **{p}**: Orb {diff:.2f}° / Limit {comb_limit}° | {status}", unsafe_allow_html=True)
 else:
-    st.markdown("""
-<div class="glass-card" style="padding: 2.5rem; text-align: center; border: 1px solid rgba(129, 140, 248, 0.15); margin-top: 1.5rem;">
-    <div style="font-size: 4rem; margin-bottom: 1rem; filter: drop-shadow(0 0 10px rgba(129, 140, 248, 0.5));">🌌</div>
-    <h2 class="glow-text" style="margin-top: 0; margin-bottom: 0.5rem; font-size: 2rem;">Cast a Horary Astro-Chart</h2>
-    <p style="color: #9ca3af; font-size: 1.1rem; max-width: 600px; margin: 0 auto 2rem auto;">
-        Cast the heavens for the exact moment of your inquiry to unlock classical Vedic predictions and AI astrological readings.
-    </p>
-    
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; text-align: left; margin-bottom: 2rem;">
-        <div style="background: rgba(255,255,255,0.02); padding: 1.25rem; border-radius: 12px; border: 1px solid rgba(255,255,255,0.04);">
-            <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">📍</div>
-            <h4 style="margin: 0 0 0.5rem 0; color: #f3f4f6;">1. Setup Location & Time</h4>
-            <p style="margin: 0; color: #9ca3af; font-size: 0.88rem; line-height: 1.4;">
-                Search your location in the sidebar to auto-calculate offline coordinates and local time zone.
-            </p>
-        </div>
-        <div style="background: rgba(255,255,255,0.02); padding: 1.25rem; border-radius: 12px; border: 1px solid rgba(255,255,255,0.04);">
-            <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">✍️</div>
-            <h4 style="margin: 0 0 0.5rem 0; color: #f3f4f6;">2. Ask in Plain English</h4>
-            <p style="margin: 0; color: #9ca3af; font-size: 0.88rem; line-height: 1.4;">
-                Type your question naturally. The engine automatically maps the question to its astrological house.
-            </p>
-        </div>
-        <div style="background: rgba(255,255,255,0.02); padding: 1.25rem; border-radius: 12px; border: 1px solid rgba(255,255,255,0.04);">
-            <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">📜</div>
-            <h4 style="margin: 0 0 0.5rem 0; color: #f3f4f6;">3. Classical Algorithms</h4>
-            <p style="margin: 0; color: #9ca3af; font-size: 0.88rem; line-height: 1.4;">
-                Computes Tajaka Yogas, Sincerity, Lost property direction, Traveler return, and Pregnancy signs.
-            </p>
-        </div>
-    </div>
-    
-    <div style="background: rgba(129, 140, 248, 0.08); border: 1px solid rgba(129, 140, 248, 0.2); border-radius: 12px; padding: 1rem; max-width: 650px; margin: 0 auto; text-align: left;">
-        <p style="margin: 0; color: #cbd5e1; font-size: 0.9rem; line-height: 1.5;">
-            👉 <strong>How to start:</strong> Use the sidebar controls on the left to select date/time, type a query like <em>"Will my lost object be found?"</em> or <em>"Will I change my job soon?"</em>, then click <strong>Analyze Prasna Chart</strong>.
-        </p>
-    </div>
+    st.markdown("""<div class="glass-card" style="padding: 2.5rem; text-align: center; border: 1px solid rgba(129, 140, 248, 0.15); margin-top: 1.5rem;">
+<div style="font-size: 4rem; margin-bottom: 1rem; filter: drop-shadow(0 0 10px rgba(129, 140, 248, 0.5));">🌌</div>
+<h2 class="glow-text" style="margin-top: 0; margin-bottom: 0.5rem; font-size: 2rem;">Cast a Horary Astro-Chart</h2>
+<p style="color: #9ca3af; font-size: 1.1rem; max-width: 600px; margin: 0 auto 2rem auto;">
+Cast the heavens for the exact moment of your inquiry to unlock classical Vedic predictions and AI astrological readings.
+</p>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; text-align: left; margin-bottom: 2rem;">
+<div style="background: rgba(255,255,255,0.02); padding: 1.25rem; border-radius: 12px; border: 1px solid rgba(255,255,255,0.04);">
+<div style="font-size: 1.5rem; margin-bottom: 0.5rem;">📍</div>
+<h4 style="margin: 0 0 0.5rem 0; color: #f3f4f6;">1. Setup Location & Time</h4>
+<p style="margin: 0; color: #9ca3af; font-size: 0.88rem; line-height: 1.4;">
+Search your location in the sidebar to auto-calculate offline coordinates and local time zone.
+</p>
 </div>
-""", unsafe_allow_html=True)
+<div style="background: rgba(255,255,255,0.02); padding: 1.25rem; border-radius: 12px; border: 1px solid rgba(255,255,255,0.04);">
+<div style="font-size: 1.5rem; margin-bottom: 0.5rem;">✍️</div>
+<h4 style="margin: 0 0 0.5rem 0; color: #f3f4f6;">2. Ask in Plain English</h4>
+<p style="margin: 0; color: #9ca3af; font-size: 0.88rem; line-height: 1.4;">
+Type your question naturally. The engine automatically maps the question to its astrological house.
+</p>
+</div>
+<div style="background: rgba(255,255,255,0.02); padding: 1.25rem; border-radius: 12px; border: 1px solid rgba(255,255,255,0.04);">
+<div style="font-size: 1.5rem; margin-bottom: 0.5rem;">📜</div>
+<h4 style="margin: 0 0 0.5rem 0; color: #f3f4f6;">3. Classical Algorithms</h4>
+<p style="margin: 0; color: #9ca3af; font-size: 0.88rem; line-height: 1.4;">
+Computes Tajaka Yogas, Sincerity, Lost property direction, Traveler return, and Pregnancy signs.
+</p>
+</div>
+</div>
+<div style="background: rgba(129, 140, 248, 0.08); border: 1px solid rgba(129, 140, 248, 0.2); border-radius: 12px; padding: 1rem; max-width: 650px; margin: 0 auto; text-align: left;">
+<p style="margin: 0; color: #cbd5e1; font-size: 0.9rem; line-height: 1.5;">
+👉 <strong>How to start:</strong> Use the sidebar controls on the left to select date/time, type a query like <em>"Will my lost object be found?"</em> or <em>"Will I change my job soon?"</em>, then click <strong>Analyze Prasna Chart</strong>.
+</p>
+</div>
+</div>""", unsafe_allow_html=True)
