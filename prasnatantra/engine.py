@@ -903,12 +903,22 @@ class PrasnaChart:
                 f"and unfavorable benefic/malefic balance. [Shatpanchasika I.3-4]"
             )
 
-        if score >= 80:
-            evaluation["success_probability"] = "High / Certain"
-        elif score >= 50:
-            evaluation["success_probability"] = "Medium / Obstacles"
-        else:
+        # Align score and success_probability with the classical verdict to prevent contradictions
+        verdict = evaluation["verdict"]
+        if verdict == "NO":
+            score = min(score, 35)
             evaluation["success_probability"] = "Low / Failure"
+        elif verdict == "MAYBE":
+            score = min(max(score, 40), 55)
+            evaluation["success_probability"] = "Medium / Obstacles"
+        elif verdict in ["YES, but partially", "YES, with struggle", "YES, through intermediary"]:
+            score = min(max(score, 50), 75)
+            evaluation["success_probability"] = "Medium / Obstacles"
+        elif verdict == "YES":
+            score = max(score, 80)
+            evaluation["success_probability"] = "High / Certain"
+
+        evaluation["score_pct"] = score
 
         # 5. Timing of event calculation
         lagna_chara = self.lagna_sign % 3  # 0 = Movable, 1 = Fixed, 2 = Common
