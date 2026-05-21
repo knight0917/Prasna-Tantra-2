@@ -6,6 +6,16 @@ import requests
 import streamlit as st
 import pandas as pd
 
+# Force reload of local prasnatantra submodules to ensure Streamlit picks up code updates
+import sys
+import importlib
+for mod in ["prasnatantra.tajaka", "prasnatantra.astronomy", "prasnatantra.special_rules", "prasnatantra.shatpanchasika", "prasnatantra.lost_objects", "prasnatantra.traveler", "prasnatantra.miscellaneous", "prasnatantra.engine", "prasnatantra.ai", "prasnatantra"]:
+    if mod in sys.modules:
+        try:
+            importlib.reload(sys.modules[mod])
+        except Exception:
+            pass
+
 # Import local engine
 from prasnatantra import PrasnaChart, SIGN_LORDS
 from prasnatantra.astronomy import get_nakshatra_pada, get_sign_name
