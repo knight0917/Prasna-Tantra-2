@@ -123,12 +123,12 @@ def map_question_to_house(question: str) -> dict:
     - House 2: Wealth, finance, money, profits, family assets, personal possessions.
     - House 3: Brothers, sisters, short journeys, writing, communication, courage, rumors, messages, news.
     - House 4: Mother, home, real estate, lands, crops, agriculture, vehicles, peace of mind.
-    - House 5: Children, pregnancy, education, intellect, speculation, romance, creativity.
-    - House 6: Illness, disease recovery, debts, enemies, servants, disputes, obstacles.
-    - House 7: Marriage, spouse, disputes, partnerships, trade, business relations, foreign travel/spouse return.
+    - House 5: Romance, emotional attachment, pre-marital courtship, children, pregnancy, education, intellect, speculation. (Map love/attraction/courtship queries here if the focus is on courtship or emotional bond, but prefer House 7 for committed marriage/union).
+    - House 6: Service, employment under a master, servants, daily jobs, illness, disease recovery, debts, enemies, disputes. (Map career/job changes or employee-employer relations here if focused on service/employment under a master, but prefer House 10 for general career status/promotions).
+    - House 7: Marriage, committed spouse/partner, union, love affairs (committed union), disputes, partnerships, trade, foreign travel/spouse return.
     - House 8: Death, danger, longevity, inheritance, hidden secrets, lost wealth.
     - House 9: Religion, pilgrimages, long journeys, father, higher knowledge, good fortune, righteousness.
-    - House 10: Career, profession, jobs, promotions, status, government, authority.
+    - House 10: Career, profession, high-status jobs, business, promotions, status, government, authority.
     - House 11: Realization of desires, financial gains, honors, friendships.
     - House 12: Expenditure, losses, captivity/imprisonment, release, foreign travel/settlement.
 
@@ -182,6 +182,10 @@ def generate_astrological_reading(question: str, chart_details: dict):
     system_prompt = """You are a master Vedic Horary (Tajaka/Prasna) Astrologer. You interpret query evaluations in the authentic style of Sri Neelakanta's *Prasna Tantra* and Prithuyasas's *Shatpanchasika*.
     
     Explain the results to the client. Keep the tone professional, mystical, and reassuring, yet clear and structured.
+    
+    CRITICAL Horary Interpretation Rule (Cross-Referencing Related Houses):
+    - For **Love, Courtship, and Marriage** queries: You MUST analyze and cross-reference both House 5 (governing pre-marital courtship, romance, emotions, and affection) and House 7 (governing committed union, marriage, and partner). Check Venus as the karaka for relationships and its condition.
+    - For **Job, Service, and Career** queries: You MUST analyze and cross-reference both House 10 (governing career status, profession, rank, and promotions) and House 6 (governing service, employment under an employer/master, and daily work). Explain the relationship between Lagna (the employee) and the 10th/6th/12th houses (signifying master, service, and change).
     
     Structure the reading exactly as follows:
     1. **The Pronouncement (Karyasiddhi)**: A direct, unambiguous answer to their question. State whether the goal will be realized, and the level of success probability. Explicitly acknowledge the question number (e.g., "For your Question #2...") and state the celestial body used as the starting reference point for counting houses (e.g., "counting from the Moon").

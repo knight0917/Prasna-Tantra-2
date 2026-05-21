@@ -100,12 +100,19 @@ def evaluate_deity_curse(chart):
 
 def evaluate_master_servant(chart):
     """
-    Evaluates master-servant relations & job changes (Stanzas 111-118)
-    Lagna = Servant/Employee. 10th house = Master/Employer/Job.
+    Evaluates master-servant relations, job changes, and career stability
+    based on Sri Neelakanta's Prasna Tantra Chapter III (Stanzas 56-61, 68-75).
+    Lagna = Employee/Servant. 10th house = Employer/Master/Job.
     """
     lagna_sign = chart.lagna_sign
     lagnapathi = chart.lagnapathi
     tenth_lord = SIGN_LORDS[(lagna_sign + 9) % 12]
+    
+    sixth_lord = SIGN_LORDS[(lagna_sign + 5) % 12]
+    twelfth_lord = SIGN_LORDS[(lagna_sign + 11) % 12]
+    third_lord = SIGN_LORDS[(lagna_sign + 2) % 12]
+    ninth_lord = SIGN_LORDS[(lagna_sign + 8) % 12]
+    seventh_lord = SIGN_LORDS[(lagna_sign + 6) % 12]
     
     # Sign classifications: 0=Movable (Aries, Cancer, Libra, Capricorn), 1=Fixed (Taurus, Leo, Scorpio, Aquarius), 2=Common (Gemini, Virgo, Sagittarius, Pisces)
     chara_map = {
@@ -126,27 +133,30 @@ def evaluate_master_servant(chart):
     lagnapathi_sign = get_sign(chart.planets[lagnapathi]["longitude"])
     lagnapathi_mobility = get_mobility(lagnapathi_sign)
     
+    lagnapathi_house = ((lagnapathi_sign - lagna_sign) % 12) + 1
+    tenth_lord_sign = get_sign(chart.planets[tenth_lord]["longitude"])
+    tenth_lord_house = ((tenth_lord_sign - lagna_sign) % 12) + 1
+    
     predictions = []
     details = []
     score_adj = 0
     
-    # Rule: Fixed Lagna and Fixed Lagna Lord -> Stay/Loyal
+    # 1. Sign Mobility Base Rules (Stanzas 111-112)
     if lagna_mobility == "Fixed" and lagnapathi_mobility == "Fixed":
         predictions.append({
             "category": "Employment Stability",
             "prediction": "The employee/servant will remain with the current master/job. Favorable stability.",
             "rule": "Prasna Tantra Ch 3 St. 111 (Fixed Lagna & Lord)"
         })
-        details.append("Master-Servant: Both Lagna and Lagna Lord are in Fixed signs (Staying).")
+        details.append("Master-Servant: Both Lagna and Lagna Lord are in Fixed signs (indicating staying).")
         score_adj += 15
-    # Rule: Movable Lagna or Lord in movable sign -> Change
     elif lagna_mobility == "Movable" or lagnapathi_mobility == "Movable":
         predictions.append({
             "category": "Employment Stability",
             "prediction": "The employee/servant will change jobs or leave the current master/employer soon.",
             "rule": "Prasna Tantra Ch 3 St. 112 (Movable Lagna or Lord)"
         })
-        details.append("Master-Servant: Lagna or Lagna Lord in Movable sign (Shifting).")
+        details.append("Master-Servant: Lagna or Lagna Lord is in a Movable sign (indicating shifting).")
         score_adj -= 10
     else:
         predictions.append({
@@ -154,20 +164,160 @@ def evaluate_master_servant(chart):
             "prediction": "Mixed results. Employee will stay for now but will eventually change after some delay.",
             "rule": "Prasna Tantra Ch 3 St. 111-112 (Common sign influence)"
         })
-        details.append("Master-Servant: Lagna/Lagna Lord under Common sign influence (Mixed/delayed change).")
+        details.append("Master-Servant: Lagna/Lagna Lord under Common sign influence (mixed/delayed change).")
         
-    # Check relationship with 10th Lord (Employer)
+    # 2. Employer-Employee Relations Aspect Rules
     rel = get_planet_relationship(lagnapathi, chart.planets[lagnapathi], tenth_lord, chart.planets[tenth_lord])
     if rel:
         if rel["is_friendly"]:
-            details.append(f"Master-Servant: Friendly aspect ({rel['aspect_type']}) between employee lord ({lagnapathi}) and employer lord ({tenth_lord}).")
+            details.append(f"Master-Servant: Friendly aspect ({rel['aspect_type']}) between employee lord ({lagnapathi}) and employer lord ({tenth_lord}) indicates harmony.")
             score_adj += 10
         else:
             details.append(f"Master-Servant: Hostile aspect ({rel['aspect_type']}) between employee lord ({lagnapathi}) and employer lord ({tenth_lord}) indicating friction.")
             score_adj -= 10
     else:
         details.append(f"Master-Servant: No aspect between employee lord ({lagnapathi}) and employer lord ({tenth_lord}).")
-        
+
+    # 3. Classical Job Change & Stability (Stanzas 56-58 & 72)
+    rel_6 = get_planet_relationship(lagnapathi, chart.planets[lagnapathi], sixth_lord, chart.planets[sixth_lord])
+    rel_12 = get_planet_relationship(lagnapathi, chart.planets[lagnapathi], twelfth_lord, chart.planets[twelfth_lord])
+    
+    in_kendra = lagnapathi_house in [1, 4, 7, 10]
+    has_rel_6_12 = (rel_6 and rel_6["is_applying"]) or (rel_12 and rel_12["is_applying"])
+    
+    if in_kendra and has_rel_6_12:
+        predictions.append({
+            "category": "Job Change Forecast",
+            "prediction": f"Querent will benefit from changing to a new master/employer. Change of service is indicated.",
+            "rule": "Prasna Tantra Ch 3 St. 72 (Lagna Lord in Kendra having Ithasala with 6th/12th Lord)"
+        })
+        details.append(f"Job Change: Lagna Lord ({lagnapathi}) is in Kendra and has Ithasala with 6th/12th Lord.")
+        if lagnapathi_mobility == "Movable":
+            details.append("Job Change: Lagna Lord in Movable sign indicates change of city/location also.")
+        score_adj += 15
+    elif in_kendra and not has_rel_6_12:
+        predictions.append({
+            "category": "Job Change Forecast",
+            "prediction": "No change of service/master is recommended. Staying with the current employer is beneficial.",
+            "rule": "Prasna Tantra Ch 3 St. 56-58 (Lagna Lord in Kendra with no Ithasala with 6th/12th Lord)"
+        })
+        details.append("Job Change: Lagna Lord in Kendra has no Ithasala with 6th or 12th Lord (staying advised).")
+        score_adj += 10
+
+    # Retrograde and 3rd/9th house change (Stanzas 56-58 Notes)
+    lagnapathi_retro = chart.planets[lagnapathi]["speed"] < 0
+    rel_3 = get_planet_relationship(lagnapathi, chart.planets[lagnapathi], third_lord, chart.planets[third_lord])
+    rel_9 = get_planet_relationship(lagnapathi, chart.planets[lagnapathi], ninth_lord, chart.planets[ninth_lord])
+    has_rel_3_9 = (rel_3 and rel_3["is_applying"]) or (rel_9 and rel_9["is_applying"])
+    
+    if lagnapathi_retro and has_rel_3_9:
+        predictions.append({
+            "category": "Job Change Forecast",
+            "prediction": "Querent will change over to a new master/position due to retrograde lord aspecting change houses.",
+            "rule": "Prasna Tantra Ch 3 St. 56-58 Notes (Retrograde Lagna Lord with Ithasala to 3rd/9th Lord)"
+        })
+        details.append("Job Change: Retrograde Lagna Lord has Ithasala with 3rd or 9th Lord (indicating position change).")
+        score_adj += 10
+
+    # 4. Improvement in present job (Stanza 73)
+    exalt_signs = {"Sun": 0, "Moon": 1, "Mars": 9, "Mercury": 5, "Jupiter": 3, "Venus": 11, "Saturn": 6}
+    own_signs = {"Sun": [4], "Moon": [3], "Mars": [0, 7], "Mercury": [2, 5], "Jupiter": [8, 11], "Venus": [1, 6], "Saturn": [9, 10]}
+    
+    is_own_exalted = (lagnapathi_sign in own_signs.get(lagnapathi, []) or lagnapathi_sign == exalt_signs.get(lagnapathi))
+    rel_moon = get_planet_relationship(lagnapathi, chart.planets[lagnapathi], "Moon", chart.planets["Moon"])
+    
+    if in_kendra and is_own_exalted and rel_moon and rel_moon["is_applying"]:
+        predictions.append({
+            "category": "Current Job Promotion",
+            "prediction": "The querent will secure improvement, raises, or promotion in the present job itself.",
+            "rule": "Prasna Tantra Ch 3 St. 73 (Lagna Lord in Kendra, own/exalted, in Ithasala with Moon)"
+        })
+        details.append("Job Promotion: Lagna Lord in Kendra (own/exalted sign) has Ithasala with Moon.")
+        score_adj += 20
+
+    # 5. Benefit under new employer (Stanza 74)
+    seventh_lord_sign = get_sign(chart.planets[seventh_lord]["longitude"])
+    seventh_lord_house = ((seventh_lord_sign - lagna_sign) % 12) + 1
+    seventh_in_kendra = seventh_lord_house in [1, 4, 7, 10]
+    seventh_own_exalted = (seventh_lord_sign in own_signs.get(seventh_lord, []) or seventh_lord_sign == exalt_signs.get(seventh_lord))
+    rel_moon_7 = get_planet_relationship(seventh_lord, chart.planets[seventh_lord], "Moon", chart.planets["Moon"])
+    
+    if seventh_in_kendra and seventh_own_exalted and rel_moon_7 and rel_moon_7["is_applying"]:
+        predictions.append({
+            "category": "New Job Prospects",
+            "prediction": "The querent will benefit immensely under a new employer (7th house represents next master).",
+            "rule": "Prasna Tantra Ch 3 St. 74 (7th Lord in Kendra, own/exalted, in Ithasala with Moon)"
+        })
+        details.append("New Employer: 7th Lord in Kendra (own/exalted sign) has Ithasala with Moon.")
+        score_adj += 20
+
+    # 6. Cordial relations (Stanza 68 & 71)
+    sirshodaya_signs = [2, 4, 5, 6, 7, 10]
+    is_sirshodaya = lagna_sign in sirshodaya_signs
+    
+    benefics = ["Jupiter", "Venus", "Mercury", "Moon"]
+    # Check if any benefic occupies Lagna
+    benefics_in_lagna = []
+    for b in benefics:
+        if b in chart.planets and get_sign(chart.planets[b]["longitude"]) == lagna_sign:
+            benefics_in_lagna.append(b)
+            
+    if is_sirshodaya and benefics_in_lagna:
+        details.append(f"Relations: Sirshodaya Lagna occupied by benefics ({', '.join(benefics_in_lagna)}) indicates cordial employer relations (Stanza 68).")
+        score_adj += 10
+
+    # Stanza 71: Moon & Benefics aspect/occupy Lagna and 7th
+    moon_sign = get_sign(chart.planets["Moon"]["longitude"])
+    moon_in_1_7 = moon_sign in [lagna_sign, (lagna_sign + 6) % 12]
+    benefics_in_1_7 = any(get_sign(chart.planets[b]["longitude"]) in [lagna_sign, (lagna_sign + 6) % 12] for b in ["Jupiter", "Venus", "Mercury"])
+    
+    if moon_in_1_7 and benefics_in_1_7:
+        predictions.append({
+            "category": "Employer Goodwill",
+            "prediction": "The employer will treat the querent with special kindness, goodwill, and friendliness.",
+            "rule": "Prasna Tantra Ch 3 St. 71 (Moon and benefics occupying/aspecting Lagna/7th)"
+        })
+        details.append("Goodwill: Moon and benefics in Lagna/7th houses.")
+        score_adj += 15
+
+    # 7. Malefic afflictions (Stanzas 69-70)
+    malefics = ["Sun", "Mars", "Saturn"]
+    for m in malefics:
+        m_sign = get_sign(chart.planets[m]["longitude"])
+        m_house = ((m_sign - lagna_sign) % 12) + 1
+        if m_house == 1:
+            predictions.append({
+                "category": "Employment Affliction",
+                "prediction": f"Risk of loss of money at the hands of the employer due to malefic ({m}) in Lagna.",
+                "rule": "Prasna Tantra Ch 3 St. 69"
+            })
+            details.append(f"Affliction: Malefic {m} in Lagna (Financial risk from employer).")
+            score_adj -= 10
+        elif m_house == 2:
+            predictions.append({
+                "category": "Employment Affliction",
+                "prediction": f"Risk of mental distress/affliction from employer due to malefic ({m}) in 2nd house.",
+                "rule": "Prasna Tantra Ch 3 St. 69"
+            })
+            details.append(f"Affliction: Malefic {m} in 2nd house (Mental distress/tension).")
+            score_adj -= 10
+        elif m_house == 7:
+            predictions.append({
+                "category": "Employment Affliction",
+                "prediction": f"Friction and severe difficulties at work due to malefic ({m}) in 7th house.",
+                "rule": "Prasna Tantra Ch 3 St. 69"
+            })
+            details.append(f"Affliction: Malefic {m} in 7th house (Interpersonal friction).")
+            score_adj -= 10
+        elif m_house == 8:
+            predictions.append({
+                "category": "Employment Affliction",
+                "prediction": f"Severe professional setback or termination due to malefic ({m}) in 8th house.",
+                "rule": "Prasna Tantra Ch 3 St. 69"
+            })
+            details.append(f"Affliction: Malefic {m} in 8th house (Severe setback risk).")
+            score_adj -= 15
+
     return {
         "predictions": predictions,
         "details": details,

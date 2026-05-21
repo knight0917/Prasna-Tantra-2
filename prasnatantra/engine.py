@@ -348,13 +348,37 @@ class PrasnaChart:
 
         return details
 
-    def evaluate_query(self, house_num, query_num=1, special_category=None):
+    def _get_active_special_category(self, house_num, special_category, query_text):
+        active_cat = special_category
+        # Suppress sports default for relationship queries if query_text is provided
+        if active_cat == "sports" and query_text:
+            love_keywords = ["love", "marriage", "marry", "relationship", "proposal", "propose", "romance", "spouse", "wife", "husband", "partner", "friendship", "friend", "attraction", "affection", "boy friend", "girlfriend", "boyfriend", "girl friend"]
+            if any(kw in query_text.lower() for kw in love_keywords):
+                active_cat = None
+                
+        if not active_cat:
+            if house_num == 12:
+                active_cat = "deity_curse"
+            elif house_num == 6:
+                active_cat = "master_servant"
+            elif house_num == 4:
+                active_cat = "crops_trade"
+            elif house_num == 8:
+                active_cat = "disputes"
+            elif house_num == 10 and query_text:
+                job_keywords = ["job", "career", "work", "employ", "service", "master", "promotion", "salary", "boss", "office", "profession", "business"]
+                if any(kw in query_text.lower() for kw in job_keywords):
+                    active_cat = "master_servant"
+        return active_cat
+
+    def evaluate_query(self, house_num, query_num=1, special_category=None, query_text=None):
 
         """
         Evaluates a query corresponding to a specific house.
         house_num: 1 to 12
         query_num: 1 to 5 (sequential query number for multiple queries)
         special_category: string (optional, e.g. "deity_curse", "sports")
+        query_text: string (optional, original query text for contextual overrides)
         """
         if house_num < 1 or house_num > 12:
             raise ValueError("House number must be between 1 and 12.")
@@ -452,12 +476,7 @@ class PrasnaChart:
             evaluation["details"].extend(sp_res["details"])
 
             # Incorporate special horary rules (Prasna Tantra Ch. III)
-            active_cat = special_category
-            if not active_cat:
-                if house_num == 12: active_cat = "deity_curse"
-                elif house_num == 6: active_cat = "master_servant"
-                elif house_num == 4: active_cat = "crops_trade"
-                elif house_num == 8: active_cat = "disputes"
+            active_cat = self._get_active_special_category(house_num, special_category, query_text)
             if active_cat:
                 if active_cat == "deity_curse": sp_rules_res = evaluate_deity_curse(self)
                 elif active_cat == "master_servant": sp_rules_res = evaluate_master_servant(self)
@@ -812,16 +831,7 @@ class PrasnaChart:
 
         # Incorporate special horary rules (Prasna Tantra Ch. III)
         special_adj = 0
-        active_cat = special_category
-        if not active_cat:
-            if house_num == 12:
-                active_cat = "deity_curse"
-            elif house_num == 6:
-                active_cat = "master_servant"
-            elif house_num == 4:
-                active_cat = "crops_trade"
-            elif house_num == 8:
-                active_cat = "disputes"
+        active_cat = self._get_active_special_category(house_num, special_category, query_text)
 
         if active_cat:
             if active_cat == "deity_curse":

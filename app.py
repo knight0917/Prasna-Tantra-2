@@ -141,6 +141,7 @@ def api_evaluate():
     house_num = int(data.get("house_num", 1))
     query_num = int(data.get("query_num", 1))
     special_category = data.get("special_category")
+    question = data.get("question")
 
     
     if not date_str or not time_str:
@@ -155,7 +156,7 @@ def api_evaluate():
         
     try:
         chart = PrasnaChart(local_dt, lat_str, lon_str, tz_offset)
-        evaluation = chart.evaluate_query(house_num, query_num=query_num, special_category=special_category)
+        evaluation = chart.evaluate_query(house_num, query_num=query_num, special_category=special_category, query_text=question)
         return jsonify(evaluation)
     except Exception as e:
         return jsonify({"error": f"Evaluation failed: {e}"}), 500

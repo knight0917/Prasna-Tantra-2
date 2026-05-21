@@ -238,5 +238,23 @@ class TestPrasnaTantra(unittest.TestCase):
         self.assertIn("thought_desc", misc)
         self.assertIn("rain_verdict", misc)
 
+    def test_dual_house_significations_fallbacks(self):
+        # 1. Test Job query on House 10 triggers master_servant
+        res_job = self.chart.evaluate_query(
+            house_num=10, 
+            query_text="Will I get a promotion in my job?"
+        )
+        # Should have Master-Servant details because of the job query text override
+        self.assertTrue(any("Master-Servant:" in d for d in res_job["details"]))
+        
+        # 2. Test Love query on House 7 suppresses sports default
+        res_love = self.chart.evaluate_query(
+            house_num=7, 
+            special_category="sports",
+            query_text="Will she accept my love proposal?"
+        )
+        # Should NOT have sports predictions/details
+        self.assertFalse(any("Sports:" in d for d in res_love["details"]))
+
 if __name__ == "__main__":
     unittest.main()

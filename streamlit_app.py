@@ -610,9 +610,16 @@ if submit_btn:
                 if house_num == 12: special_category = "deity_curse"
                 elif house_num == 6: special_category = "master_servant"
                 elif house_num == 1: special_category = "meals"
-                elif house_num == 7: special_category = "sports"
+                elif house_num == 7:
+                    love_keywords = ["love", "marriage", "marry", "relationship", "proposal", "propose", "romance", "spouse", "wife", "husband", "partner", "friendship", "friend", "attraction", "affection", "boy friend", "girlfriend", "boyfriend", "girl friend"]
+                    if not any(kw in question_text.lower() for kw in love_keywords):
+                        special_category = "sports"
                 elif house_num == 8: special_category = "disputes"
                 elif house_num == 4: special_category = "crops_trade"
+                elif house_num == 10:
+                    job_keywords = ["job", "career", "work", "employ", "service", "master", "promotion", "salary", "boss", "office", "profession", "business"]
+                    if any(kw in question_text.lower() for kw in job_keywords):
+                        special_category = "master_servant"
             
             # 3. Calculate Prasna Chart
             chart = PrasnaChart(
@@ -626,7 +633,8 @@ if submit_btn:
             evaluation = chart.evaluate_query(
                 house_num, 
                 query_num=st.session_state.query_counter, 
-                special_category=special_category
+                special_category=special_category,
+                query_text=question_text
             )
 
             # Evaluate lost property if requested or if house is 6 (theft/debts)

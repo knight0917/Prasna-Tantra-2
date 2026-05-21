@@ -243,6 +243,17 @@ def run_cli():
                     if sval[1] == house_num:
                         special_cat = sval[2]
                         break
+                        
+                # Overrides for job and love queries
+                if house_num == 7 and special_cat == "sports" and question:
+                    love_keywords = ["love", "marriage", "marry", "relationship", "proposal", "propose", "romance", "spouse", "wife", "husband", "partner", "friendship", "friend", "attraction", "affection", "boy friend", "girlfriend", "boyfriend", "girl friend"]
+                    if any(kw in question.lower() for kw in love_keywords):
+                        special_cat = None
+                elif house_num == 10 and not special_cat and question:
+                    job_keywords = ["job", "career", "work", "employ", "service", "master", "promotion", "salary", "boss", "office", "profession", "business"]
+                    if any(kw in question.lower() for kw in job_keywords):
+                        special_cat = "master_servant"
+                        
                 print(f"\nAI Mapping Success:")
                 print(f"  * Mapped House  : House {house_num} ({category_name})")
                 if special_cat:
@@ -263,7 +274,7 @@ def run_cli():
             print("Invalid category. Please select from the menu.")
             continue
             
-        res = chart.evaluate_query(house_num, query_num=query_counter, special_category=special_cat)
+        res = chart.evaluate_query(house_num, query_num=query_counter, special_category=special_cat, query_text=question or category_name)
         
         print(f"\nEvaluating Query #{query_counter}: {category_name} (House {house_num})")
         print(f"Reference Point    : {res['ref_point_name']} (Sign: {res['ref_sign_name']})")
