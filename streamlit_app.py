@@ -647,20 +647,20 @@ if submit_btn:
                 query_text=question_text
             )
 
-            # Evaluate lost property if requested or if house is 6 (theft/debts)
+            # Evaluate lost property if requested
             lost_res = None
-            if analyze_lost or house_num == 6:
+            if analyze_lost:
                 from prasnatantra.lost_objects import evaluate_lost_property
                 lost_res = evaluate_lost_property(chart)
 
-            # Evaluate traveler/abroad status if requested or if house is 9 or 3
+            # Evaluate traveler/abroad status if requested
             traveler_res = None
-            if analyze_traveler or house_num in [3, 9]:
+            if analyze_traveler:
                 traveler_res = chart.evaluate_traveler()
 
-            # Evaluate pregnancy, marriage, misc if requested or if house is 5 or 7
+            # Evaluate pregnancy, marriage, misc if requested
             misc_res = None
-            if analyze_misc or house_num in [5, 7]:
+            if analyze_misc:
                 misc_res = chart.evaluate_miscellaneous()
             
             # 5. Save variables in session state
@@ -811,7 +811,7 @@ if st.session_state.chart and st.session_state.evaluation:
             "hope", "faith", "mind", "interest", "weight", "peace", "happiness", "soul", "spirit", "direction in life",
             "connection", "opportunities", "opportunity", "contact", "touch", "track"
         ]
-        if any(w in q_lower for w in metaphorical_words) and house_num in [5, 7, 10]:
+        if any(w in q_lower for w in metaphorical_words) and house_num in [5, 6, 7, 10]:
             is_metaphorical = True
 
         if is_metaphorical:
