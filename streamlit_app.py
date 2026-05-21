@@ -42,7 +42,7 @@ st.set_page_config(
     page_title="Prasna Tantra - Vedic Horary Astrology",
     page_icon="✦",
     layout="wide",
-    initial_sidebar_state="expanded"
+    initial_sidebar_state="collapsed"
 )
 
 # Custom Premium Styling
@@ -50,15 +50,7 @@ st.markdown("""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap');
 
-/* Sidebar width adjustment on desktop */
-@media (min-width: 768px) {
-    [data-testid="stSidebar"] {
-        min-width: 380px !important;
-        max-width: 55vw !important;
-        width: clamp(380px, 28vw, 520px) !important;
-        transition: width 0.2s ease;
-    }
-}
+
 
 /* Main Streamlit container background and stars effect */
 .stApp {
@@ -219,8 +211,25 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: 700;
 }
 
+/* Style specifically the container that has the input anchor to match the cosmic glassmorphism theme */
+div[data-testid="stVerticalBlockBorderWrapper"]:has(#input-section-anchor) {
+    background: rgba(15, 14, 30, 0.6) !important;
+    border: 1px solid rgba(255, 255, 255, 0.07) !important;
+    border-radius: 16px !important;
+    padding: 1.5rem !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37) !important;
+    margin-bottom: 1.5rem !important;
+}
+
 /* Responsive adjustments for mobile/phone views */
 @media (max-width: 767px) {
+    div[data-testid="stVerticalBlockBorderWrapper"]:has(#input-section-anchor) {
+        padding: 1rem !important;
+        border-radius: 12px !important;
+        margin-bottom: 1rem !important;
+    }
     .glass-card {
         padding: 1rem !important;
         border-radius: 12px !important;
@@ -429,14 +438,14 @@ with st.expander("📖 View Application Guide & Horary Rules", expanded=False):
     Welcome to the Vedic Horary Astrology Decision Engine. This application uses the classical principles of *Prasna Tantra* (Sri Neelakanta) and *Shatpanchasika* (Prithuyasas) to answer queries based on the exact astronomical chart cast for the time and place of the query.
     
     #### 1. ⚙️ Step-by-Step Instructions
-    1. **Set the Query Time & Date:** In the sidebar, specify the exact local date and time when the question arose or was asked.
+    1. **Set the Query Time & Date:** In the control panel above, specify the exact local date and time when the question arose or was asked.
     2. **Resolve the Location:** 
        - Type the city or town name under **Resolve Location** and click **Search Location**.
        - Select the correct entry from the dropdown. The engine will automatically calculate the offline geographic coordinates and resolve the correct timezone (with DST adjustments).
        - *Note:* If needed, you can override coordinates manually in the **Advanced Coordinates Override** section.
     3. **Select Specialized Analysis Modules:**
        - The engine automatically parses your question text using AI to detect if it relates to **Lost Property**, **Travel/Abroad**, or **Pregnancy/Marriage/Thought-Reading**.
-       - If you want to force these evaluations, check the corresponding boxes in the sidebar.
+       - If you want to force these evaluations, check the corresponding boxes under **Analysis Modules** above.
     4. **Submit Query:** Click **Analyze Prasna Chart**.
     
     ---
@@ -450,7 +459,7 @@ with st.expander("📖 View Application Guide & Horary Rules", expanded=False):
     - **Question #3 (Q3):** Counted from the **Sun's Sign**.
     - **Question #4 (Q4):** Counted from **Jupiter's Sign**.
     - **Question #5+:** Counted from the stronger of **Mercury or Venus**.
-    *Click **Reset** in the sidebar at any time to clear the query history and return to Question #1.*
+    *Click **Reset** in the control panel above at any time to clear the query history and return to Question #1.*
     
     ##### 🕵️ Lost or Stolen Property (Adhyaya VI)
     - **Direction:** Determined by the sign of the Lagna, Lagna Lord, or the Moon.
@@ -471,36 +480,37 @@ with st.expander("📖 View Application Guide & Horary Rules", expanded=False):
     - If a query is flagged as **Insincere**, the verdict will return as *CANNOT BE ANSWERED*.
     """)
 
-# Main Application Layout: Sidebar (Inputs) & Main Panel (Results)
-with st.sidebar:
-    st.markdown("<h3 class='glow-text'>✦ Astronomical Inputs</h3>", unsafe_allow_html=True)
+# Main Application Control Panel (Astronomical Inputs & Query Settings)
+with st.container(border=True):
+    st.markdown("<span id='input-section-anchor'></span>", unsafe_allow_html=True)
+    st.markdown("<h3 class='glow-text' style='margin-top: 0;'>✦ Astronomical Inputs & Query</h3>", unsafe_allow_html=True)
     
-    # Date & Time Pickers
-    date_val = st.date_input(
-        "Select Query Date",
-        value=st.session_state.query_date,
-        key="query_date"
-    )
-    time_str = st.text_input(
-        "Select Query Time (HH:MM:SS)",
-        value=st.session_state.query_time_str,
-        key="query_time_str"
-    )
-    try:
-        time_val = datetime.strptime(time_str, "%H:%M:%S").time()
-    except ValueError:
-        time_val = time(12, 0, 0)
-        st.warning("Invalid time format. Defaulted to 12:00:00")
+    col_dt, col_tm, col_loc = st.columns([1, 1, 1.2])
+    
+    with col_dt:
+        date_val = st.date_input(
+            "Select Query Date",
+            value=st.session_state.query_date,
+            key="query_date"
+        )
+    with col_tm:
+        time_str = st.text_input(
+            "Select Query Time (HH:MM:SS)",
+            value=st.session_state.query_time_str,
+            key="query_time_str"
+        )
+        try:
+            time_val = datetime.strptime(time_str, "%H:%M:%S").time()
+        except ValueError:
+            time_val = time(12, 0, 0)
+            st.warning("Invalid time format. Defaulted to 12:00:00")
+            
+    with col_loc:
+        search_query = st.text_input("Type City/Town Name", value="Patna")
+        search_clicked = st.button("🔍 Search Location", use_container_width=True)
 
-    # Geocoding Autocomplete Section — uses Photon API (photon.komoot.io)
-    # Photon is OpenStreetMap-based like Nominatim but has no 429 rate-limit issues on cloud
-    st.markdown("---")
-    st.markdown("##### 📍 Resolve Location")
-    search_query = st.text_input("Type City/Town Name", value="Patna")
-
-    if st.button("Search Location"):
+    if search_clicked:
         with st.spinner("Fetching coordinates..."):
-            # Primary: Photon (generous limits, designed for apps)
             photon_url = (
                 f"https://photon.komoot.io/api/"
                 f"?q={urllib.parse.quote(search_query)}&limit=10&lang=en"
@@ -512,7 +522,6 @@ with st.sidebar:
                     data = r.json()
                     features = data.get("features", [])
                     if features:
-                        # Normalise GeoJSON features → {lat, lon, display_name, type}
                         PREFERRED_TYPES = {"city", "town", "village", "suburb",
                                            "municipality", "administrative"}
                         results = []
@@ -526,7 +535,7 @@ with st.sidebar:
                                 props.get("state", ""),
                                 props.get("country", "")
                             ] if p]
-                            display = ", ".join(dict.fromkeys(parts))  # deduplicate
+                            display = ", ".join(dict.fromkeys(parts))
                             place_type = props.get("type", props.get("osm_type", "place"))
                             results.append({
                                 "lat": str(lat_v),
@@ -535,7 +544,6 @@ with st.sidebar:
                                 "type": place_type,
                                 "class": props.get("osm_key", "place"),
                             })
-                        # Sort cities/towns first
                         preferred = [x for x in results if x.get("type") in PREFERRED_TYPES]
                         rest = [x for x in results if x not in preferred]
                         st.session_state.suggestions = (preferred + rest)[:7]
@@ -550,7 +558,6 @@ with st.sidebar:
             except Exception as ex:
                 st.error(f"Geocoding failed: {ex}")
 
-    # Display geocoding options if found
     if st.session_state.suggestions:
         def _label(res):
             lat_f = float(res["lat"])
@@ -575,64 +582,71 @@ with st.sidebar:
                 f"If these look wrong, use *Show Advanced Coordinates Override* below."
             )
 
-    # Advanced Coordinates Expander
-    with st.expander("✦ Show Advanced Coordinates Override"):
-        lat_override = st.text_input("Latitude", value=str(st.session_state.latitude))
-        lon_override = st.text_input("Longitude", value=str(st.session_state.longitude))
-        tz_override = st.number_input("Timezone Offset (Hours East)", value=float(st.session_state.tz_offset), step=0.5)
-        
+    with st.expander("⚙️ Show Advanced Coordinates Override", expanded=False):
+        col_lat, col_lon, col_tz = st.columns(3)
+        with col_lat:
+            lat_override = st.text_input("Latitude", value=str(st.session_state.latitude))
+        with col_lon:
+            lon_override = st.text_input("Longitude", value=str(st.session_state.longitude))
+        with col_tz:
+            tz_override = st.number_input("Timezone Offset (Hours East)", value=float(st.session_state.tz_offset), step=0.5)
+            
         if lat_override != str(st.session_state.latitude) or lon_override != str(st.session_state.longitude) or tz_override != float(st.session_state.tz_offset):
             st.session_state.latitude = lat_override
             st.session_state.longitude = lon_override
             st.session_state.tz_offset = tz_override
 
-    # Query Input
-    st.markdown("---")
-    st.markdown("<h3 class='glow-text'>✦ Ask Your Question</h3>", unsafe_allow_html=True)
-    question_text = st.text_area(
-        "Type your question in plain English", 
-        value="Will I get the job I interviewed for yesterday?",
-        placeholder="e.g. Will my travel be safe? Will it rain today?"
-    )
+    st.markdown("<hr style='margin: 1rem 0; border: 0; border-top: 1px solid rgba(255, 255, 255, 0.1);'>", unsafe_allow_html=True)
+    
+    col_q, col_opt = st.columns([1.8, 1.2])
+    
+    with col_q:
+        st.markdown("<h5 style='margin-top: 0;'>📝 Type your question in plain English</h5>", unsafe_allow_html=True)
+        question_text = st.text_area(
+            "Type your question in plain English", 
+            value="Will I get the job I interviewed for yesterday?",
+            placeholder="e.g. Will my travel be safe? Will it rain today?",
+            label_visibility="collapsed",
+            height=115
+        )
+        
+    with col_opt:
+        st.markdown("<h5 style='margin-top: 0;'>⚙️ Analysis Modules</h5>", unsafe_allow_html=True)
+        q_lower = question_text.lower()
+        has_lost_kw = any(w in q_lower for w in ["lost", "stolen", "theft", "missing", "find", "stole", "robbed", "where is my"])
+        metaphorical_terms = [
+            "lost love", "lost lover", "lost spouse", "lost boyfriend", "lost girlfriend", "lost husband", "lost wife", "lost partner",
+            "lost hope", "lost interest", "lost faith", "lost soul", "lost connection", "lost job", "lost opportunities", "lost opportunity",
+            "lost touch", "lost contact", "lost way", "lost track", "find love", "find a job", "find job", "find partner", "find peace",
+            "find happiness", "find myself", "find path", "find direction", "find career"
+        ]
+        if any(term in q_lower for term in metaphorical_terms):
+            has_lost_kw = False
 
-    # Auto-detect lost property keywords (exclude metaphorical/relational queries)
-    q_lower = question_text.lower()
-    has_lost_kw = any(w in q_lower for w in ["lost", "stolen", "theft", "missing", "find", "stole", "robbed", "where is my"])
-    metaphorical_terms = [
-        "lost love", "lost lover", "lost spouse", "lost boyfriend", "lost girlfriend", "lost husband", "lost wife", "lost partner",
-        "lost hope", "lost interest", "lost faith", "lost soul", "lost connection", "lost job", "lost opportunities", "lost opportunity",
-        "lost touch", "lost contact", "lost way", "lost track", "find love", "find a job", "find job", "find partner", "find peace",
-        "find happiness", "find myself", "find path", "find direction", "find career"
-    ]
-    if any(term in q_lower for term in metaphorical_terms):
-        has_lost_kw = False
+        analyze_lost = st.checkbox(
+            "Lost / Stolen Property Analysis (Adhyaya VI)", 
+            value=has_lost_kw, 
+            help="Check this to calculate direction, distance, recovery chances, and thief profile for lost objects/persons."
+        )
 
-    analyze_lost = st.checkbox(
-        "Lost / Stolen Property Analysis (Adhyaya VI)", 
-        value=has_lost_kw, 
-        help="Check this to calculate direction, distance, recovery chances, and thief profile for lost objects/persons."
-    )
+        has_traveler_kw = any(w in question_text.lower() for w in ["travel", "abroad", "return", "journey", "enemy", "war", "battle", "siege", "invad", "soldier", "marching"])
+        analyze_traveler = st.checkbox(
+            "Traveler & Abroad Analysis (Adhyayas II & V)",
+            value=has_traveler_kw,
+            help="Check this to calculate traveler health/confinement, timing of return (in days), and enemy army status."
+        )
 
-    # Auto-detect traveler keywords
-    has_traveler_kw = any(w in question_text.lower() for w in ["travel", "abroad", "return", "journey", "enemy", "war", "battle", "siege", "invad", "soldier", "marching"])
-    analyze_traveler = st.checkbox(
-        "Traveler & Abroad Analysis (Adhyayas II & V)",
-        value=has_traveler_kw,
-        help="Check this to calculate traveler health/confinement, timing of return (in days), and enemy army status."
-    )
+        has_misc_kw = any(w in question_text.lower() for w in ["pregnant", "birth", "child", "boy", "girl", "marriage", "wife", "rain", "weather", "thinking", "mind", "think"])
+        analyze_misc = st.checkbox(
+            "Pregnancy & Marriage & Misc Analysis (Adhyaya VII)",
+            value=has_misc_kw,
+            help="Check this to evaluate pregnancy confirmation/gender, marriage success, weather/rain indication, and thought reading."
+        )
 
-    # Auto-detect pregnancy, marriage, misc keywords
-    has_misc_kw = any(w in question_text.lower() for w in ["pregnant", "birth", "child", "boy", "girl", "marriage", "wife", "rain", "weather", "thinking", "mind", "think"])
-    analyze_misc = st.checkbox(
-        "Pregnancy & Marriage & Misc Analysis (Adhyaya VII)",
-        value=has_misc_kw,
-        help="Check this to evaluate pregnancy confirmation/gender, marriage success, weather/rain indication, and thought reading."
-    )
-
-    # Core Action Button
+    st.markdown("<hr style='margin: 1rem 0; border: 0; border-top: 1px solid rgba(255, 255, 255, 0.1);'>", unsafe_allow_html=True)
     col_sub1, col_sub2 = st.columns([2, 1])
     with col_sub1:
-        submit_btn = st.button("✦ Analyze Prasna Chart", use_container_width=True)
+        submit_btn = st.button("✦ Analyze Prasna Chart", use_container_width=True, type="primary")
     with col_sub2:
         if st.button("🔄 Reset", use_container_width=True, help="Reset sequential query counter back to Question #1"):
             st.session_state.query_counter = 1
@@ -1096,7 +1110,7 @@ Cast the heavens for the exact moment of your inquiry to unlock classical Vedic 
 <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">📍</div>
 <h4 style="margin: 0 0 0.5rem 0; color: #f3f4f6;">1. Setup Location & Time</h4>
 <p style="margin: 0; color: #9ca3af; font-size: 0.88rem; line-height: 1.4;">
-Search your location in the sidebar to auto-calculate offline coordinates and local time zone.
+Search your location in the control panel to auto-calculate offline coordinates and local time zone.
 </p>
 </div>
 <div style="background: rgba(255,255,255,0.02); padding: 1.25rem; border-radius: 12px; border: 1px solid rgba(255,255,255,0.04);">
@@ -1116,7 +1130,7 @@ Computes Tajaka Yogas, Sincerity, Lost property direction, Traveler return, and 
 </div>
 <div style="background: rgba(129, 140, 248, 0.08); border: 1px solid rgba(129, 140, 248, 0.2); border-radius: 12px; padding: 1rem; max-width: 650px; margin: 0 auto; text-align: left;">
 <p style="margin: 0; color: #cbd5e1; font-size: 0.9rem; line-height: 1.5;">
-👉 <strong>How to start:</strong> Use the sidebar controls on the left to select date/time, type a query like <em>"Will my lost object be found?"</em> or <em>"Will I change my job soon?"</em>, then click <strong>Analyze Prasna Chart</strong>.
+👉 <strong>How to start:</strong> Use the control panel at the top to select date/time, type a query like <em>"Will my lost object be found?"</em> or <em>"Will I change my job soon?"</em>, then click <strong>Analyze Prasna Chart</strong>.
 </p>
 </div>
 </div>""", unsafe_allow_html=True)
