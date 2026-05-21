@@ -238,7 +238,7 @@ class PrasnaChart:
 
         # ── 4. INTERMEDIARY YOGAS ────────────────────────────────────────────
         if kamboola:
-            translator = kamboola[0].get("translator", "Moon")
+            translator = "Moon"
             details.append(
                 f"[YOGA — Kamboola] Moon ({planet_desc('Moon')}) "
                 f"acts as the intermediary, translating strength between {lagnapathi} and {karyesa} "
