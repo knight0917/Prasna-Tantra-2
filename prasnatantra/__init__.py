@@ -10,8 +10,26 @@
 try:
     import sys
     import types
+    import importlib
     import libephemeris
     
+    # Reload libephemeris submodules if they are already imported to restore clean original functions
+    if "libephemeris.fast_calc" in sys.modules:
+        try:
+            importlib.reload(sys.modules["libephemeris.fast_calc"])
+        except Exception:
+            pass
+    if "libephemeris.horizons_backend" in sys.modules:
+        try:
+            importlib.reload(sys.modules["libephemeris.horizons_backend"])
+        except Exception:
+            pass
+    if "libephemeris.fixed_stars" in sys.modules:
+        try:
+            importlib.reload(sys.modules["libephemeris.fixed_stars"])
+        except Exception:
+            pass
+
     # 1. Patch virtual libephemeris.ayanamsha module
     def patched_get_ayanamsha_ut(jd_tt):
         from libephemeris.time_utils import deltat
