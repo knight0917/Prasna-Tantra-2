@@ -21,7 +21,7 @@ from prasnatantra import PrasnaChart, SIGN_LORDS
 from prasnatantra.astronomy import get_nakshatra_pada, get_sign_name
 from prasnatantra.engine import get_sign
 from prasnatantra.tajaka import get_planetary_avastha
-from prasnatantra.ai import map_question_to_house, generate_astrological_reading
+from prasnatantra.ai import map_question_to_house
 
 # Configure timezone finder
 from timezonefinder import TimezoneFinder
@@ -964,83 +964,7 @@ if st.session_state.chart and st.session_state.evaluation:
             
         st.markdown("</div>", unsafe_allow_html=True)
 
-    # ------------------ BOTTOM PANEL: AI Astrological Interpretation ------------------
-    st.markdown("<div class='glass-card'>", unsafe_allow_html=True)
-    st.markdown("<h3 class='glow-text'>✦ AI Astrological Reading (Prasna Tantra & Shatpanchasika Analysis)</h3>", unsafe_allow_html=True)
-    
-    # If session state reading is empty, trigger the live stream
-    if not st.session_state.ai_reading:
-        try:
-            # We serialize the chart details exactly as the Flask app does
-            planets_data = {}
-            for p, pdata in chart.planets.items():
-                lon = pdata["longitude"]
-                sign = get_sign(lon)
-                nak, pada, abbr = get_nakshatra_pada(lon)
-                avastha = get_planetary_avastha(p, lon, pdata, chart.planets["Sun"]["longitude"], chart.planets)
-                planets_data[p] = {
-                    "longitude": lon,
-                    "formatted": f"{int(lon%30)}° {int((lon%30-int(lon%30))*60)}' {int(((lon%30-int(lon%30))*60-int((lon%30-int(lon%30))*60))*60)}\"",
-                    "sign": sign,
-                    "sign_name": get_sign_name(sign),
-                    "nakshatra": nak,
-                    "pada": pada,
-                    "speed": pdata["speed"],
-                    "is_retrograde": pdata["speed"] < 0,
-                    "avastha": avastha
-                }
-                
-            houses_data = []
-            for h_num in range(1, 13):
-                h_data = chart.houses[h_num]
-                sign = h_data["sign"]
-                lord = SIGN_LORDS[sign]
-                houses_data.append({
-                    "house": h_num,
-                    "sign": sign,
-                    "sign_name": get_sign_name(sign),
-                    "lord": lord,
-                    "longitude_start": h_data["start_longitude"],
-                    "longitude_end": h_data["end_longitude"]
-                })
-                
-            chart_summary_data = {
-                "query_num": eval_res.get("query_num", 1),
-                "house": eval_res.get("house"),
-                "ref_point_name": eval_res.get("ref_point_name"),
-                "ref_sign_name": eval_res.get("ref_sign_name"),
-                "query_sign_name": eval_res.get("query_sign_name"),
-                "lagnapathi": eval_res.get("lagnapathi"),
-                "karyesa": eval_res.get("karyesa"),
-                "success_probability": eval_res.get("success_probability"),
-                "score_pct": eval_res.get("score_pct"),
-                "timing": eval_res.get("timing"),
-                "details": eval_res.get("details"),
-                "direct_relationship": eval_res.get("direct_relationship"),
-                "yogas": eval_res.get("yogas"),
-                "shatpanchasika_predictions": eval_res.get("shatpanchasika_predictions"),
-                "lost_property_analysis": st.session_state.lost_analysis,
-                "traveler_analysis": st.session_state.traveler_analysis,
-                "misc_analysis": st.session_state.misc_analysis
-            }
-            
-            # Run streaming read
-            reading_placeholder = st.empty()
-            full_text = ""
-            
-            # Capture stream
-            for chunk in generate_astrological_reading(question_text, chart_summary_data):
-                full_text += chunk
-                reading_placeholder.markdown(f"<div class='ai-stream-box'>{full_text}</div>", unsafe_allow_html=True)
-            
-            st.session_state.ai_reading = full_text
-            
-        except Exception as e:
-            st.error(f"Failed to generate AI Reading: {e}")
-    else:
-        # Display cached reading
-        st.markdown(f"<div class='ai-stream-box'>{st.session_state.ai_reading}</div>", unsafe_allow_html=True)
-    st.markdown("</div>", unsafe_allow_html=True)
+
 
     # ------------------ DETAILED TABS: Planet Table, Shatpanchasika, Yogas & Combustions ------------------
     tab1, tab2, tab3 = st.tabs(["🪐 Planetary Longitudes & Avasthas", "📜 Shatpanchasika & Special Predictions", "🧬 Aspect & Combustion Logs"])
