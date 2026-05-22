@@ -1187,5 +1187,42 @@ class TestShatpanchasikaMethodB(unittest.TestCase):
         self.assertTrue(len(moola_preds) >= 1)
         self.assertTrue(any("Saturn" in p["prediction"] for p in moola_preds))
 
+class TestLostPropertyRelational(unittest.TestCase):
+    def test_yoga_alignment_and_living_entity(self):
+        class DummyChart:
+            pass
+        dc = DummyChart()
+        dc.lagna_sign = 6 # Libra
+        dc.lagna_sidereal = 196.5 # Libra
+        dc.lagnapathi = "Venus"
+        dc.planets = {
+            "Sun": {"longitude": 60.0},
+            "Moon": {"longitude": 100.0}, # Cancer (House 10 from Libra, sign 3)
+            "Mars": {"longitude": 10.0},
+            "Mercury": {"longitude": 70.0},
+            "Jupiter": {"longitude": 200.0},
+            "Venus": {"longitude": 69.87}, # Gemini (House 9)
+            "Saturn": {"longitude": 240.0}
+        }
+        
+        # Test 1: Swami Yoga overall success propagates to lost recovery verdict
+        from prasnatantra.lost_objects import evaluate_lost_property
+        
+        eval_dict = {
+            "verdict": "YES",
+            "lagnapathi": "Venus",
+            "karyesa": "Venus",
+            "yogas": []
+        }
+        
+        # Call with query text "i lost someone"
+        res = evaluate_lost_property(dc, evaluation=eval_dict, query_text="i lost someone")
+        
+        # Assertions
+        self.assertTrue(res["is_living_entity"])
+        self.assertEqual(res["substance_type"], "Jeeva (Animal / Human / Living / Leather)")
+        self.assertIn("YES", res["recovery_verdict"])
+        self.assertIn("Swami Yoga", res["recovery_reason"])
+
 if __name__ == "__main__":
     unittest.main()

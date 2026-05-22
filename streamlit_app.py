@@ -762,7 +762,7 @@ if submit_btn:
             lost_res = None
             if analyze_lost:
                 from prasnatantra.lost_objects import evaluate_lost_property
-                lost_res = evaluate_lost_property(chart)
+                lost_res = evaluate_lost_property(chart, evaluation, question_text)
 
             # Evaluate traveler/abroad status if requested
             traveler_res = None
@@ -979,7 +979,9 @@ if st.session_state.chart and st.session_state.evaluation:
             st.markdown("</div>", unsafe_allow_html=True)
         else:
             st.markdown("<div class='glass-card'>", unsafe_allow_html=True)
-            st.markdown("<h3 class='glow-text'>✦ Lost Property & Recovery Analysis (Adhyaya VI)</h3>", unsafe_allow_html=True)
+            is_living = lost.get("is_living_entity", False)
+            section_title = "✦ Lost / Missing Entity Recovery Analysis (Adhyaya VI)" if is_living else "✦ Lost Property & Recovery Analysis (Adhyaya VI)"
+            st.markdown(f"<h3 class='glow-text'>{section_title}</h3>", unsafe_allow_html=True)
             
             # Display Recovery Banner
             rec_verdict = lost["recovery_verdict"]
@@ -993,21 +995,26 @@ if st.session_state.chart and st.session_state.evaluation:
             </div>
             """, unsafe_allow_html=True)
             
+            # Contextual labels
+            dir_label = "🧭 Search Direction" if is_living else "🧭 Stolen Direction"
+            dist_label = "📏 Distance Range" if is_living else "📏 Distance Removed"
+            assoc_label = "👤 Companion / Finder" if is_living else "👤 Thief Association"
+            
             # Key Parameters Grid
             st.markdown(f"""
             <div class='lost-property-grid'>
                 <div class='lost-metric-box'>
-                    <div class='lost-metric-label'>🧭 Stolen Direction</div>
+                    <div class='lost-metric-label'>{dir_label}</div>
                     <div class='lost-metric-value' style='color: #a78bfa;'>{lost['direction']}</div>
                     <small style='color: #64748b; font-size: 0.75rem;'>Basis: {lost['direction_source']}</small>
                 </div>
                 <div class='lost-metric-box'>
-                    <div class='lost-metric-label'>📏 Distance Removed</div>
+                    <div class='lost-metric-label'>{dist_label}</div>
                     <div class='lost-metric-value' style='color: #38bdf8;'>{lost['distance_desc']}</div>
                     <small style='color: #64748b; font-size: 0.75rem;'>Lagna Navamsa: {lost['nav_sign_name']} (Nav # {lost['distance_yojanas'] + 5 if lost['distance_yojanas'] > 0 else '1-5'})</small>
                 </div>
                 <div class='lost-metric-box'>
-                    <div class='lost-metric-label'>👤 Thief Association</div>
+                    <div class='lost-metric-label'>{assoc_label}</div>
                     <div class='lost-metric-value' style='color: #f43f5e;'>{"Insider 🏠" if lost['is_insider'] else "Outsider 👥"}</div>
                     <small style='color: #64748b; font-size: 0.75rem;'>{lost['thief_source']}</small>
                 </div>
@@ -1019,18 +1026,32 @@ if st.session_state.chart and st.session_state.evaluation:
             # Detailed Grid for Thief Profile and Substance
             col_lp_det1, col_lp_det2 = st.columns(2)
             with col_lp_det1:
-                st.markdown("##### 👤 Suspected Thief Profile")
-                st.markdown(f"- **Age:** {lost['thief_age']}")
-                st.markdown(f"- **Class / Caste:** {lost['thief_class']}")
-                st.markdown(f"- **Location inside property:** {lost['drekkana_location']}")
-                st.markdown(f"- **Description:** Determined by the rising sign and decanate configurations.")
+                if is_living:
+                    st.markdown("##### 👤 Suspected Associate / Finder Profile")
+                    st.markdown(f"- **Age of Associate:** {lost['thief_age']}")
+                    st.markdown(f"- **Class / Caste:** {lost['thief_class']}")
+                    st.markdown(f"- **Last seen / inside property:** {lost['drekkana_location']}")
+                    st.markdown(f"- **Description:** Determined by the rising sign and decanate configurations.")
+                else:
+                    st.markdown("##### 👤 Suspected Thief Profile")
+                    st.markdown(f"- **Age:** {lost['thief_age']}")
+                    st.markdown(f"- **Class / Caste:** {lost['thief_class']}")
+                    st.markdown(f"- **Location inside property:** {lost['drekkana_location']}")
+                    st.markdown(f"- **Description:** Determined by the rising sign and decanate configurations.")
                 
             with col_lp_det2:
-                st.markdown("##### 📦 Stolen Substance & Nature")
-                st.markdown(f"- **Substance Type:** {lost['substance_type']}")
-                st.markdown(f"- **Dominant Color:** {lost['color']}")
-                st.markdown(f"- **Physical Size:** {lost['size']} Sign / Navamsa proportions")
-                st.markdown(f"- **State:** Determined by Lagna Lord's strength and combustion status.")
+                if is_living:
+                    st.markdown("##### 📦 Entity Nature & Characteristics")
+                    st.markdown(f"- **Entity Type:** {lost['substance_type']}")
+                    st.markdown(f"- **Dominant Color:** {lost['color']}")
+                    st.markdown(f"- **Physical Size:** {lost['size']} Sign / Navamsa proportions")
+                    st.markdown(f"- **State:** Determined by Lagna Lord's strength and combustion status.")
+                else:
+                    st.markdown("##### 📦 Stolen Substance & Nature")
+                    st.markdown(f"- **Substance Type:** {lost['substance_type']}")
+                    st.markdown(f"- **Dominant Color:** {lost['color']}")
+                    st.markdown(f"- **Physical Size:** {lost['size']} Sign / Navamsa proportions")
+                    st.markdown(f"- **State:** Determined by Lagna Lord's strength and combustion status.")
                 
             st.markdown("</div>", unsafe_allow_html=True)
 

@@ -107,7 +107,7 @@ def get_planet_strength(planet_name, planet_data, sun_lon):
         
     return strength
 
-def evaluate_lost_property(chart):
+def evaluate_lost_property(chart, evaluation=None, query_text=None):
     """
     Evaluates lost/stolen property queries using Shatpanchasika Adhyaya VI rules.
     """
@@ -115,6 +115,23 @@ def evaluate_lost_property(chart):
     lagna_lon = chart.lagna_sidereal
     lagna_deg = lagna_lon % 30.0
     
+    # Check if query relates to a living entity (missing person / animal)
+    is_living_entity = False
+    if query_text:
+        q_lower = query_text.lower()
+        import re
+        living_keywords = [
+            "someone", "person", "child", "boy", "girl", "son", "daughter", "father", "mother",
+            "parent", "brother", "sister", "sibling", "husband", "wife", "spouse", "partner",
+            "friend", "grandpa", "grandma", "grandfather", "grandmother", "uncle", "aunt",
+            "nephew", "niece", "cousin", "kid", "baby", "man", "woman", "guy", "lady", "he", "she", "who",
+            "dog", "cat", "pet", "cow", "horse", "animal", "puppy", "kitten", "cattle"
+        ]
+        for word in living_keywords:
+            if re.search(r'\b' + re.escape(word) + r'\b', q_lower):
+                is_living_entity = True
+                break
+
     # 1. Navamsa and Vargottama calculations
     nav_sign, nav_idx = get_navamsa_sign(lagna_lon)
     is_fixed_lagna = lagna_sign in [1, 4, 7, 10]
@@ -123,12 +140,20 @@ def evaluate_lost_property(chart):
     
     # Sloka 1: Stolen by insider or outsider
     if is_fixed_lagna or is_fixed_nav or is_vargottama:
-        thief_source = "Insider (Family member, employee, or someone inside the querent's circle)"
-        thief_loc_desc = "The item is still within the owner's premises / property."
+        if is_living_entity:
+            thief_source = "Insider / Known Circle (Family member, friend, or someone in the querent's circle)"
+            thief_loc_desc = "The person/entity is still within the immediate vicinity or premises."
+        else:
+            thief_source = "Insider (Family member, employee, or someone inside the querent's circle)"
+            thief_loc_desc = "The item is still within the owner's premises / property."
         is_insider = True
     else:
-        thief_source = "Outsider (Stranger or someone external)"
-        thief_loc_desc = "The item has been removed from the premises."
+        if is_living_entity:
+            thief_source = "Outsider / External (Stranger or someone external)"
+            thief_loc_desc = "The person/entity has moved away or is far from the premises."
+        else:
+            thief_source = "Outsider (Stranger or someone external)"
+            thief_loc_desc = "The item has been removed from the premises."
         is_insider = False
         
     # Sloka 2: Location inside house based on Drekkana
@@ -189,6 +214,26 @@ def evaluate_lost_property(chart):
         recovery_conditions.append(
             f"Strong benefic planet in the 11th house: {', '.join(benefics_in_11)} (Shatpanchasika VI.3)"
         )
+
+    # D. Overall positive verdict alignment (Swami Yoga / Ithasala / Nakta / Yamaya etc.)
+    if evaluation and evaluation.get("verdict") == "YES":
+        recovered = True
+        lagnapathi = evaluation.get("lagnapathi")
+        karyesa = evaluation.get("karyesa")
+        
+        yoga_names = [y["name"] for y in evaluation.get("yogas", [])]
+        if lagnapathi == karyesa:
+            recovery_conditions.append(
+                f"Swami Yoga (Lagnapathi & Karyesa are the same planet: {lagnapathi}) indicates overall success and recovery/resolution"
+            )
+        elif yoga_names:
+            recovery_conditions.append(
+                f"Tajaka Yoga ({', '.join(yoga_names)}) indicates overall success and recovery/resolution"
+            )
+        else:
+            recovery_conditions.append(
+                "General Prasna chart success verdict indicates positive recovery or resolution"
+            )
         
     # Verdict text
     if recovered:
@@ -228,7 +273,10 @@ def evaluate_lost_property(chart):
     # Navamsa Index of Lagna (0 to 8)
     # 5th Navamsa ends at 16°40'. So indices 0, 1, 2, 3, 4 represent <= 5th Navamsa.
     if nav_idx <= 4:
-        distance_desc = "Within immediate premises (Item has not left the house or office)"
+        if is_living_entity:
+            distance_desc = "Within immediate premises (Person/Entity has not left the property/house)"
+        else:
+            distance_desc = "Within immediate premises (Item has not left the house or office)"
         distance_val = 0
     else:
         navs_past_5th = nav_idx - 4
@@ -254,7 +302,12 @@ def evaluate_lost_property(chart):
         substance_idx = nav_idx % 3
     else:
         substance_idx = (2 - nav_idx) % 3
-    substance_type = substance_map[substance_idx]
+        
+    if is_living_entity:
+        substance_type = "Jeeva (Animal / Human / Living / Leather)"
+    else:
+        substance_type = substance_map[substance_idx]
+        
     color = SIGN_COLORS.get(lagna_sign, "Unknown")
     size = SIGN_SIZES.get(nav_sign, "Unknown")
 
@@ -275,5 +328,6 @@ def evaluate_lost_property(chart):
         "color": color,
         "size": size,
         "lagna_sign_name": get_sign_name(lagna_sign),
-        "nav_sign_name": get_sign_name(nav_sign)
+        "nav_sign_name": get_sign_name(nav_sign),
+        "is_living_entity": is_living_entity
     }
