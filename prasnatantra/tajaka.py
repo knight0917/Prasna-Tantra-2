@@ -13,6 +13,7 @@ ORBS = {
 
 # Combustion limits in degrees from Sun
 COMBUSTION_LIMITS = {
+    "Moon": 12.0,
     "Mars": 12.0,
     "Mercury": 8.0,
     "Jupiter": 9.0,
@@ -179,6 +180,18 @@ EXALTATION_DEGREES = {
     "Saturn": 200.0
 }
 
+def get_navamsa_sign_index(longitude):
+    sign = get_sign(longitude)
+    deg_in_sign = longitude % 30
+    if sign in [0, 3, 6, 9]:
+        start_sign = sign
+    elif sign in [1, 4, 7, 10]:
+        start_sign = (sign + 8) % 12
+    else:
+        start_sign = (sign + 4) % 12
+    navamsa_idx = int(deg_in_sign / (30.0 / 9.0))
+    return (start_sign + navamsa_idx) % 12
+
 def calculate_varga_benefic_count(planet_name, longitude):
     if planet_name in ["Rahu", "Ketu"]:
         return 0
@@ -211,14 +224,7 @@ def calculate_varga_benefic_count(planet_name, longitude):
         varga_count += 1
         
     # 4. Navamsa
-    if sign in [0, 3, 6, 9]:
-        start_sign = sign
-    elif sign in [1, 4, 7, 10]:
-        start_sign = (sign + 8) % 12
-    else:
-        start_sign = (sign + 4) % 12
-    navamsa_idx = int(deg_in_sign / (30.0 / 9.0))
-    nav_sign = (start_sign + navamsa_idx) % 12
+    nav_sign = get_navamsa_sign_index(longitude)
     if nav_sign in OWN_SIGNS.get(planet_name, []) or nav_sign == EXALTATION_SIGNS.get(planet_name):
         varga_count += 1
         
@@ -282,50 +288,99 @@ def get_planetary_avastha(planet_name, planet_lon, planet_data, sun_lon, planets
         
     sign = get_sign(planet_lon)
     
-    # 3. Deeptha (Exalted)
+    # Calculate base avastha using Rashi parameters
+    base_avastha = None
     exalt_sign = EXALTATION_SIGNS.get(planet_name)
-    if exalt_sign is not None and sign == exalt_sign:
-        return "Deeptha"
-        
-    # 4. Deena (Debilitated)
     deb_sign = DEBILITATION_SIGNS.get(planet_name)
-    if deb_sign is not None and sign == deb_sign:
-        return "Deena"
-        
-    # 5. Swastha (Own sign)
-    own_s = OWN_SIGNS.get(planet_name, [])
-    if sign in own_s:
-        return "Swastha"
-        
-    # 6. Athiveerya (High benefic divisions)
-    if calculate_varga_benefic_count(planet_name, planet_lon) >= 3:
-        return "Athiveerya"
-        
-    # 7. Retrograde (treated as Suptha/weak or sleepy)
-    if planet_data.get("is_retrograde", False):
-        return "Suptha"
-        
-    # 8. Muditha (Friendly sign)
-    friendly_s = FRIENDLY_SIGNS.get(planet_name, [])
-    if sign in friendly_s:
-        return "Muditha"
-        
-    # 9. Suptha (Inimical sign)
-    inimical_s = INIMICAL_SIGNS.get(planet_name, [])
-    if sign in inimical_s:
-        return "Suptha"
-        
-    # 10. Suveerya (Ascending) / Pariheena (Descending)
-    if planet_name in EXALTATION_DEGREES:
+    
+    if exalt_sign is not None and sign == exalt_sign:
+        base_avastha = "Deeptha"
+    elif deb_sign is not None and sign == deb_sign:
+        base_avastha = "Deena"
+    elif sign in OWN_SIGNS.get(planet_name, []):
+        base_avastha = "Swastha"
+    elif calculate_varga_benefic_count(planet_name, planet_lon) >= 3:
+        base_avastha = "Athiveerya"
+    elif planet_data.get("is_retrograde", False):
+        base_avastha = "Suptha"
+    elif sign in FRIENDLY_SIGNS.get(planet_name, []):
+        base_avastha = "Muditha"
+    elif sign in INIMICAL_SIGNS.get(planet_name, []):
+        base_avastha = "Suptha"
+    elif planet_name in EXALTATION_DEGREES:
         exalt = EXALTATION_DEGREES[planet_name]
         debility = (exalt + 180.0) % 360.0
         dist_from_deb = (planet_lon - debility) % 360.0
         if dist_from_deb < 180.0:
-            return "Suveerya"
+            base_avastha = "Suveerya"
         else:
-            return "Pariheena"
+            base_avastha = "Pariheena"
+    else:
+        base_avastha = "Suveerya"
+
+    # Navamsa-based modifications
+    nav_sign = get_navamsa_sign_index(planet_lon)
+    
+    is_vargottama = (sign == nav_sign)
+    is_nav_exalted = (nav_sign == EXALTATION_SIGNS.get(planet_name))
+    is_nav_own = (nav_sign in OWN_SIGNS.get(planet_name, []))
+    is_nav_debilitated = (nav_sign == DEBILITATION_SIGNS.get(planet_name))
+    
+    # Check for benefic aspects/conjunctions in the Navamsa chart
+    aspected_by_benefic_in_nav = False
+    if planets_dict:
+        for benefic in ["Jupiter", "Venus"]:
+            if benefic == planet_name:
+                continue
+            if benefic in planets_dict:
+                b_lon = planets_dict[benefic]["longitude"]
+                b_nav_sign = get_navamsa_sign_index(b_lon)
+                diff = (nav_sign - b_nav_sign) % 12
+                # Tajaka aspect check in Navamsa: Conjunction (0), Sextile (2, 10), Square (3, 9), Trine (4, 8), Opposition (6)
+                if diff in [0, 2, 3, 4, 6, 8, 9, 10]:
+                    aspected_by_benefic_in_nav = True
+                    break
+
+    # Apply Navamsa dignity rules
+    # 1. Debilitation in Navamsa: Demote to Deena (except if already Mushita/Nipeeditha)
+    if is_nav_debilitated:
+        base_avastha = "Deena"
+        
+    # 2. Vargottama: Promote to Swastha (or keep Deeptha)
+    elif is_vargottama:
+        if base_avastha == "Deeptha":
+            base_avastha = "Deeptha"
+        else:
+            base_avastha = "Swastha"
+        
+    # 3. Exalted in Navamsa: Promote to Swastha/Deeptha
+    elif is_nav_exalted:
+        if base_avastha in ["Deeptha", "Athiveerya", "Swastha"]:
+            base_avastha = "Deeptha"
+        elif base_avastha == "Deena":
+            base_avastha = "Muditha"  # cancelled debility
+        else:
+            base_avastha = "Swastha"
             
-    return "Suveerya"
+    # 4. Own Navamsa: Promote to Swastha/Pariheena
+    elif is_nav_own:
+        if base_avastha in ["Deeptha", "Athiveerya", "Swastha"]:
+            pass
+        elif base_avastha == "Deena":
+            base_avastha = "Pariheena"  # partially cancelled debility
+        else:
+            base_avastha = "Swastha"
+
+    # 5. Benefic Aspect in Navamsa: Protects and upgrades weak/sleepy states
+    if aspected_by_benefic_in_nav:
+        if base_avastha == "Deena":
+            base_avastha = "Pariheena"
+        elif base_avastha == "Pariheena":
+            base_avastha = "Neutral"
+        elif base_avastha == "Suptha":
+            base_avastha = "Muditha"
+
+    return base_avastha
 
 def detect_nakta_yoga(p1_name, p1_data, p2_name, p2_data, planets_dict):
     """
@@ -344,18 +399,18 @@ def detect_nakta_yoga(p1_name, p1_data, p2_name, p2_data, planets_dict):
     
     p1_idx = speed_order.index(p1_name) if p1_name in speed_order else 99
     p2_idx = speed_order.index(p2_name) if p2_name in speed_order else 99
-    slower_idx = max(p1_idx, p2_idx)
+    faster_idx_limit = min(p1_idx, p2_idx)
     
     possible_nakta = []
     for name, data in planets_dict.items():
         if name in [p1_name, p2_name]:
             continue
             
-        # The translating planet should ideally be faster than the target planets
+        # The translating planet must be faster than both target planets
         if name in speed_order:
             translator_idx = speed_order.index(name)
-            if translator_idx > slower_idx:
-                continue # Translator is slower than the targets
+            if translator_idx >= faster_idx_limit:
+                continue # Translator is not faster than both targets
                 
         rel1 = get_planet_relationship(name, data, p1_name, p1_data)
         rel2 = get_planet_relationship(name, data, p2_name, p2_data)
@@ -382,17 +437,17 @@ def detect_yamaya_yoga(p1_name, p1_data, p2_name, p2_data, planets_dict):
     speed_order = ["Moon", "Mercury", "Venus", "Sun", "Mars", "Jupiter", "Saturn"]
     p1_idx = speed_order.index(p1_name) if p1_name in speed_order else -1
     p2_idx = speed_order.index(p2_name) if p2_name in speed_order else -1
-    faster_idx = min(p1_idx, p2_idx)
+    slower_idx_limit = max(p1_idx, p2_idx)
     
     possible_yamaya = []
     for name, data in planets_dict.items():
         if name in [p1_name, p2_name]:
             continue
             
-        # The translating planet should be slower than the target planets
+        # The translating planet must be slower than both target planets
         if name in speed_order:
             translator_idx = speed_order.index(name)
-            if translator_idx < faster_idx:
+            if translator_idx <= slower_idx_limit:
                 continue
                 
         rel1 = get_planet_relationship(name, data, p1_name, p1_data)
@@ -424,5 +479,51 @@ def detect_kamboola_yoga(p1_name, p1_data, p2_name, p2_data, Moon_data):
             "relationship_p1_p2": direct_rel,
             "relationship_moon_p1": rel_moon_p1,
             "relationship_moon_p2": rel_moon_p2
+        }
+    return None
+
+def detect_gairikamboola_yoga(p1_name, p1_data, p2_name, p2_data, Moon_data, planets_dict):
+    """
+    Gairikamboola Yoga: A compromised Kamboola Yoga.
+    Lagnapathi (p1) and Karyesa (p2) are in applying Ithasala,
+    and the Moon is in applying Ithasala with either or both of them (Kamboola conditions),
+    but the Moon is afflicted:
+    1. Moon is combust (within 12 degrees of the Sun).
+    2. Moon is debilitated (in Scorpio, sign index 7).
+    3. Moon is conjoined or aspected by Mars or Saturn.
+    """
+    kamboola = detect_kamboola_yoga(p1_name, p1_data, p2_name, p2_data, Moon_data)
+    if not kamboola:
+        return None
+        
+    # Check if Moon is afflicted
+    # 1. Combustion check (Moon combustion limit 12 degrees)
+    sun_lon = planets_dict["Sun"]["longitude"] if "Sun" in planets_dict else 0.0
+    moon_lon = Moon_data["longitude"]
+    moon_combust = check_combustion("Moon", moon_lon, sun_lon)
+    
+    # 2. Debilitated in Scorpio (sign index 7)
+    moon_sign = get_sign(moon_lon)
+    moon_debilitated = (moon_sign == 7)
+    
+    # 3. Conjoined or aspected by Mars or Saturn
+    moon_afflicted_by_malefics = False
+    for malefic in ["Mars", "Saturn"]:
+        if malefic in planets_dict:
+            rel = get_planet_relationship("Moon", Moon_data, malefic, planets_dict[malefic])
+            if rel:
+                moon_afflicted_by_malefics = True
+                break
+                
+    if moon_combust or moon_debilitated or moon_afflicted_by_malefics:
+        return {
+            "relationship_p1_p2": kamboola["relationship_p1_p2"],
+            "relationship_moon_p1": kamboola["relationship_moon_p1"],
+            "relationship_moon_p2": kamboola["relationship_moon_p2"],
+            "afflictions": {
+                "combust": moon_combust,
+                "debilitated": moon_debilitated,
+                "malefic_aspect": moon_afflicted_by_malefics
+            }
         }
     return None

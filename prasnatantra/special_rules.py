@@ -1,4 +1,6 @@
-from .tajaka import get_planet_relationship, get_planetary_avastha, check_combustion
+from .tajaka import get_planet_relationship, get_planetary_avastha, check_combustion, detect_kamboola_yoga
+from .astronomy import get_sign_name
+
 
 SIGN_LORDS = {
     0: "Mars",      # Aries
@@ -727,3 +729,784 @@ def evaluate_crops_trade(chart, house_num):
         "details": details,
         "score_adjustment": score_adj
     }
+
+def get_navamsa_sign(lon):
+    """
+    Computes the Navamsa sign for a given longitude (0 to 360 degrees).
+    """
+    sign_idx = int(lon / 30.0) % 12
+    deg_in_sign = lon % 30.0
+    nav_idx = int(deg_in_sign / (30.0 / 9.0))
+    
+    # Fire signs (Aries=0, Leo=4, Sagittarius=8) start at Aries (0)
+    # Earth signs (Taurus=1, Virgo=5, Capricorn=9) start at Capricorn (9)
+    # Air signs (Gemini=2, Libra=6, Aquarius=10) start at Libra (6)
+    # Water signs (Cancer=3, Scorpio=7, Pisces=11) start at Cancer (3)
+    if sign_idx in [0, 4, 8]:
+        start_sign = 0
+    elif sign_idx in [1, 5, 9]:
+        start_sign = 9
+    elif sign_idx in [2, 6, 10]:
+        start_sign = 6
+    else: # 3, 7, 11
+        start_sign = 3
+        
+    return (start_sign + nav_idx) % 12
+
+def check_mrityu_yoga(chart):
+    """
+    Checks if Mrityu Yoga is present in the chart.
+    Mrityu Yoga is defined as:
+    - Lagna Lord in 8th house, or
+    - 8th Lord in Lagna, or
+    - Moon in the 8th house.
+    """
+    lagna_sign = chart.lagna_sign
+    eighth_sign = (lagna_sign + 7) % 12
+    
+    lagnapathi = chart.lagnapathi
+    eighth_lord = SIGN_LORDS[eighth_sign]
+    
+    lagnapathi_sign = get_sign(chart.planets[lagnapathi]["longitude"])
+    eighth_lord_sign = get_sign(chart.planets[eighth_lord]["longitude"])
+    moon_sign = get_sign(chart.planets["Moon"]["longitude"])
+    
+    is_mrityu = (lagnapathi_sign == eighth_sign) or (eighth_lord_sign == lagna_sign) or (moon_sign == eighth_sign)
+    
+    reasons = []
+    if lagnapathi_sign == eighth_sign:
+        reasons.append(f"Lagna Lord ({lagnapathi}) in the 8th house ({get_sign_name(eighth_sign)})")
+    if eighth_lord_sign == lagna_sign:
+        reasons.append(f"8th Lord ({eighth_lord}) in Lagna ({get_sign_name(lagna_sign)})")
+    if moon_sign == eighth_sign:
+        reasons.append(f"Moon in the 8th house ({get_sign_name(eighth_sign)})")
+        
+    return is_mrityu, ", ".join(reasons)
+
+def evaluate_dreams(chart):
+    """
+    Evaluates queries on dreams (Prasna Tantra Ch 3 Stanzas 144-148).
+    """
+    lagna_sign = chart.lagna_sign
+    sun_lon = chart.planets["Sun"]["longitude"]
+    
+    predictions = []
+    details = []
+    score_adj = 0
+    
+    # 1. Determine planet strengths and the strongest planet
+    avastha_vals = {
+        "Deeptha": 10, "Athiveerya": 9, "Suveerya": 8, "Swastha": 7, "Muditha": 6,
+        "Neutral": 5, "Pariheena": 4, "Suptha": 3, "Nipeeditha": 2, "Deena": 1, "Mushita": 0
+    }
+    
+    planet_strengths = {}
+    weak_planets_count = 0
+    for p in ["Sun", "Moon", "Mars", "Mercury", "Jupiter", "Venus", "Saturn"]:
+        p_data = chart.planets[p]
+        p_avastha = get_planetary_avastha(p, p_data["longitude"], p_data, sun_lon, chart.planets)
+        strength = avastha_vals.get(p_avastha, 5)
+        # Adjust for combustion
+        if p != "Sun" and check_combustion(p, p_data["longitude"], sun_lon):
+            strength = max(0, strength - 3)
+        planet_strengths[p] = strength
+        if strength <= 3:
+            weak_planets_count += 1
+            
+    # Strongest planet
+    strongest_planet = max(planet_strengths, key=planet_strengths.get)
+    strongest_strength = planet_strengths[strongest_planet]
+    
+    # Classical theme mapping
+    theme_map = {
+        "Sun": "A king, fire, weapon, or a bloody act.",
+        "Moon": "White flower, white cloth, scent, or a woman.",
+        "Mars": "Blood, flesh, pearl, or gold.",
+        "Mercury": "Journeying in the heavens.",
+        "Jupiter": "Money and the visit of relatives.",
+        "Venus": "Bathing in a tank or river.",
+        "Saturn": "Climbing elevated places such as hills, tall buildings, etc."
+    }
+    
+    # 2. Check occupants of Lagna
+    lagna_occupants = []
+    for p in ["Sun", "Moon", "Mars", "Mercury", "Jupiter", "Venus", "Saturn"]:
+        if get_sign(chart.planets[p]["longitude"]) == lagna_sign:
+            lagna_occupants.append(p)
+            
+    # 3. Navamsa Lagna Lord
+    nav_lagna_sign = get_navamsa_sign(chart.lagna_sidereal)
+    nav_lord = SIGN_LORDS[nav_lagna_sign]
+    
+    details.append(f"Dreams: Lagna is {get_sign_name(lagna_sign)}. Navamsa Lagna is {get_sign_name(nav_lagna_sign)} (ruled by {nav_lord}).")
+    details.append(f"Dreams: Strongest planet in chart is {strongest_planet} (Strength: {strongest_strength}).")
+    
+    # Process indicators
+    if lagna_occupants:
+        for p in lagna_occupants:
+            theme = theme_map.get(p, "Ordinary dream.")
+            predictions.append({
+                "category": "Dream Indication",
+                "prediction": f"Lagna occupant {p} indicates dreams of: {theme}",
+                "rule": f"Prasna Tantra Ch 3 St. 144-146 (Occupant {p} in Lagna)"
+            })
+            details.append(f"Dream indication from Lagna occupant {p}: {theme}")
+            
+    # Stanza 146: "or of the nature of dream can be divined according to Navamsa Lagna."
+    nav_theme = theme_map.get(nav_lord, "Ordinary dream.")
+    predictions.append({
+        "category": "Dream Indication",
+        "prediction": f"Navamsa Lagna Lord {nav_lord} indicates dreams of: {nav_theme}",
+        "rule": "Prasna Tantra Ch 3 St. 146 (Navamsa Lagna Lord)"
+    })
+    details.append(f"Dream indication from Navamsa Lagna Lord {nav_lord}: {nav_theme}")
+    
+    # Stanza 147: "Or the nature of the dream should be ascertained with reference to the strongest planet..."
+    strong_theme = theme_map.get(strongest_planet, "Ordinary dream.")
+    predictions.append({
+        "category": "Dream Indication",
+        "prediction": f"Strongest planet {strongest_planet} indicates dreams of: {strong_theme}",
+        "rule": "Prasna Tantra Ch 3 St. 147 (Strongest Planet)"
+    })
+    details.append(f"Dream indication from Strongest Planet {strongest_planet}: {strong_theme}")
+    
+    # Stanza 147: "If all planets are weak, he will have evil dreams."
+    if weak_planets_count == 7:
+        predictions.append({
+            "category": "Dream Quality",
+            "prediction": "The querent will have evil/fearful dreams (all planets are weak).",
+            "rule": "Prasna Tantra Ch 3 St. 147 (All planets weak)"
+        })
+        details.append("Dream quality: All planets are weak, signifying evil/inauspicious dreams.")
+        score_adj -= 20
+    elif strongest_strength <= 5: # relatively even/moderate
+        predictions.append({
+            "category": "Dream Quality",
+            "prediction": "The querent will have ordinary or mundane dreams (planetary influences are evenly disposed).",
+            "rule": "Prasna Tantra Ch 3 St. 147 (Evenly disposed)"
+        })
+        details.append("Dream quality: Planetary influences are evenly/moderately disposed, indicating ordinary dreams.")
+    else:
+        details.append("Dream quality: Influences are distinct, indicating vivid dreams of the indicated theme.")
+        score_adj += 10
+        
+    # Stanza 148: "If the Sun is in the ascendant aspected by the Moon or if both the Sun and the Moon are in the ascendant..."
+    sun_in_lagna = "Sun" in lagna_occupants
+    moon_in_lagna = "Moon" in lagna_occupants
+    
+    moon_aspects_sun = aspects_sign(chart.planets["Moon"]["longitude"], lagna_sign)
+    
+    if (sun_in_lagna and moon_aspects_sun) or (sun_in_lagna and moon_in_lagna):
+        predictions.append({
+            "category": "Dream Quality",
+            "prediction": "The querent will experience a bad dream/nightmare. Duration of the dream corresponds to the rising sign duration (approx. 2 hours).",
+            "rule": "Prasna Tantra Ch 3 St. 148"
+        })
+        details.append("Dream quality: Sun and Moon combination indicates a nightmare/bad dream.")
+        score_adj -= 15
+        
+    return {
+        "predictions": predictions,
+        "details": details,
+        "score_adjustment": score_adj
+    }
+
+def evaluate_ships(chart):
+    """
+    Evaluates queries on ships, safe voyage, cargo, sinking, and transactions (Stanzas 172-180).
+    """
+    lagna_sign = chart.lagna_sign
+    lagnapathi = chart.lagnapathi
+    eighth_sign = (lagna_sign + 7) % 12
+    eighth_lord = SIGN_LORDS[eighth_sign]
+    seventh_sign = (lagna_sign + 6) % 12
+    moon_sign = get_sign(chart.planets["Moon"]["longitude"])
+    moon_lord = SIGN_LORDS[moon_sign]
+    
+    nav_lagna_sign = get_navamsa_sign(chart.lagna_sidereal)
+    nav_lagnapathi = SIGN_LORDS[nav_lagna_sign]
+    
+    sun_lon = chart.planets["Sun"]["longitude"]
+    
+    predictions = []
+    details = []
+    score_adj = 0
+    
+    def planet_s(p):
+        return get_sign(chart.planets[p]["longitude"])
+        
+    lagnapathi_sign = planet_s(lagnapathi)
+    eighth_lord_sign = planet_s(eighth_lord)
+    
+    # 1. Profit from ship (Stanza 173)
+    kendra_signs = [lagna_sign, (lagna_sign + 3) % 12, (lagna_sign + 6) % 12, (lagna_sign + 9) % 12]
+    upachaya_signs = [(lagna_sign + 2) % 12, (lagna_sign + 5) % 12, (lagna_sign + 10) % 12] # 3rd, 6th, 11th
+    
+    benefics_in_kendra = []
+    malefics_in_3_6_11 = []
+    
+    for p in ["Jupiter", "Venus", "Moon", "Mercury"]:
+        if p == "Mercury" and check_combustion("Mercury", chart.planets["Mercury"]["longitude"], sun_lon):
+            continue
+        if planet_s(p) in kendra_signs:
+            benefics_in_kendra.append(p)
+            
+    for p in ["Sun", "Mars", "Saturn"]:
+        if planet_s(p) in upachaya_signs:
+            malefics_in_3_6_11.append(p)
+            
+    if benefics_in_kendra and malefics_in_3_6_11:
+        predictions.append({
+            "category": "Voyage Profit",
+            "prediction": f"The ship brings gain and benefit. Benefics in quadrants: {', '.join(benefics_in_kendra)}. Malefics in 3/6/11: {', '.join(malefics_in_3_6_11)}.",
+            "rule": "Prasna Tantra Ch 3 St. 173"
+        })
+        details.append("Voyage: Benefics in quadrants and malefics in 3/6/11 indicate profit.")
+        score_adj += 15
+        
+    # 2. Voyage Safe & Cargo (Stanza 174)
+    lagnapathi_retro = chart.planets[lagnapathi]["speed"] < 0
+    nav_lagnapathi_retro = chart.planets[nav_lagnapathi]["speed"] < 0
+    
+    if lagnapathi_retro and nav_lagnapathi_retro:
+        aspected_by_benefic = False
+        aspected_by_malefic = False
+        
+        for b in ["Jupiter", "Venus", "Moon", "Mercury"]:
+            if b == "Mercury" and check_combustion("Mercury", chart.planets["Mercury"]["longitude"], sun_lon):
+                continue
+            if aspects_sign(chart.planets[b]["longitude"], lagnapathi_sign) or aspects_sign(chart.planets[b]["longitude"], planet_s(nav_lagnapathi)):
+                aspected_by_benefic = True
+                
+        for m in ["Sun", "Mars", "Saturn"]:
+            if aspects_sign(chart.planets[m]["longitude"], lagnapathi_sign) or aspects_sign(chart.planets[m]["longitude"], planet_s(nav_lagnapathi)):
+                aspected_by_malefic = True
+                
+        if aspected_by_benefic:
+            predictions.append({
+                "category": "Voyage Arrival",
+                "prediction": "The ship with merchandise (cargo) arrives safe (Lagna and Navamsa lords retrograde & aspected by benefics).",
+                "rule": "Prasna Tantra Ch 3 St. 174"
+            })
+            details.append("Voyage: Retrograde lords aspected by benefics indicates safe arrival of ship with cargo.")
+            score_adj += 15
+        elif aspected_by_malefic:
+            predictions.append({
+                "category": "Voyage Arrival",
+                "prediction": "The ship arrives but without any merchandise (lords retrograde & aspected by malefics).",
+                "rule": "Prasna Tantra Ch 3 St. 174"
+            })
+            details.append("Voyage: Retrograde lords aspected by malefics indicates loss of merchandise.")
+            score_adj -= 10
+            
+    # 3. Transaction Gain (Stanza 175)
+    if lagnapathi_sign == lagna_sign and eighth_lord_sign == eighth_sign:
+        predictions.append({
+            "category": "Voyage Transaction",
+            "prediction": "Gain will accrue in the transaction of the ship (lords in own signs).",
+            "rule": "Prasna Tantra Ch 3 St. 175"
+        })
+        details.append("Voyage: Lagna Lord in Lagna and 8th Lord in 8th house indicate transactional gain.")
+        score_adj += 15
+        
+    benefics_in_8 = []
+    for b in ["Jupiter", "Venus", "Moon", "Mercury"]:
+        if b == "Mercury" and check_combustion("Mercury", chart.planets["Mercury"]["longitude"], sun_lon):
+            continue
+        if planet_s(b) == eighth_sign:
+            avastha_vals = {
+                "Deeptha": 10, "Athiveerya": 9, "Suveerya": 8, "Swastha": 7, "Muditha": 6,
+                "Neutral": 5, "Pariheena": 4, "Suptha": 3, "Nipeeditha": 2, "Deena": 1, "Mushita": 0
+            }
+            p_data = chart.planets[b]
+            p_avastha = get_planetary_avastha(b, p_data["longitude"], p_data, sun_lon, chart.planets)
+            if avastha_vals.get(p_avastha, 5) >= 6:
+                benefics_in_8.append(b)
+                
+    if benefics_in_8:
+        predictions.append({
+            "category": "Voyage Transaction",
+            "prediction": f"Strong benefic {', '.join(benefics_in_8)} in the 8th house indicates gain and beneficial results.",
+            "rule": "Prasna Tantra Ch 3 St. 175"
+        })
+        details.append(f"Voyage: Strong benefic {', '.join(benefics_in_8)} in the 8th house.")
+        score_adj += 15
+        
+    # 4. Early Arrival (Stanza 176)
+    is_mrityu, mrityu_reasons = check_mrityu_yoga(chart)
+    if is_mrityu:
+        predictions.append({
+            "category": "Voyage Arrival",
+            "prediction": f"The ship will arrive early due to Mrityu Yoga: {mrityu_reasons}.",
+            "rule": "Prasna Tantra Ch 3 St. 176"
+        })
+        details.append(f"Voyage: Early arrival indicated by Mrityu Yoga ({mrityu_reasons}).")
+        score_adj += 10
+        
+    # 5. Drowning of Commander (Stanza 177)
+    rel_8_lagna = get_planet_relationship(eighth_lord, chart.planets[eighth_lord], lagnapathi, chart.planets[lagnapathi])
+    rel_8_moon_lord = get_planet_relationship(eighth_lord, chart.planets[eighth_lord], moon_lord, chart.planets[moon_lord])
+    rel_8_moon = get_planet_relationship(eighth_lord, chart.planets[eighth_lord], "Moon", chart.planets["Moon"])
+    
+    is_inimical_8 = False
+    reasons_inimical_8 = []
+    if rel_8_lagna and not rel_8_lagna["is_friendly"]:
+        is_inimical_8 = True
+        reasons_inimical_8.append("Lagna Lord")
+    if rel_8_moon_lord and not rel_8_moon_lord["is_friendly"]:
+        is_inimical_8 = True
+        reasons_inimical_8.append("Moon Lord")
+    if rel_8_moon and not rel_8_moon["is_friendly"]:
+        is_inimical_8 = True
+        reasons_inimical_8.append("Moon")
+        
+    if is_inimical_8:
+        predictions.append({
+            "category": "Voyage Safety",
+            "prediction": f"The commander/owner of the ship will get drowned in the sea (8th Lord has hostile relationship with {', '.join(reasons_inimical_8)}).",
+            "rule": "Prasna Tantra Ch 3 St. 177"
+        })
+        details.append(f"Voyage Danger: Hostile aspect from 8th Lord to {', '.join(reasons_inimical_8)} (Drowning hazard).")
+        score_adj -= 25
+        
+    # 6. Sinking of Ship (Stanza 178)
+    aspects_lagna = aspects_sign(chart.planets[lagnapathi]["longitude"], lagna_sign)
+    aspects_8th = aspects_sign(chart.planets[eighth_lord]["longitude"], eighth_sign)
+    
+    if not aspects_lagna and not aspects_8th:
+        predictions.append({
+            "category": "Voyage Safety",
+            "prediction": "It is certain that the ship in voyage will get sunk (Lagna Lord and 8th Lord do not aspect their respective houses).",
+            "rule": "Prasna Tantra Ch 3 St. 178"
+        })
+        details.append("Voyage Danger: Neither Lagna Lord nor 8th Lord aspects its own house, indicating sinking.")
+        score_adj -= 30
+        
+    # 7. Loss of cargo but ship safe (Stanza 179)
+    if lagnapathi_sign == seventh_sign or eighth_lord_sign == seventh_sign:
+        predictions.append({
+            "category": "Voyage Safety",
+            "prediction": "The merchandise will be lost, but the ship will return home safe (Lagna or 8th Lord in 7th house).",
+            "rule": "Prasna Tantra Ch 3 St. 179"
+        })
+        details.append("Voyage: Lagna Lord or 8th Lord in the 7th house points to cargo loss but safe ship.")
+        score_adj -= 10
+        
+    # 8. Mutual quarrels (Stanza 180)
+    rel_lagna_moon_lord = get_planet_relationship(lagnapathi, chart.planets[lagnapathi], moon_lord, chart.planets[moon_lord])
+    if rel_lagna_moon_lord and not rel_lagna_moon_lord["is_friendly"]:
+        predictions.append({
+            "category": "Voyage Discord",
+            "prediction": "The men on the ship will be involved in mutual quarrels and discord (mutual hostile aspect between Lagna Lord and Moon Lord).",
+            "rule": "Prasna Tantra Ch 3 St. 180"
+        })
+        details.append("Voyage Discord: Hostile relationship between Lagna Lord and Chandra Lagna Lord.")
+        score_adj -= 15
+        
+    if not predictions:
+        predictions.append({
+            "category": "Voyage Forecast",
+            "prediction": "Standard safe voyage is indicated. No specific afflictions or major combinations detected.",
+            "rule": "Prasna Tantra Ch 3 St. 172-180"
+        })
+        details.append("Voyage: General planetary placements indicate standard safety.")
+        
+    return {
+        "predictions": predictions,
+        "details": details,
+        "score_adjustment": score_adj
+    }
+
+def evaluate_rumours(chart):
+    """
+    Evaluates queries on the truth of rumours or news (Stanzas 181-182).
+    """
+    lagna_sign = chart.lagna_sign
+    lagnapathi = chart.lagnapathi
+    moon_sign = get_sign(chart.planets["Moon"]["longitude"])
+    sun_lon = chart.planets["Sun"]["longitude"]
+    
+    predictions = []
+    details = []
+    score_adj = 0
+    
+    # 1. Check if Lagna Lord is retrograde (unreliable)
+    lagnapathi_retro = chart.planets[lagnapathi]["speed"] < 0
+    if lagnapathi_retro:
+        predictions.append({
+            "category": "News Reliability",
+            "prediction": f"The news or rumour is completely UNRELIABLE and false, regardless of whether it is good or bad (Lagna Lord {lagnapathi} is retrograde).",
+            "rule": "Prasna Tantra Ch 3 St. 182"
+        })
+        details.append(f"Rumours: Lagna Lord ({lagnapathi}) is retrograde, indicating news is false/unreliable.")
+        score_adj -= 30
+        return {
+            "predictions": predictions,
+            "details": details,
+            "score_adjustment": score_adj
+        }
+        
+    # 2. Check support from benefics vs malefics
+    kendra_signs = [lagna_sign, (lagna_sign + 3) % 12, (lagna_sign + 6) % 12, (lagna_sign + 9) % 12]
+    
+    lagnapathi_sign = get_sign(chart.planets[lagnapathi]["longitude"])
+    lagnapathi_in_kendra = lagnapathi_sign in kendra_signs
+    moon_in_kendra = moon_sign in kendra_signs
+    
+    benefic_score = 0
+    malefic_score = 0
+    
+    # Check Lagna sign
+    for b in ["Jupiter", "Venus", "Moon", "Mercury"]:
+        if b == "Mercury" and check_combustion("Mercury", chart.planets["Mercury"]["longitude"], sun_lon):
+            continue
+        if get_sign(chart.planets[b]["longitude"]) == lagna_sign or aspects_sign(chart.planets[b]["longitude"], lagna_sign):
+            benefic_score += 1
+            
+    for m in ["Sun", "Mars", "Saturn"]:
+        if get_sign(chart.planets[m]["longitude"]) == lagna_sign or aspects_sign(chart.planets[m]["longitude"], lagna_sign):
+            malefic_score += 1
+            
+    # Check Lagna Lord
+    for b in ["Jupiter", "Venus", "Moon", "Mercury"]:
+        if b == "Mercury" and check_combustion("Mercury", chart.planets["Mercury"]["longitude"], sun_lon):
+            continue
+        if b == lagnapathi:
+            continue
+        rel = get_planet_relationship(lagnapathi, chart.planets[lagnapathi], b, chart.planets[b])
+        if rel and rel["is_friendly"]:
+            benefic_score += 1
+            
+    for m in ["Sun", "Mars", "Saturn"]:
+        if m == lagnapathi:
+            continue
+        rel = get_planet_relationship(lagnapathi, chart.planets[lagnapathi], m, chart.planets[m])
+        if rel and not rel["is_friendly"]:
+            malefic_score += 1
+            
+    # Check Moon
+    for b in ["Jupiter", "Venus", "Mercury"]:
+        if b == "Mercury" and check_combustion("Mercury", chart.planets["Mercury"]["longitude"], sun_lon):
+            continue
+        rel = get_planet_relationship("Moon", chart.planets["Moon"], b, chart.planets[b])
+        if rel and rel["is_friendly"]:
+            benefic_score += 1
+            
+    for m in ["Sun", "Mars", "Saturn"]:
+        rel = get_planet_relationship("Moon", chart.planets["Moon"], m, chart.planets[m])
+        if rel and not rel["is_friendly"]:
+            malefic_score += 1
+            
+    if lagnapathi_in_kendra:
+        benefic_score += 1
+    if moon_in_kendra:
+        benefic_score += 1
+        
+    details.append(f"Rumours: Benefic score is {benefic_score}. Malefic score is {malefic_score}.")
+    details.append(f"Rumours: Lagna Lord in Kendra: {lagnapathi_in_kendra}. Moon in Kendra: {moon_in_kendra}.")
+    
+    if benefic_score > malefic_score:
+        predictions.append({
+            "category": "News Reliability",
+            "prediction": "Favourable news received is RELIABLE and true. The significators are supported by benefics or occupy quadrants.",
+            "rule": "Prasna Tantra Ch 3 St. 181"
+        })
+        details.append("Rumours: Favourable news is reliable due to benefic support/quadrant placement.")
+        score_adj += 20
+    elif malefic_score > benefic_score:
+        predictions.append({
+            "category": "News Reliability",
+            "prediction": "Evil or unfavourable news received is CORRECT. The significators are afflicted by malefics.",
+            "rule": "Prasna Tantra Ch 3 St. 182"
+        })
+        details.append("Rumours: Unfavourable/evil news is correct due to malefic afflictions.")
+        score_adj -= 20
+    else:
+        predictions.append({
+            "category": "News Reliability",
+            "prediction": "Mixed or inconclusive indicators. The rumour cannot be fully verified, but check subsequent developments.",
+            "rule": "Prasna Tantra Ch 3 St. 181-182"
+        })
+        details.append("Rumours: Balanced influences indicate news is partially true or unconfirmed.")
+        
+    return {
+        "predictions": predictions,
+        "details": details,
+        "score_adjustment": score_adj
+    }
+
+def evaluate_sexual_matters(chart):
+    """
+    Evaluates queries on sexual matters, union, partner types, and timing (Chapter IV, Stanzas 35-40).
+    """
+    lagna_sign = chart.lagna_sign
+    lagnapathi = chart.lagnapathi
+    seventh_sign = (lagna_sign + 6) % 12
+    seventh_lord = SIGN_LORDS[seventh_sign]
+    
+    sun_lon = chart.planets["Sun"]["longitude"]
+    moon_lon = chart.planets["Moon"]["longitude"]
+    moon_sign = get_sign(moon_lon)
+    
+    predictions = []
+    details = []
+    score_adj = 0
+    
+    def get_house_of_planet(p):
+        p_sign = get_sign(chart.planets[p]["longitude"])
+        return ((p_sign - lagna_sign) % 12) + 1
+        
+    lagnapathi_house = get_house_of_planet(lagnapathi)
+    seventh_lord_house = get_house_of_planet(seventh_lord)
+    
+    # 1. Partner Type (Stanzas 35-36)
+    occ_7 = []
+    for p in ["Sun", "Moon", "Mars", "Mercury", "Jupiter", "Venus", "Saturn"]:
+        if get_sign(chart.planets[p]["longitude"]) == seventh_sign:
+            occ_7.append(p)
+            
+    partner_type = None
+    rule_source = None
+    
+    if occ_7:
+        if any(p in ["Mars", "Sun", "Venus"] for p in occ_7):
+            partner_type = "intimacy with another partner (outside marriage / adultery)"
+            rule_source = f"occupant {', '.join([p for p in occ_7 if p in ['Mars', 'Sun', 'Venus']])} in 7th"
+            score_adj -= 10
+        elif "Jupiter" in occ_7:
+            partner_type = "intimacy with their own spouse"
+            rule_source = "Jupiter in 7th"
+            score_adj += 15
+        elif any(p in ["Mercury", "Moon"] for p in occ_7):
+            partner_type = "intimacy with a casual partner or prostitute"
+            rule_source = f"occupant {', '.join([p for p in occ_7 if p in ['Mercury', 'Moon']])} in 7th"
+            score_adj -= 5
+        elif "Saturn" in occ_7:
+            partner_type = "intimacy with an elderly or low-status/low-caste partner"
+            rule_source = "Saturn in 7th"
+            score_adj -= 10
+    else:
+        if seventh_lord in ["Mars", "Sun", "Venus"]:
+            partner_type = "intimacy with another partner (outside marriage / adultery) indicated by 7th Lord"
+            rule_source = f"7th Lord {seventh_lord}"
+            score_adj -= 10
+        elif seventh_lord == "Jupiter":
+            partner_type = "intimacy with their own spouse indicated by 7th Lord"
+            rule_source = "7th Lord Jupiter"
+            score_adj += 15
+        elif seventh_lord in ["Mercury", "Moon"]:
+            partner_type = "intimacy with a casual partner or prostitute indicated by 7th Lord"
+            rule_source = f"7th Lord {seventh_lord}"
+            score_adj -= 5
+        elif seventh_lord == "Saturn":
+            partner_type = "intimacy with an elderly or low-status/low-caste partner indicated by 7th Lord"
+            rule_source = "7th Lord Saturn"
+            score_adj -= 10
+            
+    if partner_type:
+        predictions.append({
+            "category": "Partner Indication",
+            "prediction": f"The query indicates {partner_type}.",
+            "rule": f"Prasna Tantra Ch 4 St. 35-36 ({rule_source})"
+        })
+        details.append(f"Sexual: Partner type is {partner_type} based on {rule_source}.")
+        
+    # Partner Description
+    age_char = None
+    age_source = None
+    rep_planet = occ_7[0] if occ_7 else seventh_lord
+    
+    if rep_planet == "Moon":
+        moon_dist = (moon_lon - sun_lon) % 360
+        if moon_dist < 48.0 or moon_dist > 312.0:
+            age_char = "a young partner (Bala Moon)"
+        else:
+            age_char = "a mature partner"
+        age_source = "Moon"
+    elif rep_planet == "Mercury":
+        age_char = "a young girl/partner"
+        age_source = "Mercury"
+    elif rep_planet == "Saturn":
+        age_char = "an elderly partner"
+        age_source = "Saturn"
+    elif rep_planet in ["Sun", "Jupiter"]:
+        age_char = "a partner in confinement (pregnant or recently delivered)"
+        age_source = rep_planet
+    elif rep_planet in ["Mars", "Venus"]:
+        age_char = "a quarrelsome or highly passionate partner"
+        age_source = rep_planet
+        
+    if age_char:
+        predictions.append({
+            "category": "Partner Description",
+            "prediction": f"The partner is likely to be {age_char}.",
+            "rule": f"Prasna Tantra Ch 4 St. 35-36 (Age/Mood by {age_source})"
+        })
+        details.append(f"Sexual: Partner description is '{age_char}' based on {age_source}.")
+        
+    # 2. Secretion and Pleasure (Stanzas 37-39)
+    rel_moon_benefics = []
+    rel_moon_malefics = []
+    
+    for b in ["Jupiter", "Venus", "Mercury"]:
+        if b == "Mercury" and check_combustion("Mercury", chart.planets["Mercury"]["longitude"], sun_lon):
+            continue
+        rel = get_planet_relationship("Moon", chart.planets["Moon"], b, chart.planets[b])
+        if rel and rel["is_applying"]:
+            rel_moon_benefics.append(b)
+            
+    for m in ["Sun", "Mars", "Saturn"]:
+        rel = get_planet_relationship("Moon", chart.planets["Moon"], m, chart.planets[m])
+        if rel and rel["is_applying"]:
+            rel_moon_malefics.append(m)
+            
+    if rel_moon_benefics:
+        predictions.append({
+            "category": "Union Quality",
+            "prediction": f"The union will be filled with pleasure, happiness, and joy (Moon in Ithasala with benefics: {', '.join(rel_moon_benefics)}).",
+            "rule": "Prasna Tantra Ch 4 St. 37"
+        })
+        details.append(f"Sexual: Moon has applying Ithasala with benefics {', '.join(rel_moon_benefics)} indicating happy union.")
+        score_adj += 15
+    elif rel_moon_malefics:
+        predictions.append({
+            "category": "Union Quality",
+            "prediction": f"The union will be marked by quarrels, angry exchanges, or distress (Moon in Ithasala with malefics: {', '.join(rel_moon_malefics)}).",
+            "rule": "Prasna Tantra Ch 4 St. 38"
+        })
+        details.append(f"Sexual: Moon has applying Ithasala with malefics {', '.join(rel_moon_malefics)} indicating discordant union.")
+        score_adj -= 15
+        
+    # Special Satisfaction Combination
+    jup_in_1 = get_sign(chart.planets["Jupiter"]["longitude"]) == lagna_sign
+    ven_in_7 = get_sign(chart.planets["Venus"]["longitude"]) == seventh_sign
+    moon_in_4 = get_sign(chart.planets["Moon"]["longitude"]) == (lagna_sign + 3) % 12
+    
+    if jup_in_1 and ven_in_7 and moon_in_4:
+        predictions.append({
+            "category": "Union Quality",
+            "prediction": "The secretion and union will bring complete satisfaction, ecstasy, and joy to the couple.",
+            "rule": "Prasna Tantra Ch 4 St. 38 (Jupiter in Lagna, Venus in 7th, Moon in 4th)"
+        })
+        details.append("Sexual: Special configuration (Jup 1st, Ven 7th, Moon 4th) present for complete satisfaction.")
+        score_adj += 20
+        
+    # Moon Kamboola with benefic
+    kamboola_found = False
+    for b in ["Jupiter", "Venus", "Mercury"]:
+        if b == "Mercury" and check_combustion("Mercury", chart.planets["Mercury"]["longitude"], sun_lon):
+            continue
+        k_yoga = detect_kamboola_yoga(lagnapathi, chart.planets[lagnapathi], b, chart.planets[b], chart.planets["Moon"])
+        if k_yoga:
+            kamboola_found = True
+            break
+            
+    if kamboola_found:
+        predictions.append({
+            "category": "Union Quality",
+            "prediction": "The partner's secretion will be fresh like a flower and of pleasant odour (Moon Kamboola Yoga with benefic).",
+            "rule": "Prasna Tantra Ch 4 St. 39"
+        })
+        details.append("Sexual: Moon has Kamboola Yoga with a benefic, indicating pleasant/fresh secretion.")
+        score_adj += 10
+        
+    # Moon in own house or exaltation
+    if moon_sign == 3 or moon_sign == 1:
+        predictions.append({
+            "category": "Union Location",
+            "prediction": "The union will take place in a grand place or mansion (Moon in own house or exaltation).",
+            "rule": "Prasna Tantra Ch 4 St. 39"
+        })
+        details.append("Sexual: Moon in own house/exaltation indicates union in a grand place.")
+        score_adj += 10
+        
+    # Moon in common sign
+    if moon_sign in [2, 5, 8, 11]:
+        predictions.append({
+            "category": "Partner Verification",
+            "prediction": "The union is with the querent's own spouse (Moon in a common sign).",
+            "rule": "Prasna Tantra Ch 4 St. 39"
+        })
+        details.append("Sexual: Moon in a common sign indicates union is with spouse.")
+        score_adj += 10
+        
+    # 3. Extra-marital, Menses & Timing
+    if lagna_sign in [0, 3, 6, 9]:
+        predictions.append({
+            "category": "Partner Verification",
+            "prediction": "The querent will have intimacy with a partner other than their own spouse (Movable Lagna).",
+            "rule": "Prasna Tantra Ch 4 St. 40"
+        })
+        details.append("Sexual: Movable Lagna indicates partner other than spouse.")
+        score_adj -= 5
+        
+    saturn_house = get_house_of_planet("Saturn")
+    if saturn_house == 4:
+        predictions.append({
+            "category": "Partner Condition",
+            "prediction": "The union will be with a partner who is in menses/period (Saturn in the 4th house).",
+            "rule": "Prasna Tantra Ch 4 St. 40"
+        })
+        details.append("Sexual: Saturn in the 4th house indicates partner is in menses.")
+        score_adj -= 10
+        
+    # Timing
+    diurnal_signs = [4, 5, 6, 7, 10, 11]
+    nocturnal_signs = [0, 1, 2, 3, 8, 9]
+    
+    if lagnapathi_house in [3, 8] and seventh_lord_house in [3, 8]:
+        predictions.append({
+            "category": "Union Timing",
+            "prediction": "Union will occur both during the day and during the night (both lords in 3rd/8th house).",
+            "rule": "Prasna Tantra Ch 4 St. 40"
+        })
+        details.append("Sexual Timing: Both Lagna Lord and 7th Lord in 3rd/8th house indicates union day and night.")
+    else:
+        timing_predicted = False
+        if lagna_sign in diurnal_signs and lagnapathi_house in [3, 9]:
+            predictions.append({
+                "category": "Union Timing",
+                "prediction": "Union will occur during the day (lord of diurnal Lagna sign in 3rd/9th house).",
+                "rule": "Prasna Tantra Ch 4 St. 40"
+            })
+            details.append("Sexual Timing: Diurnal Lagna Lord in 3rd/9th indicates day union.")
+            timing_predicted = True
+        elif lagna_sign in nocturnal_signs and lagnapathi_house in [3, 9]:
+            predictions.append({
+                "category": "Union Timing",
+                "prediction": "Union will occur during the night (lord of nocturnal Lagna sign in 3rd/9th house).",
+                "rule": "Prasna Tantra Ch 4 St. 40"
+            })
+            details.append("Sexual Timing: Nocturnal Lagna Lord in 3rd/9th indicates night union.")
+            timing_predicted = True
+            
+        if not timing_predicted:
+            if seventh_sign in diurnal_signs and seventh_lord_house in [3, 9]:
+                predictions.append({
+                    "category": "Union Timing",
+                    "prediction": "Union will occur during the day (lord of diurnal 7th sign in 3rd/9th house).",
+                    "rule": "Prasna Tantra Ch 4 St. 40"
+                })
+                details.append("Sexual Timing: Diurnal 7th Lord in 3rd/9th indicates day union.")
+            elif seventh_sign in nocturnal_signs and seventh_lord_house in [3, 9]:
+                predictions.append({
+                    "category": "Union Timing",
+                    "prediction": "Union will occur during the night (lord of nocturnal 7th sign in 3rd/9th house).",
+                    "rule": "Prasna Tantra Ch 4 St. 40"
+                })
+                details.append("Sexual Timing: Nocturnal 7th Lord in 3rd/9th indicates night union.")
+                
+    if not predictions:
+        predictions.append({
+            "category": "Union Forecast",
+            "prediction": "Standard indications for union and intimacy. Check general 7th house and Venus disposition.",
+            "rule": "Prasna Tantra Ch 4 St. 35-40"
+        })
+        details.append("Sexual: No specific planetary indicators triggered for timing or partner details.")
+        
+    return {
+        "predictions": predictions,
+        "details": details,
+        "score_adjustment": score_adj
+    }
+

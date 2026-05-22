@@ -259,3 +259,4 @@ except ImportError:
 
 from .engine import PrasnaChart, SIGN_LORDS
 from .astronomy import get_sign_name
+from .timing import calculate_equinoctial_shadow, calculate_kalapinda_timing

@@ -1,6 +1,7 @@
+import math
 from datetime import datetime, timedelta
 from .astronomy import calculate_lagna, get_planetary_positions, get_house_cusps, get_sign_name
-from .tajaka import get_planet_relationship, detect_nakta_yoga, detect_yamaya_yoga, detect_kamboola_yoga, get_planetary_avastha, check_combustion
+from .tajaka import get_planet_relationship, detect_nakta_yoga, detect_yamaya_yoga, detect_kamboola_yoga, detect_gairikamboola_yoga, get_planetary_avastha, check_combustion, check_nipeeditha
 from .shatpanchasika import evaluate_shatpanchasika
 from .special_rules import (
     evaluate_deity_curse,
@@ -8,8 +9,13 @@ from .special_rules import (
     evaluate_meals,
     evaluate_sports,
     evaluate_disputes,
-    evaluate_crops_trade
+    evaluate_crops_trade,
+    evaluate_dreams,
+    evaluate_ships,
+    evaluate_rumours,
+    evaluate_sexual_matters
 )
+
 
 # Traditional Vedic Sign Ownership
 SIGN_LORDS = {
@@ -31,12 +37,13 @@ SIGN_LORDS = {
 SIRSHODAYA_SIGNS = [2, 4, 5, 6, 7, 10]  # Gemini, Leo, Virgo, Libra, Scorpio, Aquarius
 
 class PrasnaChart:
-    def __init__(self, local_datetime, lat_str, lon_str, tz_offset_hours):
+    def __init__(self, local_datetime, lat_str, lon_str, tz_offset_hours, ayanamsha_mode="Lahiri"):
         """
         local_datetime: datetime object
         lat_str: Latitude, e.g. "12:58:18"
         lon_str: Longitude, e.g. "77:35:41"
         tz_offset_hours: float (e.g. 5.5 for IST)
+        ayanamsha_mode: str ("Lahiri" or "Raman")
         """
         self.local_time = local_datetime
         # Calculate UTC time
@@ -46,9 +53,10 @@ class PrasnaChart:
         self.latitude = lat_str
         self.longitude = lon_str
         self.tz_offset = tz_offset_hours
+        self.ayanamsha_mode = ayanamsha_mode
         
         # 1. Calculate Lagna & Astronomy
-        lagna_data = calculate_lagna(self.utc_str, lat_str, lon_str)
+        lagna_data = calculate_lagna(self.utc_str, lat_str, lon_str, ayanamsha_mode=ayanamsha_mode)
         self.lagna_sidereal = lagna_data["sidereal"]
         self.lagna_tropical = lagna_data["tropical"]
         self.ayanamsha = lagna_data["ayanamsha"]
@@ -60,7 +68,7 @@ class PrasnaChart:
         self.lagnapathi = SIGN_LORDS[self.lagna_sign]
         
         # 3. Get planetary positions
-        self.planets = get_planetary_positions(self.utc_str, self.ayanamsha)
+        self.planets = get_planetary_positions(self.utc_str, self.ayanamsha, ayanamsha_mode=ayanamsha_mode)
         
         # 4. Check sincerity
         self.sincerity = self._check_sincerity()
@@ -86,12 +94,17 @@ class PrasnaChart:
             (ref_sign + 9) % 12
         ]
         
+        # Mercury combustion limit is 14 degrees for the Sincerity check
+        merc_sun_diff = abs(self.planets["Mercury"]["longitude"] - self.planets["Sun"]["longitude"]) % 360
+        if merc_sun_diff > 180:
+            merc_sun_diff = 360 - merc_sun_diff
+        merc_combust_sincerity = merc_sun_diff <= 14.0
+        
         # Rule a: Moon conjoining reference sign, Saturn in a quadrant, Mercury combust
         moon_in_lagna = get_sign(self.planets["Moon"]["longitude"]) == ref_sign
         sat_in_quadrant = get_sign(self.planets["Saturn"]["longitude"]) in quadrants
-        merc_combust = abs(self.planets["Mercury"]["longitude"] - self.planets["Sun"]["longitude"]) % 360 <= 8.0
         
-        if moon_in_lagna and sat_in_quadrant and merc_combust:
+        if moon_in_lagna and sat_in_quadrant and merc_combust_sincerity:
             reasons_insincere.append("Moon conjoins reference sign, Saturn in quadrant, and Mercury combust.")
             
         # Rule b: Mars and Mercury aspect Moon conjoining reference sign
@@ -102,18 +115,18 @@ class PrasnaChart:
             
         # Rule c: Malefic conjoins reference sign (without benefic aspect)
         malefics_in_lagna = []
-        for p in ["Sun", "Mars", "Saturn"]:
+        for p in ["Sun", "Mars", "Saturn", "Rahu", "Ketu"]:
             if get_sign(self.planets[p]["longitude"]) == ref_sign:
                 malefics_in_lagna.append(p)
         if malefics_in_lagna:
             reasons_insincere.append(f"Malefics conjoin reference sign: {', '.join(malefics_in_lagna)}")
             
-        # Rule d: Jupiter or Mercury cast inimical glance on lord of 7th (from reference sign)
+        # Rule d: Jupiter or Mercury cast inimical glance (square/opposition) on lord of 7th
         rel_jup_7 = get_planet_relationship("Jupiter", self.planets["Jupiter"], seventh_lord, self.planets[seventh_lord])
         rel_merc_7 = get_planet_relationship("Mercury", self.planets["Mercury"], seventh_lord, self.planets[seventh_lord])
-        if rel_jup_7 and not rel_jup_7["is_friendly"]:
+        if rel_jup_7 and rel_jup_7["is_friendly"] is False:
             reasons_insincere.append(f"Jupiter casts a hostile aspect on the 7th lord ({seventh_lord}).")
-        if rel_merc_7 and not rel_merc_7["is_friendly"]:
+        if rel_merc_7 and rel_merc_7["is_friendly"] is False:
             reasons_insincere.append(f"Mercury casts a hostile aspect on the 7th lord ({seventh_lord}).")
             
         # Sincere indicators
@@ -122,19 +135,26 @@ class PrasnaChart:
         for p in ["Jupiter", "Venus", "Mercury", "Moon"]:
             if get_sign(self.planets[p]["longitude"]) == ref_sign:
                 # Mercury must not be combust to be benefic
-                if p == "Mercury" and merc_combust:
+                if p == "Mercury" and merc_combust_sincerity:
                     continue
                 benefics_in_lagna.append(p)
         if benefics_in_lagna:
             reasons_sincere.append(f"Benefics conjoin reference sign: {', '.join(benefics_in_lagna)}")
             
         # indicator b: Mars or Full Moon and Jupiter aspect reference sign
-        # Using a simplified aspect on the sign longitude
-        ref_lon = ref_sign * 30.0 + 15.0
-        for p in ["Mars", "Moon", "Jupiter"]:
-            rel = get_planet_relationship(p, self.planets[p], "Lagna", {"longitude": ref_lon, "speed": 0.0})
-            if rel and rel["is_friendly"]:
-                reasons_sincere.append(f"{p} aspects the reference sign favorably.")
+        # A planet aspects/conjoins Lagna if it's not in the 2nd, 6th, 8th, or 12th house relative to Lagna
+        def aspects_or_conjoins_lagna(p_name):
+            p_sign = get_sign(self.planets[p_name]["longitude"])
+            return ((p_sign - ref_sign) % 12) not in [1, 5, 7, 11]
+            
+        is_full_moon = 120.0 <= abs(self.planets["Moon"]["longitude"] - self.planets["Sun"]["longitude"]) % 360 <= 240.0
+        
+        mars_aspects = aspects_or_conjoins_lagna("Mars")
+        jup_aspects = aspects_or_conjoins_lagna("Jupiter")
+        moon_aspects = aspects_or_conjoins_lagna("Moon")
+        
+        if mars_aspects or (is_full_moon and moon_aspects and jup_aspects):
+            reasons_sincere.append("Mars or Full Moon and Jupiter aspect or conjoin Lagna.")
                 
         # indicator c: Jupiter or Mercury throws friendly aspect on lord of 7th (from reference sign)
         if rel_jup_7 and rel_jup_7["is_friendly"]:
@@ -152,7 +172,7 @@ class PrasnaChart:
 
     def _build_narrative(self, ref_sign, ref_point_name, house_num, query_sign,
                           lagnapathi, karyesa, rel, kamboola, nakta, yamaya,
-                          merc_combust, sinc_res):
+                          merc_combust, sinc_res, gairikamboola=None):
         """
         Generates a book-style Prasna Tantra narrative for evaluation["details"].
         Follows the classical analytical flow used in B.V. Raman's Prasna Tantra
@@ -237,7 +257,20 @@ class PrasnaChart:
             )
 
         # ── 4. INTERMEDIARY YOGAS ────────────────────────────────────────────
-        if kamboola:
+        if gairikamboola:
+            afflictions_str = []
+            if gairikamboola["afflictions"]["combust"]:
+                afflictions_str.append("combust")
+            if gairikamboola["afflictions"]["debilitated"]:
+                afflictions_str.append("debilitated in Scorpio")
+            if gairikamboola["afflictions"]["malefic_aspect"]:
+                afflictions_str.append("aspected/conjoined by Mars/Saturn")
+            details.append(
+                f"[YOGA — Gairikamboola] Gairikamboola Yoga detected (compromised Kamboola). "
+                f"Lagnapathi and Karyesa have Ithasala, and the Moon mediates, but the Moon is afflicted "
+                f"({', '.join(afflictions_str)}), which spoils the connection. [Prasna Tantra Ch. II]"
+            )
+        elif kamboola:
             translator = "Moon"
             details.append(
                 f"[YOGA — Kamboola] Moon ({planet_desc('Moon')}) "
@@ -349,6 +382,18 @@ class PrasnaChart:
         return details
 
     def _get_active_special_category(self, house_num, special_category, query_text):
+        # 1. Check query_text keywords first to override any default categories
+        if query_text:
+            q_lower = query_text.lower()
+            if any(kw in q_lower for kw in ["dream", "dreams", "sleep"]):
+                return "dreams"
+            elif any(kw in q_lower for kw in ["ship", "ships", "voyage", "sea", "ocean", "sail", "vessel", "boat"]):
+                return "ships"
+            elif any(kw in q_lower for kw in ["rumour", "rumours", "rumor", "rumors", "news", "hearsay", "report"]):
+                return "rumours"
+            elif any(kw in q_lower for kw in ["sex", "sexual", "union", "intimacy", "copulation", "passion", "secretion", "prostitute", "adultery"]):
+                return "sexual_matters"
+
         active_cat = special_category
         # Suppress sports default for relationship queries if query_text is provided
         if active_cat == "sports" and query_text:
@@ -370,6 +415,86 @@ class PrasnaChart:
                 if any(kw in query_text.lower() for kw in job_keywords):
                     active_cat = "master_servant"
         return active_cat
+
+    def _get_stronger_mercury_venus(self):
+        """
+        Determines the stronger planet between Mercury and Venus according to a 
+        multi-tiered dignity comparison and standard tie-breakers.
+        Returns:
+            stronger_name: "Mercury" or "Venus"
+            reason: Explanation of the decision for debug/narrative purposes
+        """
+        merc_data = self.planets["Mercury"]
+        ven_data = self.planets["Venus"]
+        merc_lon = merc_data["longitude"]
+        ven_lon = ven_data["longitude"]
+        sun_lon = self.planets["Sun"]["longitude"]
+
+        # 1. Compare Avastha Ranks
+        merc_avastha = get_planetary_avastha("Mercury", merc_lon, merc_data, sun_lon, self.planets)
+        ven_avastha = get_planetary_avastha("Venus", ven_lon, ven_data, sun_lon, self.planets)
+
+        avastha_ranks = {
+            "Deeptha": 9,
+            "Athiveerya": 8,
+            "Suveerya": 7,
+            "Swastha": 6,
+            "Muditha": 5,
+            "Neutral": 4,
+            "Pariheena": 3,
+            "Suptha": 2,
+            "Nipeeditha": 1,
+            "Deena": 0,
+            "Mushita": -1
+        }
+
+        merc_rank = avastha_ranks.get(merc_avastha, 4)
+        ven_rank = avastha_ranks.get(ven_avastha, 4)
+
+        if merc_rank != ven_rank:
+            if merc_rank > ven_rank:
+                return "Mercury", f"Mercury has superior Avastha ({merc_avastha}) compared to Venus ({ven_avastha})"
+            else:
+                return "Venus", f"Venus has superior Avastha ({ven_avastha}) compared to Mercury ({merc_avastha})"
+
+        # 2. Combustion Tie-Breaker
+        merc_combust = check_combustion("Mercury", merc_lon, sun_lon)
+        ven_combust = check_combustion("Venus", ven_lon, sun_lon)
+        if merc_combust != ven_combust:
+            if not merc_combust:
+                return "Mercury", "Mercury is non-combust while Venus is combust"
+            else:
+                return "Venus", "Venus is non-combust while Mercury is combust"
+
+        # 3. Malefic Conjunction / Planetary War Tie-Breaker
+        merc_vanquished = check_nipeeditha("Mercury", merc_lon, self.planets)
+        ven_vanquished = check_nipeeditha("Venus", ven_lon, self.planets)
+        if merc_vanquished != ven_vanquished:
+            if not merc_vanquished:
+                return "Mercury", "Mercury is not conjoined with a malefic while Venus is conjoined"
+            else:
+                return "Venus", "Venus is not conjoined with a malefic while Mercury is conjoined"
+
+        # 4. Retrograde Status Tie-Breaker
+        merc_retro = merc_data.get("is_retrograde", False)
+        ven_retro = ven_data.get("is_retrograde", False)
+        if merc_retro != ven_retro:
+            if not merc_retro:
+                return "Mercury", "Mercury is direct while Venus is retrograde"
+            else:
+                return "Venus", "Venus is direct while Mercury is retrograde"
+
+        # 5. Motional Speed Tie-Breaker (faster absolute speed > slower)
+        merc_speed = abs(merc_data.get("speed", 0.0))
+        ven_speed = abs(ven_data.get("speed", 0.0))
+        if not math.isclose(merc_speed, ven_speed, rel_tol=1e-9, abs_tol=1e-9):
+            if merc_speed > ven_speed:
+                return "Mercury", f"Mercury has faster motional speed ({merc_speed:.4f}°/day) than Venus ({ven_speed:.4f}°/day)"
+            else:
+                return "Venus", f"Venus has faster motional speed ({ven_speed:.4f}°/day) than Mercury ({merc_speed:.4f}°/day)"
+
+        # 6. Natural Strength (Naisargika Bala) Tie-Breaker: Venus > Mercury
+        return "Venus", "Venus has greater natural strength (Naisargika Bala) than Mercury"
 
     def evaluate_query(self, house_num, query_num=1, special_category=None, query_text=None):
 
@@ -398,38 +523,9 @@ class PrasnaChart:
             ref_point_name = "Jupiter"
         else:
             # 5th query onwards: stronger between Mercury and Venus
-            merc_lon = self.planets["Mercury"]["longitude"]
-            ven_lon = self.planets["Venus"]["longitude"]
-            merc_sign = get_sign(merc_lon)
-            ven_sign = get_sign(ven_lon)
-            
-            # Simple strength rank based on Avastha
-            merc_avastha = get_planetary_avastha("Mercury", merc_lon, self.planets["Mercury"], self.planets["Sun"]["longitude"], self.planets)
-            ven_avastha = get_planetary_avastha("Venus", ven_lon, self.planets["Venus"], self.planets["Sun"]["longitude"], self.planets)
-            
-            avastha_ranks = {
-                "Deeptha": 9,
-                "Athiveerya": 8,
-                "Suveerya": 7,
-                "Swastha": 6,
-                "Muditha": 5,
-                "Neutral": 4,
-                "Pariheena": 3,
-                "Suptha": 2,
-                "Nipeeditha": 1,
-                "Deena": 0,
-                "Mushita": -1
-            }
-            
-            merc_rank = avastha_ranks.get(merc_avastha, 4)
-            ven_rank = avastha_ranks.get(ven_avastha, 4)
-            
-            if ven_rank >= merc_rank:
-                ref_sign = ven_sign
-                ref_point_name = "Venus (stronger)"
-            else:
-                ref_sign = merc_sign
-                ref_point_name = "Mercury (stronger)"
+            stronger_planet, strength_reason = self._get_stronger_mercury_venus()
+            ref_sign = get_sign(self.planets[stronger_planet]["longitude"])
+            ref_point_name = f"{stronger_planet} (stronger: {strength_reason})"
                 
         lagnapathi = SIGN_LORDS[ref_sign]
         merc_combust = abs(self.planets["Mercury"]["longitude"] - self.planets["Sun"]["longitude"]) % 360 <= 8.0
@@ -484,6 +580,10 @@ class PrasnaChart:
                 elif active_cat == "sports": sp_rules_res = evaluate_sports(self)
                 elif active_cat == "disputes": sp_rules_res = evaluate_disputes(self)
                 elif active_cat == "crops_trade": sp_rules_res = evaluate_crops_trade(self, house_num)
+                elif active_cat == "dreams": sp_rules_res = evaluate_dreams(self)
+                elif active_cat == "ships": sp_rules_res = evaluate_ships(self)
+                elif active_cat == "rumours": sp_rules_res = evaluate_rumours(self)
+                elif active_cat == "sexual_matters": sp_rules_res = evaluate_sexual_matters(self)
                 else: sp_rules_res = None
 
                 if sp_rules_res:
@@ -511,7 +611,10 @@ class PrasnaChart:
         # 3. Check for Yogas
         moon_data = self.planets["Moon"]
         kamboola = detect_kamboola_yoga(lagnapathi, self.planets[lagnapathi], karyesa, self.planets[karyesa], moon_data)
-        if kamboola:
+        gairikamboola = detect_gairikamboola_yoga(lagnapathi, self.planets[lagnapathi], karyesa, self.planets[karyesa], moon_data, self.planets)
+        if gairikamboola:
+            evaluation["yogas"].append({"name": "Gairikamboola Yoga", "details": gairikamboola})
+        elif kamboola:
             evaluation["yogas"].append({"name": "Kamboola Yoga", "details": kamboola})
 
         nakta = detect_nakta_yoga(lagnapathi, self.planets[lagnapathi], karyesa, self.planets[karyesa], self.planets)
@@ -526,7 +629,7 @@ class PrasnaChart:
         evaluation["details"] = self._build_narrative(
             ref_sign, ref_point_name, house_num, query_sign,
             lagnapathi, karyesa, rel, kamboola, nakta, yamaya,
-            merc_combust=merc_combust, sinc_res=sinc_res
+            merc_combust=merc_combust, sinc_res=sinc_res, gairikamboola=gairikamboola
         )
             
         # 4. Calculate Success Score (details narrative already built above)
@@ -544,7 +647,10 @@ class PrasnaChart:
                 score -= 20
 
         # Yoga score additions
-        if kamboola:
+        if gairikamboola:
+            # Gairikamboola spoils the connection
+            score -= 20
+        elif kamboola:
             score += 30
         if nakta:
             score += 20
@@ -846,6 +952,14 @@ class PrasnaChart:
                 sp_rules_res = evaluate_disputes(self)
             elif active_cat == "crops_trade":
                 sp_rules_res = evaluate_crops_trade(self, house_num)
+            elif active_cat == "dreams":
+                sp_rules_res = evaluate_dreams(self)
+            elif active_cat == "ships":
+                sp_rules_res = evaluate_ships(self)
+            elif active_cat == "rumours":
+                sp_rules_res = evaluate_rumours(self)
+            elif active_cat == "sexual_matters":
+                sp_rules_res = evaluate_sexual_matters(self)
             else:
                 sp_rules_res = None
 
@@ -858,7 +972,14 @@ class PrasnaChart:
         evaluation["score_pct"] = score
 
         # ── Classical YES / NO / MAYBE verdict (Shatpanchasika Ch. I-II) ──────
-        if rel and rel["is_applying"] and rel["is_friendly"]:
+        if gairikamboola:
+            evaluation["verdict"] = "NO"
+            evaluation["verdict_reason"] = (
+                f"Gairikamboola Yoga detected (compromised Kamboola) — "
+                f"although Lagnapathi and Karyesa have Ithasala, the Moon's severe affliction "
+                f"spoils the connection and prevents success. [Prasna Tantra Ch. II]"
+            )
+        elif rel and rel["is_applying"] and rel["is_friendly"]:
             if score >= 80:
                 evaluation["verdict"] = "YES"
                 evaluation["verdict_reason"] = (

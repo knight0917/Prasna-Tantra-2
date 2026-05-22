@@ -31,12 +31,14 @@ def parse_coord(coord_str):
             return sign * (abs(deg) + min_part/60.0 + sec_part/3600.0)
         return 0.0
 
-def get_ayanamsha(jd):
+def get_ayanamsha(jd, ayanamsha_mode="Lahiri"):
     """
-    Calculates the Lahiri Ayanamsha using the Swiss Ephemeris library.
-    We set the sidereal mode to Traditional Lahiri (SIDM_LAHIRI_1940).
+    Calculates the Ayanamsha using the Swiss Ephemeris library based on mode.
     """
-    swe.set_sid_mode(swe.SIDM_LAHIRI_1940, 0.0, 0.0)
+    if ayanamsha_mode.lower() == "raman":
+        swe.set_sid_mode(swe.SIDM_RAMAN, 0.0, 0.0)
+    else:
+        swe.set_sid_mode(swe.SIDM_LAHIRI_1940, 0.0, 0.0)
     return swe.get_ayanamsa_ut(jd)
 
 def get_nakshatra_pada(longitude):
@@ -49,7 +51,7 @@ def get_nakshatra_pada(longitude):
     nakshatra_idx = max(0, min(26, nakshatra_idx))
     return NAKSHATRAS[nakshatra_idx], pada_num, NAKSHATRAS_ABBR[nakshatra_idx]
 
-def calculate_lagna(utc_datetime_str, lat_str, lon_str):
+def calculate_lagna(utc_datetime_str, lat_str, lon_str, ayanamsha_mode="Lahiri"):
     """
     Calculates the tropical and sidereal Lagna (Ascendant) using Swiss Ephemeris houses.
     """
@@ -59,8 +61,11 @@ def calculate_lagna(utc_datetime_str, lat_str, lon_str):
     lat_deg = parse_coord(lat_str)
     lon_deg = parse_coord(lon_str)
     
-    # Set traditional Lahiri mode
-    swe.set_sid_mode(swe.SIDM_LAHIRI_1940, 0.0, 0.0)
+    # Set sidereal mode based on ayanamsha_mode
+    if ayanamsha_mode.lower() == "raman":
+        swe.set_sid_mode(swe.SIDM_RAMAN, 0.0, 0.0)
+    else:
+        swe.set_sid_mode(swe.SIDM_LAHIRI_1940, 0.0, 0.0)
     ayanamsha = swe.get_ayanamsa_ut(jd)
     
     # Calculate houses (Whole Sign system 'W')
@@ -78,7 +83,7 @@ def calculate_lagna(utc_datetime_str, lat_str, lon_str):
         "lst": lst_deg
     }
 
-def get_planetary_positions(utc_datetime_str, ayanamsha):
+def get_planetary_positions(utc_datetime_str, ayanamsha, ayanamsha_mode="Lahiri"):
     """
     Calculates high-precision geocentric sidereal positions of planets and Moon's nodes.
     Uses Swiss Ephemeris calc_ut with FLG_SIDEREAL flag.
@@ -86,7 +91,11 @@ def get_planetary_positions(utc_datetime_str, ayanamsha):
     dt = datetime.strptime(utc_datetime_str, "%Y/%m/%d %H:%M:%S")
     jd = swe.julday(dt.year, dt.month, dt.day, dt.hour + dt.minute/60.0 + dt.second/3600.0)
     
-    swe.set_sid_mode(swe.SIDM_LAHIRI_1940, 0.0, 0.0)
+    # Set sidereal mode based on ayanamsha_mode
+    if ayanamsha_mode.lower() == "raman":
+        swe.set_sid_mode(swe.SIDM_RAMAN, 0.0, 0.0)
+    else:
+        swe.set_sid_mode(swe.SIDM_LAHIRI_1940, 0.0, 0.0)
     
     bodies = {
         "Sun": swe.SUN,

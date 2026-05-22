@@ -264,6 +264,44 @@ div[data-testid="stVerticalBlockBorderWrapper"]:has(#input-section-anchor) {
         font-size: 0.88rem !important;
     }
 }
+
+/* Premium Footer Styling */
+.premium-footer {
+    margin-top: 4rem;
+    padding: 2rem 1.5rem;
+    background: rgba(15, 14, 30, 0.45);
+    border-top: 1px solid rgba(129, 140, 248, 0.1);
+    border-radius: 16px;
+    text-align: center;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 -8px 32px 0 rgba(0, 0, 0, 0.2);
+}
+.premium-footer-title {
+    font-size: 0.95rem;
+    color: #9ca3af;
+    margin-bottom: 0.75rem;
+    letter-spacing: 1px;
+}
+.premium-footer-message {
+    font-size: 1rem;
+    color: #cbd5e1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+.premium-footer-email {
+    color: #818cf8;
+    text-decoration: none;
+    font-weight: 600;
+    position: relative;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+.premium-footer-email:hover {
+    color: #c084fc;
+    text-shadow: 0 0 8px rgba(192, 132, 252, 0.6);
+}
 </style>
 """, unsafe_allow_html=True)
 
@@ -399,6 +437,8 @@ def generate_kundali_svg(chart):
 # Streamlit Session State Initialization
 if "suggestions" not in st.session_state:
     st.session_state.suggestions = []
+if "ayanamsha_mode" not in st.session_state:
+    st.session_state.ayanamsha_mode = "Lahiri"
 if "latitude" not in st.session_state:
     st.session_state.latitude = "25:35:39"
 if "longitude" not in st.session_state:
@@ -596,6 +636,18 @@ with st.container(border=True):
             st.session_state.longitude = lon_override
             st.session_state.tz_offset = tz_override
 
+        # Ayanamsha Selector
+        ayan_modes = ["Lahiri", "Raman"]
+        ayan_index = ayan_modes.index(st.session_state.ayanamsha_mode) if st.session_state.ayanamsha_mode in ayan_modes else 0
+        selected_ayan = st.selectbox(
+            "Ayanamsha Mode Selection",
+            options=ayan_modes,
+            index=ayan_index,
+            help="Select 'Raman' to match classical B.V. Raman example cases, or 'Lahiri' for standard modern computations."
+        )
+        if selected_ayan != st.session_state.ayanamsha_mode:
+            st.session_state.ayanamsha_mode = selected_ayan
+
     st.markdown("<hr style='margin: 1rem 0; border: 0; border-top: 1px solid rgba(255, 255, 255, 0.1);'>", unsafe_allow_html=True)
     
     col_q, col_opt = st.columns([1.8, 1.2])
@@ -689,7 +741,8 @@ if submit_btn:
                 dt_combined, 
                 str(st.session_state.latitude), 
                 str(st.session_state.longitude), 
-                float(st.session_state.tz_offset)
+                float(st.session_state.tz_offset),
+                ayanamsha_mode=st.session_state.ayanamsha_mode
             )
             
             # 4. Evaluate query parameters
@@ -839,8 +892,55 @@ if st.session_state.chart and st.session_state.evaluation:
     # Display Timing
     st.markdown(f"<div class='timing-highlight'>⏰ <strong>Estimated Timing:</strong> {eval_res.get('timing', 'N/A')}</div>", unsafe_allow_html=True)
 
+    # Calculate and Display Kalapinda Timing Method
+    from prasnatantra.astronomy import parse_coord
+    from prasnatantra.timing import calculate_kalapinda_timing
+
+    lat_val = parse_coord(str(st.session_state.latitude))
+    try:
+        kp = calculate_kalapinda_timing(chart.lagna_sidereal, lat_val)
+        with st.expander("🕰️ Prasna Tantra Kalapinda Timing Method (IV.15-19)", expanded=False):
+            st.markdown(f"""
+            <div style="font-size: 0.95rem; line-height: 1.6;">
+                <strong>Equinoctial Midday Shadow:</strong> <span style='color: #22d3ee; font-weight: bold;'>{kp['equinoctial_shadow']:.2f} gnomons</span> (Latitude: {kp['latitude']:.4f}°)<br>
+                <strong>Ascendant Longitude:</strong> {format_longitude(kp['lagna_longitude'])} (in sign: {get_sign_name(chart.lagna_sign)})<br>
+                <strong>Kalapinda (Ascendant in minutes of arc):</strong> <span style='color: #a855f7; font-weight: bold;'>{kp['kalapinda']}</span><br>
+                
+                <h6 style="margin-top: 0.75rem; margin-bottom: 0.25rem; color: #f472b6;">Step-by-Step Calculation:</h6>
+                <ol style="margin-left: 1rem; padding-left: 0; margin-bottom: 0.75rem;">
+                    <li><strong>First Process (Planetary Signification):</strong> 
+                        Product of Kalapinda & Shadow = <code>{kp['first_process']['product']:.2f}</code>. 
+                        Dividing by 7 gives remainder <code>{kp['first_process']['remainder']}</code>, 
+                        corresponding to <strong>{kp['first_process']['planet']}</strong> (Gunaka: <code>{kp['first_process']['gunaka']}</code>).
+                    </li>
+                    <li><strong>Second Process (Gunaka Multiplier):</strong> 
+                        Product of Kalapinda & Gunaka = <code>{kp['second_process']['product']}</code>. 
+                        Divisor (Sum of Gunakas from Sun to {kp['first_process']['planet']}) = <code>{kp['second_process']['divisor']}</code>. 
+                        Dividing gives remainder Y = <code>{kp['second_process']['remainder_y']}</code>.
+                    </li>
+                    <li><strong>Third Process (Planetary Deductions):</strong> 
+                        Deducting planetary factors sequentially: Y leaves <code>{kp['third_process']['leftover_points']}</code> points with <strong>{kp['third_process']['rising_planet']}</strong> (Gunaka: {kp['third_process']['rising_planet_gunaka']}) as the fructifying planet (Benefic: <code>{kp['third_process']['is_benefic']}</code>).
+                    </li>
+                </ol>
+                
+                <div style="
+                    margin-top: 0.75rem;
+                    padding: 0.75rem;
+                    background: rgba(34, 211, 238, 0.1);
+                    border: 1px solid rgba(34, 211, 238, 0.3);
+                    border-radius: 8px;
+                    text-align: center;
+                ">
+                    <strong>Fructification Time:</strong> <span style='color: #22d3ee; font-size: 1.1rem; font-weight: bold;'>{kp['timing']['value']:.2f} / {kp['third_process']['rising_planet_gunaka']} {kp['timing']['unit']}</span><br>
+                    <span style='color: #9ca3af; font-size: 0.85rem;'>Approx. <strong>{kp['timing']['time_in_days']:.1f} days</strong> from query time</span>
+                </div>
+            </div>
+            """, unsafe_allow_html=True)
+    except Exception as e:
+        st.warning(f"Unable to calculate Kalapinda timing: {str(e)}")
+
     # Coordinates details
-    st.markdown(f"**Ayanamsha:** `{format_longitude(chart.ayanamsha)}` | **Lagna:** `{format_longitude(chart.lagna_sidereal)}` in **{get_sign_name(chart.lagna_sign)}**", unsafe_allow_html=True)
+    st.markdown(f"**Ayanamsha ({chart.ayanamsha_mode}):** `{format_longitude(chart.ayanamsha)}` | **Lagna:** `{format_longitude(chart.lagna_sidereal)}` in **{get_sign_name(chart.lagna_sign)}**", unsafe_allow_html=True)
     st.markdown("<br>", unsafe_allow_html=True)
 
     # Astrological Rationale Details
@@ -1055,14 +1155,55 @@ if st.session_state.chart and st.session_state.evaluation:
         st.markdown("##### Shatpanchasika Chapters I-VII Specific Predictions")
         shat_preds = eval_res.get("shatpanchasika_predictions", [])
         if shat_preds:
-            for p in shat_preds:
-                st.markdown(f"""
-                <div class='glass-card' style='margin-bottom: 0.75rem; padding: 1rem;'>
-                    <strong>Category:</strong> <span style='color: #22d3ee;'>{p.get('category')}</span><br>
-                    <strong>Prediction:</strong> {p.get('prediction')}<br>
-                    <small style='color: #9ca3af;'>Rule Basis: {p.get('rule')}</small>
-                </div>
-                """, unsafe_allow_html=True)
+            # Group predictions: Object identification vs other specific rules
+            obj_id_preds = [p for p in shat_preds if p.get('category') == "Query Object Identification"]
+            other_preds = [p for p in shat_preds if p.get('category') != "Query Object Identification"]
+            
+            if obj_id_preds:
+                st.markdown("<h6>📦 Query Object Identification (Dhatu / Moola / Jeeva)</h6>", unsafe_allow_html=True)
+                
+                # Method A vs Method B
+                method_a_preds = [p for p in obj_id_preds if "Method B" not in p.get('prediction')]
+                method_b_preds = [p for p in obj_id_preds if "Method B" in p.get('prediction')]
+                
+                col_a, col_b = st.columns(2)
+                with col_a:
+                    st.markdown("""
+                    <div style='background: rgba(34, 211, 238, 0.05); border: 1px solid rgba(34, 211, 238, 0.2); border-radius: 12px; padding: 1rem; height: 100%;'>
+                        <strong style='color: #22d3ee;'>Method A (Rising Navamsa Rule)</strong>
+                    """, unsafe_allow_html=True)
+                    if method_a_preds:
+                        for p in method_a_preds:
+                            st.markdown(f"<div style='margin-top: 0.5rem;'>{p.get('prediction')}</div>", unsafe_allow_html=True)
+                            st.markdown(f"<small style='color: #9ca3af;'>Rule Basis: {p.get('rule')}</small>", unsafe_allow_html=True)
+                    else:
+                        st.markdown("<div style='margin-top: 0.5rem; color: #64748b;'>No classification available.</div>", unsafe_allow_html=True)
+                    st.markdown("</div>", unsafe_allow_html=True)
+                    
+                with col_b:
+                    st.markdown("""
+                    <div style='background: rgba(168, 85, 247, 0.05); border: 1px solid rgba(168, 85, 247, 0.2); border-radius: 12px; padding: 1rem; height: 100%;'>
+                        <strong style='color: #a855f7;'>Method B (Navamsa Aspect Rule)</strong>
+                    """, unsafe_allow_html=True)
+                    if method_b_preds:
+                        for p in method_b_preds:
+                            st.markdown(f"<div style='margin-top: 0.5rem;'>{p.get('prediction')}</div>", unsafe_allow_html=True)
+                            st.markdown(f"<small style='color: #9ca3af;'>Rule Basis: {p.get('rule')}</small>", unsafe_allow_html=True)
+                    else:
+                        st.markdown("<div style='margin-top: 0.5rem; color: #64748b;'>No planet aspects its own/another Navamsa in Lagna/5th/9th houses.</div>", unsafe_allow_html=True)
+                    st.markdown("</div>", unsafe_allow_html=True)
+                st.markdown("<br>", unsafe_allow_html=True)
+                
+            if other_preds:
+                st.markdown("<h6>📜 Other Specific Shatpanchasika Predictions</h6>", unsafe_allow_html=True)
+                for p in other_preds:
+                    st.markdown(f"""
+                    <div class='glass-card' style='margin-bottom: 0.75rem; padding: 1rem;'>
+                        <strong>Category:</strong> <span style='color: #22d3ee;'>{p.get('category')}</span><br>
+                        <strong>Prediction:</strong> {p.get('prediction')}<br>
+                        <small style='color: #9ca3af;'>Rule Basis: {p.get('rule')}</small>
+                    </div>
+                    """, unsafe_allow_html=True)
         else:
             st.info("No specific Shatpanchasika rules apply to this house query.")
             
@@ -1134,3 +1275,16 @@ Computes Tajaka Yogas, Sincerity, Lost property direction, Traveler return, and 
 </p>
 </div>
 </div>""", unsafe_allow_html=True)
+
+# Always render the premium footer
+st.markdown("""
+<div class="premium-footer">
+    <div class="premium-footer-title">✦ Prasna Tantra — Vedic Horary Astrology Engine ✦</div>
+    <div class="premium-footer-message">
+        ✉️ <strong>Message Me:</strong> 
+        <a class="premium-footer-email" href="mailto:ankitkusingh@zohomail.eu">
+            ankitkusingh@zohomail.eu
+        </a>
+    </div>
+</div>
+""", unsafe_allow_html=True)

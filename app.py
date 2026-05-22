@@ -60,8 +60,10 @@ def api_chart():
     except ValueError as e:
         return jsonify({"error": f"Invalid date/time format: {e}"}), 400
         
+    ayanamsha_mode = data.get("ayanamsha_mode", "Lahiri")
+        
     try:
-        chart = PrasnaChart(local_dt, lat_str, lon_str, tz_offset)
+        chart = PrasnaChart(local_dt, lat_str, lon_str, tz_offset, ayanamsha_mode=ayanamsha_mode)
         
         # Serialize planet details
         planets_data = {}
@@ -102,6 +104,7 @@ def api_chart():
             "utc_str": chart.utc_str,
             "ayanamsha": chart.ayanamsha,
             "ayanamsha_formatted": format_longitude(chart.ayanamsha),
+            "ayanamsha_mode": chart.ayanamsha_mode,
             "lagna_longitude": chart.lagna_sidereal,
             "lagna_longitude_formatted": format_longitude(chart.lagna_sidereal),
             "lagna_sign": chart.lagna_sign,
@@ -154,9 +157,13 @@ def api_evaluate():
     except ValueError as e:
         return jsonify({"error": f"Invalid date/time format: {e}"}), 400
         
+    ayanamsha_mode = data.get("ayanamsha_mode", "Lahiri")
+        
     try:
-        chart = PrasnaChart(local_dt, lat_str, lon_str, tz_offset)
+        chart = PrasnaChart(local_dt, lat_str, lon_str, tz_offset, ayanamsha_mode=ayanamsha_mode)
         evaluation = chart.evaluate_query(house_num, query_num=query_num, special_category=special_category, query_text=question)
+        # Include ayanamsha_mode in evaluation results for consistency
+        evaluation["ayanamsha_mode"] = ayanamsha_mode
         return jsonify(evaluation)
     except Exception as e:
         return jsonify({"error": f"Evaluation failed: {e}"}), 500

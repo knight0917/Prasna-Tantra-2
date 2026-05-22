@@ -77,12 +77,13 @@ function setupFormListeners() {
         const tz_offset = parseFloat(document.getElementById('tz_offset').value);
         const latitude = document.getElementById('latitude').value;
         const longitude = document.getElementById('longitude').value;
+        const ayanamsha_mode = document.getElementById('ayanamsha_mode').value;
         
         try {
             const res = await fetch('/api/chart', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ date, time, tz_offset, latitude, longitude })
+                body: JSON.stringify({ date, time, tz_offset, latitude, longitude, ayanamsha_mode })
             });
             
             const data = await res.json();
@@ -259,6 +260,7 @@ async function handleEvaluation() {
     const tz_offset = parseFloat(document.getElementById('tz_offset').value);
     const latitude = document.getElementById('latitude').value;
     const longitude = document.getElementById('longitude').value;
+    const ayanamsha_mode = document.getElementById('ayanamsha_mode').value;
     
     let houseNum = 1;
     let queryNum = queryCounter;
@@ -305,7 +307,7 @@ async function handleEvaluation() {
         const evalRes = await fetch('/api/evaluate', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ date, time, tz_offset, latitude, longitude, house_num: houseNum, query_num: queryNum, special_category: specialCategory })
+            body: JSON.stringify({ date, time, tz_offset, latitude, longitude, ayanamsha_mode, house_num: houseNum, query_num: queryNum, special_category: specialCategory, question: question })
         });
         
         const evalData = await evalRes.json();

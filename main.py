@@ -30,7 +30,11 @@ SPECIAL_QUERY_MAP = {
     15: ("Meals & Dietary Queries (Quality of food, tastes, missing meals)", 1, "meals"),
     16: ("Sports & Contests (Querent/Home Team vs. Opponent/Away Team)", 7, "sports"),
     17: ("Disputes & Lawsuits (Querent vs. Defendant, Arbitrator, Final Verdict)", 8, "disputes"),
-    18: ("Crops, Purchase/Sale & Trade (Agriculture yields, price trends, transactions)", 4, "crops_trade")
+    18: ("Crops, Purchase/Sale & Trade (Agriculture yields, price trends, transactions)", 4, "crops_trade"),
+    19: ("Dreams & Sleep (Inauspicious/Vivid, thematic indications)", 8, "dreams"),
+    20: ("Ships & Voyages (Cargo arrival, drowning, transactions)", 8, "ships"),
+    21: ("Truth of Rumours / Reports (Reliability of news)", 3, "rumours"),
+    22: ("Sexual Matters & Union (Timing, partner type, satisfaction)", 7, "sexual_matters")
 }
 
 def format_longitude(deg):
@@ -85,6 +89,13 @@ def run_cli():
     if not lon_input:
         lon_input = default_lon
         
+    # Ayanamsha Mode
+    ayan_input = input("Enter Ayanamsha Mode (Lahiri/Raman) [Default: Lahiri]: ").strip()
+    if not ayan_input:
+        ayan_input = "Lahiri"
+    if ayan_input.lower() not in ["lahiri", "raman"]:
+        ayan_input = "Lahiri"
+        
     # Parse date/time
     try:
         local_dt = datetime.strptime(f"{date_input} {time_input}", "%Y-%m-%d %H:%M:%S")
@@ -93,14 +104,14 @@ def run_cli():
         return
         
     print("\n[Calculating chart...]")
-    chart = PrasnaChart(local_dt, lat_input, lon_input, tz_offset)
+    chart = PrasnaChart(local_dt, lat_input, lon_input, tz_offset, ayanamsha_mode=ayan_input)
     
     # Print General Chart Info
     print_premium_header("Chart Details")
     print(f"Local Time : {chart.local_time.strftime('%Y-%m-%d %H:%M:%S')} (UTC {tz_offset:+.1f}h)")
     print(f"UTC Time   : {chart.utc_str}")
     print(f"Coordinates: Lat {lat_input}, Lon {lon_input}")
-    print(f"Ayanamsha  : {format_longitude(chart.ayanamsha)} (Lahiri)")
+    print(f"Ayanamsha  : {format_longitude(chart.ayanamsha)} ({chart.ayanamsha_mode})")
     lag_nak, lag_pada, lag_abbr = get_nakshatra_pada(chart.lagna_sidereal)
     print(f"Lagna      : {format_longitude(chart.lagna_sidereal)} in {get_sign_name(chart.lagna_sign)} ({lag_nak} - {lag_pada}) (Lagnapathi: {chart.lagnapathi})")
     
