@@ -19,6 +19,7 @@ env/
 
 # Markdown documentation files that shouldn't go to git
 *.md
+!README.md
 
 # Scratch directory
 scratch/
