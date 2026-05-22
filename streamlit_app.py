@@ -283,24 +283,29 @@ div[data-testid="stVerticalBlockBorderWrapper"]:has(#input-section-anchor) {
     margin-bottom: 0.75rem;
     letter-spacing: 1px;
 }
-.premium-footer-message {
-    font-size: 1rem;
-    color: #cbd5e1;
+.premium-footer-button {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
-}
-.premium-footer-email {
+    padding: 0.6rem 1.5rem;
+    background: rgba(129, 140, 248, 0.08);
+    border: 1px solid rgba(129, 140, 248, 0.25);
+    border-radius: 30px;
     color: #818cf8;
     text-decoration: none;
     font-weight: 600;
-    position: relative;
-    transition: color 0.3s ease, text-shadow 0.3s ease;
+    font-size: 0.9rem;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    margin-top: 0.5rem;
 }
-.premium-footer-email:hover {
+.premium-footer-button:hover {
+    background: rgba(168, 85, 247, 0.15);
+    border-color: rgba(168, 85, 247, 0.45);
     color: #c084fc;
-    text-shadow: 0 0 8px rgba(192, 132, 252, 0.6);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(168, 85, 247, 0.3);
 }
 </style>
 """, unsafe_allow_html=True)
@@ -1280,10 +1285,9 @@ Computes Tajaka Yogas, Sincerity, Lost property direction, Traveler return, and 
 st.markdown("""
 <div class="premium-footer">
     <div class="premium-footer-title">✦ Prasna Tantra — Vedic Horary Astrology Engine ✦</div>
-    <div class="premium-footer-message">
-        ✉️ <strong>Message Me:</strong> 
-        <a class="premium-footer-email" href="mailto:ankitkusingh@zohomail.eu">
-            ankitkusingh@zohomail.eu
+    <div style="margin-top: 0.5rem;">
+        <a class="premium-footer-button" href="mailto:ankitkusingh@zohomail.eu">
+            ✉️ Message Me
         </a>
     </div>
 </div>
