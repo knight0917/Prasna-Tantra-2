@@ -17,9 +17,8 @@ venv/
 env/
 .pytest_cache/
 
-# Markdown documentation files that shouldn't go to git
-*.md
-!README.md
+# Allow markdown documentation files
+# (Removed ignore rule for *.md to track docs)
 
 # Scratch directory
 scratch/
