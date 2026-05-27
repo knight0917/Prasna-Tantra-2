@@ -34,7 +34,11 @@ SPECIAL_QUERY_MAP = {
     19: ("Dreams & Sleep (Inauspicious/Vivid, thematic indications)", 8, "dreams"),
     20: ("Ships & Voyages (Cargo arrival, drowning, transactions)", 8, "ships"),
     21: ("Truth of Rumours / Reports (Reliability of news)", 3, "rumours"),
-    22: ("Sexual Matters & Union (Timing, partner type, satisfaction)", 7, "sexual_matters")
+    22: ("Sexual Matters & Union (Timing, partner type, satisfaction)", 7, "sexual_matters"),
+    23: ("Hunting / Expedition Outcome (success, danger, catch quality)", 6, "hunting"),
+    24: ("Incarceration / Captivity / Release Prospects", 12, "incarceration"),
+    25: ("Women Enquiry (communication, receptivity, emotional climate)", 7, "women_enquiry"),
+    26: ("Purchase / Sale Transactions (buy/sell outlook and net gain)", 4, "purchase_sale")
 }
 
 def format_longitude(deg):

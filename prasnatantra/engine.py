@@ -10,7 +10,11 @@ from .special_rules import (
     evaluate_sports,
     evaluate_disputes,
     evaluate_crops_trade,
+    evaluate_purchase_sale,
+    evaluate_women_enquiry,
     evaluate_dreams,
+    evaluate_hunting,
+    evaluate_incarceration,
     evaluate_ships,
     evaluate_rumours,
     evaluate_sexual_matters
@@ -162,10 +166,20 @@ class PrasnaChart:
         if rel_merc_7 and rel_merc_7["is_friendly"]:
             reasons_sincere.append(f"Mercury throws a friendly aspect on the 7th lord ({seventh_lord}).")
             
-        is_sincere = len(reasons_insincere) <= len(reasons_sincere)
-        
+        # Final sincerity decision:
+        # keep classical insincerity signals, but avoid over-triggering invalidation
+        # when mixed sincere and insincere indications coexist.
+        ins_count = len(reasons_insincere)
+        sin_count = len(reasons_sincere)
+        ins_minus_sin = ins_count - sin_count
+        is_sincere = not (
+            (ins_count >= 2 and sin_count == 0) or
+            (ins_count >= 3 and ins_minus_sin >= 2)
+        )
+
         return {
             "is_sincere": is_sincere,
+            "insincere_score": ins_minus_sin,
             "reasons_insincere": reasons_insincere,
             "reasons_sincere": reasons_sincere
         }
@@ -387,12 +401,20 @@ class PrasnaChart:
             q_lower = query_text.lower()
             if any(kw in q_lower for kw in ["dream", "dreams", "sleep"]):
                 return "dreams"
+            elif any(kw in q_lower for kw in ["hunt", "hunting", "expedition", "game"]):
+                return "hunting"
+            elif any(kw in q_lower for kw in ["incarceration", "incarcerated", "imprison", "imprisoned", "prison", "jail", "custody", "captivity", "detention"]):
+                return "incarceration"
             elif any(kw in q_lower for kw in ["ship", "ships", "voyage", "sea", "ocean", "sail", "vessel", "boat"]):
                 return "ships"
             elif any(kw in q_lower for kw in ["rumour", "rumours", "rumor", "rumors", "news", "hearsay", "report"]):
                 return "rumours"
             elif any(kw in q_lower for kw in ["sex", "sexual", "union", "intimacy", "copulation", "passion", "secretion", "prostitute", "adultery"]):
                 return "sexual_matters"
+            elif any(kw in q_lower for kw in ["woman", "women", "lady", "girl", "female", "her", "wife nature", "enquiry about women"]):
+                return "women_enquiry"
+            elif any(kw in q_lower for kw in ["purchase", "buy", "bought", "sale", "sell", "sold", "transaction", "deal", "acquisition"]):
+                return "purchase_sale"
 
         active_cat = special_category
         # Suppress sports default for relationship queries if query_text is provided
@@ -415,6 +437,55 @@ class PrasnaChart:
                 if any(kw in query_text.lower() for kw in job_keywords):
                     active_cat = "master_servant"
         return active_cat
+
+    def _filter_shatpanchasika_predictions(self, predictions, active_cat, query_text):
+        """
+        Reduce cross-topic overlap noise in broad house-based Shatpanchasika outputs.
+        Keeps predictions focused on the active special category where possible.
+        """
+        if not predictions:
+            return predictions
+
+        category_map = {
+            "disputes": ["dispute", "litigation", "lawsuit", "conflict", "enemy", "arbitr", "judge", "siege", "war"],
+            "ships": ["voyage", "ship", "cargo", "sea", "sail", "merchandise"],
+            "sexual_matters": ["partner", "union", "sexual", "intimacy", "adultery"],
+            "women_enquiry": ["women", "woman", "female", "partner", "union", "emotional"],
+            "purchase_sale": ["purchase", "sale", "gain", "trade", "buyer", "seller", "transaction"],
+            "hunting": ["hunting", "expedition", "catch", "target"],
+            "incarceration": ["captivity", "imprison", "custody", "detention", "release"],
+            "dreams": ["dream", "sleep"],
+            "rumours": ["news", "rumour", "report"],
+        }
+
+        # infer traveler-style context from query text even when special category is not explicit
+        q = (query_text or "").lower()
+        traveler_intent = any(k in q for k in ["return", "abroad", "traveler", "gone away", "alive or dead", "journey"])
+        focus_terms = category_map.get(active_cat, [])
+        if traveler_intent and not focus_terms:
+            focus_terms = ["traveler", "return", "abroad", "enemy", "arrival", "movement"]
+
+        if not focus_terms:
+            return predictions
+
+        filtered = []
+        fallback_general = []
+        for p in predictions:
+            cat = str(p.get("category", "")).lower()
+            pred = str(p.get("prediction", "")).lower()
+            text = f"{cat} {pred}"
+            if any(term in text for term in focus_terms):
+                filtered.append(p)
+            elif "general" in cat:
+                fallback_general.append(p)
+
+        # Keep at least some contextual signal and avoid returning empty list
+        if filtered:
+            # Add at most one general line for context continuity
+            if fallback_general:
+                filtered.append(fallback_general[0])
+            return filtered
+        return predictions
 
     def _get_stronger_mercury_venus(self):
         """
@@ -568,11 +639,13 @@ class PrasnaChart:
             )
 
             sp_res = evaluate_shatpanchasika(self, house_num)
-            evaluation["shatpanchasika_predictions"] = sp_res["predictions"]
+            active_cat = self._get_active_special_category(house_num, special_category, query_text)
+            evaluation["shatpanchasika_predictions"] = self._filter_shatpanchasika_predictions(
+                sp_res["predictions"], active_cat, query_text
+            )
             evaluation["details"].extend(sp_res["details"])
 
             # Incorporate special horary rules (Prasna Tantra Ch. III)
-            active_cat = self._get_active_special_category(house_num, special_category, query_text)
             if active_cat:
                 if active_cat == "deity_curse": sp_rules_res = evaluate_deity_curse(self)
                 elif active_cat == "master_servant": sp_rules_res = evaluate_master_servant(self)
@@ -580,7 +653,11 @@ class PrasnaChart:
                 elif active_cat == "sports": sp_rules_res = evaluate_sports(self)
                 elif active_cat == "disputes": sp_rules_res = evaluate_disputes(self)
                 elif active_cat == "crops_trade": sp_rules_res = evaluate_crops_trade(self, house_num)
+                elif active_cat == "purchase_sale": sp_rules_res = evaluate_purchase_sale(self)
+                elif active_cat == "women_enquiry": sp_rules_res = evaluate_women_enquiry(self)
                 elif active_cat == "dreams": sp_rules_res = evaluate_dreams(self)
+                elif active_cat == "hunting": sp_rules_res = evaluate_hunting(self)
+                elif active_cat == "incarceration": sp_rules_res = evaluate_incarceration(self)
                 elif active_cat == "ships": sp_rules_res = evaluate_ships(self)
                 elif active_cat == "rumours": sp_rules_res = evaluate_rumours(self)
                 elif active_cat == "sexual_matters": sp_rules_res = evaluate_sexual_matters(self)
@@ -602,7 +679,7 @@ class PrasnaChart:
                 evaluation["verdict_reason"] = "Swami Yoga (Lagnapathi = Karyesa) — strongest possible indicator [Shatpanchasika I.3]"
                 evaluation["success_probability"] = "Very High"
                 evaluation["score_pct"] = 100
-            return evaluation
+            return self._enrich_special_evaluations(evaluation, house_num, query_text)
             
         # 2. Check direct relationship
         rel = get_planet_relationship(lagnapathi, self.planets[lagnapathi], karyesa, self.planets[karyesa])
@@ -815,6 +892,10 @@ class PrasnaChart:
             tl_combust = check_combustion(third_lord, third_lord_data["longitude"], sun_lon_val)
             tl_sign = get_sign(third_lord_data["longitude"])
             tl_in_dusthana = tl_sign in [(ref_sign + 5) % 12, (ref_sign + 7) % 12]
+            rel_1_3 = get_planet_relationship(lagnapathi, lagnapathi_data, third_lord, third_lord_data)
+            evaluation["details"].append(
+                f"House 3 Analysis: 3rd lord is {third_lord}; combust={tl_combust}; dusthana(6/8)={tl_in_dusthana}."
+            )
             
             if tl_combust:
                 house_score_adj -= 15
@@ -822,15 +903,29 @@ class PrasnaChart:
             if tl_in_dusthana:
                 house_score_adj -= 10
                 evaluation["details"].append(f"House 3: 3rd Lord ({third_lord}) is in dusthana (6th/8th house) (Obstacles).")
+            if rel_1_3 and rel_1_3["is_applying"] and rel_1_3["is_friendly"]:
+                house_score_adj += 12
+                evaluation["details"].append("House 3: Friendly applying relation between 1st and 3rd lords (success through effort and sibling harmony).")
+            elif rel_1_3 and rel_1_3["is_friendly"] is False:
+                house_score_adj -= 8
+                evaluation["details"].append("House 3: Hostile relation between 1st and 3rd lords (quarrel/separation tendencies with siblings or effort-friction).")
 
         elif house_num == 4:
             occ_4 = occupants_of_house(4)
             occ_7 = occupants_of_house(7)
             benefics_4_7 = [p for p in (occ_4 + occ_7) if p in ["Jupiter", "Venus"] or (p == "Mercury" and not merc_combust)]
+            fourth_lord = SIGN_LORDS[(ref_sign + 3) % 12]
+            rel_1_4 = get_planet_relationship(lagnapathi, lagnapathi_data, fourth_lord, self.planets[fourth_lord])
             
             if benefics_4_7:
                 house_score_adj += 15
                 evaluation["details"].append(f"House 4: Benefics in 4th/7th house: {', '.join(benefics_4_7)} (Favorable for property/vehicles/home).")
+            if rel_1_4 and rel_1_4["is_applying"] and rel_1_4["is_friendly"]:
+                house_score_adj += 10
+                evaluation["details"].append("House 4: Friendly applying relation between 1st and 4th lords (property/home acquisition and domestic harmony).")
+            elif rel_1_4 and rel_1_4["is_friendly"] is False:
+                house_score_adj -= 8
+                evaluation["details"].append("House 4: Hostile tie between 1st and 4th lords (domestic friction, delay in property comfort).")
             
             if get_sign(moon_lon) == (ref_sign + 3) % 12:
                 rel_moon_lagna = get_planet_relationship("Moon", self.planets["Moon"], lagnapathi, lagnapathi_data)
@@ -844,6 +939,9 @@ class PrasnaChart:
             if rel_1_5 and rel_1_5["is_applying"]:
                 house_score_adj += 20
                 evaluation["details"].append("House 5: Applying aspect (Ithasala) between 1st and 5th lords (Favorable for children).")
+            if rel_1_5 and rel_1_5["is_friendly"] is False:
+                house_score_adj -= 10
+                evaluation["details"].append("House 5: Hostile 1st/5th relation may indicate delay, anxiety, or interruptions in childbirth/education.")
             
             fifth_house_sign = (ref_sign + 4) % 12
             fifth_lord_sign = get_sign(self.planets[fifth_lord]["longitude"])
@@ -871,6 +969,32 @@ class PrasnaChart:
             elif not patient_strong and not physician_strong:
                 house_score_adj -= 15
                 evaluation["details"].append("House 6: Both patient and physician lords are weak (Delays/complications in healing).")
+
+            # Expanded disease-nature hints from planet influencing the 6th house/lord
+            sixth_sign = (ref_sign + 5) % 12
+            sixth_lord = SIGN_LORDS[sixth_sign]
+            rel_lord_6 = get_planet_relationship(sixth_lord, self.planets[sixth_lord], lagnapathi, lagnapathi_data)
+            disease_hint_map = {
+                "Sun": "heat/bile, inflammatory, feverish or cardiac strain patterns",
+                "Moon": "fluid/phlegmatic, edema, glandular or psychosomatic fluctuations",
+                "Mars": "acute, injury, bleeding, infection, surgery-prone patterns",
+                "Mercury": "nervous, respiratory, skin/allergy, variable diagnosis patterns",
+                "Jupiter": "metabolic, endocrine, swelling/growth, sugar-lipid tendencies",
+                "Venus": "reproductive, renal/urinary, venous or hormonal imbalance patterns",
+                "Saturn": "chronic, degenerative, obstructive, pain/stiffness long-duration patterns",
+            }
+            disease_hint = disease_hint_map.get(sixth_lord, "mixed disease tendencies")
+            evaluation["details"].append(
+                f"House 6 Diagnosis Hint: 6th lord is {sixth_lord}, suggesting {disease_hint}."
+            )
+            if rel_lord_6 and rel_lord_6["is_applying"] and not rel_lord_6["is_friendly"]:
+                evaluation["details"].append(
+                    "House 6 Diagnosis Hint: Hostile applying tie between 6th lord and Lagnapathi suggests aggravation phase."
+                )
+            elif rel_lord_6 and rel_lord_6["is_applying"] and rel_lord_6["is_friendly"]:
+                evaluation["details"].append(
+                    "House 6 Diagnosis Hint: Friendly applying tie between 6th lord and Lagnapathi supports manageable/treatable progression."
+                )
 
         elif house_num == 7:
             if get_sign(moon_lon) == (ref_sign + 6) % 12:
@@ -929,15 +1053,111 @@ class PrasnaChart:
                 house_score_adj += 15
                 evaluation["details"].append(f"House 12: 12th Lord ({twelfth_lord}) occupies the Ascendant (Power to querent over losses).")
 
+        # Additional explicit rule coverage from remaining stanza set
+        # Stanza 1: Lagnapathi in Lagna + Moon aspecting Lagna -> fulfillment
+        if get_sign(self.planets[lagnapathi]["longitude"]) == ref_sign and aspects_sign(self.planets["Moon"]["longitude"], ref_sign):
+            house_score_adj += 12
+            evaluation["details"].append("Stanza Rule: Lagnapathi occupies Lagna and Moon aspects Lagna -> fulfillment strongly indicated.")
+
+        # Stanza 13 style danger intensification: severe affliction involving 7th, Moon, and 8th axis
+        seventh_sign = (ref_sign + 6) % 12
+        eighth_sign = (ref_sign + 7) % 12
+        sat_aff_7 = aspects_sign(self.planets["Saturn"]["longitude"], seventh_sign) or get_sign(self.planets["Saturn"]["longitude"]) == seventh_sign
+        mars_aff_7 = aspects_sign(self.planets["Mars"]["longitude"], seventh_sign) or get_sign(self.planets["Mars"]["longitude"]) == seventh_sign
+        nodes_aff_7 = (
+            aspects_sign(self.planets["Rahu"]["longitude"], seventh_sign) or get_sign(self.planets["Rahu"]["longitude"]) == seventh_sign or
+            aspects_sign(self.planets["Ketu"]["longitude"], seventh_sign) or get_sign(self.planets["Ketu"]["longitude"]) == seventh_sign
+        )
+        moon_aff_8 = aspects_sign(self.planets["Moon"]["longitude"], eighth_sign) or get_sign(self.planets["Moon"]["longitude"]) == eighth_sign
+        if (sat_aff_7 and mars_aff_7 and nodes_aff_7 and moon_aff_8):
+            house_score_adj -= 18
+            evaluation["details"].append("Stanza Rule: Saturn/Mars/nodal severe 7th-axis affliction with Moon-8th involvement -> danger/intensity increases.")
+
+        # Stanza 31/57: strong 11th-lord favorable connection -> gains / recovery support
+        eleventh_lord = SIGN_LORDS[(ref_sign + 10) % 12]
+        rel_1_11_extra = get_planet_relationship(lagnapathi, self.planets[lagnapathi], eleventh_lord, self.planets[eleventh_lord])
+        eleventh_avastha = get_planetary_avastha(eleventh_lord, self.planets[eleventh_lord]["longitude"], self.planets[eleventh_lord], sun_lon_val, self.planets)
+        if rel_1_11_extra and rel_1_11_extra["is_applying"] and rel_1_11_extra["is_friendly"] and eleventh_avastha in ["Deeptha", "Swastha", "Athiveerya", "Suveerya"]:
+            house_score_adj += 10
+            evaluation["details"].append("Stanza Rule: Strong 11th-lord favorable tie supports gain/recovery/new-position outcomes.")
+
+        # Stanza 35: 1st-3rd favorable link -> success through effort
+        third_lord_extra = SIGN_LORDS[(ref_sign + 2) % 12]
+        rel_1_3_extra = get_planet_relationship(lagnapathi, self.planets[lagnapathi], third_lord_extra, self.planets[third_lord_extra])
+        if rel_1_3_extra and rel_1_3_extra["is_applying"] and rel_1_3_extra["is_friendly"]:
+            house_score_adj += 8
+            evaluation["details"].append("Stanza Rule: Friendly applying 1st-3rd relation -> success through courage/effort.")
+
+        # Stanza 70: weak/afflicted 6th-lord weakens enemies
+        sixth_lord_extra = SIGN_LORDS[(ref_sign + 5) % 12]
+        sixth_avastha = get_planetary_avastha(sixth_lord_extra, self.planets[sixth_lord_extra]["longitude"], self.planets[sixth_lord_extra], sun_lon_val, self.planets)
+        if sixth_avastha in ["Deena", "Mushita", "Nipeeditha", "Suptha"]:
+            house_score_adj += 6
+            evaluation["details"].append("Stanza Rule: 6th-lord weak/afflicted -> enemy strength reduces.")
+
+        # Stanza 72/73/75: marriage-relational nuance on 7th
+        if house_num == 7:
+            sat_on_7 = aspects_sign(self.planets["Saturn"]["longitude"], seventh_sign) or get_sign(self.planets["Saturn"]["longitude"]) == seventh_sign
+            mars_on_7 = aspects_sign(self.planets["Mars"]["longitude"], seventh_sign) or get_sign(self.planets["Mars"]["longitude"]) == seventh_sign
+            if sat_on_7:
+                house_score_adj -= 6
+                evaluation["details"].append("Stanza Rule: Saturn influence on 7th -> delay in marriage/union.")
+            if sat_on_7 and mars_on_7:
+                house_score_adj -= 8
+                evaluation["details"].append("Stanza Rule: Mars+Saturn afflict 7th -> quarrels/friction in relationships.")
+            fifth_lord_extra = SIGN_LORDS[(ref_sign + 4) % 12]
+            seventh_lord_extra = SIGN_LORDS[(ref_sign + 6) % 12]
+            rel_5_7 = get_planet_relationship(fifth_lord_extra, self.planets[fifth_lord_extra], seventh_lord_extra, self.planets[seventh_lord_extra])
+            if rel_5_7 and rel_5_7["is_applying"] and rel_5_7["is_friendly"]:
+                house_score_adj += 8
+                evaluation["details"].append("Stanza Rule: Favorable 5th-7th connection -> emotional attachment/love-marriage support.")
+
+        # Stanza 117/123: 1st-10th career growth vs 10th linked to 8th/12th instability
+        if house_num == 10:
+            tenth_lord_extra = SIGN_LORDS[(ref_sign + 9) % 12]
+            rel_1_10 = get_planet_relationship(lagnapathi, self.planets[lagnapathi], tenth_lord_extra, self.planets[tenth_lord_extra])
+            tenth_sign_extra = get_sign(self.planets[tenth_lord_extra]["longitude"])
+            if rel_1_10 and rel_1_10["is_applying"] and rel_1_10["is_friendly"]:
+                house_score_adj += 10
+                evaluation["details"].append("Stanza Rule: Favorable 1st-10th relation -> career growth and ambition fulfillment.")
+            if tenth_sign_extra in [(ref_sign + 7) % 12, (ref_sign + 11) % 12]:
+                house_score_adj -= 10
+                evaluation["details"].append("Stanza Rule: 10th-lord linked to 8th/12th axis -> profession change/instability signal.")
+
+        # Stanza 142: 12th-lord favorable with 9th/7th -> foreign travel/residence
+        if house_num in [9, 12]:
+            twelfth_lord_extra = SIGN_LORDS[(ref_sign + 11) % 12]
+            ninth_lord_extra = SIGN_LORDS[(ref_sign + 8) % 12]
+            seventh_lord_extra = SIGN_LORDS[(ref_sign + 6) % 12]
+            rel_12_9 = get_planet_relationship(twelfth_lord_extra, self.planets[twelfth_lord_extra], ninth_lord_extra, self.planets[ninth_lord_extra])
+            rel_12_7 = get_planet_relationship(twelfth_lord_extra, self.planets[twelfth_lord_extra], seventh_lord_extra, self.planets[seventh_lord_extra])
+            if (rel_12_9 and rel_12_9["is_applying"] and rel_12_9["is_friendly"]) or (rel_12_7 and rel_12_7["is_applying"] and rel_12_7["is_friendly"]):
+                house_score_adj += 8
+                evaluation["details"].append("Stanza Rule: Favorable 12th-lord tie with 9th/7th -> foreign travel/residence support.")
+
+        # Stanza 118: 4th-lord favorable with 11th-lord -> cultivation/agri-profit
+        if house_num == 4:
+            fourth_lord_extra = SIGN_LORDS[(ref_sign + 3) % 12]
+            eleventh_lord_extra = SIGN_LORDS[(ref_sign + 10) % 12]
+            rel_4_11 = get_planet_relationship(fourth_lord_extra, self.planets[fourth_lord_extra], eleventh_lord_extra, self.planets[eleventh_lord_extra])
+            if rel_4_11 and rel_4_11["is_applying"] and rel_4_11["is_friendly"]:
+                house_score_adj += 8
+                evaluation["details"].append("Stanza Rule: Favorable 4th-11th relation -> profit through cultivation/land output.")
+
         # Incorporate Shatpanchasika rules evaluation
         sp_res = evaluate_shatpanchasika(self, house_num)
-        evaluation["shatpanchasika_predictions"] = sp_res["predictions"]
+        evaluation["shatpanchasika_predictions"] = self._filter_shatpanchasika_predictions(
+            sp_res["predictions"], active_cat=None, query_text=query_text
+        )
         evaluation["details"].extend(sp_res["details"])
         shatpanchasika_adj = sp_res["score_adjustment"]
 
         # Incorporate special horary rules (Prasna Tantra Ch. III)
         special_adj = 0
         active_cat = self._get_active_special_category(house_num, special_category, query_text)
+        evaluation["shatpanchasika_predictions"] = self._filter_shatpanchasika_predictions(
+            evaluation["shatpanchasika_predictions"], active_cat, query_text
+        )
 
         if active_cat:
             if active_cat == "deity_curse":
@@ -952,8 +1172,16 @@ class PrasnaChart:
                 sp_rules_res = evaluate_disputes(self)
             elif active_cat == "crops_trade":
                 sp_rules_res = evaluate_crops_trade(self, house_num)
+            elif active_cat == "purchase_sale":
+                sp_rules_res = evaluate_purchase_sale(self)
+            elif active_cat == "women_enquiry":
+                sp_rules_res = evaluate_women_enquiry(self)
             elif active_cat == "dreams":
                 sp_rules_res = evaluate_dreams(self)
+            elif active_cat == "hunting":
+                sp_rules_res = evaluate_hunting(self)
+            elif active_cat == "incarceration":
+                sp_rules_res = evaluate_incarceration(self)
             elif active_cat == "ships":
                 sp_rules_res = evaluate_ships(self)
             elif active_cat == "rumours":
@@ -1083,6 +1311,33 @@ class PrasnaChart:
             evaluation["score_pct"] = 0
             evaluation["timing"] = "Not determinable — query flagged as insincere/test"
 
+        return self._enrich_special_evaluations(evaluation, house_num, query_text)
+
+    def _enrich_special_evaluations(self, evaluation, house_num, query_text):
+        evaluation["marriage_analysis"] = None
+        evaluation["children_analysis"] = None
+        
+        is_marriage = False
+        is_children = False
+        if query_text:
+            q_lower = query_text.lower()
+            if any(w in q_lower for w in ["marry", "marriage", "wedding", "spouse", "wife", "husband", "partner", "union"]):
+                is_marriage = True
+            if any(w in q_lower for w in ["child", "baby", "son", "daughter", "progeny", "pregnancy", "pregnant", "conceive"]):
+                is_children = True
+                
+        if house_num == 7:
+            is_marriage = True
+        elif house_num == 5:
+            is_children = True
+            
+        if is_marriage:
+            from .marriage import evaluate_marriage_query
+            evaluation["marriage_analysis"] = evaluate_marriage_query(self)
+        if is_children:
+            from .children import evaluate_children_query
+            evaluation["children_analysis"] = evaluate_children_query(self)
+            
         return evaluation
 
     def evaluate_traveler(self):

@@ -122,15 +122,15 @@ def map_question_to_house(question: str) -> dict:
     - House 1 (Lagna): Health, longevity, physical body, general outlook, appearance, past/present/future, start of new ventures.
     - House 2: Wealth, finance, money, profits, family assets, personal possessions.
     - House 3: Brothers, sisters, short journeys, writing, communication, courage, rumors, messages, news.
-    - House 4: Mother, home, real estate, lands, crops, agriculture, vehicles, peace of mind.
+    - House 4: Mother, home, real estate, lands, crops, agriculture, vehicles, peace of mind, purchase/sale of property and transaction base.
     - House 5: Romance, emotional attachment, pre-marital courtship, children, pregnancy, education, intellect, speculation. (Map love/attraction/courtship queries here if the focus is on courtship or emotional bond, but prefer House 7 for committed marriage/union).
-    - House 6: Service, employment under a master, servants, daily jobs, illness, disease recovery, debts, enemies, disputes. (Map career/job changes or employee-employer relations here if focused on service/employment under a master, but prefer House 10 for general career status/promotions).
-    - House 7: Marriage, committed spouse/partner, union, love affairs (committed union), disputes, partnerships, trade, foreign travel/spouse return.
+    - House 6: Service, employment under a master, servants, daily jobs, illness, disease recovery, debts, enemies, disputes, hunting/expedition risk. (Map career/job changes or employee-employer relations here if focused on service/employment under a master, but prefer House 10 for general career status/promotions).
+    - House 7: Marriage, committed spouse/partner, union, love affairs (committed union), enquiry about women/feminine counterpart, disputes, partnerships, trade, foreign travel/spouse return.
     - House 8: Death, danger, longevity, inheritance, hidden secrets, lost wealth.
     - House 9: Religion, pilgrimages, long journeys, father, higher knowledge, good fortune, righteousness.
     - House 10: Career, profession, high-status jobs, business, promotions, status, government, authority.
     - House 11: Realization of desires, financial gains, honors, friendships.
-    - House 12: Expenditure, losses, captivity/imprisonment, release, foreign travel/settlement.
+    - House 12: Expenditure, losses, captivity/imprisonment/detention, release, foreign travel/settlement.
 
     Return your response strictly in JSON format with the following keys:
     {
@@ -150,6 +150,34 @@ def map_question_to_house(question: str) -> dict:
         "temperature": 0.1
     }
     
+    def infer_special_category(question_text: str, house_num: int):
+        q = question_text.lower()
+        if any(k in q for k in ["dream", "sleep"]):
+            return "dreams"
+        if any(k in q for k in ["ship", "voyage", "sea", "boat", "vessel"]):
+            return "ships"
+        if any(k in q for k in ["rumour", "rumor", "news", "hearsay", "report"]):
+            return "rumours"
+        if any(k in q for k in ["sexual", "intimacy", "union", "adultery", "copulation"]):
+            return "sexual_matters"
+        if any(k in q for k in ["hunt", "hunting", "expedition", "game"]):
+            return "hunting"
+        if any(k in q for k in ["prison", "jail", "custody", "incarceration", "detention", "captivity"]):
+            return "incarceration"
+        if any(k in q for k in ["woman", "women", "lady", "female", "her nature"]):
+            return "women_enquiry"
+        if any(k in q for k in ["purchase", "buy", "sale", "sell", "transaction", "acquisition"]):
+            return "purchase_sale"
+        if house_num == 12:
+            return "deity_curse"
+        if house_num == 6:
+            return "master_servant"
+        if house_num == 4:
+            return "crops_trade"
+        if house_num == 8:
+            return "disputes"
+        return None
+
     try:
         res = query_groq(payload)
         content_str = res["choices"][0]["message"]["content"]
@@ -160,17 +188,21 @@ def map_question_to_house(question: str) -> dict:
         if house < 1 or house > 12:
             house = 1
             
+        special_category = infer_special_category(question, house)
         return {
             "house": house,
             "category_name": str(data.get("category_name", "General Outlook")),
-            "explanation": str(data.get("explanation", "Mapped by AI Horary Classifier."))
+            "explanation": str(data.get("explanation", "Mapped by AI Horary Classifier.")),
+            "special_category": special_category
         }
     except Exception as e:
         # Graceful fallback to prevent crashes on invalid LLM responses
+        fallback_house = 1
         return {
-            "house": 1,
+            "house": fallback_house,
             "category_name": "General Outlook",
-            "explanation": f"Fallback to House 1 due to mapping error: {e}"
+            "explanation": f"Fallback to House 1 due to mapping error: {e}",
+            "special_category": infer_special_category(question, fallback_house)
         }
 
 def generate_astrological_reading(question: str, chart_details: dict):

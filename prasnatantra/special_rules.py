@@ -730,6 +730,169 @@ def evaluate_crops_trade(chart, house_num):
         "score_adjustment": score_adj
     }
 
+def evaluate_purchase_sale(chart):
+    """
+    Dedicated purchase/sale query evaluator.
+    Purchase lens: Lagna + 2nd + 11th.
+    Sale lens: 7th + 10th + 11th.
+    """
+    lagna_sign = chart.lagna_sign
+    lagnapathi = chart.lagnapathi
+    second_lord = SIGN_LORDS[(lagna_sign + 1) % 12]
+    seventh_lord = SIGN_LORDS[(lagna_sign + 6) % 12]
+    tenth_lord = SIGN_LORDS[(lagna_sign + 9) % 12]
+    eleventh_lord = SIGN_LORDS[(lagna_sign + 10) % 12]
+    sun_lon = chart.planets["Sun"]["longitude"]
+
+    predictions = []
+    details = []
+    score_adj = 0
+
+    rel_buy = get_planet_relationship(lagnapathi, chart.planets[lagnapathi], second_lord, chart.planets[second_lord])
+    rel_sell = get_planet_relationship(seventh_lord, chart.planets[seventh_lord], tenth_lord, chart.planets[tenth_lord])
+    rel_gain = get_planet_relationship(eleventh_lord, chart.planets[eleventh_lord], lagnapathi, chart.planets[lagnapathi])
+
+    # Purchase
+    if rel_buy and rel_buy["is_applying"] and rel_buy["is_friendly"]:
+        predictions.append({
+            "category": "Purchase Outlook",
+            "prediction": "Purchase is favorable and likely to be value-accretive.",
+            "rule": "Purchase-Sale Special: Friendly applying Lagna/2nd relation"
+        })
+        score_adj += 14
+    elif rel_buy and rel_buy["is_friendly"] is False:
+        predictions.append({
+            "category": "Purchase Outlook",
+            "prediction": "Purchase may cause stress, overpayment, or hidden downside.",
+            "rule": "Purchase-Sale Special: Hostile Lagna/2nd relation"
+        })
+        score_adj -= 10
+    else:
+        predictions.append({
+            "category": "Purchase Outlook",
+            "prediction": "Purchase outcome is mixed; negotiate carefully and verify terms.",
+            "rule": "Purchase-Sale Special: Weak direct Lagna/2nd linkage"
+        })
+
+    # Sale
+    if rel_sell and rel_sell["is_applying"] and rel_sell["is_friendly"]:
+        predictions.append({
+            "category": "Sale Outlook",
+            "prediction": "Sale is likely to close with acceptable terms.",
+            "rule": "Purchase-Sale Special: Friendly applying 7th/10th relation"
+        })
+        score_adj += 14
+    elif rel_sell and rel_sell["is_friendly"] is False:
+        predictions.append({
+            "category": "Sale Outlook",
+            "prediction": "Sale may be delayed, contested, or priced below expectation.",
+            "rule": "Purchase-Sale Special: Hostile 7th/10th relation"
+        })
+        score_adj -= 10
+    else:
+        predictions.append({
+            "category": "Sale Outlook",
+            "prediction": "Sale may happen slowly or after revised expectations.",
+            "rule": "Purchase-Sale Special: Weak direct 7th/10th linkage"
+        })
+
+    # Profitability
+    if rel_gain and rel_gain["is_applying"] and rel_gain["is_friendly"]:
+        predictions.append({
+            "category": "Net Gain",
+            "prediction": "Profitability is supported; gains likely after transaction completion.",
+            "rule": "Purchase-Sale Special: 11th-lord gain link"
+        })
+        score_adj += 10
+    else:
+        predictions.append({
+            "category": "Net Gain",
+            "prediction": "Net gain is uncertain; keep buffers for hidden costs and delays.",
+            "rule": "Purchase-Sale Special: Weak 11th-lord gain link"
+        })
+
+    # Timing hint from 2nd/10th lord condition
+    tenth_avastha = get_planetary_avastha(tenth_lord, chart.planets[tenth_lord]["longitude"], chart.planets[tenth_lord], sun_lon, chart.planets)
+    second_avastha = get_planetary_avastha(second_lord, chart.planets[second_lord]["longitude"], chart.planets[second_lord], sun_lon, chart.planets)
+    details.append(f"Purchase-Sale: 2nd lord state={second_avastha}, 10th lord state={tenth_avastha}.")
+
+    return {
+        "predictions": predictions,
+        "details": details,
+        "score_adjustment": score_adj
+    }
+
+def evaluate_women_enquiry(chart):
+    """
+    Enquiry about women/feminine counterpart.
+    Uses Venus, Moon, 7th house and their ties with Lagna lord.
+    """
+    lagna_sign = chart.lagna_sign
+    lagnapathi = chart.lagnapathi
+    seventh_lord = SIGN_LORDS[(lagna_sign + 6) % 12]
+    sun_lon = chart.planets["Sun"]["longitude"]
+
+    predictions = []
+    details = []
+    score_adj = 0
+
+    rel_1_7 = get_planet_relationship(lagnapathi, chart.planets[lagnapathi], seventh_lord, chart.planets[seventh_lord])
+    rel_1_ven = get_planet_relationship(lagnapathi, chart.planets[lagnapathi], "Venus", chart.planets["Venus"])
+    rel_1_moon = get_planet_relationship(lagnapathi, chart.planets[lagnapathi], "Moon", chart.planets["Moon"])
+
+    ven_avastha = get_planetary_avastha("Venus", chart.planets["Venus"]["longitude"], chart.planets["Venus"], sun_lon, chart.planets)
+    moon_avastha = get_planetary_avastha("Moon", chart.planets["Moon"]["longitude"], chart.planets["Moon"], sun_lon, chart.planets)
+    supportive = {"Deeptha", "Swastha", "Athiveerya", "Suveerya", "Muditha"}
+    difficult = {"Deena", "Mushita", "Nipeeditha"}
+
+    if rel_1_7 and rel_1_7["is_applying"] and rel_1_7["is_friendly"]:
+        predictions.append({
+            "category": "Women Enquiry Outcome",
+            "prediction": "Connection/communication with the woman in question is likely to progress.",
+            "rule": "Women Enquiry: Friendly applying relation between 1st and 7th lords"
+        })
+        score_adj += 16
+    elif rel_1_7 and rel_1_7["is_friendly"] is False:
+        predictions.append({
+            "category": "Women Enquiry Outcome",
+            "prediction": "Emotional friction or misunderstanding is likely unless handled carefully.",
+            "rule": "Women Enquiry: Hostile relation between 1st and 7th lords"
+        })
+        score_adj -= 12
+    else:
+        predictions.append({
+            "category": "Women Enquiry Outcome",
+            "prediction": "Mixed indications; outcome depends on timing and intermediary support.",
+            "rule": "Women Enquiry: Weak direct relation"
+        })
+
+    if ven_avastha in supportive and moon_avastha in supportive:
+        predictions.append({
+            "category": "Emotional Climate",
+            "prediction": "Favorable emotional climate, receptivity and warmth are indicated.",
+            "rule": "Women Enquiry: Venus and Moon strength"
+        })
+        score_adj += 12
+    elif ven_avastha in difficult or moon_avastha in difficult:
+        predictions.append({
+            "category": "Emotional Climate",
+            "prediction": "Emotional volatility, delay, or guarded response is indicated.",
+            "rule": "Women Enquiry: Venus/Moon affliction"
+        })
+        score_adj -= 10
+
+    if rel_1_ven and rel_1_ven["is_applying"] and rel_1_ven["is_friendly"]:
+        details.append("Women Enquiry: Lagnapathi has friendly applying tie with Venus.")
+    if rel_1_moon and rel_1_moon["is_applying"] and rel_1_moon["is_friendly"]:
+        details.append("Women Enquiry: Lagnapathi has friendly applying tie with Moon.")
+    details.append(f"Women Enquiry: Venus={ven_avastha}, Moon={moon_avastha}.")
+
+    return {
+        "predictions": predictions,
+        "details": details,
+        "score_adjustment": score_adj
+    }
+
 def get_navamsa_sign(lon):
     """
     Computes the Navamsa sign for a given longitude (0 to 360 degrees).
@@ -905,6 +1068,170 @@ def evaluate_dreams(chart):
         details.append("Dream quality: Sun and Moon combination indicates a nightmare/bad dream.")
         score_adj -= 15
         
+    return {
+        "predictions": predictions,
+        "details": details,
+        "score_adjustment": score_adj
+    }
+
+def evaluate_hunting(chart):
+    """
+    Evaluates hunting/expedition outcomes (Prasna Tantra special-query cluster).
+    Core heuristics:
+    - Lagna/Lagnapathi = querent/hunter
+    - 7th/7th lord = target/opposition in expedition
+    - Mars/Mercury strength influences quality of catch and execution skill
+    """
+    lagna_sign = chart.lagna_sign
+    lagnapathi = chart.lagnapathi
+    seventh_sign = (lagna_sign + 6) % 12
+    seventh_lord = SIGN_LORDS[seventh_sign]
+    fourth_lord = SIGN_LORDS[(lagna_sign + 3) % 12]
+    tenth_lord = SIGN_LORDS[(lagna_sign + 9) % 12]
+    sun_lon = chart.planets["Sun"]["longitude"]
+
+    predictions = []
+    details = []
+    score_adj = 0
+
+    rel_1_7 = get_planet_relationship(lagnapathi, chart.planets[lagnapathi], seventh_lord, chart.planets[seventh_lord])
+    if rel_1_7 and rel_1_7["is_applying"] and rel_1_7["is_friendly"]:
+        predictions.append({
+            "category": "Hunting Expedition",
+            "prediction": "Favorable expedition: hunter is likely to get a successful catch.",
+            "rule": "Special Questions - Friendly applying relation between Lagna lord and 7th lord"
+        })
+        details.append("Hunting: Lagnapathi and 7th lord are in a friendly applying relation.")
+        score_adj += 20
+    elif rel_1_7 and rel_1_7["is_friendly"] is False:
+        predictions.append({
+            "category": "Hunting Expedition",
+            "prediction": "Difficult expedition: obstacles, poor catch, or wasted effort are likely.",
+            "rule": "Special Questions - Inimical relation between Lagna lord and 7th lord"
+        })
+        details.append("Hunting: Lagnapathi and 7th lord are in hostile relation.")
+        score_adj -= 15
+    else:
+        predictions.append({
+            "category": "Hunting Expedition",
+            "prediction": "Mixed outcome: the expedition may proceed but result remains uncertain.",
+            "rule": "Special Questions - No strong direct relation between Lagna and 7th lords"
+        })
+
+    # Mars + Mercury skill indicators
+    mars_avastha = get_planetary_avastha("Mars", chart.planets["Mars"]["longitude"], chart.planets["Mars"], sun_lon, chart.planets)
+    merc_avastha = get_planetary_avastha("Mercury", chart.planets["Mercury"]["longitude"], chart.planets["Mercury"], sun_lon, chart.planets)
+    strong_states = {"Deeptha", "Swastha", "Athiveerya", "Suveerya"}
+    weak_states = {"Deena", "Mushita", "Nipeeditha"}
+
+    if mars_avastha in strong_states and merc_avastha in strong_states:
+        predictions.append({
+            "category": "Catch Quality",
+            "prediction": "Good execution and better chances of meaningful catch (Mars/Mercury strong).",
+            "rule": "Special Questions - Mars and Mercury strength"
+        })
+        details.append(f"Hunting: Mars={mars_avastha}, Mercury={merc_avastha} (both strong).")
+        score_adj += 12
+    elif mars_avastha in weak_states or merc_avastha in weak_states:
+        predictions.append({
+            "category": "Catch Quality",
+            "prediction": "Expedition may be abandoned or produce little result (Mars/Mercury weakened).",
+            "rule": "Special Questions - Mars/Mercury weakness"
+        })
+        details.append(f"Hunting: Mars={mars_avastha}, Mercury={merc_avastha} (one or both weak).")
+        score_adj -= 10
+
+    # Nature of target based on the sign occupied by 7th-linked target lords
+    target_sign = get_sign(chart.planets[fourth_lord]["longitude"])
+    if get_sign(chart.planets[tenth_lord]["longitude"]) == seventh_sign:
+        target_sign = seventh_sign
+    watery = {3, 7, 11}
+    if target_sign in watery:
+        target_desc = "aquatic or water-linked targets"
+    elif target_sign in {0, 1, 4, 8, 9}:
+        target_desc = "land/forest game"
+    else:
+        target_desc = "birds/smaller fast-moving targets"
+    predictions.append({
+        "category": "Target Nature",
+        "prediction": f"The indicated target type is {target_desc}.",
+        "rule": "Special Questions - 4th/10th/7th target-sign indication"
+    })
+
+    return {
+        "predictions": predictions,
+        "details": details,
+        "score_adjustment": score_adj
+    }
+
+def evaluate_incarceration(chart):
+    """
+    Evaluates incarceration/captivity and release prospects.
+    Uses 12th house, Saturn/Rahu pressure, and Lagna-vs-12th dynamics.
+    """
+    lagna_sign = chart.lagna_sign
+    lagnapathi = chart.lagnapathi
+    twelfth_sign = (lagna_sign + 11) % 12
+    twelfth_lord = SIGN_LORDS[twelfth_sign]
+    sun_lon = chart.planets["Sun"]["longitude"]
+
+    predictions = []
+    details = []
+    score_adj = 0
+
+    # Confinement signals
+    saturn_in_12 = get_sign(chart.planets["Saturn"]["longitude"]) == twelfth_sign
+    rahu_in_12 = get_sign(chart.planets["Rahu"]["longitude"]) == twelfth_sign
+    twelfth_lord_in_8 = get_sign(chart.planets[twelfth_lord]["longitude"]) == (lagna_sign + 7) % 12
+    malefic_pressure = saturn_in_12 or rahu_in_12 or twelfth_lord_in_8
+
+    if malefic_pressure:
+        predictions.append({
+            "category": "Captivity Status",
+            "prediction": "Risk of confinement, legal restriction, or institutional pressure is high.",
+            "rule": "Special Questions - 12th house malefic pressure"
+        })
+        details.append("Incarceration: Saturn/Rahu/8th-link pressure on 12th axis detected.")
+        score_adj -= 20
+    else:
+        predictions.append({
+            "category": "Captivity Status",
+            "prediction": "No strong incarceration signature; severe confinement is less likely.",
+            "rule": "Special Questions - Weak 12th-house confinement pressure"
+        })
+        score_adj += 8
+
+    # Release indicators
+    rel_1_12 = get_planet_relationship(lagnapathi, chart.planets[lagnapathi], twelfth_lord, chart.planets[twelfth_lord])
+    lagnapathi_avastha = get_planetary_avastha(
+        lagnapathi, chart.planets[lagnapathi]["longitude"], chart.planets[lagnapathi], sun_lon, chart.planets
+    )
+    strong_states = {"Deeptha", "Swastha", "Athiveerya", "Suveerya"}
+    weak_states = {"Deena", "Mushita", "Nipeeditha"}
+
+    if rel_1_12 and rel_1_12["is_applying"] and rel_1_12["is_friendly"] and lagnapathi_avastha in strong_states:
+        predictions.append({
+            "category": "Release Prospects",
+            "prediction": "Release/relief is likely and may happen within a manageable time window.",
+            "rule": "Special Questions - Friendly applying 1st/12th relation with strong Lagna lord"
+        })
+        details.append(f"Incarceration: Lagnapathi ({lagnapathi}) is strong ({lagnapathi_avastha}) with applying friendly tie to 12th lord.")
+        score_adj += 18
+    elif lagnapathi_avastha in weak_states:
+        predictions.append({
+            "category": "Release Prospects",
+            "prediction": "Relief may be delayed; confinement stress can feel prolonged.",
+            "rule": "Special Questions - Weak Lagna lord in captivity context"
+        })
+        details.append(f"Incarceration: Lagnapathi is weak ({lagnapathi_avastha}), reducing release momentum.")
+        score_adj -= 10
+    else:
+        predictions.append({
+            "category": "Release Prospects",
+            "prediction": "Partial relief is possible through negotiation, support, or legal procedure.",
+            "rule": "Special Questions - Mixed 1st/12th dynamics"
+        })
+
     return {
         "predictions": predictions,
         "details": details,
@@ -1509,4 +1836,3 @@ def evaluate_sexual_matters(chart):
         "details": details,
         "score_adjustment": score_adj
     }
-

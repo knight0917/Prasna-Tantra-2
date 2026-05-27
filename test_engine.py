@@ -463,6 +463,8 @@ class TestPrasnaTantra(unittest.TestCase):
         ship_pred = [p for p in res["shatpanchasika_predictions"] if p["category"] in ["Voyage Profit", "Voyage Arrival"]]
         self.assertTrue(len(ship_pred) > 0)
         self.assertTrue(any("Voyage:" in d for d in res["details"]))
+        # overlap cleanup: ship-focused query should not be dominated by traveler war/march categories
+        self.assertFalse(any(p["category"] in ["Enemy Arrival", "Fighter Arrival Timing"] for p in res["shatpanchasika_predictions"]))
 
     def test_special_rules_rumours(self):
         # Test rumours category mapping via keyword override
@@ -472,6 +474,12 @@ class TestPrasnaTantra(unittest.TestCase):
         self.assertTrue(len(rumour_pred) > 0)
         self.assertTrue(any("Rumours:" in d for d in res["details"]))
 
+    def test_disputes_context_filtering(self):
+        res = self.chart.evaluate_query(8, special_category="disputes", query_text="Who wins this litigation?")
+        self.assertIn("shatpanchasika_predictions", res)
+        self.assertTrue(any("Dispute" in p["category"] or "Lawsuit" in p["category"] for p in res["shatpanchasika_predictions"]))
+        self.assertFalse(any("Voyage" in p["category"] for p in res["shatpanchasika_predictions"]))
+
     def test_special_rules_sexual_matters(self):
         # Test sexual matters category mapping via keyword override
         res = self.chart.evaluate_query(7, query_text="will we have sexual union?")
@@ -479,6 +487,80 @@ class TestPrasnaTantra(unittest.TestCase):
         sex_pred = [p for p in res["shatpanchasika_predictions"] if p["category"] in ["Partner Indication", "Partner Description", "Union Quality"]]
         self.assertTrue(len(sex_pred) > 0)
         self.assertTrue(any("Sexual:" in d for d in res["details"]))
+
+    def test_special_rules_hunting(self):
+        res = self.chart.evaluate_query(6, query_text="Will the hunting expedition succeed?")
+        self.assertIn("shatpanchasika_predictions", res)
+        hunt_pred = [p for p in res["shatpanchasika_predictions"] if p["category"] in ["Hunting Expedition", "Catch Quality", "Target Nature"]]
+        self.assertTrue(len(hunt_pred) > 0)
+
+    def test_special_rules_incarceration(self):
+        res = self.chart.evaluate_query(12, query_text="Will he be released from prison soon?")
+        self.assertIn("shatpanchasika_predictions", res)
+        prison_pred = [p for p in res["shatpanchasika_predictions"] if p["category"] in ["Captivity Status", "Release Prospects"]]
+        self.assertTrue(len(prison_pred) > 0)
+
+    def test_house6_disease_diagnosis_hint(self):
+        res = self.chart.evaluate_query(6, query_text="What is the nature of this illness?")
+        self.assertTrue(any("House 6 Diagnosis Hint" in d for d in res["details"]))
+
+    def test_house3_additional_rule_detail(self):
+        import copy
+        c = copy.deepcopy(self.chart)
+        # Force a deterministic friendly applying 1st/3rd-lord relation:
+        # Lagna Virgo -> 1st lord Mercury, 3rd lord Mars
+        c.lagna_sign = 5
+        c.lagnapathi = "Mercury"
+        c.planets["Mercury"]["longitude"] = 149.0
+        c.planets["Mercury"]["speed"] = 1.2
+        c.planets["Mars"]["longitude"] = 210.0
+        c.planets["Mars"]["speed"] = 0.5
+        res = c.evaluate_query(3, query_text="How are things with my siblings and efforts?")
+        self.assertTrue(any("House 3 Analysis:" in d for d in res["details"]))
+
+    def test_special_rules_women_enquiry(self):
+        res = self.chart.evaluate_query(7, query_text="What is the response from this woman?")
+        self.assertIn("shatpanchasika_predictions", res)
+        wom_pred = [p for p in res["shatpanchasika_predictions"] if p["category"] in ["Women Enquiry Outcome", "Emotional Climate"]]
+        self.assertTrue(len(wom_pred) > 0)
+        self.assertTrue(any("Women Enquiry:" in d for d in res["details"]))
+
+    def test_special_rules_purchase_sale(self):
+        res = self.chart.evaluate_query(4, query_text="Should I buy now or wait for sale?")
+        self.assertIn("shatpanchasika_predictions", res)
+        ps_pred = [p for p in res["shatpanchasika_predictions"] if p["category"] in ["Purchase Outlook", "Sale Outlook", "Net Gain"]]
+        self.assertTrue(len(ps_pred) > 0)
+        self.assertTrue(any("Purchase-Sale:" in d for d in res["details"]))
+
+    def test_remaining_stanza_rules_career_and_foreign(self):
+        import copy
+        c = copy.deepcopy(self.chart)
+        # Force favorable 1st-10th relation and 12th with 9th relation
+        c.lagna_sign = 5
+        c.lagnapathi = "Mercury"
+        c.planets["Mercury"]["longitude"] = 150.0
+        c.planets["Mercury"]["speed"] = 1.2
+        # 10th lord from Virgo is Mercury itself (strong link by identity)
+        # 12th lord from Virgo is Sun; 9th lord is Venus
+        c.planets["Sun"]["longitude"] = 120.0
+        c.planets["Sun"]["speed"] = 0.98
+        c.planets["Venus"]["longitude"] = 180.0
+        c.planets["Venus"]["speed"] = 0.9
+        r12 = c.evaluate_query(12, query_text="foreign residence")
+        self.assertTrue(any("Stanza Rule:" in d for d in r12["details"]))
+
+    def test_remaining_stanza_rules_marriage_delay_and_quarrel(self):
+        import copy
+        c = copy.deepcopy(self.chart)
+        c.lagna_sign = 5
+        c.lagnapathi = "Mercury"
+        seventh_sign = (c.lagna_sign + 6) % 12
+        # place Saturn and Mars on 7th sign to trigger delay/quarrel rules
+        c.planets["Saturn"]["longitude"] = seventh_sign * 30.0 + 5.0
+        c.planets["Mars"]["longitude"] = seventh_sign * 30.0 + 12.0
+        r7 = c.evaluate_query(7, query_text="marriage delay?")
+        self.assertTrue(any("Saturn influence on 7th" in d for d in r7["details"]))
+        self.assertTrue(any("Mars+Saturn afflict 7th" in d for d in r7["details"]))
 
     def test_shatpanchasika_rule1_kendra_significances(self):
         # Rule 1: Adhyaya I Sloka 2 (Kendra Significances)
@@ -1196,13 +1278,13 @@ class TestLostPropertyRelational(unittest.TestCase):
         dc.lagna_sidereal = 196.5 # Libra
         dc.lagnapathi = "Venus"
         dc.planets = {
-            "Sun": {"longitude": 60.0},
-            "Moon": {"longitude": 100.0}, # Cancer (House 10 from Libra, sign 3)
-            "Mars": {"longitude": 10.0},
-            "Mercury": {"longitude": 70.0},
-            "Jupiter": {"longitude": 200.0},
-            "Venus": {"longitude": 69.87}, # Gemini (House 9)
-            "Saturn": {"longitude": 240.0}
+            "Sun": {"longitude": 60.0, "speed": 1.0},
+            "Moon": {"longitude": 100.0, "speed": 1.0}, # Cancer (House 10 from Libra, sign 3)
+            "Mars": {"longitude": 10.0, "speed": 1.0},
+            "Mercury": {"longitude": 70.0, "speed": 1.0},
+            "Jupiter": {"longitude": 200.0, "speed": 1.0},
+            "Venus": {"longitude": 69.87, "speed": 1.0}, # Gemini (House 9)
+            "Saturn": {"longitude": 240.0, "speed": 1.0}
         }
         
         # Test 1: Swami Yoga overall success propagates to lost recovery verdict
@@ -1223,6 +1305,53 @@ class TestLostPropertyRelational(unittest.TestCase):
         self.assertEqual(res["substance_type"], "Jeeva (Animal / Human / Living / Leather)")
         self.assertIn("YES", res["recovery_verdict"])
         self.assertIn("Swami Yoga", res["recovery_reason"])
+
+class TestPrasnaTantraMarriageAndChildren(unittest.TestCase):
+    def test_marriage_query(self):
+        class DummyChart:
+            pass
+        dc = DummyChart()
+        dc.lagna_sign = 0 # Aries
+        dc.lagna_sidereal = 15.0
+        dc.lagnapathi = "Mars"
+        dc.planets = {
+            "Sun": {"longitude": 10.0, "speed": 1.0},
+            "Moon": {"longitude": 150.0, "speed": 1.0},
+            "Mars": {"longitude": 73.0, "speed": 1.5},  # Gemini, friendly Trine to Venus in Libra (195.0), applying
+            "Mercury": {"longitude": 25.0, "speed": 1.0},
+            "Jupiter": {"longitude": 200.0, "speed": 1.0},
+            "Venus": {"longitude": 195.0, "speed": 1.0}, # Libra (7th house)
+            "Saturn": {"longitude": 220.0, "speed": 1.0}  # Scorpio, does not aspect Libra
+        }
+        
+        from prasnatantra.marriage import evaluate_marriage_query
+        res = evaluate_marriage_query(dc)
+        self.assertIn("YES", res["verdict"])
+        self.assertEqual(res["spouse_influencing_planet"], "Venus")
+        self.assertIn("romantic", res["spouse_personality"].lower())
+        
+    def test_children_query(self):
+        class DummyChart:
+            pass
+        dc = DummyChart()
+        dc.lagna_sign = 0 # Aries
+        dc.lagna_sidereal = 15.0
+        dc.lagnapathi = "Mars"
+        dc.planets = {
+            "Sun": {"longitude": 335.0, "speed": 1.0},    # Pisces, does not aspect Leo
+            "Moon": {"longitude": 150.0, "speed": 1.0},   # Virgo, does not aspect Leo
+            "Mars": {"longitude": 93.0, "speed": 1.5},     # Cancer, does not aspect Leo, friendly Trine to Sun, applying
+            "Mercury": {"longitude": 25.0, "speed": 1.0},   # Aries, aspects Leo
+            "Jupiter": {"longitude": 130.0, "speed": 1.0}, # Leo (5th house), occupies Leo
+            "Venus": {"longitude": 195.0, "speed": 1.0},   # Libra, aspects Leo
+            "Saturn": {"longitude": 275.0, "speed": 1.0}   # Capricorn, does not aspect Leo
+        }
+        
+        from prasnatantra.children import evaluate_children_query
+        res = evaluate_children_query(dc)
+        self.assertIn("YES", res["verdict"])
+        self.assertEqual(res["gender_verdict"], "MALE CHILD (BOY) — Highly probable.")
+        self.assertIn("good health", res["progeny_welfare"].lower())
 
 if __name__ == "__main__":
     unittest.main()

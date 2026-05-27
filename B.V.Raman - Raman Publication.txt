@@ -1,0 +1,4745 @@
+GENERAL INTRODUCTION
+
+Horary astrology is the most important branch of the three divisions of the astrological science, the other two being Jataka (predictive astrology) and Muhurtha (electional astrology). It takes as the basis for predicting future events, the horoscope set for the moment a query is put. Horary has a further advantage over the judicial in the sense that the time of query is known accurately.
+
+In fact the time at which a query is put is the time of birth of the intention or desire in the mind of the querent and hence of great significance. The question must be seriously put if the answer is earnestly desired and if correct results are to be obtained. Any questions posed light-heartedly or with mischievous intention should be dismissed by the astrologer.
+
+Horary astrology is the art of perceiving the relation between the thought as it arises in the mind and the pattern of the heavens at the moment. This gives a clue for forecasting an event. Hence horary astrology is the most practical and useful branch of knowledge.
+
+Prasna Tantra, an English translation of which is herewith presented, is a treatise on horary astrology, written by Neelakanta Daivajna. According to some authorities, it is not an independent treatise, but a part of Neelakanta’s larger work Tajaka Neelakanteeya, being the 3rd or last Tantra or division, the other two being Samgnatantra (preliminaries) and Varshatantra (the annual horoscope).
+
+Whether an independent treatise or a part of a larger work, it has its own uniqueness as dealing clearly and in simple language with important aspects of horary astrology.
+
+There are any number of treatises on this branch of astrology written by ancient masters, such as Chappannaka, Shatpanchasika, Lampaka, Prasnajnana, Prasnahushana, Prasnasindhu, Prasna Chintamani, Bhuvana Deepika, Jinendramala, Krishneeya and Prasna Marga, the last being the most comprehensive and elaborate exposition of Horary.
+
+Prasna Marga has been translated by me into English with elaborate notes and it is expected to be out by the middle of next year.
+
+My choice of Prasna Tantra for translation into English was due to three reasons.
+
+First, it is compact, yet comprehensive.
+
+Second, the treatise is clear and the principles given in its pages are in a large measure applicable to modern conditions.
+
+And third, in my practice most of the predictions made by me essentially based on this book have been remarkably fulfilled.
+
+The author of this book is said to be Neelakanta Daivajna. From his own Tajaka and from other collateral sources, it has been gathered that he came from a family of astrologers. He was the grandson of Chintamani Daivajna, son of Anantha Daivajna and brother of Rama Daivajna and belonged to the Gotra of Gargya.
+
+In the last part of his Varshatantra, Neelakanta records that he composed this book on the eighth day of the bright half of Aswija of Saka Year 1509 which means 1567 A.D.
+
+GENERAL INTRODUCTION (Continued)
+
+Page (x)
+
+While the first two parts (of his larger work), viz., Samgnatantra and Varshatantra have commentaries of one Viswanatha Daivajna, probably written in Saka 1551 (A.D. 1639), no commentaries have been written on the last division which may be said to constitute the independent volume of Prasna Tantra.
+
+In translating the original into English, the main object has been to bring the spirit of the author rather than the letter.
+
+Astrology is a technical subject and in attempting to convey ideas from a highly suggestive and perfect language like Sanskrit into a modern and developed language like English, certain confusion of sense cannot be entirely ruled out. It is not a literal translation I have given.
+
+But it is a liberal rendering, the object being to make accessible to the Indian public who have a limited knowledge in Sanskrit and also to the Western world where, in recent times, interest in the study of Hindu astrology has been growing by leaps and bounds, a system of Horary astrology in which they will find sufficient information of practical utility.
+
+It is for the learned readers to judge how far I have been successful in my humble endeavours.
+
+Prasna Tantra has been divided into four chapters viz., Prasna Vichara (preliminaries), Bhava Prasna (questions bearing on different houses), Visesha Prasna (special questions) and Prakirnakadhyaya (concluding remarks).
+
+The first chapter deals with such details as the utility of Prasna, planetary characteristics and avasthas, planetary natures, and matters to be inquired into from different houses.
+
+The second chapter is quite comprehensive. It gives combinations for judging the outcome of questions bearing on different houses.
+
+Page (xi)
+
+The third chapter deals with specific questions such as the return of a man gone away from home; whether he is alive or dead; whether or not he will return; illness; whether the patient will recover; nature of illness; diagnosis; leaving employment and seeking another job; disputes, litigation, etc.; success and failure; theft and loss of articles; the sex, etc., of the thief; whether the article is lost completely, recoverable and if latter how it could be recovered; children; marriage; dreams; food; hunting; quarrels; incarceration; about ships on sea; purchase and sale; planting of crops, etc.
+
+The fourth chapter covers questions such as gain of money, general outlook, time of gain, thought-reading, enquiry about women, nature of intimacy with women, nature of weather and crops, etc.
+
+The chapter is concluded with some important information on aspects and yogas considered in Tajaka Astrology.
+
+The treatment throughout has been comprehensive. Sometimes there is also a certain jumbling of subjects dealt with.
+
+For instance, while in Chapter II questions bearing on marriage and children are treated, the same subjects are again repeated in Chapter III in greater detail.
+
+On the whole, under the aegis of horary astrology has been covered skilfully leaving to the discretion of the astrologer, how best he could adapt the principles to answer questions even not covered in the book.
+
+The aspects considered in this book are those of the Tajaka system. The principal aspects, to put in simple language, are the sextile (60°), square (90°), opposition (180°), trine (120°) and conjunction (0°).
+
+Page (xii)
+
+An aspect by itself has no orb. But planets have orbs of operation (deepthamsas).
+
+They are:
+
+Sun — 15°
+Moon — 12°
+Mars — 7°
+Mercury — 7°
+Jupiter — 9°
+Venus — 7°
+Saturn — 9°
+
+No mundane aspects are considered.
+
+Though the nature of an aspect and conjunction may be said to depend upon the nature of the planets in aspect, the square and opposition are generally held to be inauspicious while the trine and sextile are held to give rise to auspicious results.
+
+Conjunctions are favourable with benefic planets and evil with malefic planets.
+
+For instance, a conjunction of Saturn and Mars is definitely evil and threatens serious consequences.
+
+A conjunction of Jupiter and Venus is equally good and denotes auspiciousness.
+
+In horary astrology, planets become distinguished as significators.
+
+For instance, the lord of the 3rd is the significator of brothers.
+
+If he happens to be say, Saturn and the ascendant lord is Jupiter and if they are in conjunction, the brother (signified by Jupiter) would be adversely affected if the question relates to mutual relations of the two brothers.
+
+Yogas in Tajaka system arise on the basis of applying exact and separating aspects.
+
+For further details I would refer my readers to my book Varshaphal or The Hindu Progressed Horoscope. It deals fully with the Tajaka system.
+
+As regards the significations of planets while Neelakanta has dealt with them in a fairly exhaustive manner, we can also have recourse to the significations suggested in other authoritative classics such as Prasna Marga and Krishneeya.
+
+
+Page (xiii)
+
+In interpretation of horary charts certain niceties have to be observed.
+
+The lord of the ascendant is always the significator of the querent or his agent though the ascendant and the planets in the ascendant are also important as co-significators.
+
+The signification of the event is the ruler of the house concerned.
+
+For example, the significator of marriage is the lord of the 7th though planets occupying the 7th will also have a role of their own to play.
+
+Matters pertaining to health can be studied from the house but illness is indicated by the 6th house.
+
+Money matters come under the 2nd but lands and immovable property are signified by the 4th house.
+
+Further details about events signified by different houses can be found in the body of the text.
+
+If a querent puts a question, say pertaining to his brother’s wife, then we have to consult the 9th house as it is the 7th from the 3rd house.
+
+Similarly, a stolen article belonging to a friend has reference to the 4th from 11th (friend), i.e., 2nd house.
+
+The closer the Yoga (Ithasala, etc.), the more certain will be the result.
+
+If in a question bearing on marriage, the aspect between the rulers of ascendant and the 7th is a square, the event will no doubt happen but certain obstacles will have to be overcome.
+
+The Moon’s situation always gives a clue to the mind of the querent or his agent.
+
+In order to determine a correct answer, the different shades of evidence have to be carefully weighed and assessed.
+
+The astrologer must get into the root of the question and boldly declare the answer avoiding subjective factors.
+
+All questions should always be related to their appropriate houses and the planets located therein or connected with them.
+
+Page (xiv)
+
+The houses by ownership, etc., should be carefully considered.
+
+Translation of light is another factor considered in this book.
+
+When a planet separates from one that is slower than itself and overtakes another by conjunction or aspect, there is translation of light.
+
+The object of a query will be realised through the help of a person signified by the translating planet.
+
+Thus if in a question bearing on marriage, if Mercury translates the light of the lord of the 7th to the lord of the 1st, the result will turn out favourably through the person indicated by the translating planet if the aspect is good.
+
+If the aspect is evil, then there will be failure or disappointment through the person signified by the translating planet.
+
+As in horoscopy, very often the time-factor is a hard nut to crack in horary astrology too.
+
+The most important part of a question is when the expected result or event will occur.
+
+There are no doubt rules given in texts on horary astrology but most of them are not found to be quite reliable.
+
+It occurs to me that every case must be decided on the nature of the question concerned.
+
+Suppose a question relating to birth of an issue is put when the woman is in advanced stage of pregnancy and at the time of the query, the lords of the ascendant and the significator are 2° apart from each other.
+
+Then we can safely say that the delivery will take place within two weeks and the probable date can be fixed on the basis of transits.
+
+Page (xv)
+
+If a similar distance (conjunction or favourable aspect) is found between the significators, say in respect of a question on marriage, we can decide the time on the basis of the movable, fixed or common nature of the sign the significator is in.
+
+According to the famous work Krishneeya, the number of constellations intervening between the ascendant and the constellation occupied by the significator indicates the number of days, provided the ascendant is in a fixed sign. This is to be doubled or trebled according as the Lagna is a common or movable sign respectively.
+
+Another method given by the same work is as follows:
+
+Multiply the number of signs intervening between the ascendant and the sign held by the significator by 12.
+
+The product represents the number of days, months or years according as the ascendant is a movable, common or fixed sign.
+
+Both the above two methods have not been found quite satisfactory.
+
+A more satisfactory method is to consider the number of degrees between the aspect of the ascendant lord and the significator as representing the number of days, weeks or months according as the ascendant is movable, common or fixed.
+
+The other method which could be used with considerable success is to consider the question chart as Varshaphal chart, calculate the Varshaphal Dasas and then time the result.
+
+This method has a drawback because the timing is to be confined within 12 months.
+
+The reader will do well to adopt the method appealing to him in the light or the practical examples given in this book.
+
+It is generally difficult to judge the time of occurrence with accuracy. But by practice a student of astrology can instinctively feel which method he should adopt and he can generally be successful.
+
+Page (xvi)
+
+Horary astrology is a system of prognostication which demonstrates that in the time at which a query is put lies imbedded seeds of the result.
+
+The astrologer in his interpretations of the horary chart should be assisted by promptings from the great Divine.
+
+The astrologer who practises this branch of astrology has certain moral responsibilities.
+
+If for instance a query is put about the death of an ailing father, the answer should not be readily given.
+
+The astrologer should first of all find out from the chart the motive of the querent — whether the question is prompted by love and affection or by sinister motives such as grabbing the father’s property.
+
+Similarly questions bearing on the character of the wife or husband should not be answered if the motives of the querent are suspect.
+
+Thus the astrologer is under a certain moral responsibility towards society and his art should not be used either for harming others or for creating fear or suffering.
+
+A novice in horary astrology must be very careful in interpreting the Prasna chart.
+
+With my humble capacity I have tried my level best to present an English translation of Prasna Tantra to lucidly as possible and it is for the educated public to judge how far I have been successful in this endeavour.
+
+While placing this translation in the hands of my readers I crave their indulgence for any fault that may have crept in.
+
+If the book should prove instructive and useful to my readers, I shall feel myself rewarded.
+
+Bangalore,
+3-8-1969
+
+— B. V. Raman
+
+CHAPTER I
+USES OF HORARY ASTROLOGY
+
+Stanzas 1 and 2:
+
+According to the opinion of astrologers, all those human beings who will be impelled (by Daiva) wish to know the current good and bad nature of things in their lives.
+
+Once upon a time, even the Lord of the world Brahma approached Vishnu to learn horary astrology.
+
+NOTES
+
+The importance of horary astrology is stressed in the first two stanzas.
+
+Everyone that is impelled by Daiva or an inner urge will become inclined to approach an astrologer to know about his immediate future.
+
+Here “Daiva” is the unknown factor and usually means one’s past Karma.
+
+As a result of one’s past Karma, one gets a urge or inspiration, or the urge to consult an astrologer and horary astrology reveals the future on the basis of the current dispositions of planets.
+
+HOW TO PUT A QUERY?
+
+Stanza 3:
+
+One should approach a learned astrologer of pleasant disposition, early in the morning, with fruits, flowers and money and facing the east and after making due obeisance to the astrologer, put only one question of an auspicious nature.
+
+NOTES
+
+According to tradition the querist, be he a commoner or a prince, should follow a certain procedure before putting questions to an astrologer.
+
+Early morning is considered to be suitable for consultation.
+
+Flowers, fruits, etc., indicate auspiciousness.
+
+An astrologer is a daivajna or decipherer of the intention of God.
+
+Therefore, he is to be approached with a certain reverence and humility.
+
+It is only an astrologer of a “pleasant disposition” that deserves to be consulted.
+
+The above three stanzas are attributed to Varahamihira.
+
+THE TRUE ASTROLOGER
+
+Stanza 4:
+
+The predictions of one well-versed in the ten kinds of calculating planetary longitudes and proficient in astrological lore cannot go wrong.
+
+NOTES
+
+There is no need to explain the different astronomical methods of calculating planetary dispositions as today, the castings are invariably done according to Panchangas or modern ephemerides.
+
+The above sloka is attributed to Utpala, the commentator of Brihat Jataka.
+
+Hence the reference here to the word “Jataka” is taken by some as proficiency in Brihat Jataka.
+
+Stanza 5:
+
+In the hands of men of learning, culture and humility, successful results alone are possible.
+
+NOTES
+
+The Jatakaranava says:
+
+“According to God Siva’s own words, predictions should not be given to persons who are mean, arrogant, atheistic, violent and devoid of decent behaviour.”
+
+ABOUT THE QUERIST
+
+Stanza 1:
+
+Whether the person is sincere or not in putting the question should first be ascertained on the strength of the ascendant.
+
+The astrologer should then study the good and bad aspects of the query and his prediction will be duly inspired.
+
+Stanzas 2 to 4:
+
+The querist’s intention will not be honest if:
+
+(a) the Moon is in the ascendant, Saturn is in a quadrant and Mercury is combust,
+
+(b) Mars and Mercury aspect the Moon in the ascendant,
+
+(c) a malefic joins the ascendant,
+
+(d) Jupiter or Mercury cast an inimical glance on the lord of the 7th.
+
+His intention will be sincere if:
+
+(a) a benefic planet joins the ascendant,
+
+(b) Mars or full Moon and Jupiter aspect the ascendant,
+
+(c) Jupiter or Mercury throws a friendly aspect on the lord of the seventh.
+
+NOTES
+
+The combinations are simple and do not require an explanation.
+
+Astrological practitioners must be well aware of the fact that some persons put questions either for fun or for testing the astrologer and therefore have dishonest intentions.
+
+If the astrologer feels by a study of the chart that the querist is not sincere, he should decline to give any prediction.
+
+No test questions should be entertained.
+
+Mercury according to Tajaka becomes combust if within 14 degrees from the Sun.
+
+The inimical and friendly aspects referred to in stanza 4 are the square and trine respectively.
+
+If Jupiter squares lord of the 7th, it is an inimical aspect.
+
+ANSWERING MORE THAN ONE QUERY
+
+Stanzas 5 and 6:
+
+The first query is to be read from the ascendant, the second from the Moon, the third from the Sun, the fourth from Jupiter and the fifth from the stronger of the planets Mercury or Venus.
+
+It is the dictum of the astrological science that a query has to be answered by a proper assessment of the ascendant.
+
+If only one question is answered, the prediction cannot go wrong.
+
+NOTES
+
+The considered opinion of the author appears to be that at a time only one question has to be tackled if the prediction is to be correct.
+
+When a series of questions are put at a particular moment, they have to be answered thus:
+
+1st question — Ascendant  
+2nd question — Sign occupied by the Moon  
+3rd question — Sign occupied by the Sun  
+4th question — Sign occupied by Jupiter  
+5th question — Sign occupied by Mercury or Venus
+
+In regard to the 5th question, the Rasi held by either Mercury or Venus whichever is stronger should be considered.
+
+In support of his view that only one query should be answered from a horary chart, Neelakanta quotes from Prasna Chintamani according to which after making all the calculations only one query should be answered.
+
+PLANETARY AVASTHAS
+
+Stanza 7:
+
+One should predict by examining the ten planetary states such as Deeptha, etc., and such a prediction will not go wrong.
+
+NOTES
+
+The ten avasthas are:
+
+1. Deeptha — exaltation  
+2. Deena — debilitation  
+3. Muditha — friendly sign  
+4. Swastha — own house  
+5. Supta — inimical house  
+6. Nipiditha — vanquished  
+7. Mushita — combust  
+8. Pariheena — descending towards debility  
+9. Suveerya — ascending towards exaltation  
+10. Athiveerya — excess of benefic vargas
+
+Stanzas 8, 9 and 10:
+
+In a Prasna chart, planets subject to the different avasthas are capable of conferring the following results:
+
+Deeptha — success in the undertaking
+
+Deena — sorrow
+
+Swastha — fame
+
+Muditha — gain of wealth and happiness
+
+Supta — sorrow and fear from enemies
+
+Nipiditha — loss of money
+
+Mushita and Pariheena — failure and loss of money
+
+Suveerya — access to conveyance and gold
+
+Athiveerya — political success and valuable contacts
+
+NOTES
+
+In the above stanzas, the results of planets subject to different avasthas have been given.
+
+In the translation, what is relevant to modern conditions has been retained.
+
+For example, a planet in Suveerya is said to confer elephants (gaja), horses (aswa) and gold (kanaka).
+
+The translation, the word is conveyance, since in modern times it is very rare that elephants and horses are used for locomotion.
+
+The planets can give the ascribed results only when they influence the signification concerned.
+
+If, for instance, a query pertains to illness and the significator happens to be in Suveerya avastha, access to gold cannot be read.
+
+The interpretation must be consistent with the nature of the question.
+
+
+PLANETARY INDICATIONS
+
+Stanza 11:
+
+The Sun signifies east, sattwic nature, royalty, father, Kshatriya caste, heat, blood-red colour, wavering temperament, honey-coloured eyes, phlegm, minerals, courage and thin hair.
+
+Stanza 12:
+
+The Moon signifies phlegm, rainy season, softness, mother, milk (white colour), sattwic nature, living beings, Vaisya caste, swiftness, circular shape, wind and charming eyes.
+
+Stanza 13:
+
+Mars indicates Greeshma (June–July) season, Kshatriya caste, blood-red, south, commander-in-chief, wavering nature, youthfulness, dhatu (minerals), white eyes, cruelty and bilious constitution.
+
+
+PLANETARY INDICATIONS
+
+Stanza 14:
+
+Mercury signifies Sarat season (October–November), bluish hue, tall body, impotence, moola (minerals), hair apparent, ability in writing, north, Sudra caste, a mixture of windy, phlegmatic and bilious natures.
+
+Stanza 15:
+
+Jupiter rules sattwic nature, wealth, cold, phlegmatic constitution, tall body, prime-minister, Brahmins, male sex, midday, north-east and honey-coloured eyes.
+
+Stanza 16:
+
+Venus signifies peace, Brahmin, women subordinates, prime-minister, wavering nature, white colour, south-east, phlegmatic constitution, sour taste and curly hair.
+
+Stanza 17:
+
+Saturn signifies black colour, sinful nature, weakness, old age, impotence, minerals, untouchables, remissness, Sisira season (March–April), wind, cruel nature, west and windy constitution.
+
+Stanza 18:
+
+Rahu signifies dhatu, tuft of hair, vegetables (moola) and events indicated by Saturn, becomes strong in a Kendra from Mercury or the ascendant.
+
+NOTES
+
+The Karakatwas of planets listed here are fairly exhaustive.
+
+They will be highly useful in answering a variety of questions bearing on theft, profession, persons who have run away, sickness, etc.
+
+It is also worth taking into account the significations assigned to planets in other classical astrological works.
+
+In addition to the Karakatwas given above which are fairly exhaustive, the following significations may also be noted:
+
+The Sun — palaces, aristocracy, goldsmiths, medicines, diseases of the heart and eye, pride, independent spirit, humanity and patrimony.
+
+The Moon — agriculture, pearls, women, eyes, royalty, sailors, aquatic plants, female diseases, gout, psychology and abscess.
+
+Mars — fire, incendiaries, sex-urge, fighting spirit, hazards, boasting, quarrels, criminal acts, sedition, rashness, thieving, violence, courage, surgeons and physicians, barbers, chemists, army, fevers, cuts and wounds, injuries, bloody complaints, surgical operations, ulcers, carbuncles, fistula, piles and stone in the kidney or bladder.
+
+Mercury — writing, mathematics, poets, architecture, impotence, wit and humour, accountants and advocates, merchants, trade, eloquence, tale-bearer, scandals, communications, neurosis, idiocy, newspapers, ambassadors, clerks, astrologers, rheumatism, nervous troubles, brain disease, memory defects and dumbness.
+
+Jupiter — Brahmins, Vedic scholars, priests, children, charity, reverence, soldiery, judges, ministers, religious heads and institutions, liver troubles, diabetes, palpitation and flatulence.
+
+Venus — brightness, good manners, artists, music, dancing, love, fashion, cleanliness, affection, virtue and vice, bed-pleasures, hotels, liquor, musicians, embroiderers, wife, perfumes, cow-herds and beauty-shops, venereal complaints and diseases arising from easy and lustful pleasures.
+
+Saturn — manual labour, brick-laying, masonry, restraint, reserved nature, hair, begging, miners, miners, factory-workers, shepherds, wasting disease, jaundice, haemorrhoids, water closets, latrines, sinks and dirty linen.
+
+Rahu and Kethu resemble Saturn and Mars.
+
+
+EVENTS TO KNOW FROM DIFFERENT HOUSES
+
+Stanza 19:
+
+From the first house is to be discovered one’s happiness, longevity, age, caste, health, disposition, nature, sorrow, appearance and complexion.
+
+Stanza 20:
+
+The second house rules pearls, precious stones and minerals and wealth, apparel, work pertaining to horses and roads.
+
+Stanza 21:
+
+The third house rules sisters, brothers, servants and those that perform menial work.
+
+Stanza 22:
+
+The fourth rules tracts of land, places where plants are thrashed, tracts abounding in vegetation, special medicines, treasure-troves and crevices.
+
+Stanza 23:
+
+The fifth house has rulership over pregnancy, issues, wanderings, spells and incantations, arbitration, learning, intelligence and discourses.
+
+Stanza 24:
+
+The sixth house denotes fear from thieves, enemies, fighting, donkeys, diabolical deeds, maternal uncle, fear and obstruction and servants.
+
+Stanza 25:
+
+From the seventh house should be read trade, transactions, disputes, journeys, and wife or husband.
+
+Stanza 26:
+
+The eighth house rules river-crossing, wayside suffering, hills, trouble from enemies, lost property, evil deeds, battles, diseases and clandestine deeds.
+
+Stanza 27:
+
+The ninth house signifies tanks, wells, lakes, water reservoirs, deities, places of worship, maths, vows (penance), pilgrimage and righteousness.
+
+Stanza 28:
+
+Events to be ascertained from the tenth house are Government, authority, meritorious deeds, virtue, position, father, essential things, rainfall and celestial phenomena.
+
+Stanza 29:
+
+The eleventh house signifies elephant and horse-rides, clothes, staple food, gold, daughter and gain of wealth.
+
+Stanza 30:
+
+The twelfth house rules renunciation, enjoyment, disputes, charity, cultivation and institutional expenditure.
+
+NOTES
+
+The significations given to the planets as above differ from the significations suggested in books on Parasari Astrology.
+
+The ninth house is said to rule father but as per stanza 28, the tenth signifies father.
+
+A more elaborate description of significations is to be found in Satyacharya’s Dhruvanadi and the reader will do well to read it.
+
+Whether the significations mentioned by Satyacharya can be made use of in Horary Astrology is a point which can be decided only on the basis of one’s experience.
+
+CHAPTER II
+BHAVA PRASNA
+
+GENERAL ESTIMATE
+
+Stanza 1:
+
+If the lord of the ascendant occupies the ascendant and the Moon aspects it, the object of the query will be fulfilled.
+
+Stanza 2:
+
+If the lord of the ascendant is in a Kendra or Trikona and is associated with or aspected by benefics, success in the matter queried about will result.
+
+Stanza 3:
+
+If the lord of the ascendant is weak, occupies the 6th, 8th or 12th house, and is afflicted by malefics, failure in the undertaking should be predicted.
+
+Stanza 4:
+
+When the Moon is strong and associated with benefics, the object desired will be realised quickly.
+
+If the Moon is weak, waning, afflicted or hemmed between malefics, obstacles, delay or disappointment may occur.
+
+NOTES
+
+The ascendant and its lord are of paramount importance in horary astrology.
+
+The success or failure of the undertaking depends largely upon the strength of the ascendant lord and the Moon.
+
+The Moon acts as an indicator of the mind of the querent and the flow of events.
+
+A strong Moon accelerates results while a weak or afflicted Moon delays or frustrates them.
+
+Stanza 5:
+
+If benefics occupy Kendras and Trikonas while malefics are relegated to unfavourable houses, favourable results may be expected.
+
+Stanza 6:
+
+When the significator of the matter concerned joins or aspects the ascendant lord favourably, the desired object will materialise.
+
+If the aspect is inimical, obstacles and disappointments may arise.
+
+NOTES
+
+In horary astrology, aspects play a major role.
+
+The Tajaka aspects such as sextile, trine, conjunction, square and opposition must be carefully judged.
+
+Friendly aspects help fulfilment while inimical aspects hinder progress.
+
+The closer the aspect between significators, the quicker and more certain the result.
+
+ON THE STRENGTH OF HOUSES
+
+Stanza 7:
+
+A house becomes strong when occupied or aspected by benefics, when its lord is strong, and when free from malefic affliction.
+
+Stanza 8:
+
+A house becomes weak if occupied or aspected by malefics, if its lord is debilitated, combust, defeated or placed in evil houses.
+
+NOTES
+
+The house relevant to the query must be examined thoroughly.
+
+For example:
+
+Marriage — 7th house  
+Children — 5th house  
+Career or profession — 10th house  
+Property — 4th house  
+Disease — 6th house  
+Travel — 9th or 12th house
+
+Even if the ascendant is strong, weakness in the concerned house can obstruct fulfilment.
+
+Likewise, even if difficulties exist, a strong house and significator can eventually produce success after struggle.
+
+EFFECT OF BENEFICS AND MALEFICS
+
+Benefics:
+
+Jupiter, Venus, strong Mercury and waxing Moon generally produce favourable outcomes, prosperity and assistance.
+
+Malefics:
+
+Saturn, Mars, Rahu, Ketu, afflicted Mercury, waning Moon and the Sun (in certain matters) tend to create obstacles, delay, suffering or conflict.
+
+If benefics influence the house concerned and its lord, the matter prospers.
+
+If malefics dominate the matter, struggle, loss or disappointment may arise.
+
+NOTES
+
+Malefics are not always harmful.
+
+For example, Mars can favour disputes, litigation, competition and military matters.
+
+Saturn can favour labour, discipline and work involving endurance.
+
+Thus planets must be judged according to the nature of the query.
+
+
+QUESTIONS RELATING TO THE 1ST HOUSE
+
+Stanza 9:
+
+If the ascendant is occupied or aspected by benefics and its lord is strong, the querent will enjoy health, happiness and success.
+
+Stanza 10:
+
+If the ascendant lord occupies a Kendra or Trikona, unafflicted and endowed with strength, the object in mind of the querent will be fulfilled.
+
+Stanza 11:
+
+If the ascendant or its lord is associated with malefics, debilitated, combust or weak, bodily suffering, anxiety and failure may be predicted.
+
+NOTES
+
+The ascendant represents:
+
+- The querent himself
+- Physical body
+- Health
+- Mental disposition
+- General success or failure
+- Happiness and vitality
+
+The lord of the ascendant is therefore the most important factor in a horary chart.
+
+A strong ascendant lord gives confidence, vitality and success.
+
+A weak ascendant lord indicates fear, confusion, disease or inability to accomplish the object desired.
+
+Stanza 12:
+
+If benefics occupy or aspect the ascendant and the Moon is strong, health improves and disease diminishes.
+
+Stanza 13:
+
+If malefics occupy the ascendant, the sixth or eighth houses and afflict the Moon, illness becomes serious.
+
+Stanza 14:
+
+When the ascendant lord joins benefics and avoids association with the lords of the sixth, eighth or twelfth, recovery should be predicted.
+
+NOTES
+
+In health-related queries, the following should be carefully examined:
+
+1. Ascendant and ascendant lord
+2. Moon
+3. Sixth house (disease)
+4. Eighth house (danger)
+5. Twelfth house (hospitalisation, loss of vitality)
+
+Strong benefic influence generally shows recovery.
+
+Severe affliction by Saturn, Mars, Rahu or Ketu may indicate prolonged illness or complications.
+
+The Moon is especially important because it reflects the condition of the body and mind.
+
+Stanza 15:
+
+If the ascendant lord is strong and associated with benefics, danger passes and longevity is protected.
+
+Stanza 16:
+
+If the ascendant lord is weak, afflicted and connected with the eighth house or its lord, danger, suffering or fear should be judged.
+
+NOTES
+
+Care should be taken before making grave predictions concerning life and death.
+
+The astrologer should weigh all factors carefully.
+
+A single evil indication should never be considered final.
+
+Benefic aspects often protect the querent even in difficult situations.
+
+Stanza 17:
+
+If the lord of the ascendant and the significator of the matter join, aspect each other favourably, or form Ithasala Yoga, success is promised.
+
+If hostile aspects intervene, obstacles or delay may arise.
+
+NOTES
+
+One of the most important rules in horary:
+
+Connection between:
+
+(1) Ascendant lord  
+and  
+(2) Lord/significator of the matter asked about
+
+= determines success.
+
+Example:
+
+Marriage question → 7th lord
+
+Career question → 10th lord
+
+Money question → 2nd or 11th lord
+
+Property question → 4th lord
+
+Childbirth question → 5th lord
+
+If these connect harmoniously, the result is favourable.
+
+
+QUESTIONS RELATING TO THE SECOND HOUSE
+
+Stanza 18:
+
+From the second house should be judged wealth, family, speech, food, precious articles, accumulated money and valuables.
+
+Stanza 19:
+
+If the second house, its lord and significator are strong and associated with benefics, gain of wealth and prosperity should be predicted.
+
+Stanza 20:
+
+If the second lord occupies a Kendra or Trikona and is associated with benefics, the querent gains money and valuable possessions.
+
+NOTES
+
+The second house chiefly governs:
+
+- Wealth
+- Savings
+- Family
+- Speech
+- Food
+- Precious stones
+- Gold, jewellery and valuables
+- Financial stability
+
+The condition of the second lord is highly important in financial questions.
+
+A strong second house gives prosperity and security.
+
+A weak or afflicted second house gives financial anxiety, family disputes or loss of wealth.
+
+
+Stanza 21:
+
+If benefics occupy or aspect the second house, wealth increases and gain may be expected.
+
+Stanza 22:
+
+If malefics occupy or afflict the second house, financial loss, debts or obstacles in obtaining wealth may arise.
+
+Stanza 23:
+
+If the lord of the second joins the eleventh lord or receives benefic influence, increase of money should be expected.
+
+NOTES
+
+The 11th house is the house of gains.
+
+Therefore:
+
+2nd house = accumulated wealth  
+11th house = incoming gains
+
+When the lords of the 2nd and 11th connect favourably, financial gain becomes highly probable.
+
+If afflicted by Saturn, Mars, Rahu or Ketu, the querent may suffer delays, theft, expenses or financial setbacks.
+
+Stanza 24:
+
+If the second lord is strong and receives benefic aspects, lost wealth or articles may be recovered.
+
+Stanza 25:
+
+If the second house and its lord are severely afflicted by malefics, recovery becomes doubtful.
+
+Stanza 26:
+
+If the Moon applies favourably to the significator, the lost article may return quickly.
+
+NOTES
+
+Questions concerning:
+
+- Lost money
+- Jewellery
+- Missing valuables
+- Theft
+
+must be examined from:
+
+1. Second house (wealth)
+2. Fourth house (property)
+3. Seventh house (thief in some contexts)
+4. Eighth house (hidden matters)
+5. Eleventh house (recovery)
+
+A strong Moon often shows recovery.
+
+Affliction by malefics can indicate delay, loss or permanent disappearance.
+
+
+Stanza 27:
+
+If benefics influence the second house, harmony prevails in the family and speech becomes pleasant.
+
+Stanza 28:
+
+If malefics influence the second house, harsh speech, disputes and misunderstandings arise.
+
+NOTES
+
+The second house also governs:
+
+- Family environment
+- Speech and communication
+- Eating habits
+- Moral values
+
+Benefic influence gives polite speech and family peace.
+
+Malefic influence can make one blunt, argumentative or troubled by family matters.
+
+In judging financial matters, the astrologer should examine:
+
+1. Second house
+2. Second lord
+3. Eleventh house (gain)
+4. Eleventh lord
+5. Moon
+6. Relevant significator
+
+If several favourable indications occur together, prosperity is assured.
+
+If mixed influences are present, gain may occur after struggle or delay.
+
+QUESTIONS RELATING TO THE THIRD HOUSE
+
+Stanza 29:
+
+From the third house should be judged brothers, sisters, courage, effort, servants, communications and short journeys.
+
+Stanza 30:
+
+If the third house and its lord are strong and associated with benefics, happiness through brothers and success through effort should be predicted.
+
+Stanza 31:
+
+If the third lord occupies a Kendra or Trikona and receives benefic aspects, brothers prosper and assistance comes from relatives.
+
+NOTES
+
+The third house governs:
+
+- Brothers and sisters
+- Courage
+- Initiative
+- Communication
+- Writing
+- Servants and assistants
+- Efforts and enterprise
+- Short travels
+
+A strong third house gives confidence, boldness and support from siblings.
+
+A weak or afflicted third house may indicate disputes with brothers, lack of confidence or failed efforts.
+
+Stanza 32:
+
+If benefics occupy or aspect the third house, harmony and affection among siblings may be expected.
+
+Stanza 33:
+
+If malefics occupy or afflict the third house, quarrels, separation or suffering through brothers may arise.
+
+Stanza 34:
+
+If the third lord joins benefics, the welfare of brothers is assured.
+
+If afflicted by malefics, brothers may suffer illness, danger or misfortune.
+
+NOTES
+
+Questions about:
+
+- Younger brothers
+- Sisters
+- Relationship with siblings
+- Missing siblings
+- Welfare of relatives
+
+must be judged mainly from:
+
+1. Third house
+2. Third lord
+3. Planets occupying the third
+4. Moon
+5. Relevant significators
+
+Stanza 35:
+
+If the lord of the ascendant connects favourably with the third lord, success through courage and personal effort should be predicted.
+
+Stanza 36:
+
+If the third lord is weak, combust, debilitated or afflicted, efforts may fail or produce only partial success.
+
+NOTES
+
+The third house is called the house of initiative.
+
+Strong third house:
+
+- Confidence
+- Entrepreneurship
+- Determination
+- Success through action
+
+Weak third house:
+
+- Fear
+- Hesitation
+- Laziness
+- Repeated failure despite effort
+
+Mars gives courage and fighting spirit.
+
+Mercury gives communication skills and writing ability.
+
+Saturn may delay success but grants persistence.
+
+Stanza 37:
+
+Benefic influence on the third house indicates successful travel, favourable news and support from associates.
+
+Stanza 38:
+
+Malefic influence may indicate delays, disputes, bad news or obstacles in communication.
+
+NOTES
+
+The third house also governs:
+
+- Letters
+- Communication
+- Messages
+- Documents
+- Nearby movement
+- Business trips
+
+In modern interpretation, this may include:
+
+- Emails
+- Phone communication
+- Media
+- Online messaging
+- Networking
+
+For questions regarding brothers or efforts, examine:
+
+1. Third house
+2. Third lord
+3. Mars (natural significator of courage)
+4. Moon
+5. Relevant house connected to the question
+
+Strong benefic influence promises success.
+
+Malefic domination creates struggle, delay or conflict.
+
+QUESTIONS RELATING TO THE FOURTH HOUSE
+
+Stanza 39:
+
+From the fourth house should be judged lands, houses, conveyances, mother, domestic happiness, hidden treasures and immovable property.
+
+Stanza 40:
+
+If the fourth house and its lord are strong and associated with benefics, happiness through house, property and domestic matters should be predicted.
+
+Stanza 41:
+
+If the fourth lord occupies a Kendra or Trikona and receives benefic influence, gain of property, residence or conveyance may result.
+
+NOTES
+
+The fourth house governs:
+
+- House and residence
+- Land and agriculture
+- Property and real estate
+- Vehicles and conveyances
+- Mother
+- Emotional happiness
+- Domestic comfort
+- Hidden treasures
+- Fixed assets
+
+A strong fourth house gives stability, comfort and prosperity.
+
+A weak or afflicted fourth house causes domestic unrest, property disputes or emotional dissatisfaction.
+
+Stanza 42:
+
+If benefics occupy or aspect the fourth house, gain of land, buildings and prosperity may be expected.
+
+Stanza 43:
+
+If the fourth lord joins benefics and occupies a favourable house, purchase or acquisition of property is indicated.
+
+Stanza 44:
+
+If the fourth house or its lord is afflicted by malefics, disputes over land, obstacles in obtaining property or loss may arise.
+
+NOTES
+
+Property questions should be judged from:
+
+1. Fourth house
+2. Fourth lord
+3. Mars (land/property)
+4. Moon (comfort and residence)
+5. Relevant significators
+
+Strong combinations indicate:
+
+- Buying a house
+- Getting land
+- Property appreciation
+- Peaceful residence
+
+Afflictions indicate:
+
+- Court disputes
+- Delays
+- Construction problems
+- Financial strain
+- Family conflicts regarding property
+
+Stanza 45:
+
+If benefics influence the fourth house and its lord is strong, acquisition of vehicles and comforts may be predicted.
+
+Stanza 46:
+
+If malefics influence the fourth house, troubles concerning conveyances, accidents or expenses may arise.
+
+NOTES
+
+In ancient texts:
+
+Elephants, horses and chariots represented vehicles.
+
+In modern interpretation this includes:
+
+- Cars
+- Motorbikes
+- Trucks
+- Public transport
+- Luxury vehicles
+
+Venus generally signifies comfort and vehicles.
+
+Mars may indicate mechanical troubles or accidents when afflicted.
+
+Stanza 47:
+
+If benefics occupy or aspect the fourth house, happiness through mother and domestic harmony may be expected.
+
+Stanza 48:
+
+If malefics afflict the fourth house, illness to mother, emotional suffering or domestic troubles may occur.
+
+NOTES
+
+Questions concerning mother should examine:
+
+1. Fourth house
+2. Fourth lord
+3. Moon (natural significator of mother)
+4. Condition of benefics and malefics
+
+Strong benefic influence indicates:
+
+- Maternal support
+- Emotional peace
+- Family harmony
+
+Affliction can indicate:
+
+- Illness to mother
+- Separation
+- Emotional stress
+- Family disagreements
+
+Stanza 49:
+
+If the fourth lord is strong and associated with benefics, recovery of hidden objects or gain from buried wealth may occur.
+
+Stanza 50:
+
+If afflicted by malefics, recovery becomes doubtful.
+
+NOTES
+
+In horary, the fourth house is important for:
+
+- Lost household items
+- Hidden valuables
+- Buried objects
+- Real estate documents
+- Missing property within the home
+
+For property-related queries examine:
+
+1. Fourth house
+2. Fourth lord
+3. Moon
+4. Mars
+5. Eleventh house (gain)
+6. Relevant significators
+
+Benefic influence gives success and comfort.
+
+Malefic influence gives delay, disputes or loss.
+
+QUESTIONS RELATING TO THE FIFTH HOUSE
+
+Stanza 51:
+
+From the fifth house should be judged children, pregnancy, intelligence, learning, merit from previous births, mantras and emotional attachments.
+
+Stanza 52:
+
+If the fifth house and its lord are strong and associated with benefics, happiness through children and success in educational matters should be predicted.
+
+Stanza 53:
+
+If the fifth lord occupies a Kendra or Trikona and receives benefic aspects, childbirth, learning and prosperity may result.
+
+NOTES
+
+The fifth house governs:
+
+- Children
+- Pregnancy
+- Love and romance
+- Intelligence
+- Education
+- Creativity
+- Speculation and gambling
+- Mantras and spiritual practices
+- Purva punya (past-life merit)
+
+A strong fifth house gives happiness through children and success in intellectual pursuits.
+
+A weak or afflicted fifth house may indicate delays, worry or disappointment regarding children.
+
+Stanza 54:
+
+If benefics occupy or aspect the fifth house and its lord is strong, childbirth may be predicted.
+
+Stanza 55:
+
+If the fifth lord joins benefics and avoids affliction from malefics, safe delivery and happiness through children are indicated.
+
+Stanza 56:
+
+If the fifth house or its lord is afflicted by malefics, miscarriage, delay in conception or anxiety regarding children may occur.
+
+NOTES
+
+Questions concerning childbirth should examine:
+
+1. Fifth house
+2. Fifth lord
+3. Jupiter (natural significator of children)
+4. Moon
+5. Relevant yogas
+
+Benefic influences suggest:
+
+- Pregnancy
+- Healthy childbirth
+- Joy from children
+
+Malefic afflictions may indicate:
+
+- Delays
+- Miscarriage risks
+- Health concerns
+- Emotional distress
+
+Stanza 57:
+
+If benefics influence the fifth house, children prosper and happiness results.
+
+Stanza 58:
+
+If malefics influence the fifth house, suffering, illness or trouble to children may occur.
+
+NOTES
+
+Questions about children should assess:
+
+- Strength of fifth lord
+- Occupants of fifth house
+- Jupiter
+- Moon
+
+Strong benefic combinations indicate:
+
+- Intelligent children
+- Healthy development
+- Academic success
+
+Malefic influence may indicate:
+
+- Illness
+- Disobedience
+- Delays in education
+- Worry for parents
+
+Stanza 59:
+
+If the fifth lord joins Mercury or Jupiter favourably, success in learning, scriptures and education should be predicted.
+
+Stanza 60:
+
+If afflicted, interruptions in education, confusion or poor concentration may arise.
+
+NOTES
+
+The fifth house governs:
+
+- Education
+- Memory
+- Intelligence
+- Analytical ability
+- Spiritual learning
+- Mantras and sacred knowledge
+
+Mercury supports:
+
+- Logic
+- Communication
+- Writing
+- Academic ability
+
+Jupiter supports:
+
+- Wisdom
+- Higher knowledge
+- Philosophy
+- Spirituality
+
+Stanza 61:
+
+Benefic influence on the fifth house indicates success in affection, romance and emotional happiness.
+
+Stanza 62:
+
+Malefic influence creates disappointment, emotional disturbance or instability in relationships.
+
+NOTES
+
+Modern interpretation of the fifth house includes:
+
+- Romantic relationships
+- Dating
+- Emotional bonding
+- Creative arts
+- Entertainment
+- Investments and speculation
+
+A strong fifth house supports:
+
+- Creativity
+- Love
+- Success in entertainment
+- Good speculation
+
+Affliction may indicate:
+
+- Romantic disappointment
+- Loss through speculation
+- Emotional suffering
+
+
+For questions concerning children or education examine:
+
+1. Fifth house
+2. Fifth lord
+3. Jupiter
+4. Moon
+5. Relevant significators
+
+Benefic influence promises success and happiness.
+
+Malefic affliction causes delay, worry or obstacles.
+
+QUESTIONS RELATING TO THE SIXTH HOUSE
+
+Stanza 63:
+
+From the sixth house should be judged disease, enemies, debts, disputes, obstacles, wounds, servants and fear from opponents.
+
+Stanza 64:
+
+If the sixth house and its lord are strong and afflicted by malefics, enemies become powerful and troubles increase.
+
+Stanza 65:
+
+If benefics influence the sixth house or its lord, enemies are subdued and obstacles are removed.
+
+NOTES
+
+The sixth house governs:
+
+- Disease
+- Enemies
+- Litigation
+- Competition
+- Debts
+- Servants and employees
+- Daily struggle
+- Obstacles
+
+Unlike other houses, malefics can sometimes work favourably in the sixth house because they possess fighting power.
+
+A strong sixth house may help defeat enemies, especially in litigation or competition.
+
+Stanza 66:
+
+If the ascendant lord is strong and benefics influence the sixth house, disease diminishes and recovery should be predicted.
+
+Stanza 67:
+
+If the sixth lord afflicts the ascendant or Moon and joins malefics, disease becomes severe or prolonged.
+
+Stanza 68:
+
+If benefics aspect the ascendant and Moon, relief and cure may occur.
+
+NOTES
+
+For health-related queries examine:
+
+1. Ascendant
+2. Ascendant lord
+3. Sixth house (disease)
+4. Sixth lord
+5. Moon
+6. Eighth house (danger)
+7. Twelfth house (hospitalisation)
+
+Strong benefic combinations indicate:
+
+- Recovery
+- Effective treatment
+- Improvement in health
+
+Malefic affliction may indicate:
+
+- Chronic illness
+- Delay in recovery
+- Surgery
+- Complications
+
+
+Stanza 69:
+
+If malefics occupy the sixth house while the ascendant remains strong, victory over enemies should be predicted.
+
+Stanza 70:
+
+If the sixth lord is weak and afflicted, enemies lose strength.
+
+Stanza 71:
+
+If the sixth lord combines with benefics and the ascendant lord is strong, success in disputes and competition results.
+
+NOTES
+
+The sixth house is highly important for:
+
+- Court cases
+- Competitions
+- Rivalries
+- Job conflicts
+- Business disputes
+
+Mars favours fighting spirit.
+
+Saturn favours endurance and persistence.
+
+Benefics bring peaceful resolution.
+
+Malefics may indicate prolonged conflict but can also give victory when well placed.
+
+Stanza 69:
+
+If malefics occupy the sixth house while the ascendant remains strong, victory over enemies should be predicted.
+
+Stanza 70:
+
+If the sixth lord is weak and afflicted, enemies lose strength.
+
+Stanza 71:
+
+If the sixth lord combines with benefics and the ascendant lord is strong, success in disputes and competition results.
+
+NOTES
+
+The sixth house is highly important for:
+
+- Court cases
+- Competitions
+- Rivalries
+- Job conflicts
+- Business disputes
+
+Mars favours fighting spirit.
+
+Saturn favours endurance and persistence.
+
+Benefics bring peaceful resolution.
+
+Malefics may indicate prolonged conflict but can also give victory when well placed.
+
+Stanza 72:
+
+If the sixth lord is strong and associated with malefics, debts may increase.
+
+Stanza 73:
+
+If benefics influence the sixth house and second house favourably, repayment of debts may occur.
+
+NOTES
+
+For debt-related matters examine:
+
+1. Sixth house (debts)
+2. Second house (wealth)
+3. Eleventh house (income)
+4. Relevant significators
+
+Strong benefic influence indicates:
+
+- Clearing debts
+- Financial recovery
+- Assistance from others
+
+Malefic domination indicates:
+
+- Loans
+- Legal pressure
+- Financial burden
+
+Stanza 74:
+
+If benefics influence the sixth house, servants and employees remain loyal and helpful.
+
+Stanza 75:
+
+If malefics dominate, disputes, betrayal or problems through servants may arise.
+
+NOTES
+
+In modern interpretation, this includes:
+
+- Employees
+- Co-workers
+- Staff
+- Labourers
+- Daily work environment
+
+A strong sixth house may show efficient teamwork.
+
+Affliction can indicate:
+
+- Workplace conflicts
+- Toxic work environment
+- Legal disputes with staff
+
+For sixth house questions examine:
+
+1. Sixth house
+2. Sixth lord
+3. Ascendant and its lord
+4. Moon
+5. Eighth house (severity)
+6. Twelfth house (loss or hospitalisation)
+
+Benefics indicate recovery and resolution.
+
+Malefics indicate struggle, delay and conflict.
+
+However, in competitive matters, strong malefics may actually produce victory.
+
+QUESTIONS RELATING TO THE SEVENTH HOUSE
+
+Stanza 76:
+
+From the seventh house should be judged marriage, wife or husband, sexual union, agreements, partnerships, trade, journeys and dealings with others.
+
+Stanza 77:
+
+If the seventh house and its lord are strong and associated with benefics, marriage, partnerships and agreements become favourable.
+
+Stanza 78:
+
+If the seventh lord occupies a Kendra or Trikona and receives benefic influence, success in marriage and harmony in relationships should be predicted.
+
+NOTES
+
+The seventh house governs:
+
+- Marriage
+- Husband or wife
+- Romantic partnership
+- Sexual relationships
+- Business partnerships
+- Contracts and agreements
+- Trade
+- Foreign dealings
+- Public interactions
+
+A strong seventh house gives harmony, cooperation and favourable unions.
+
+A weak or afflicted seventh house may indicate delay, conflict or disappointment.
+
+Stanza 79:
+
+If benefics occupy or aspect the seventh house, marriage takes place happily.
+
+Stanza 80:
+
+If the lord of the ascendant and the lord of the seventh combine harmoniously, marriage or reunion should be predicted.
+
+Stanza 81:
+
+If the seventh lord is afflicted by malefics, debilitated or combust, delay or difficulty in marriage may arise.
+
+NOTES
+
+Marriage questions should examine:
+
+1. Seventh house
+2. Seventh lord
+3. Venus
+4. Moon
+5. Ascendant lord
+6. Relationship between 1st and 7th lords
+
+Favourable connection between the 1st and 7th lords is one of the strongest signs of marriage or reconciliation.
+
+Malefic affliction may indicate:
+
+- Delay in marriage
+- Misunderstanding
+- Separation
+- Obstacles from family
+- Emotional dissatisfaction
+
+Stanza 82:
+
+If benefics influence the seventh house, affection and mutual understanding prevail between husband and wife.
+
+Stanza 83:
+
+If malefics influence the seventh house, quarrels, mistrust or separation may arise.
+
+NOTES
+
+Benefic influence indicates:
+
+- Harmony
+- Loyalty
+- Emotional closeness
+- Mutual support
+
+Malefic influence may show:
+
+- Frequent arguments
+- Emotional distance
+- Betrayal
+- Temporary separation
+
+Stanza 84:
+
+If benefics influence the seventh house and its lord is strong, partnerships and business dealings succeed.
+
+Stanza 85:
+
+If afflicted by malefics, betrayal, losses or disputes through partners may occur.
+
+NOTES
+
+Modern interpretation includes:
+
+- Business partners
+- Contracts
+- Clients
+- Collaborations
+- Joint ventures
+
+A strong seventh house supports:
+
+- Trustworthy partners
+- Profitable agreements
+- Successful negotiations
+
+Affliction may indicate:
+
+- Fraud
+- Legal conflict
+- Miscommunication
+- Financial losses
+
+Stanza 86:
+
+If the seventh lord joins benefics and connects favourably with the ascendant lord, a person who has gone away may return.
+
+Stanza 87:
+
+If the seventh house suffers affliction and malefics obstruct the significator, delay or non-return may be predicted.
+
+NOTES
+
+The seventh house is important for:
+
+- Missing persons
+- Return of spouse
+- Reunion
+- Travel-related questions
+- Foreign movement
+
+Benefic connection suggests:
+
+- Reunion
+- Safe return
+- Successful journey
+
+Malefic obstruction suggests:
+
+- Delay
+- Conflict
+- Difficulty returning
+
+Stanza 88:
+
+If Venus, Moon and the seventh lord are strong and associated with benefics, pleasure and fulfilment in relationships should be predicted.
+
+Stanza 89:
+
+If afflicted, dissatisfaction or emotional strain may occur.
+
+NOTES
+
+Venus plays a major role in questions involving:
+
+- Attraction
+- Romance
+- Sexual compatibility
+- Emotional bonding
+
+For seventh house questions examine:
+
+1. Seventh house
+2. Seventh lord
+3. Venus
+4. Moon
+5. Ascendant lord
+6. Relationship between 1st and 7th lords
+
+Strong benefic influence promises harmony and success.
+
+Malefic affliction gives delay, conflict or separation.
+
+QUESTIONS RELATING TO THE EIGHTH HOUSE
+
+Stanza 90:
+
+From the eighth house should be judged longevity, danger, death, hidden matters, fear, obstacles, scandals, suffering and sudden events.
+
+Stanza 91:
+
+If the eighth house and its lord are strong and associated with benefics, dangers pass away and protection results.
+
+Stanza 92:
+
+If the eighth lord is weak, afflicted or associated with malefics, danger, anxiety and suffering should be predicted.
+
+NOTES
+
+The eighth house governs:
+
+- Longevity
+- Sudden events
+- Accidents
+- Fear and anxiety
+- Transformation
+- Hidden matters
+- Secrets
+- Inheritance
+- Scandals
+- Chronic disease
+- Sudden losses
+
+The eighth house is one of the most sensitive houses in horary.
+
+Predictions concerning death or severe danger should be given with extreme caution.
+
+Stanza 93:
+
+If benefics occupy or aspect the eighth house, danger may be overcome and recovery becomes possible.
+
+Stanza 94:
+
+If malefics dominate the eighth house while the ascendant and Moon are weak, serious suffering may arise.
+
+Stanza 95:
+
+If the ascendant lord combines favourably with benefics, protection and escape from danger should be predicted.
+
+NOTES
+
+For longevity and danger-related questions examine:
+
+1. Ascendant
+2. Ascendant lord
+3. Eighth house
+4. Eighth lord
+5. Moon
+6. Benefic protection
+
+A strong ascendant often reduces danger.
+
+Benefics such as Jupiter and Venus may provide protection even in difficult charts.
+
+Multiple severe afflictions indicate prolonged struggle or fear.
+
+Stanza 96:
+
+If benefics influence the eighth house, hidden matters may be revealed favourably.
+
+Stanza 97:
+
+If malefics influence the eighth house, deception, fear or concealed troubles may arise.
+
+NOTES
+
+The eighth house governs:
+
+- Secrets
+- Hidden enemies
+- Mysteries
+- Occult subjects
+- Research
+- Underground matters
+- Confidential dealings
+
+Strong benefic influence may reveal truth.
+
+Malefic influence may indicate manipulation, fear or secrecy.
+
+Stanza 98:
+
+If the eighth lord combines with malefics, sudden losses or setbacks may occur.
+
+Stanza 99:
+
+If benefics aspect the significator, recovery from losses becomes possible.
+
+NOTES
+
+The eighth house often creates:
+
+- Delays
+- Fear
+- Emotional suffering
+- Financial shocks
+- Unexpected reversals
+
+However, benefic influence can convert crisis into transformation and eventual gain.
+
+Stanza 100:
+
+If the eighth lord is strong and associated with benefics, gain through inheritance or another’s resources may occur.
+
+Stanza 101:
+
+If afflicted, disputes concerning inheritance or blocked resources may arise.
+
+NOTES
+
+Modern interpretation includes:
+
+- Insurance
+- Tax matters
+- Shared finances
+- Inheritance
+- Settlements
+- Legal compensation
+
+For eighth house questions examine:
+
+1. Eighth house
+2. Eighth lord
+3. Ascendant and its lord
+4. Moon
+5. Benefic protection
+6. Twelfth house (loss)
+7. Sixth house (disease or conflict)
+
+Strong benefics reduce danger.
+
+Severe affliction indicates obstacles, fear or sudden disruptions.
+
+Never judge serious danger from one factor alone.
+
+QUESTIONS RELATING TO THE NINTH HOUSE
+
+Stanza 102:
+
+From the ninth house should be judged fortune, religion, father, teachers, blessings, pilgrimage, virtue and higher wisdom.
+
+Stanza 103:
+
+If the ninth house and its lord are strong and associated with benefics, prosperity, fortune and divine grace should be predicted.
+
+Stanza 104:
+
+If the ninth lord occupies a Kendra or Trikona and receives benefic influence, success in righteous actions and blessings from elders may result.
+
+NOTES
+
+The ninth house governs:
+
+- Fortune and luck
+- Father
+- Guru or teacher
+- Religion and spirituality
+- Pilgrimage
+- Higher education
+- Dharma (righteousness)
+- Divine blessings
+- Philosophy
+- Long-distance travel
+
+A strong ninth house indicates blessings, support and good karma.
+
+A weak or afflicted ninth house may indicate delays, obstacles or lack of guidance.
+
+Stanza 105:
+
+If benefics occupy or aspect the ninth house, happiness through father, elders and teachers may be expected.
+
+Stanza 106:
+
+If the ninth lord is afflicted by malefics, suffering, illness or separation involving father may occur.
+
+NOTES
+
+Questions concerning father should examine:
+
+1. Ninth house
+2. Ninth lord
+3. Sun (natural significator of father)
+4. Condition of benefics and malefics
+
+Benefic influence indicates:
+
+- Support from father
+- Respect
+- Guidance
+- Family blessings
+
+Affliction may indicate:
+
+- Distance from father
+- Illness
+- Disagreements
+- Emotional suffering
+
+Stanza 107:
+
+If the ascendant lord combines favourably with the ninth lord, fortune rises and success in undertakings should be predicted.
+
+Stanza 108:
+
+If the ninth lord is weak, combust or afflicted, fortune may fail or progress may become delayed.
+
+NOTES
+
+The ninth house is the house of luck.
+
+A strong connection between:
+
+1. Ascendant lord
+2. Ninth lord
+
+often shows:
+
+- Unexpected support
+- Success
+- Opportunity
+- Protection during hardship
+
+Weakness may indicate:
+
+- Misfortune
+- Lack of support
+- Delays despite effort
+
+Stanza 109:
+
+If benefics influence the ninth house, success in religious matters, pilgrimage and spiritual practice should be predicted.
+
+Stanza 110:
+
+If afflicted, obstacles in pilgrimage or disturbance in faith may arise.
+
+NOTES
+
+The ninth house governs:
+
+- Temples
+- Spiritual teachers
+- Sacred rituals
+- Religious journeys
+- Faith
+- Philosophy
+
+Jupiter strongly supports spiritual growth.
+
+Moon and Venus may indicate devotion and peaceful pilgrimage.
+
+Stanza 111:
+
+If the ninth lord combines favourably with the twelfth or seventh house, long journeys or foreign travel may occur.
+
+Stanza 112:
+
+If afflicted by malefics, travel may be delayed or troublesome.
+
+NOTES
+
+For travel-related questions examine:
+
+1. Ninth house (long-distance travel)
+2. Twelfth house (foreign residence)
+3. Seventh house (movement)
+4. Moon
+5. Relevant significators
+
+Benefic influence gives:
+
+- Safe travel
+- Successful pilgrimage
+- Helpful experiences abroad
+
+Affliction gives:
+
+- Delays
+- Expenses
+- Difficulties during travel
+
+For ninth house questions examine:
+
+1. Ninth house
+2. Ninth lord
+3. Sun (father)
+4. Jupiter (wisdom, blessings)
+5. Ascendant lord
+6. Moon
+
+Benefic influence gives luck and protection.
+
+Malefic affliction causes delay, struggle or lack of support.
+
+QUESTIONS RELATING TO THE TENTH HOUSE
+
+Stanza 113:
+
+From the tenth house should be judged profession, livelihood, authority, reputation, status, government matters and actions performed in the world.
+
+Stanza 114:
+
+If the tenth house and its lord are strong and associated with benefics, success in profession and honour should be predicted.
+
+Stanza 115:
+
+If the tenth lord occupies a Kendra or Trikona and receives benefic influence, advancement, recognition and prosperity in work may result.
+
+NOTES
+
+The tenth house governs:
+
+- Career
+- Profession
+- Livelihood
+- Job and business
+- Reputation
+- Fame
+- Public image
+- Government dealings
+- Promotions
+- Leadership
+- Authority
+
+A strong tenth house gives career growth and recognition.
+
+A weak or afflicted tenth house may indicate obstacles, instability or dissatisfaction in profession.
+
+Stanza 116:
+
+If benefics occupy or aspect the tenth house, honour, success and professional progress should be predicted.
+
+Stanza 117:
+
+If the lord of the ascendant combines favourably with the tenth lord, career growth and fulfilment of ambitions may result.
+
+Stanza 118:
+
+If the tenth lord is afflicted by malefics, combust or debilitated, obstacles in career or loss of status may arise.
+
+NOTES
+
+Career questions should examine:
+
+1. Tenth house
+2. Tenth lord
+3. Ascendant lord
+4. Sixth house (employment)
+5. Eleventh house (income and gains)
+6. Saturn (work)
+7. Sun (authority)
+
+Strong benefic influence indicates:
+
+- Promotion
+- Job success
+- Recognition
+- Stable income
+
+Affliction may indicate:
+
+- Career setbacks
+- Workplace politics
+- Delays
+- Unemployment
+
+Stanza 119:
+
+If benefics influence the tenth house, dealings with authority and government become favourable.
+
+Stanza 120:
+
+If malefics afflict the tenth house, disputes with superiors or obstacles from authority may arise.
+
+NOTES
+
+The tenth house also governs:
+
+- Bosses
+- Government offices
+- Public institutions
+- Business leadership
+- Social standing
+- Public reputation
+
+A strong Sun or Jupiter may favour leadership.
+
+Mercury supports business and administration.
+
+Saturn favours disciplined professions and long-term stability.
+
+
+Stanza 121:
+
+If benefics influence the tenth house and Moon is strong, fame, honour and public appreciation may result.
+
+Stanza 122:
+
+If afflicted, criticism, humiliation or damage to reputation may occur.
+
+NOTES
+
+Public image depends on:
+
+1. Tenth house
+2. Tenth lord
+3. Moon (public perception)
+4. Sun (status)
+5. Ascendant
+
+Benefic influence gives:
+
+- Respect
+- Recognition
+- Social status
+- Public trust
+
+Malefic influence may indicate:
+
+- Defamation
+- Workplace conflict
+- Loss of trust
+- Stress from responsibilities
+
+
+Stanza 123:
+
+If the tenth lord connects with the twelfth or eighth house, change in profession or instability may occur.
+
+Stanza 124:
+
+If the ascendant lord joins the tenth lord favourably after affliction, improvement through career change may result.
+
+NOTES
+
+Job change questions should examine:
+
+1. Tenth house
+2. Sixth house
+3. Eighth house (sudden change)
+4. Twelfth house (exit or resignation)
+5. Eleventh house (future gains)
+
+Benefics indicate:
+
+- Better opportunities
+- Successful transition
+
+Malefics indicate:
+
+- Forced change
+- Stress
+- Temporary instability
+
+
+For career and profession questions examine:
+
+1. Tenth house
+2. Tenth lord
+3. Ascendant lord
+4. Sixth house (employment)
+5. Eleventh house (income)
+6. Sun and Saturn
+7. Moon
+
+Strong benefic influence gives success and recognition.
+
+Malefic affliction gives delay, pressure or career obstacles.
+
+
+QUESTIONS RELATING TO THE ELEVENTH HOUSE
+
+Stanza 125:
+
+From the eleventh house should be judged gains, fulfilment of desires, profits, friends, elder siblings, prosperity and acquisitions.
+
+Stanza 126:
+
+If the eleventh house and its lord are strong and associated with benefics, gains and fulfilment of objectives should be predicted.
+
+Stanza 127:
+
+If the eleventh lord occupies a Kendra or Trikona and receives benefic influence, increase in wealth and success in undertakings may result.
+
+NOTES
+
+The eleventh house governs:
+
+- Gains and profits
+- Income
+- Fulfilment of desires
+- Ambitions
+- Elder brothers and sisters
+- Friendships
+- Social circles
+- Networking
+- Expansion
+- Business profits
+
+A strong eleventh house gives abundance, support and success.
+
+A weak or afflicted eleventh house may indicate delayed gains, broken expectations or losses through associates.
+
+
+Stanza 128:
+
+If benefics occupy or aspect the eleventh house, financial gain and prosperity may be expected.
+
+Stanza 129:
+
+If the eleventh lord joins the second lord favourably, increase in wealth and savings should be predicted.
+
+Stanza 130:
+
+If afflicted by malefics, gains become delayed or reduced.
+
+NOTES
+
+Financial questions should examine:
+
+1. Eleventh house (gain)
+2. Second house (stored wealth)
+3. Tenth house (profession)
+4. Ascendant lord
+5. Moon
+
+Strong combinations indicate:
+
+- Profit
+- Salary increase
+- Business growth
+- Financial improvement
+
+Affliction may indicate:
+
+- Delayed payments
+- Income instability
+- Financial disappointment
+
+
+Stanza 131:
+
+If benefics influence the eleventh house, support from friends and associates may be expected.
+
+Stanza 132:
+
+If malefics influence the eleventh house, betrayal, misunderstanding or disappointment through friends may arise.
+
+NOTES
+
+Modern interpretation includes:
+
+- Professional networks
+- Online communities
+- Mentors
+- Collaborators
+- Influential contacts
+
+Benefic influence indicates:
+
+- Helpful connections
+- Strong support system
+- Beneficial friendships
+
+Malefic influence may indicate:
+
+- False friends
+- Exploitation
+- Social tension
+
+
+Stanza 133:
+
+If benefics occupy or aspect the eleventh house, welfare and happiness through elder siblings may be predicted.
+
+Stanza 134:
+
+If the eleventh lord is afflicted, suffering, distance or misunderstandings involving elder siblings may arise.
+
+NOTES
+
+Questions concerning elder brothers or sisters should examine:
+
+1. Eleventh house
+2. Eleventh lord
+3. Moon
+4. Relevant significators
+
+Strong benefic influence indicates:
+
+- Harmony
+- Support
+- Success of siblings
+
+Affliction may indicate:
+
+- Illness
+- Separation
+- Family disputes
+
+Stanza 135:
+
+If the ascendant lord combines favourably with the eleventh lord, fulfilment of wishes and achievement of goals may result.
+
+Stanza 136:
+
+If afflicted by malefics, hopes may be delayed or partially fulfilled.
+
+NOTES
+
+The eleventh house is often called:
+
+“The house of fulfilment.”
+
+Strong benefic combinations support:
+
+- Goal achievement
+- Recognition
+- Social success
+- Opportunities
+- Financial rewards
+
+Malefics may delay but not necessarily deny success.
+
+
+For eleventh house questions examine:
+
+1. Eleventh house
+2. Eleventh lord
+3. Second house (wealth)
+4. Tenth house (career)
+5. Ascendant lord
+6. Moon
+
+Benefic influence promises gains and fulfilment.
+
+Malefic affliction causes delay, disappointment or social complications.
+
+
+QUESTIONS RELATING TO THE TWELFTH HOUSE
+
+Stanza 137:
+
+From the twelfth house should be judged expenditure, loss, confinement, foreign residence, sleep, hidden enemies, charity and liberation.
+
+Stanza 138:
+
+If the twelfth house and its lord are strong and associated with benefics, expenditure for noble purposes and spiritual growth may result.
+
+Stanza 139:
+
+If the twelfth lord occupies favourable houses and receives benefic influence, foreign travel, peaceful isolation or spiritual progress may occur.
+
+NOTES
+
+The twelfth house governs:
+
+- Expenses
+- Financial loss
+- Foreign countries
+- Isolation
+- Sleep and dreams
+- Hospitals
+- Prisons
+- Hidden enemies
+- Secret suffering
+- Spirituality
+- Moksha (liberation)
+
+A strong twelfth house may indicate spiritual development and productive foreign connections.
+
+A weak or afflicted twelfth house may indicate wasteful expenditure, loneliness or hidden troubles.
+
+Stanza 140:
+
+If malefics occupy or afflict the twelfth house, unnecessary expenditure and financial loss may arise.
+
+Stanza 141:
+
+If benefics influence the twelfth house, expenses may occur for beneficial or auspicious purposes.
+
+NOTES
+
+Financial loss questions should examine:
+
+1. Twelfth house (expenses)
+2. Second house (wealth)
+3. Eleventh house (income)
+4. Eighth house (sudden loss)
+5. Moon
+
+Benefic expenses include:
+
+- Charity
+- Education
+- Spiritual activity
+- Investments
+- Family welfare
+
+Malefic influence may indicate:
+
+- Waste
+- Medical expenses
+- Legal costs
+- Financial leakage
+
+Stanza 142:
+
+If the twelfth lord combines favourably with the ninth or seventh lord, foreign travel or residence may occur.
+
+Stanza 143:
+
+If afflicted by malefics, travel may involve hardship, delay or suffering.
+
+NOTES
+
+Foreign settlement questions should examine:
+
+1. Twelfth house
+2. Ninth house
+3. Seventh house
+4. Fourth house (leaving homeland)
+5. Moon
+
+Benefic influence suggests:
+
+- Comfortable stay abroad
+- Opportunity
+- Learning
+- Financial growth
+
+Malefic influence may indicate:
+
+- Isolation
+- Homesickness
+- Immigration problems
+- Unexpected expenses
+
+
+Stanza 144:
+
+If the twelfth house combines with the sixth and eighth under malefic influence, confinement, illness or suffering may arise.
+
+Stanza 145:
+
+If benefics aspect the ascendant and Moon, relief and recovery should be predicted.
+
+NOTES
+
+The twelfth house may indicate:
+
+- Hospital stays
+- Imprisonment
+- Retreats
+- Solitude
+- Mental exhaustion
+- Secret enemies
+
+The astrologer should judge carefully and avoid frightening predictions.
+
+
+Stanza 146:
+
+If benefics influence the twelfth house, peaceful sleep, meaningful dreams and spiritual inclination may occur.
+
+Stanza 147:
+
+If afflicted, disturbed sleep, anxiety or emotional suffering may arise.
+
+NOTES
+
+The twelfth house is deeply spiritual.
+
+Strong benefic influence may indicate:
+
+- Meditation
+- Detachment
+- Inner peace
+- Mystical experiences
+
+Affliction may indicate:
+
+- Anxiety
+- Escapism
+- Isolation
+- Sleep disturbances
+
+
+For twelfth house questions examine:
+
+1. Twelfth house
+2. Twelfth lord
+3. Ninth house (fortune/spirituality)
+4. Seventh house (travel)
+5. Fourth house (homeland)
+6. Moon
+7. Ascendant lord
+
+Benefic influence gives spiritual gain and meaningful expenditure.
+
+Malefic affliction causes loss, suffering or isolation.
+
+CHAPTER III
+VISESHA PRASNA
+SPECIAL QUESTIONS
+
+THE RETURN OF A PERSON GONE AWAY
+
+Stanza 1:
+
+If the lord of the ascendant and the lord of the seventh are in mutual aspect or conjunction, the person who has gone away will return.
+
+Stanza 2:
+
+If benefics influence the ascendant, seventh house or their lords, return should be predicted quickly.
+
+Stanza 3:
+
+If malefics obstruct the ascendant lord, the seventh lord or the Moon, delay in return or obstacles may arise.
+
+NOTES
+
+Questions concerning a person who has gone away should mainly examine:
+
+1. Ascendant — the querent
+2. Seventh house — the absent person
+3. Moon — movement and mental state
+4. Relationship between ascendant lord and seventh lord
+5. Benefic or malefic influences
+
+Favourable combinations indicate:
+
+- Safe return
+- Reunion
+- Communication
+- Quick arrival
+
+Malefic affliction indicates:
+
+- Delay
+- Obstacles
+- Conflict
+- Travel-related problems
+
+Stanza 4:
+
+If benefics aspect the seventh house and Moon is strong, the absent person remains safe.
+
+Stanza 5:
+
+If the seventh house and Moon are severely afflicted by malefics, suffering or danger to the person may be indicated.
+
+NOTES
+
+Safety of the absent person should be judged carefully.
+
+Examine:
+
+1. Seventh house
+2. Seventh lord
+3. Moon
+4. Eighth house (danger)
+5. Twelfth house (confinement or suffering)
+
+Benefic protection suggests:
+
+- Safety
+- Protection
+- Gradual return
+
+Affliction may indicate:
+
+- Illness
+- Delay
+- Emotional suffering
+- Travel problems
+
+
+Stanza 6:
+
+If the ascendant lord and seventh lord are approaching conjunction or favourable aspect, the person may return soon.
+
+Stanza 7:
+
+If separation between significators is large or obstructed by malefics, delay should be expected.
+
+NOTES
+
+Timing may be judged from:
+
+- Degrees separating significators
+- Strength of Moon
+- Nature of signs:
+
+Movable signs → quick result  
+Common signs → moderate delay  
+Fixed signs → long delay
+
+Closer aspect = quicker return.
+
+For questions concerning a missing or absent person examine:
+
+1. Ascendant
+2. Ascendant lord
+3. Seventh house
+4. Seventh lord
+5. Moon
+6. Eighth house (danger)
+7. Twelfth house (confinement)
+
+Strong benefic influence promises return.
+
+Heavy affliction indicates delay or obstacles.
+
+Never judge danger from one indication alone.
+
+IS THE PERSON ALIVE OR DEAD?
+
+Stanza 8:
+
+If the ascendant, Moon and significator are strong and associated with benefics, the absent person is alive.
+
+Stanza 9:
+
+If the seventh house and its lord receive benefic influence and avoid severe affliction, safety and continued life should be predicted.
+
+Stanza 10:
+
+If the eighth house, eighth lord and Moon are heavily afflicted by malefics and devoid of benefic influence, danger or death may be feared.
+
+NOTES
+
+This is one of the most delicate questions in horary astrology.
+
+The astrologer must exercise great caution and should avoid frightening conclusions based upon one indication alone.
+
+To judge whether a person is alive, examine:
+
+1. Seventh house — absent person
+2. Seventh lord
+3. Moon
+4. Eighth house — danger/death
+5. Eighth lord
+6. Ascendant and its lord
+7. Benefic protection
+
+Strong benefic influence usually indicates:
+
+- Safety
+- Survival
+- Recovery
+- Protection from danger
+
+Heavy affliction may indicate:
+
+- Serious suffering
+- Illness
+- Accident
+- Extreme danger
+
+
+Stanza 11:
+
+If Jupiter or Venus aspect the seventh house or Moon, protection should be predicted.
+
+Stanza 12:
+
+If the lord of the ascendant combines favourably with the seventh lord, reunion and safety may result.
+
+NOTES
+
+Jupiter is considered one of the strongest protective influences.
+
+Venus also softens difficult combinations.
+
+Benefic combinations indicate:
+
+- Communication
+- Safe return
+- Rescue
+- Unexpected help
+
+
+Stanza 13:
+
+If Saturn, Mars, Rahu or Ketu severely afflict the seventh house, Moon and eighth house, danger becomes stronger.
+
+Stanza 14:
+
+If benefics fail to protect the significators, fear, suffering or loss may occur.
+
+NOTES
+
+Danger becomes more serious when:
+
+- Moon is weak
+- Ascendant lord is afflicted
+- Seventh lord is weak
+- Eighth house is heavily afflicted
+- Multiple malefics dominate
+
+However:
+
+One negative indication alone is never sufficient.
+
+The whole chart must be judged carefully.
+
+
+For questions asking whether a person is alive or dead examine:
+
+1. Seventh house
+2. Seventh lord
+3. Moon
+4. Eighth house
+5. Eighth lord
+6. Ascendant lord
+7. Benefic protection
+
+Strong benefic influence indicates life and safety.
+
+Heavy repeated affliction may indicate danger.
+
+The astrologer should always judge with compassion and responsibility.
+
+
+ILLNESS — NATURE OF DISEASE AND RECOVERY
+
+Stanza 15:
+
+If the ascendant, ascendant lord and Moon are strong and associated with benefics, recovery from illness should be predicted.
+
+Stanza 16:
+
+If the sixth house, sixth lord and Moon suffer severe affliction by malefics, disease becomes serious or prolonged.
+
+Stanza 17:
+
+If benefics influence the sixth house while the ascendant remains strong, relief and cure may occur.
+
+NOTES
+
+In questions relating to disease examine:
+
+1. Ascendant — body and vitality
+2. Ascendant lord
+3. Moon — condition of mind and body
+4. Sixth house — disease
+5. Sixth lord
+6. Eighth house — danger and chronicity
+7. Twelfth house — hospitalisation and loss of strength
+
+Strong benefic influence indicates:
+
+- Recovery
+- Effective treatment
+- Relief from suffering
+- Improvement in health
+
+Heavy malefic influence may indicate:
+
+- Chronic illness
+- Delayed cure
+- Complications
+- Weakness
+
+
+Stanza 18:
+
+The nature of disease should be judged from the planet influencing the sixth house and sixth lord.
+
+Stanza 19:
+
+The afflicted planet indicates the bodily system affected.
+
+NOTES
+
+Sun indicates:
+
+- Fever
+- Heart complaints
+- Eye troubles
+- Heat-related disease
+
+Moon indicates:
+
+- Fluid imbalance
+- Cold disorders
+- Mental stress
+- Sleep disturbances
+
+Mars indicates:
+
+- Blood disorders
+- Injury
+- Surgery
+- Burns
+- Infection
+- Inflammation
+
+Mercury indicates:
+
+- Nervous disorders
+- Mental stress
+- Speech problems
+- Skin issues
+
+Jupiter indicates:
+
+- Obesity
+- Diabetes
+- Liver disorders
+- Digestive imbalance
+
+Venus indicates:
+
+- Reproductive issues
+- Hormonal imbalance
+- Urinary problems
+- Venereal disease
+
+Saturn indicates:
+
+- Chronic disease
+- Weakness
+- Joint pain
+- Paralysis
+- Long-term suffering
+
+Rahu/Ketu indicate:
+
+- Strange illnesses
+- Misdiagnosis
+- Toxicity
+- Psychological disturbance
+
+
+Stanza 20:
+
+If benefics aspect the ascendant, Moon and sixth house, recovery should be predicted.
+
+Stanza 21:
+
+If the sixth lord becomes weak while the ascendant lord gains strength, disease diminishes.
+
+Stanza 22:
+
+If the eighth house dominates and benefics fail to protect, danger increases.
+
+NOTES
+
+Signs of recovery:
+
+- Strong ascendant
+- Strong Moon
+- Benefic aspect from Jupiter or Venus
+- Weakening of sixth lord
+- Connection between ascendant lord and benefics
+
+Signs of danger:
+
+- Moon afflicted
+- Ascendant weak
+- Sixth and eighth houses strongly afflicted
+- Malefics dominating without benefic relief
+
+
+Stanza 23:
+
+If the sixth, eighth and twelfth houses combine under malefic influence, confinement, prolonged illness or hospitalisation may occur.
+
+Stanza 24:
+
+If benefics intervene, treatment becomes successful and recovery may follow.
+
+NOTES
+
+The twelfth house often indicates:
+
+- Hospital stay
+- Isolation
+- Medical expenditure
+- Sleep-related weakness
+
+Benefic intervention often improves outcomes even in difficult charts.
+
+
+Stanza 25:
+
+If the ascendant lord approaches favourable aspect with benefics, recovery may happen soon.
+
+Stanza 26:
+
+Movable signs indicate quick recovery, common signs moderate delay and fixed signs prolonged suffering.
+
+NOTES
+
+Timing may be judged from:
+
+- Degrees separating significators
+- Moon’s movement
+- Nature of signs
+
+Movable signs → quick result  
+Common signs → medium delay  
+Fixed signs → long recovery period
+
+
+For illness-related questions examine:
+
+1. Ascendant
+2. Ascendant lord
+3. Moon
+4. Sixth house
+5. Sixth lord
+6. Eighth house
+7. Twelfth house
+8. Benefic protection
+
+Strong benefics indicate recovery.
+
+Repeated severe affliction indicates prolonged illness or danger.
+
+No serious conclusion should be drawn from one factor alone.
+
+
+LEAVING EMPLOYMENT AND SEEKING ANOTHER JOB
+
+Stanza 27:
+
+If the tenth lord is weak, afflicted or associated with malefics, dissatisfaction or obstacles in employment may arise.
+
+Stanza 28:
+
+If the ascendant lord combines favourably with the tenth or eleventh lord, improvement in profession may result.
+
+Stanza 29:
+
+If the tenth lord connects with the eighth or twelfth house, change in employment or resignation may occur.
+
+NOTES
+
+Questions concerning job change should examine:
+
+1. Tenth house — profession
+2. Tenth lord
+3. Sixth house — employment and service
+4. Sixth lord
+5. Eleventh house — gains and salary
+6. Twelfth house — exit or resignation
+7. Eighth house — sudden change
+
+Weakness in the tenth house often shows dissatisfaction.
+
+Affliction by malefics may indicate:
+
+- Toxic work environment
+- Pressure from superiors
+- Delay in promotion
+- Loss of motivation
+
+
+Stanza 30:
+
+If benefics influence the tenth house and the ascendant lord joins favourably with the tenth lord, success in obtaining employment should be predicted.
+
+Stanza 31:
+
+If the eleventh lord becomes strong and favourably connected, gain through a new position may occur.
+
+Stanza 32:
+
+If afflicted by malefics, delay, rejection or disappointment may result.
+
+NOTES
+
+Strong combinations for getting a job:
+
+- Connection between 1st and 10th lords
+- Strong 10th lord
+- Benefic influence from Jupiter or Venus
+- Strong Moon
+- Strong 11th house (income)
+
+Afflictions may indicate:
+
+- Interview failure
+- Delay
+- Unsuitable opportunity
+- Workplace instability
+
+
+Stanza 33:
+
+If the present employment is afflicted while another favourable combination arises, change may prove beneficial.
+
+Stanza 34:
+
+If the tenth lord remains strong and benefics support the present position, staying may be advantageous.
+
+NOTES
+
+Indicators favouring job change:
+
+- Strong eleventh house
+- Favourable future opportunity
+- Benefic connection to tenth house
+- Weak present employment indicators
+
+Indicators favouring staying:
+
+- Strong tenth lord
+- Career growth in current role
+- Protection from benefics
+- Stable income pattern
+
+
+Stanza 35:
+
+If Mercury and the seventh house gain strength, trade or independent work may prosper.
+
+Stanza 36:
+
+If Saturn and the sixth house are strong, service or salaried employment may prove favourable.
+
+NOTES
+
+Mercury + 7th house:
+
+- Business
+- Freelancing
+- Trade
+- Consulting
+- Entrepreneurship
+
+Saturn + 6th house:
+
+- Stable employment
+- Corporate work
+- Government service
+- Long-term job security
+
+The astrologer should assess the temperament of the querent before prediction.
+
+
+Stanza 37:
+
+If the ascendant lord approaches favourable aspect with the tenth or eleventh lord, change or opportunity may occur soon.
+
+Stanza 38:
+
+Movable signs indicate quick change, common signs moderate delay and fixed signs prolonged waiting.
+
+NOTES
+
+Timing depends on:
+
+- Degrees between significators
+- Moon’s movement
+- Nature of signs
+
+Movable signs → quick result  
+Common signs → moderate timing  
+Fixed signs → delay
+
+
+For job and employment questions examine:
+
+1. Tenth house
+2. Tenth lord
+3. Sixth house
+4. Eleventh house
+5. Ascendant lord
+6. Moon
+7. Eighth and Twelfth houses (change/exit)
+
+Strong benefic influence indicates career improvement.
+
+Malefic affliction indicates delay, pressure or dissatisfaction.
+
+A strong eleventh house often confirms financial improvement after change.
+
+
+DISPUTES, LITIGATION AND COURT CASES
+
+Stanza 39:
+
+If the ascendant lord is strong and the sixth house is favourable, victory in disputes should be predicted.
+
+Stanza 40:
+
+If benefics influence the sixth house and ascendant, success in litigation may result.
+
+Stanza 41:
+
+If the sixth lord is weak or afflicted, enemies lose strength and the querent gains advantage.
+
+NOTES
+
+Questions concerning disputes should examine:
+
+1. Ascendant — querent
+2. Ascendant lord
+3. Sixth house — enemies, disputes
+4. Sixth lord
+5. Seventh house — opponent
+6. Tenth house — judgement or authority
+7. Moon — outcome and mental state
+
+A strong ascendant generally favours the querent.
+
+Weakness in the opponent’s house often indicates advantage to the querent.
+
+Stanza 42:
+
+If the ascendant lord is stronger than the seventh lord, the querent gains victory.
+
+Stanza 43:
+
+If the seventh lord becomes stronger and receives benefic support, the opponent may prevail.
+
+Stanza 44:
+
+If benefics influence both parties, compromise or settlement may occur.
+
+NOTES
+
+To determine victory compare:
+
+Querent:
+- Ascendant
+- Ascendant lord
+- Moon
+
+Opponent:
+- Seventh house
+- Seventh lord
+
+Victory indicators for the querent:
+
+- Strong ascendant lord
+- Benefic support
+- Strong Moon
+- Weak opponent
+
+Victory indicators for opponent:
+
+- Strong seventh lord
+- Afflicted ascendant
+- Weak Moon
+
+Stanza 45:
+
+If the tenth house and sixth house combine favourably, success through legal judgement may result.
+
+Stanza 46:
+
+If malefics dominate the sixth and tenth houses, prolonged litigation and stress may arise.
+
+NOTES
+
+For court-related matters examine:
+
+1. Sixth house — dispute
+2. Seventh house — opponent
+3. Tenth house — judgement
+4. Eleventh house — success/gain
+5. Moon
+
+Benefic influence indicates:
+
+- Favourable judgement
+- Settlement
+- Resolution
+- Compensation
+
+Malefic influence may indicate:
+
+- Delay
+- Appeals
+- Expense
+- Emotional stress
+
+Stanza 47:
+
+If Mars and Saturn afflict the sixth house, conflict becomes severe.
+
+Stanza 48:
+
+If Jupiter aspects the ascendant or sixth house, protection and victory may occur.
+
+NOTES
+
+Mars may indicate:
+
+- Aggressive opponents
+- Heated disputes
+- Legal confrontation
+
+Saturn may indicate:
+
+- Long delays
+- Bureaucratic obstacles
+- Slow justice
+
+Jupiter often gives:
+
+- Protection
+- Fairness
+- Favourable support
+- Wise resolution
+
+Stanza 49:
+
+If benefics connect the ascendant and seventh houses, reconciliation or compromise may be achieved.
+
+Stanza 50:
+
+If hostile aspects dominate, prolonged conflict may continue.
+
+NOTES
+
+Settlement is more likely when:
+
+- Venus influences the chart
+- Jupiter aspects both sides
+- Moon is strong
+- Benefics dominate angular houses
+
+Conflict continues when:
+
+- Mars/Saturn dominate
+- Moon is afflicted
+- Ascendant and seventh lords oppose harshly
+
+Stanza 51:
+
+If significators move toward favourable aspect, resolution may occur soon.
+
+Stanza 52:
+
+Movable signs indicate quick judgement, common signs moderate delay and fixed signs prolonged litigation.
+
+NOTES
+
+Timing depends on:
+
+- Degrees between significators
+- Moon’s movement
+- Sign quality
+
+Movable signs → fast result  
+Common signs → moderate timing  
+Fixed signs → long delay
+
+
+For disputes and litigation examine:
+
+1. Ascendant
+2. Ascendant lord
+3. Sixth house
+4. Sixth lord
+5. Seventh house (opponent)
+6. Tenth house (judgement)
+7. Moon
+
+Strong ascendant and weak opponent favour victory.
+
+Benefics favour settlement.
+
+Malefics create delay and prolonged conflict.
+
+THEFT, LOST ARTICLES AND IDENTIFYING THE THIEF
+
+Stanza 53:
+
+Questions concerning theft, lost articles and missing valuables should be judged from the second, fourth, seventh and eighth houses.
+
+Stanza 54:
+
+If benefics influence the second house and Moon is strong, recovery of lost property may be predicted.
+
+Stanza 55:
+
+If the second house and its lord are heavily afflicted by malefics, recovery becomes doubtful.
+
+NOTES
+
+For theft or missing property examine:
+
+1. Second house — valuables and money
+2. Fourth house — home and property
+3. Seventh house — thief
+4. Eighth house — hidden matters
+5. Eleventh house — recovery
+6. Moon — outcome
+
+Strong benefic influence indicates:
+
+- Recovery
+- Discovery of clues
+- Return of article
+- Help from others
+
+Heavy malefic affliction may indicate:
+
+- Permanent loss
+- Delay
+- Hidden theft
+- Deception
+
+Stanza 56:
+
+If the lord of the second joins benefics or aspects the ascendant favourably, the lost article may be recovered.
+
+Stanza 57:
+
+If the eleventh lord becomes strong and favourably connected, recovery becomes likely.
+
+Stanza 58:
+
+If the eighth house dominates and malefics obstruct the significator, recovery becomes difficult.
+
+NOTES
+
+Signs favouring recovery:
+
+- Strong Moon
+- Benefic aspect of Jupiter or Venus
+- Strong second lord
+- Strong eleventh house
+- Connection between ascendant and significator
+
+Signs against recovery:
+
+- Weak Moon
+- Heavy affliction
+- Dominant eighth house
+- Separation between significators
+
+Stanza 59:
+
+The thief should be judged from the seventh house and the planet influencing it.
+
+Stanza 60:
+
+The nature, appearance and status of the thief may be inferred from the influencing planet.
+
+NOTES
+
+Planetary indications of thief:
+
+Sun:
+- Person of authority
+- Proud personality
+- Government-related person
+- Well-known person
+
+Moon:
+- Emotional person
+- Woman or caretaker
+- Changeable behaviour
+
+Mars:
+- Aggressive person
+- Young male
+- Worker, mechanic, soldier
+- Hot-tempered
+
+Mercury:
+- Clever person
+- Trader, student, messenger
+- Skilled liar or negotiator
+
+Jupiter:
+- Respectable or educated person
+- Religious or teacher-like figure
+- Senior adviser
+
+Venus:
+- Attractive person
+- Woman
+- Artist or luxury-related person
+
+Saturn:
+- Poor person
+- Servant, labourer
+- Elderly or dark-complexioned person
+- Slow movement
+
+Rahu/Ketu:
+- Secretive person
+- Outsider
+- Fraudster
+- Stranger
+
+
+Stanza 61:
+
+If the seventh house connects with the fourth or ascendant, the thief may be known to the querent.
+
+Stanza 62:
+
+If Rahu, Saturn or eighth house dominate, the thief may be a stranger.
+
+NOTES
+
+Known thief indicators:
+
+- Connection between 1st and 7th houses
+- Fourth house involvement (home/family)
+- Familiar significators
+
+Unknown thief indicators:
+
+- Rahu dominance
+- Eighth house secrecy
+- Foreign or distant influence
+
+Stanza 63:
+
+The direction of the missing object may be judged from the sign or planet influencing the significator.
+
+NOTES
+
+Planetary directions:
+
+Sun → East  
+Moon → North-West  
+Mars → South  
+Mercury → North  
+Jupiter → North-East  
+Venus → South-East  
+Saturn → West  
+Rahu/Ketu → South-West
+
+Movable signs:
+- Object may be moving or relocated
+
+Fixed signs:
+- Object remains where it was
+
+Common signs:
+- Object is nearby but shifted
+
+Stanza 64:
+
+The nature of the place should be judged from the sign and planet involved.
+
+NOTES
+
+Sun:
+- Bright places
+- Government offices
+- Heat/fire-related areas
+
+Moon:
+- Kitchen
+- Near water
+- Bedroom
+
+Mars:
+- Tools
+- Machinery
+- Heat/fire place
+- Sharp objects
+
+Mercury:
+- Books
+- Study table
+- Office
+- Documents
+
+Jupiter:
+- Temple
+- Educational place
+- Safe area
+
+Venus:
+- Bedroom
+- Beauty items
+- Clothes
+- Luxury place
+
+Saturn:
+- Dirty place
+- Storage room
+- Old area
+- Hidden corner
+
+Rahu/Ketu:
+- Unusual place
+- Dark area
+- Forgotten storage
+
+
+For theft or lost-property questions examine:
+
+1. Second house
+2. Fourth house
+3. Seventh house (thief)
+4. Eighth house (hidden matters)
+5. Eleventh house (recovery)
+6. Moon
+
+Benefics favour recovery.
+
+Heavy malefic affliction may indicate permanent loss.
+
+The thief’s nature is judged from the planet influencing the seventh house.
+
+
+MARRIAGE QUESTIONS
+
+Stanza 65:
+
+Questions concerning marriage should be judged from the seventh house, seventh lord, Venus and Moon.
+
+Stanza 66:
+
+If the seventh house and its lord are strong and associated with benefics, marriage should be predicted.
+
+Stanza 67:
+
+If the lord of the ascendant combines favourably with the seventh lord, marriage or union may take place.
+
+NOTES
+
+For marriage-related questions examine:
+
+1. Seventh house
+2. Seventh lord
+3. Venus
+4. Moon
+5. Ascendant lord
+6. Relationship between 1st and 7th lords
+
+Strong benefic influence indicates:
+
+- Marriage
+- Engagement
+- Harmonious union
+- Supportive partner
+
+Affliction may indicate:
+
+- Delay
+- Obstacles
+- Emotional stress
+- Family resistance
+
+Stanza 68:
+
+If benefics occupy or aspect the seventh house, marriage becomes likely.
+
+Stanza 69:
+
+If the ascendant lord and seventh lord form favourable aspect or conjunction, the desired union may occur.
+
+Stanza 70:
+
+If malefics obstruct the seventh house or seventh lord, delay or disappointment may result.
+
+NOTES
+
+Strong indicators for marriage:
+
+- Connection between 1st and 7th lords
+- Venus strong
+- Moon waxing and unafflicted
+- Benefics in Kendra or Trikona
+
+Obstacles may arise due to:
+
+- Saturn → delay
+- Mars → conflict
+- Rahu/Ketu → confusion, unusual situations
+- Combust or debilitated seventh lord
+
+Stanza 71:
+
+The nature and appearance of the spouse should be judged from the seventh house and planet influencing it.
+
+NOTES
+
+Sun:
+- Proud
+- Influential
+- Authoritative personality
+
+Moon:
+- Attractive
+- Emotional
+- Caring nature
+
+Mars:
+- Passionate
+- Energetic
+- Quick-tempered
+
+Mercury:
+- Intelligent
+- Communicative
+- Youthful personality
+
+Jupiter:
+- Wise
+- Respectable
+- Moral and supportive
+
+Venus:
+- Attractive
+- Romantic
+- Artistic
+
+Saturn:
+- Mature
+- Serious
+- Reserved or older
+
+Rahu/Ketu:
+- Unusual personality
+- Foreign background
+- Non-traditional relationship
+
+Stanza 72:
+
+If Saturn influences the seventh house, delay in marriage may occur.
+
+Stanza 73:
+
+If Mars and Saturn afflict the seventh house, quarrels or difficulties may arise.
+
+Stanza 74:
+
+If benefics intervene, obstacles are reduced and marriage eventually succeeds.
+
+NOTES
+
+Common delay factors:
+
+- Saturn in or aspecting 7th
+- Weak Venus
+- Weak Moon
+- Seventh lord afflicted
+- Malefic dominance
+
+Benefic intervention may indicate:
+
+- Delayed but successful marriage
+- Help from elders
+- Improved circumstances
+
+Stanza 75:
+
+If the fifth and seventh houses connect favourably, emotional attachment or love marriage may occur.
+
+Stanza 76:
+
+If family-related houses dominate, traditional arrangements may be indicated.
+
+NOTES
+
+Love marriage indicators:
+
+- 5th ↔ 7th connection
+- Venus strong
+- Moon strong
+- Mercury involvement
+
+Traditional marriage indicators:
+
+- Strong family houses
+- Jupiter influence
+- Elder involvement
+- Stable benefic combinations
+
+Stanza 77:
+
+If the ascendant lord and seventh lord approach conjunction or favourable aspect, marriage may occur soon.
+
+Stanza 78:
+
+Movable signs indicate quick marriage, common signs moderate timing and fixed signs delay.
+
+NOTES
+
+Timing depends on:
+
+- Degrees between significators
+- Moon’s motion
+- Sign quality
+
+Movable signs → quick marriage  
+Common signs → moderate delay  
+Fixed signs → long waiting period
+
+For marriage questions examine:
+
+1. Seventh house
+2. Seventh lord
+3. Venus
+4. Moon
+5. Ascendant lord
+6. Fifth house (romance)
+7. Relationship between 1st and 7th lords
+
+Strong benefic influence promises marriage.
+
+Malefic affliction causes delay or obstacles.
+
+Connection between 1st and 7th lords is one of the strongest signs of union.
+
+QUESTIONS CONCERNING CHILDREN
+
+Stanza 79:
+
+Questions concerning childbirth, children and pregnancy should be judged from the fifth house, fifth lord, Jupiter and Moon.
+
+Stanza 80:
+
+If the fifth house and its lord are strong and associated with benefics, childbirth should be predicted.
+
+Stanza 81:
+
+If the ascendant lord combines favourably with the fifth lord, happiness through children may result.
+
+NOTES
+
+For child-related questions examine:
+
+1. Fifth house
+2. Fifth lord
+3. Jupiter (natural significator of children)
+4. Moon
+5. Ascendant lord
+
+Strong benefic influence indicates:
+
+- Childbirth
+- Healthy pregnancy
+- Happiness through children
+- Family joy
+
+Affliction may indicate:
+
+- Delay
+- Anxiety
+- Miscarriage risk
+- Difficulty conceiving
+
+QUESTIONS CONCERNING CHILDREN
+
+Stanza 79:
+
+Questions concerning childbirth, children and pregnancy should be judged from the fifth house, fifth lord, Jupiter and Moon.
+
+Stanza 80:
+
+If the fifth house and its lord are strong and associated with benefics, childbirth should be predicted.
+
+Stanza 81:
+
+If the ascendant lord combines favourably with the fifth lord, happiness through children may result.
+
+NOTES
+
+For child-related questions examine:
+
+1. Fifth house
+2. Fifth lord
+3. Jupiter (natural significator of children)
+4. Moon
+5. Ascendant lord
+
+Strong benefic influence indicates:
+
+- Childbirth
+- Healthy pregnancy
+- Happiness through children
+- Family joy
+
+Affliction may indicate:
+
+- Delay
+- Anxiety
+- Miscarriage risk
+- Difficulty conceiving
+
+Stanza 82:
+
+If benefics occupy or aspect the fifth house and Jupiter remains strong, childbirth may occur.
+
+Stanza 83:
+
+If the fifth lord is afflicted by malefics, delay or obstacles may arise.
+
+Stanza 84:
+
+If benefics support the fifth lord after affliction, eventual success should be predicted.
+
+NOTES
+
+Strong childbirth indicators:
+
+- Jupiter strong
+- Benefics in the fifth house
+- Strong Moon
+- Connection between ascendant and fifth lord
+
+Delay indicators:
+
+- Saturn influence
+- Weak fifth lord
+- Moon afflicted
+- Malefic dominance
+
+Stanza 85:
+
+Male planets and masculine signs indicate male child.
+
+Female planets and feminine signs indicate female child.
+
+NOTES
+
+Male indicators:
+
+Sun
+Mars
+Jupiter
+
+Masculine signs:
+
+Aries
+Gemini
+Leo
+Libra
+Sagittarius
+Aquarius
+
+Female indicators:
+
+Moon
+Venus
+
+Feminine signs:
+
+Taurus
+Cancer
+Virgo
+Scorpio
+Capricorn
+Pisces
+
+Mercury may indicate mixed results or twins depending on association.
+
+Strong masculine influence → male child
+
+Strong feminine influence → female child
+
+Stanza 86:
+
+If benefics influence the fifth house, welfare and prosperity of the child may be predicted.
+
+Stanza 87:
+
+If malefics afflict the fifth house, illness, suffering or anxiety concerning the child may arise.
+
+NOTES
+
+For welfare of child examine:
+
+1. Fifth house
+2. Fifth lord
+3. Jupiter
+4. Moon
+5. Relevant significators
+
+Benefic influence suggests:
+
+- Good health
+- Intelligence
+- Academic success
+- Happiness
+
+Malefic influence may indicate:
+
+- Weak health
+- Educational struggles
+- Behavioural issues
+- Worry for parents
+
+Stanza 88:
+
+If benefics repeatedly influence the fifth house, more than one child may result.
+
+Stanza 89:
+
+If Saturn strongly afflicts the fifth house, delay in childbirth may occur.
+
+NOTES
+
+Jupiter often increases progeny.
+
+Saturn often delays but does not always deny.
+
+Moon and Venus support fertility.
+
+Rahu/Ketu may indicate unusual circumstances, medical intervention or uncertainty.
+
+Stanza 90:
+
+If the fifth lord approaches favourable aspect with benefics, childbirth may occur soon.
+
+Stanza 91:
+
+Movable signs indicate quick result, common signs moderate delay and fixed signs prolonged waiting.
+
+NOTES
+
+Timing depends on:
+
+- Degrees between significators
+- Moon’s movement
+- Nature of signs
+
+Movable signs → quick childbirth  
+Common signs → moderate timing  
+Fixed signs → delay
+
+
+For questions concerning children examine:
+
+1. Fifth house
+2. Fifth lord
+3. Jupiter
+4. Moon
+5. Ascendant lord
+
+Strong benefic influence promises childbirth and welfare.
+
+Malefic affliction causes delay or anxiety.
+
+Jupiter’s condition is especially important.
+
+
+DREAMS AND THEIR INTERPRETATION
+
+Stanza 92:
+
+Questions concerning dreams should be judged from the twelfth house, Moon and the planets influencing them.
+
+Stanza 93:
+
+If benefics influence the Moon and twelfth house, auspicious dreams and favourable outcomes should be predicted.
+
+Stanza 94:
+
+If malefics influence the Moon or twelfth house, disturbing dreams or mental anxiety may arise.
+
+NOTES
+
+Dream-related questions should examine:
+
+1. Twelfth house — dreams and sleep
+2. Moon — mind and imagination
+3. Twelfth lord
+4. Planets influencing Moon
+5. Benefic or malefic dominance
+
+Benefic influence indicates:
+
+- Positive dreams
+- Spiritual signs
+- Good omens
+- Emotional peace
+
+Malefic influence indicates:
+
+- Fearful dreams
+- Anxiety
+- Disturbed sleep
+- Emotional confusion
+
+Stanza 95:
+
+Dreams involving temples, light, flowers, pure water, saints, deities or pleasant surroundings are auspicious.
+
+Stanza 96:
+
+Dreams involving ascent, gaining ornaments, meeting respected persons or receiving blessings indicate success.
+
+NOTES
+
+Favourable dream symbols include:
+
+- Temples
+- Gods or saints
+- Clean water
+- Flowers
+- Gold or ornaments
+- Bright light
+- Flying upward
+- Mountains
+- Blessings
+- Marriage symbols
+
+These may indicate:
+
+- Success
+- Marriage
+- Prosperity
+- Recovery from illness
+- Spiritual blessings
+
+
+Stanza 97:
+
+Dreams involving darkness, falling, dirty water, snakes, fear, crying, blood or destruction may indicate obstacles.
+
+Stanza 98:
+
+Dreams of imprisonment, quarrels or frightening events may show anxiety or future difficulties.
+
+NOTES
+
+Unfavourable dream symbols include:
+
+- Darkness
+- Falling from height
+- Dirty places
+- Death imagery
+- Fire destruction
+- Fear
+- Crying
+- Fighting
+- Injury
+- Being chased
+
+These may indicate:
+
+- Obstacles
+- Delays
+- Emotional suffering
+- Financial trouble
+- Conflict
+- Health concerns
+
+
+Stanza 99:
+
+The nature of dreams should be judged according to the influencing planet.
+
+NOTES
+
+Sun:
+- Kings
+- Authority
+- Fire
+- Fame
+- Power
+
+Moon:
+- Water
+- Women
+- Emotions
+- Family
+- Travel
+
+Mars:
+- War
+- Injury
+- Blood
+- Conflict
+- Weapons
+
+Mercury:
+- Communication
+- Books
+- Friends
+- Trade
+- Learning
+
+Jupiter:
+- Teachers
+- Temples
+- Religion
+- Wisdom
+- Blessings
+
+Venus:
+- Love
+- Beauty
+- Marriage
+- Luxury
+- Pleasure
+
+Saturn:
+- Fear
+- Darkness
+- Isolation
+- Poverty
+- Delay
+
+Rahu/Ketu:
+- Strange dreams
+- Fear
+- Illusions
+- Foreign or unusual symbolism
+
+
+Stanza 100:
+
+Dreams occurring near dawn become more effective and may materialise sooner.
+
+Stanza 101:
+
+Dreams seen during disturbed sleep or illness may not carry predictive value.
+
+NOTES
+
+Traditional rule:
+
+Early morning dreams → stronger effect
+
+Dreams during fever, stress or disturbed sleep → less reliable
+
+Repeated dreams → stronger significance
+
+
+For dream-related questions examine:
+
+1. Twelfth house
+2. Twelfth lord
+3. Moon
+4. Planets influencing Moon
+5. Benefic or malefic dominance
+
+Benefics indicate meaningful and favourable dreams.
+
+Malefics indicate anxiety, fear or warning signs.
+
+Dreams near dawn are generally considered more predictive.
+
+PURCHASE AND SALE
+
+Stanza 102:
+
+Questions concerning buying, selling and trade should be judged from the second, seventh, tenth and eleventh houses.
+
+Stanza 103:
+
+If benefics influence the seventh and eleventh houses, profit in trade and favourable transactions should be predicted.
+
+Stanza 104:
+
+If the ascendant lord combines favourably with the seventh or tenth lord, success in commerce may result.
+
+NOTES
+
+For trade and business questions examine:
+
+1. Second house — money and assets
+2. Seventh house — trade and agreements
+3. Tenth house — profession and activity
+4. Eleventh house — gains and profits
+5. Moon — movement and outcome
+
+Benefic influence indicates:
+
+- Profitable deals
+- Smooth transactions
+- Good timing
+- Business success
+
+Malefic influence may indicate:
+
+- Loss
+- Delay
+- Miscommunication
+- Poor judgement
+
+Stanza 105:
+
+If benefics influence the house concerned and Moon is strong, the purchase may prove beneficial.
+
+Stanza 106:
+
+If malefics afflict the significator, loss or dissatisfaction may result from the purchase.
+
+NOTES
+
+Questions such as:
+
+- Should I buy this property?
+- Should I purchase this business?
+- Is this investment good?
+
+must examine:
+
+1. Relevant house
+2. House lord
+3. Moon
+4. Eleventh house (profit)
+5. Twelfth house (expense)
+
+Benefic combinations suggest:
+
+- Good value
+- Long-term benefit
+- Success
+
+Malefic influence suggests:
+
+- Overpayment
+- Hidden defects
+- Regret
+- Financial strain
+
+Stanza 107:
+
+If the seventh lord and eleventh lord combine favourably, sale may succeed profitably.
+
+Stanza 108:
+
+If afflicted by malefics, delay or reduced value may occur.
+
+NOTES
+
+Good indicators for successful sale:
+
+- Strong seventh house
+- Strong eleventh house
+- Strong Moon
+- Benefic support
+
+Poor indicators:
+
+- Weak Moon
+- Saturn delay
+- Rahu confusion
+- Afflicted significators
+
+
+Stanza 109:
+
+If Mercury and the seventh house are strong, trade and commerce prosper.
+
+Stanza 110:
+
+If benefics influence the tenth and eleventh houses, profit and expansion may occur.
+
+NOTES
+
+Mercury favours:
+
+- Trading
+- Communication business
+- Commerce
+- Sales
+- Brokerage
+
+Jupiter favours:
+
+- Expansion
+- Stable profit
+- Ethical business
+
+Venus favours:
+
+- Luxury goods
+- Beauty industry
+- Hospitality
+- Fashion
+
+Mars favours:
+
+- Machinery
+- Engineering
+- Technical work
+
+Saturn favours:
+
+- Labour-intensive industries
+- Manufacturing
+- Long-term stability
+
+Stanza 111:
+
+If significators move toward favourable aspect, successful purchase or sale may occur soon.
+
+Stanza 112:
+
+Movable signs indicate quick results, common signs moderate timing and fixed signs delay.
+
+NOTES
+
+Timing depends on:
+
+- Degrees between significators
+- Moon’s motion
+- Nature of signs
+
+Movable signs → quick transaction  
+Common signs → moderate timing  
+Fixed signs → delay
+
+For purchase and sale questions examine:
+
+1. Second house
+2. Seventh house
+3. Tenth house
+4. Eleventh house
+5. Moon
+6. Relevant significator
+
+Benefic influence gives profitable trade.
+
+Malefic affliction causes delay, poor judgement or loss.
+
+AGRICULTURE, CROPS AND HARVEST
+
+Stanza 113:
+
+Questions concerning crops, agriculture and harvest should be judged from the fourth house, Moon, benefics and seasonal influences.
+
+Stanza 114:
+
+If benefics influence the fourth house and Moon is strong, abundance and successful harvest should be predicted.
+
+Stanza 115:
+
+If malefics afflict the fourth house or Moon, crop damage, shortage or delay may arise.
+
+NOTES
+
+For agricultural questions examine:
+
+1. Fourth house — land and cultivation
+2. Fourth lord
+3. Moon — moisture and fertility
+4. Tenth house — productivity
+5. Eleventh house — gains
+6. Seasonal planetary influences
+
+Benefic influence indicates:
+
+- Good harvest
+- Fertility
+- Rainfall support
+- Agricultural profit
+
+Malefic influence may indicate:
+
+- Drought
+- Pest problems
+- Crop loss
+- Financial strain
+
+
+Stanza 116:
+
+If Moon and benefics gain strength, favourable rains may occur.
+
+Stanza 117:
+
+If Saturn, Mars or Rahu afflict the Moon, irregular weather or agricultural suffering may result.
+
+NOTES
+
+Moon strongly influences:
+
+- Water supply
+- Rainfall
+- Soil moisture
+- Agricultural timing
+
+Jupiter influence:
+
+- Abundance
+- Prosperity
+- Seasonal support
+
+Saturn influence:
+
+- Delay
+- Scarcity
+- Dryness
+
+Mars influence:
+
+- Heat
+- Fire
+- Sudden destruction
+
+Rahu/Ketu influence:
+
+- Unexpected disturbances
+- Unusual climate behavior
+
+
+Stanza 118:
+
+If the fourth lord combines favourably with the eleventh lord, profit through cultivation may result.
+
+Stanza 119:
+
+If the eighth or twelfth houses dominate under malefic influence, loss or poor yield may occur.
+
+NOTES
+
+Strong indicators of successful yield:
+
+- Strong fourth house
+- Strong Moon
+- Benefic influence
+- Connection with eleventh house (gain)
+
+Poor harvest indicators:
+
+- Weak Moon
+- Afflicted fourth lord
+- Malefics dominating
+- Severe twelfth-house influence
+
+
+Stanza 120:
+
+The nature and productivity of land should be judged from the sign occupying the fourth house and planets influencing it.
+
+NOTES
+
+Fertile indications:
+
+Moon, Venus, Jupiter influence
+
+Dry or difficult land:
+
+Saturn, Mars influence
+
+Movable signs:
+- Changing conditions
+- Fast development
+
+Fixed signs:
+- Stable long-term yield
+
+Common signs:
+- Mixed or fluctuating outcomes
+
+
+In modern times, these principles may also be adapted to:
+
+- Business projects
+- Investments
+- Long-term ventures
+- Real-estate development
+- Startup growth
+- Financial cycles
+
+Fourth house = foundation
+
+Moon = momentum and support
+
+Eleventh house = eventual gain
+
+Benefics = growth
+
+Malefics = obstacles or delays
+
+
+For agriculture or productivity questions examine:
+
+1. Fourth house
+2. Fourth lord
+3. Moon
+4. Tenth house
+5. Eleventh house
+6. Seasonal influences
+
+Benefics indicate prosperity and successful outcome.
+
+Malefic affliction indicates delay, loss or struggle.
+
+
+CHAPTER IV
+GAIN OF MONEY, GENERAL OUTLOOK AND THOUGHT READING
+
+GAIN OF MONEY
+
+Stanza 1:
+
+Questions concerning gain of money should be judged from the second house, eleventh house, their lords and benefic influences.
+
+Stanza 2:
+
+If the second and eleventh houses are strong and associated with benefics, gain of wealth should be predicted.
+
+Stanza 3:
+
+If the lords of the second and eleventh combine favourably, prosperity and fulfilment of financial expectations may result.
+
+NOTES
+
+For money-related questions examine:
+
+1. Second house — stored wealth
+2. Eleventh house — gains and profits
+3. Tenth house — profession
+4. Moon — flow of events
+5. Ascendant lord
+
+Benefic influence indicates:
+
+- Financial gain
+- Salary increase
+- Business success
+- Unexpected profit
+
+Malefic influence may indicate:
+
+- Delay in payment
+- Loss
+- Financial pressure
+- Unstable income
+
+Stanza 4:
+
+The overall outcome of any query should be judged from the ascendant, Moon and the relevant house concerned.
+
+Stanza 5:
+
+If benefics dominate the chart and significators gain strength, success should be predicted.
+
+Stanza 6:
+
+If malefics dominate and significators weaken, obstacles or disappointment may result.
+
+NOTES
+
+To judge the final outcome examine:
+
+1. Ascendant
+2. Ascendant lord
+3. Moon
+4. Relevant house
+5. House lord
+6. Benefic or malefic dominance
+
+Strong chart indicators:
+
+- Strong Moon
+- Benefics in Kendras
+- Strong ascendant lord
+- Relevant house strong
+
+Weak chart indicators:
+
+- Moon afflicted
+- Weak ascendant lord
+- Malefics dominating
+- Relevant house damaged
+
+Stanza 7:
+
+The thought in the mind of the querent should be judged from the Moon, ascendant and planets influencing them.
+
+Stanza 8:
+
+The astrologer should infer the nature of the query even before it is fully spoken.
+
+NOTES
+
+Moon is the key to thought reading.
+
+The Moon reveals:
+
+- Emotional state
+- Hidden concern
+- Immediate anxiety
+- Secret desire
+
+Planetary clues:
+
+Sun:
+- Authority
+- Career
+- Father
+- Reputation
+
+Moon:
+- Family
+- Mother
+- Emotions
+- Travel
+
+Mars:
+- Conflict
+- Anger
+- Injury
+- Property disputes
+
+Mercury:
+- Study
+- Communication
+- Trade
+- Documents
+
+Jupiter:
+- Finance
+- Children
+- Religion
+- Wisdom
+
+Venus:
+- Love
+- Marriage
+- Relationships
+- Luxury
+
+Saturn:
+- Fear
+- Delay
+- Work pressure
+- Loss
+
+Rahu/Ketu:
+- Confusion
+- Hidden fear
+- Foreign matters
+- Obsession
+
+Stanza 9:
+
+Questions concerning women should be judged from Venus, Moon and the seventh house.
+
+Stanza 10:
+
+Benefic influence indicates harmony while malefic influence indicates difficulty.
+
+NOTES
+
+Questions involving women may concern:
+
+- Marriage
+- Relationships
+- Emotional connection
+- Reconciliation
+- Trust
+
+Strong Venus and Moon indicate:
+
+- Harmony
+- Attraction
+- Emotional closeness
+
+Affliction indicates:
+
+- Misunderstanding
+- Separation
+- Emotional instability
+
+Stanza 11:
+
+Questions concerning rainfall, crops and public welfare should be judged from Moon, Jupiter and seasonal indications.
+
+Stanza 12:
+
+Benefic influence indicates prosperity while malefic dominance may indicate scarcity.
+
+NOTES
+
+Moon:
+- Rainfall
+- Public emotion
+
+Jupiter:
+- Prosperity
+- Abundance
+
+Saturn/Mars:
+- Scarcity
+- Hardship
+
+Stanza 13:
+
+Judgement should finally be confirmed through Tajaka aspects and yogas.
+
+NOTES
+
+Important Tajaka aspects:
+
+Conjunction → 0°  
+Sextile → 60°  
+Square → 90°  
+Trine → 120°  
+Opposition → 180°
+
+Important principle:
+
+Applying aspect → event moving toward manifestation
+
+Separating aspect → event moving away
+
+Closer aspect = stronger result
+
+The astrologer should combine:
+
+- House judgement
+- Planetary strength
+- Moon’s condition
+- Tajaka yogas
+- Benefic/malefic influence
+- Timing methods
+
+No prediction should be made from one factor alone.
+
+Repeated indications confirm the result.
+
+Compassion, wisdom and responsibility are essential in giving predictions.
+

@@ -1,0 +1,2504 @@
+{
+  "source_file": "D:\\New folder\\B.V.Raman - Raman Publication.txt",
+  "total_stanza_blocks_detected": 311,
+  "unclassified_blocks": 0,
+  "bucket_counts": {
+    "editorial_noncomputational": 4,
+    "planet_house_signification_reference": 19,
+    "core_house_rules": 274,
+    "deity_curse": 2,
+    "master_servant": 23,
+    "meals": 4,
+    "sports": 1,
+    "disputes": 71,
+    "crops_trade": 21,
+    "purchase_sale": 14,
+    "dreams": 17,
+    "ships": 55,
+    "rumours": 3,
+    "sexual_matters": 10,
+    "women_enquiry": 35,
+    "hunting": 0,
+    "incarceration": 3,
+    "lost_objects": 13,
+    "traveler": 20,
+    "misc_weather_thought": 19
+  },
+  "rows": [
+    {
+      "stanza": 3,
+      "buckets": [
+        "editorial_noncomputational"
+      ],
+      "excerpt": "Stanza 3: One should approach a learned astrologer of pleasant disposition, early in the morning, with fruits, flowers and money and facing the east and after making due obeisance to the astrologer, put only one question of an auspicious nature. NOTES Accor"
+    },
+    {
+      "stanza": 4,
+      "buckets": [
+        "editorial_noncomputational"
+      ],
+      "excerpt": "Stanza 4: The predictions of one well-versed in the ten kinds of calculating planetary longitudes and proficient in astrological lore cannot go wrong. NOTES There is no need to explain the different astronomical methods of calculating planetary dispositions"
+    },
+    {
+      "stanza": 5,
+      "buckets": [
+        "editorial_noncomputational"
+      ],
+      "excerpt": "Stanza 5: In the hands of men of learning, culture and humility, successful results alone are possible. NOTES The Jatakaranava says: \u201cAccording to God Siva\u2019s own words, predictions should not be given to persons who are mean, arrogant, atheistic, violent a"
+    },
+    {
+      "stanza": 1,
+      "buckets": [
+        "core_house_rules",
+        "editorial_noncomputational",
+        "women_enquiry"
+      ],
+      "excerpt": "Stanza 1: Whether the person is sincere or not in putting the question should first be ascertained on the strength of the ascendant. The astrologer should then study the good and bad aspects of the query and his prediction will be duly inspired. Stanzas 2 t"
+    },
+    {
+      "stanza": 7,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 7: One should predict by examining the ten planetary states such as Deeptha, etc., and such a prediction will not go wrong. NOTES The ten avasthas are: 1. Deeptha \u2014 exaltation 2. Deena \u2014 debilitation 3. Muditha \u2014 friendly sign 4. Swastha \u2014 own"
+    },
+    {
+      "stanza": 11,
+      "buckets": [
+        "planet_house_signification_reference"
+      ],
+      "excerpt": "Stanza 11: The Sun signifies east, sattwic nature, royalty, father, Kshatriya caste, heat, blood-red colour, wavering temperament, honey-coloured eyes, phlegm, minerals, courage and thin hair."
+    },
+    {
+      "stanza": 12,
+      "buckets": [
+        "misc_weather_thought",
+        "planet_house_signification_reference",
+        "ships"
+      ],
+      "excerpt": "Stanza 12: The Moon signifies phlegm, rainy season, softness, mother, milk (white colour), sattwic nature, living beings, Vaisya caste, swiftness, circular shape, wind and charming eyes."
+    },
+    {
+      "stanza": 13,
+      "buckets": [
+        "ships"
+      ],
+      "excerpt": "Stanza 13: Mars indicates Greeshma (June\u2013July) season, Kshatriya caste, blood-red, south, commander-in-chief, wavering nature, youthfulness, dhatu (minerals), white eyes, cruelty and bilious constitution. PLANETARY INDICATIONS"
+    },
+    {
+      "stanza": 14,
+      "buckets": [
+        "planet_house_signification_reference",
+        "ships"
+      ],
+      "excerpt": "Stanza 14: Mercury signifies Sarat season (October\u2013November), bluish hue, tall body, impotence, moola (minerals), hair apparent, ability in writing, north, Sudra caste, a mixture of windy, phlegmatic and bilious natures."
+    },
+    {
+      "stanza": 15,
+      "buckets": [
+        "core_house_rules",
+        "planet_house_signification_reference"
+      ],
+      "excerpt": "Stanza 15: Jupiter rules sattwic nature, wealth, cold, phlegmatic constitution, tall body, prime-minister, Brahmins, male sex, midday, north-east and honey-coloured eyes."
+    },
+    {
+      "stanza": 16,
+      "buckets": [
+        "meals",
+        "planet_house_signification_reference",
+        "women_enquiry"
+      ],
+      "excerpt": "Stanza 16: Venus signifies peace, Brahmin, women subordinates, prime-minister, wavering nature, white colour, south-east, phlegmatic constitution, sour taste and curly hair."
+    },
+    {
+      "stanza": 17,
+      "buckets": [
+        "planet_house_signification_reference",
+        "ships"
+      ],
+      "excerpt": "Stanza 17: Saturn signifies black colour, sinful nature, weakness, old age, impotence, minerals, untouchables, remissness, Sisira season (March\u2013April), wind, cruel nature, west and windy constitution."
+    },
+    {
+      "stanza": 18,
+      "buckets": [
+        "core_house_rules",
+        "crops_trade",
+        "disputes",
+        "lost_objects",
+        "misc_weather_thought",
+        "planet_house_signification_reference",
+        "rumours",
+        "ships",
+        "women_enquiry"
+      ],
+      "excerpt": "Stanza 18: Rahu signifies dhatu, tuft of hair, vegetables (moola) and events indicated by Saturn, becomes strong in a Kendra from Mercury or the ascendant. NOTES The Karakatwas of planets listed here are fairly exhaustive. They will be highly useful in ans"
+    },
+    {
+      "stanza": 19,
+      "buckets": [
+        "planet_house_signification_reference"
+      ],
+      "excerpt": "Stanza 19: From the first house is to be discovered one\u2019s happiness, longevity, age, caste, health, disposition, nature, sorrow, appearance and complexion."
+    },
+    {
+      "stanza": 20,
+      "buckets": [
+        "core_house_rules",
+        "planet_house_signification_reference"
+      ],
+      "excerpt": "Stanza 20: The second house rules pearls, precious stones and minerals and wealth, apparel, work pertaining to horses and roads."
+    },
+    {
+      "stanza": 21,
+      "buckets": [
+        "core_house_rules",
+        "master_servant",
+        "planet_house_signification_reference"
+      ],
+      "excerpt": "Stanza 21: The third house rules sisters, brothers, servants and those that perform menial work."
+    },
+    {
+      "stanza": 22,
+      "buckets": [
+        "planet_house_signification_reference"
+      ],
+      "excerpt": "Stanza 22: The fourth rules tracts of land, places where plants are thrashed, tracts abounding in vegetation, special medicines, treasure-troves and crevices."
+    },
+    {
+      "stanza": 23,
+      "buckets": [
+        "core_house_rules",
+        "planet_house_signification_reference",
+        "ships"
+      ],
+      "excerpt": "Stanza 23: The fifth house has rulership over pregnancy, issues, wanderings, spells and incantations, arbitration, learning, intelligence and discourses."
+    },
+    {
+      "stanza": 24,
+      "buckets": [
+        "core_house_rules",
+        "master_servant"
+      ],
+      "excerpt": "Stanza 24: The sixth house denotes fear from thieves, enemies, fighting, donkeys, diabolical deeds, maternal uncle, fear and obstruction and servants."
+    },
+    {
+      "stanza": 25,
+      "buckets": [
+        "core_house_rules",
+        "crops_trade",
+        "disputes",
+        "purchase_sale",
+        "traveler"
+      ],
+      "excerpt": "Stanza 25: From the seventh house should be read trade, transactions, disputes, journeys, and wife or husband."
+    },
+    {
+      "stanza": 26,
+      "buckets": [
+        "core_house_rules",
+        "lost_objects",
+        "planet_house_signification_reference",
+        "ships"
+      ],
+      "excerpt": "Stanza 26: The eighth house rules river-crossing, wayside suffering, hills, trouble from enemies, lost property, evil deeds, battles, diseases and clandestine deeds."
+    },
+    {
+      "stanza": 27,
+      "buckets": [
+        "deity_curse",
+        "planet_house_signification_reference",
+        "ships"
+      ],
+      "excerpt": "Stanza 27: The ninth house signifies tanks, wells, lakes, water reservoirs, deities, places of worship, maths, vows (penance), pilgrimage and righteousness."
+    },
+    {
+      "stanza": 28,
+      "buckets": [
+        "misc_weather_thought"
+      ],
+      "excerpt": "Stanza 28: Events to be ascertained from the tenth house are Government, authority, meritorious deeds, virtue, position, father, essential things, rainfall and celestial phenomena."
+    },
+    {
+      "stanza": 29,
+      "buckets": [
+        "core_house_rules",
+        "meals",
+        "planet_house_signification_reference"
+      ],
+      "excerpt": "Stanza 29: The eleventh house signifies elephant and horse-rides, clothes, staple food, gold, daughter and gain of wealth."
+    },
+    {
+      "stanza": 30,
+      "buckets": [
+        "disputes",
+        "planet_house_signification_reference"
+      ],
+      "excerpt": "Stanza 30: The twelfth house rules renunciation, enjoyment, disputes, charity, cultivation and institutional expenditure. NOTES The significations given to the planets as above differ from the significations suggested in books on Parasari Astrology. The ni"
+    },
+    {
+      "stanza": 1,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 1: If the lord of the ascendant occupies the ascendant and the Moon aspects it, the object of the query will be fulfilled."
+    },
+    {
+      "stanza": 2,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 2: If the lord of the ascendant is in a Kendra or Trikona and is associated with or aspected by benefics, success in the matter queried about will result."
+    },
+    {
+      "stanza": 3,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 3: If the lord of the ascendant is weak, occupies the 6th, 8th or 12th house, and is afflicted by malefics, failure in the undertaking should be predicted."
+    },
+    {
+      "stanza": 4,
+      "buckets": [
+        "core_house_rules",
+        "misc_weather_thought"
+      ],
+      "excerpt": "Stanza 4: When the Moon is strong and associated with benefics, the object desired will be realised quickly. If the Moon is weak, waning, afflicted or hemmed between malefics, obstacles, delay or disappointment may occur. NOTES The ascendant and its lord a"
+    },
+    {
+      "stanza": 5,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 5: If benefics occupy Kendras and Trikonas while malefics are relegated to unfavourable houses, favourable results may be expected."
+    },
+    {
+      "stanza": 6,
+      "buckets": [
+        "core_house_rules",
+        "disputes"
+      ],
+      "excerpt": "Stanza 6: When the significator of the matter concerned joins or aspects the ascendant lord favourably, the desired object will materialise. If the aspect is inimical, obstacles and disappointments may arise. NOTES In horary astrology, aspects play a major"
+    },
+    {
+      "stanza": 7,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 7: A house becomes strong when occupied or aspected by benefics, when its lord is strong, and when free from malefic affliction."
+    },
+    {
+      "stanza": 8,
+      "buckets": [
+        "core_house_rules",
+        "disputes",
+        "ships",
+        "women_enquiry"
+      ],
+      "excerpt": "Stanza 8: A house becomes weak if occupied or aspected by malefics, if its lord is debilitated, combust, defeated or placed in evil houses. NOTES The house relevant to the query must be examined thoroughly. For example: Marriage \u2014 7th house Children \u2014 5"
+    },
+    {
+      "stanza": 9,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 9: If the ascendant is occupied or aspected by benefics and its lord is strong, the querent will enjoy health, happiness and success."
+    },
+    {
+      "stanza": 10,
+      "buckets": [
+        "core_house_rules",
+        "misc_weather_thought"
+      ],
+      "excerpt": "Stanza 10: If the ascendant lord occupies a Kendra or Trikona, unafflicted and endowed with strength, the object in mind of the querent will be fulfilled."
+    },
+    {
+      "stanza": 11,
+      "buckets": [
+        "core_house_rules",
+        "ships"
+      ],
+      "excerpt": "Stanza 11: If the ascendant or its lord is associated with malefics, debilitated, combust or weak, bodily suffering, anxiety and failure may be predicted. NOTES The ascendant represents: - The querent himself - Physical body - Health - Mental disposition -"
+    },
+    {
+      "stanza": 12,
+      "buckets": [
+        "core_house_rules",
+        "ships"
+      ],
+      "excerpt": "Stanza 12: If benefics occupy or aspect the ascendant and the Moon is strong, health improves and disease diminishes."
+    },
+    {
+      "stanza": 13,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 13: If malefics occupy the ascendant, the sixth or eighth houses and afflict the Moon, illness becomes serious."
+    },
+    {
+      "stanza": 14,
+      "buckets": [
+        "core_house_rules",
+        "misc_weather_thought",
+        "ships"
+      ],
+      "excerpt": "Stanza 14: When the ascendant lord joins benefics and avoids association with the lords of the sixth, eighth or twelfth, recovery should be predicted. NOTES In health-related queries, the following should be carefully examined: 1. Ascendant and ascendant l"
+    },
+    {
+      "stanza": 15,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 15: If the ascendant lord is strong and associated with benefics, danger passes and longevity is protected."
+    },
+    {
+      "stanza": 16,
+      "buckets": [
+        "core_house_rules",
+        "disputes"
+      ],
+      "excerpt": "Stanza 16: If the ascendant lord is weak, afflicted and connected with the eighth house or its lord, danger, suffering or fear should be judged. NOTES Care should be taken before making grave predictions concerning life and death. The astrologer should wei"
+    },
+    {
+      "stanza": 17,
+      "buckets": [
+        "core_house_rules",
+        "planet_house_signification_reference"
+      ],
+      "excerpt": "Stanza 17: If the lord of the ascendant and the significator of the matter join, aspect each other favourably, or form Ithasala Yoga, success is promised. If hostile aspects intervene, obstacles or delay may arise. NOTES One of the most important rules in"
+    },
+    {
+      "stanza": 18,
+      "buckets": [
+        "core_house_rules",
+        "disputes",
+        "meals"
+      ],
+      "excerpt": "Stanza 18: From the second house should be judged wealth, family, speech, food, precious articles, accumulated money and valuables."
+    },
+    {
+      "stanza": 19,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 19: If the second house, its lord and significator are strong and associated with benefics, gain of wealth and prosperity should be predicted."
+    },
+    {
+      "stanza": 20,
+      "buckets": [
+        "core_house_rules",
+        "disputes",
+        "meals"
+      ],
+      "excerpt": "Stanza 20: If the second lord occupies a Kendra or Trikona and is associated with benefics, the querent gains money and valuable possessions. NOTES The second house chiefly governs: - Wealth - Savings - Family - Speech - Food - Precious stones - Gold, jewe"
+    },
+    {
+      "stanza": 21,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 21: If benefics occupy or aspect the second house, wealth increases and gain may be expected."
+    },
+    {
+      "stanza": 22,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 22: If malefics occupy or afflict the second house, financial loss, debts or obstacles in obtaining wealth may arise."
+    },
+    {
+      "stanza": 23,
+      "buckets": [
+        "core_house_rules",
+        "lost_objects"
+      ],
+      "excerpt": "Stanza 23: If the lord of the second joins the eleventh lord or receives benefic influence, increase of money should be expected. NOTES The 11th house is the house of gains. Therefore: 2nd house = accumulated wealth 11th house = incoming gains When the"
+    },
+    {
+      "stanza": 24,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 24: If the second lord is strong and receives benefic aspects, lost wealth or articles may be recovered."
+    },
+    {
+      "stanza": 25,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 25: If the second house and its lord are severely afflicted by malefics, recovery becomes doubtful."
+    },
+    {
+      "stanza": 26,
+      "buckets": [
+        "core_house_rules",
+        "lost_objects",
+        "traveler"
+      ],
+      "excerpt": "Stanza 26: If the Moon applies favourably to the significator, the lost article may return quickly. NOTES Questions concerning: - Lost money - Jewellery - Missing valuables - Theft must be examined from: 1. Second house (wealth) 2. Fourth house (property"
+    },
+    {
+      "stanza": 27,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 27: If benefics influence the second house, harmony prevails in the family and speech becomes pleasant."
+    },
+    {
+      "stanza": 28,
+      "buckets": [
+        "core_house_rules",
+        "disputes"
+      ],
+      "excerpt": "Stanza 28: If malefics influence the second house, harsh speech, disputes and misunderstandings arise. NOTES The second house also governs: - Family environment - Speech and communication - Eating habits - Moral values Benefic influence gives polite speec"
+    },
+    {
+      "stanza": 29,
+      "buckets": [
+        "core_house_rules",
+        "disputes",
+        "master_servant",
+        "traveler"
+      ],
+      "excerpt": "Stanza 29: From the third house should be judged brothers, sisters, courage, effort, servants, communications and short journeys."
+    },
+    {
+      "stanza": 30,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 30: If the third house and its lord are strong and associated with benefics, happiness through brothers and success through effort should be predicted."
+    },
+    {
+      "stanza": 31,
+      "buckets": [
+        "core_house_rules",
+        "disputes",
+        "master_servant"
+      ],
+      "excerpt": "Stanza 31: If the third lord occupies a Kendra or Trikona and receives benefic aspects, brothers prosper and assistance comes from relatives. NOTES The third house governs: - Brothers and sisters - Courage - Initiative - Communication - Writing - Servants"
+    },
+    {
+      "stanza": 32,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 32: If benefics occupy or aspect the third house, harmony and affection among siblings may be expected."
+    },
+    {
+      "stanza": 33,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 33: If malefics occupy or afflict the third house, quarrels, separation or suffering through brothers may arise."
+    },
+    {
+      "stanza": 34,
+      "buckets": [
+        "core_house_rules",
+        "disputes",
+        "ships"
+      ],
+      "excerpt": "Stanza 34: If the third lord joins benefics, the welfare of brothers is assured. If afflicted by malefics, brothers may suffer illness, danger or misfortune. NOTES Questions about: - Younger brothers - Sisters - Relationship with siblings - Missing siblin"
+    },
+    {
+      "stanza": 35,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 35: If the lord of the ascendant connects favourably with the third lord, success through courage and personal effort should be predicted."
+    },
+    {
+      "stanza": 36,
+      "buckets": [
+        "core_house_rules",
+        "ships"
+      ],
+      "excerpt": "Stanza 36: If the third lord is weak, combust, debilitated or afflicted, efforts may fail or produce only partial success. NOTES The third house is called the house of initiative. Strong third house: - Confidence - Entrepreneurship - Determination - Succe"
+    },
+    {
+      "stanza": 37,
+      "buckets": [
+        "core_house_rules",
+        "rumours"
+      ],
+      "excerpt": "Stanza 37: Benefic influence on the third house indicates successful travel, favourable news and support from associates."
+    },
+    {
+      "stanza": 38,
+      "buckets": [
+        "core_house_rules",
+        "disputes",
+        "rumours"
+      ],
+      "excerpt": "Stanza 38: Malefic influence may indicate delays, disputes, bad news or obstacles in communication. NOTES The third house also governs: - Letters - Communication - Messages - Documents - Nearby movement - Business trips In modern interpretation, this may"
+    },
+    {
+      "stanza": 39,
+      "buckets": [
+        "core_house_rules",
+        "disputes"
+      ],
+      "excerpt": "Stanza 39: From the fourth house should be judged lands, houses, conveyances, mother, domestic happiness, hidden treasures and immovable property."
+    },
+    {
+      "stanza": 40,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 40: If the fourth house and its lord are strong and associated with benefics, happiness through house, property and domestic matters should be predicted."
+    },
+    {
+      "stanza": 41,
+      "buckets": [
+        "core_house_rules",
+        "crops_trade",
+        "disputes"
+      ],
+      "excerpt": "Stanza 41: If the fourth lord occupies a Kendra or Trikona and receives benefic influence, gain of property, residence or conveyance may result. NOTES The fourth house governs: - House and residence - Land and agriculture - Property and real estate - Vehic"
+    },
+    {
+      "stanza": 42,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 42: If benefics occupy or aspect the fourth house, gain of land, buildings and prosperity may be expected."
+    },
+    {
+      "stanza": 43,
+      "buckets": [
+        "core_house_rules",
+        "purchase_sale"
+      ],
+      "excerpt": "Stanza 43: If the fourth lord joins benefics and occupies a favourable house, purchase or acquisition of property is indicated."
+    },
+    {
+      "stanza": 44,
+      "buckets": [
+        "core_house_rules",
+        "disputes",
+        "misc_weather_thought",
+        "purchase_sale"
+      ],
+      "excerpt": "Stanza 44: If the fourth house or its lord is afflicted by malefics, disputes over land, obstacles in obtaining property or loss may arise. NOTES Property questions should be judged from: 1. Fourth house 2. Fourth lord 3. Mars (land/property) 4. Moon (comf"
+    },
+    {
+      "stanza": 45,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 45: If benefics influence the fourth house and its lord is strong, acquisition of vehicles and comforts may be predicted."
+    },
+    {
+      "stanza": 46,
+      "buckets": [
+        "core_house_rules",
+        "planet_house_signification_reference",
+        "sports",
+        "women_enquiry"
+      ],
+      "excerpt": "Stanza 46: If malefics influence the fourth house, troubles concerning conveyances, accidents or expenses may arise. NOTES In ancient texts: Elephants, horses and chariots represented vehicles. In modern interpretation this includes: - Cars - Motorbikes"
+    },
+    {
+      "stanza": 47,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 47: If benefics occupy or aspect the fourth house, happiness through mother and domestic harmony may be expected."
+    },
+    {
+      "stanza": 48,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 48: If malefics afflict the fourth house, illness to mother, emotional suffering or domestic troubles may occur. NOTES Questions concerning mother should examine: 1. Fourth house 2. Fourth lord 3. Moon (natural significator of mother) 4. Condition o"
+    },
+    {
+      "stanza": 49,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 49: If the fourth lord is strong and associated with benefics, recovery of hidden objects or gain from buried wealth may occur."
+    },
+    {
+      "stanza": 50,
+      "buckets": [
+        "core_house_rules",
+        "disputes"
+      ],
+      "excerpt": "Stanza 50: If afflicted by malefics, recovery becomes doubtful. NOTES In horary, the fourth house is important for: - Lost household items - Hidden valuables - Buried objects - Real estate documents - Missing property within the home For property-related"
+    },
+    {
+      "stanza": 51,
+      "buckets": [
+        "core_house_rules",
+        "disputes"
+      ],
+      "excerpt": "Stanza 51: From the fifth house should be judged children, pregnancy, intelligence, learning, merit from previous births, mantras and emotional attachments."
+    },
+    {
+      "stanza": 52,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 52: If the fifth house and its lord are strong and associated with benefics, happiness through children and success in educational matters should be predicted."
+    },
+    {
+      "stanza": 53,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 53: If the fifth lord occupies a Kendra or Trikona and receives benefic aspects, childbirth, learning and prosperity may result. NOTES The fifth house governs: - Children - Pregnancy - Love and romance - Intelligence - Education - Creativity - Specu"
+    },
+    {
+      "stanza": 54,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 54: If benefics occupy or aspect the fifth house and its lord is strong, childbirth may be predicted."
+    },
+    {
+      "stanza": 55,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 55: If the fifth lord joins benefics and avoids affliction from malefics, safe delivery and happiness through children are indicated."
+    },
+    {
+      "stanza": 56,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 56: If the fifth house or its lord is afflicted by malefics, miscarriage, delay in conception or anxiety regarding children may occur. NOTES Questions concerning childbirth should examine: 1. Fifth house 2. Fifth lord 3. Jupiter (natural significato"
+    },
+    {
+      "stanza": 57,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 57: If benefics influence the fifth house, children prosper and happiness results."
+    },
+    {
+      "stanza": 58,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 58: If malefics influence the fifth house, suffering, illness or trouble to children may occur. NOTES Questions about children should assess: - Strength of fifth lord - Occupants of fifth house - Jupiter - Moon Strong benefic combinations indicate:"
+    },
+    {
+      "stanza": 59,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 59: If the fifth lord joins Mercury or Jupiter favourably, success in learning, scriptures and education should be predicted."
+    },
+    {
+      "stanza": 60,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 60: If afflicted, interruptions in education, confusion or poor concentration may arise. NOTES The fifth house governs: - Education - Memory - Intelligence - Analytical ability - Spiritual learning - Mantras and sacred knowledge Mercury supports:"
+    },
+    {
+      "stanza": 61,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 61: Benefic influence on the fifth house indicates success in affection, romance and emotional happiness."
+    },
+    {
+      "stanza": 62,
+      "buckets": [
+        "core_house_rules",
+        "ships"
+      ],
+      "excerpt": "Stanza 62: Malefic influence creates disappointment, emotional disturbance or instability in relationships. NOTES Modern interpretation of the fifth house includes: - Romantic relationships - Dating - Emotional bonding - Creative arts - Entertainment - Inv"
+    },
+    {
+      "stanza": 63,
+      "buckets": [
+        "core_house_rules",
+        "disputes",
+        "master_servant",
+        "ships"
+      ],
+      "excerpt": "Stanza 63: From the sixth house should be judged disease, enemies, debts, disputes, obstacles, wounds, servants and fear from opponents."
+    },
+    {
+      "stanza": 64,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 64: If the sixth house and its lord are strong and afflicted by malefics, enemies become powerful and troubles increase."
+    },
+    {
+      "stanza": 65,
+      "buckets": [
+        "core_house_rules",
+        "disputes",
+        "master_servant",
+        "ships"
+      ],
+      "excerpt": "Stanza 65: If benefics influence the sixth house or its lord, enemies are subdued and obstacles are removed. NOTES The sixth house governs: - Disease - Enemies - Litigation - Competition - Debts - Servants and employees - Daily struggle - Obstacles Unlike"
+    },
+    {
+      "stanza": 66,
+      "buckets": [
+        "core_house_rules",
+        "ships"
+      ],
+      "excerpt": "Stanza 66: If the ascendant lord is strong and benefics influence the sixth house, disease diminishes and recovery should be predicted."
+    },
+    {
+      "stanza": 67,
+      "buckets": [
+        "core_house_rules",
+        "ships"
+      ],
+      "excerpt": "Stanza 67: If the sixth lord afflicts the ascendant or Moon and joins malefics, disease becomes severe or prolonged."
+    },
+    {
+      "stanza": 68,
+      "buckets": [
+        "core_house_rules",
+        "ships"
+      ],
+      "excerpt": "Stanza 68: If benefics aspect the ascendant and Moon, relief and cure may occur. NOTES For health-related queries examine: 1. Ascendant 2. Ascendant lord 3. Sixth house (disease) 4. Sixth lord 5. Moon 6. Eighth house (danger) 7. Twelfth house (hospitalisat"
+    },
+    {
+      "stanza": 69,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 69: If malefics occupy the sixth house while the ascendant remains strong, victory over enemies should be predicted."
+    },
+    {
+      "stanza": 70,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 70: If the sixth lord is weak and afflicted, enemies lose strength."
+    },
+    {
+      "stanza": 71,
+      "buckets": [
+        "core_house_rules",
+        "disputes",
+        "master_servant"
+      ],
+      "excerpt": "Stanza 71: If the sixth lord combines with benefics and the ascendant lord is strong, success in disputes and competition results. NOTES The sixth house is highly important for: - Court cases - Competitions - Rivalries - Job conflicts - Business disputes"
+    },
+    {
+      "stanza": 69,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 69: If malefics occupy the sixth house while the ascendant remains strong, victory over enemies should be predicted."
+    },
+    {
+      "stanza": 70,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 70: If the sixth lord is weak and afflicted, enemies lose strength."
+    },
+    {
+      "stanza": 71,
+      "buckets": [
+        "core_house_rules",
+        "disputes",
+        "master_servant"
+      ],
+      "excerpt": "Stanza 71: If the sixth lord combines with benefics and the ascendant lord is strong, success in disputes and competition results. NOTES The sixth house is highly important for: - Court cases - Competitions - Rivalries - Job conflicts - Business disputes"
+    },
+    {
+      "stanza": 72,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 72: If the sixth lord is strong and associated with malefics, debts may increase."
+    },
+    {
+      "stanza": 73,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 73: If benefics influence the sixth house and second house favourably, repayment of debts may occur. NOTES For debt-related matters examine: 1. Sixth house (debts) 2. Second house (wealth) 3. Eleventh house (income) 4. Relevant significators Strong"
+    },
+    {
+      "stanza": 74,
+      "buckets": [
+        "core_house_rules",
+        "master_servant"
+      ],
+      "excerpt": "Stanza 74: If benefics influence the sixth house, servants and employees remain loyal and helpful."
+    },
+    {
+      "stanza": 75,
+      "buckets": [
+        "core_house_rules",
+        "disputes",
+        "master_servant"
+      ],
+      "excerpt": "Stanza 75: If malefics dominate, disputes, betrayal or problems through servants may arise. NOTES In modern interpretation, this includes: - Employees - Co-workers - Staff - Labourers - Daily work environment A strong sixth house may show efficient teamwo"
+    },
+    {
+      "stanza": 76,
+      "buckets": [
+        "core_house_rules",
+        "crops_trade",
+        "disputes",
+        "sexual_matters",
+        "ships",
+        "traveler"
+      ],
+      "excerpt": "Stanza 76: From the seventh house should be judged marriage, wife or husband, sexual union, agreements, partnerships, trade, journeys and dealings with others."
+    },
+    {
+      "stanza": 77,
+      "buckets": [
+        "core_house_rules",
+        "ships"
+      ],
+      "excerpt": "Stanza 77: If the seventh house and its lord are strong and associated with benefics, marriage, partnerships and agreements become favourable."
+    },
+    {
+      "stanza": 78,
+      "buckets": [
+        "core_house_rules",
+        "crops_trade",
+        "sexual_matters",
+        "ships"
+      ],
+      "excerpt": "Stanza 78: If the seventh lord occupies a Kendra or Trikona and receives benefic influence, success in marriage and harmony in relationships should be predicted. NOTES The seventh house governs: - Marriage - Husband or wife - Romantic partnership - Sexual"
+    },
+    {
+      "stanza": 79,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 79: If benefics occupy or aspect the seventh house, marriage takes place happily."
+    },
+    {
+      "stanza": 80,
+      "buckets": [
+        "core_house_rules",
+        "sexual_matters"
+      ],
+      "excerpt": "Stanza 80: If the lord of the ascendant and the lord of the seventh combine harmoniously, marriage or reunion should be predicted."
+    },
+    {
+      "stanza": 81,
+      "buckets": [
+        "core_house_rules",
+        "ships",
+        "women_enquiry"
+      ],
+      "excerpt": "Stanza 81: If the seventh lord is afflicted by malefics, debilitated or combust, delay or difficulty in marriage may arise. NOTES Marriage questions should examine: 1. Seventh house 2. Seventh lord 3. Venus 4. Moon 5. Ascendant lord 6. Relationship between"
+    },
+    {
+      "stanza": 82,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 82: If benefics influence the seventh house, affection and mutual understanding prevail between husband and wife."
+    },
+    {
+      "stanza": 83,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 83: If malefics influence the seventh house, quarrels, mistrust or separation may arise. NOTES Benefic influence indicates: - Harmony - Loyalty - Emotional closeness - Mutual support Malefic influence may show: - Frequent arguments - Emotional dis"
+    },
+    {
+      "stanza": 84,
+      "buckets": [
+        "core_house_rules",
+        "ships"
+      ],
+      "excerpt": "Stanza 84: If benefics influence the seventh house and its lord is strong, partnerships and business dealings succeed."
+    },
+    {
+      "stanza": 85,
+      "buckets": [
+        "core_house_rules",
+        "disputes"
+      ],
+      "excerpt": "Stanza 85: If afflicted by malefics, betrayal, losses or disputes through partners may occur. NOTES Modern interpretation includes: - Business partners - Contracts - Clients - Collaborations - Joint ventures A strong seventh house supports: - Trustworthy"
+    },
+    {
+      "stanza": 86,
+      "buckets": [
+        "core_house_rules",
+        "traveler"
+      ],
+      "excerpt": "Stanza 86: If the seventh lord joins benefics and connects favourably with the ascendant lord, a person who has gone away may return."
+    },
+    {
+      "stanza": 87,
+      "buckets": [
+        "core_house_rules",
+        "sexual_matters",
+        "traveler"
+      ],
+      "excerpt": "Stanza 87: If the seventh house suffers affliction and malefics obstruct the significator, delay or non-return may be predicted. NOTES The seventh house is important for: - Missing persons - Return of spouse - Reunion - Travel-related questions - Foreign m"
+    },
+    {
+      "stanza": 88,
+      "buckets": [
+        "core_house_rules",
+        "ships",
+        "women_enquiry"
+      ],
+      "excerpt": "Stanza 88: If Venus, Moon and the seventh lord are strong and associated with benefics, pleasure and fulfilment in relationships should be predicted."
+    },
+    {
+      "stanza": 89,
+      "buckets": [
+        "core_house_rules",
+        "misc_weather_thought",
+        "sexual_matters",
+        "ships",
+        "women_enquiry"
+      ],
+      "excerpt": "Stanza 89: If afflicted, dissatisfaction or emotional strain may occur. NOTES Venus plays a major role in questions involving: - Attraction - Romance - Sexual compatibility - Emotional bonding For seventh house questions examine: 1. Seventh house 2. Seve"
+    },
+    {
+      "stanza": 90,
+      "buckets": [
+        "disputes"
+      ],
+      "excerpt": "Stanza 90: From the eighth house should be judged longevity, danger, death, hidden matters, fear, obstacles, scandals, suffering and sudden events."
+    },
+    {
+      "stanza": 91,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 91: If the eighth house and its lord are strong and associated with benefics, dangers pass away and protection results."
+    },
+    {
+      "stanza": 92,
+      "buckets": [
+        "core_house_rules",
+        "ships"
+      ],
+      "excerpt": "Stanza 92: If the eighth lord is weak, afflicted or associated with malefics, danger, anxiety and suffering should be predicted. NOTES The eighth house governs: - Longevity - Sudden events - Accidents - Fear and anxiety - Transformation - Hidden matters -"
+    },
+    {
+      "stanza": 93,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 93: If benefics occupy or aspect the eighth house, danger may be overcome and recovery becomes possible."
+    },
+    {
+      "stanza": 94,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 94: If malefics dominate the eighth house while the ascendant and Moon are weak, serious suffering may arise."
+    },
+    {
+      "stanza": 95,
+      "buckets": [
+        "core_house_rules",
+        "women_enquiry"
+      ],
+      "excerpt": "Stanza 95: If the ascendant lord combines favourably with benefics, protection and escape from danger should be predicted. NOTES For longevity and danger-related questions examine: 1. Ascendant 2. Ascendant lord 3. Eighth house 4. Eighth lord 5. Moon 6. Be"
+    },
+    {
+      "stanza": 96,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 96: If benefics influence the eighth house, hidden matters may be revealed favourably."
+    },
+    {
+      "stanza": 97,
+      "buckets": [
+        "core_house_rules",
+        "ships"
+      ],
+      "excerpt": "Stanza 97: If malefics influence the eighth house, deception, fear or concealed troubles may arise. NOTES The eighth house governs: - Secrets - Hidden enemies - Mysteries - Occult subjects - Research - Underground matters - Confidential dealings Strong be"
+    },
+    {
+      "stanza": 98,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 98: If the eighth lord combines with malefics, sudden losses or setbacks may occur."
+    },
+    {
+      "stanza": 99,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 99: If benefics aspect the significator, recovery from losses becomes possible. NOTES The eighth house often creates: - Delays - Fear - Emotional suffering - Financial shocks - Unexpected reversals However, benefic influence can convert crisis into"
+    },
+    {
+      "stanza": 100,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 100: If the eighth lord is strong and associated with benefics, gain through inheritance or another\u2019s resources may occur."
+    },
+    {
+      "stanza": 101,
+      "buckets": [
+        "core_house_rules",
+        "disputes",
+        "ships"
+      ],
+      "excerpt": "Stanza 101: If afflicted, disputes concerning inheritance or blocked resources may arise. NOTES Modern interpretation includes: - Insurance - Tax matters - Shared finances - Inheritance - Settlements - Legal compensation For eighth house questions examine"
+    },
+    {
+      "stanza": 102,
+      "buckets": [
+        "disputes"
+      ],
+      "excerpt": "Stanza 102: From the ninth house should be judged fortune, religion, father, teachers, blessings, pilgrimage, virtue and higher wisdom."
+    },
+    {
+      "stanza": 103,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 103: If the ninth house and its lord are strong and associated with benefics, prosperity, fortune and divine grace should be predicted."
+    },
+    {
+      "stanza": 104,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 104: If the ninth lord occupies a Kendra or Trikona and receives benefic influence, success in righteous actions and blessings from elders may result. NOTES The ninth house governs: - Fortune and luck - Father - Guru or teacher - Religion and spirit"
+    },
+    {
+      "stanza": 105,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 105: If benefics occupy or aspect the ninth house, happiness through father, elders and teachers may be expected."
+    },
+    {
+      "stanza": 106,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 106: If the ninth lord is afflicted by malefics, suffering, illness or separation involving father may occur. NOTES Questions concerning father should examine: 1. Ninth house 2. Ninth lord 3. Sun (natural significator of father) 4. Condition of bene"
+    },
+    {
+      "stanza": 107,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 107: If the ascendant lord combines favourably with the ninth lord, fortune rises and success in undertakings should be predicted."
+    },
+    {
+      "stanza": 108,
+      "buckets": [
+        "core_house_rules",
+        "ships"
+      ],
+      "excerpt": "Stanza 108: If the ninth lord is weak, combust or afflicted, fortune may fail or progress may become delayed. NOTES The ninth house is the house of luck. A strong connection between: 1. Ascendant lord 2. Ninth lord often shows: - Unexpected support - Su"
+    },
+    {
+      "stanza": 109,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 109: If benefics influence the ninth house, success in religious matters, pilgrimage and spiritual practice should be predicted."
+    },
+    {
+      "stanza": 110,
+      "buckets": [
+        "traveler",
+        "women_enquiry"
+      ],
+      "excerpt": "Stanza 110: If afflicted, obstacles in pilgrimage or disturbance in faith may arise. NOTES The ninth house governs: - Temples - Spiritual teachers - Sacred rituals - Religious journeys - Faith - Philosophy Jupiter strongly supports spiritual growth. Moon"
+    },
+    {
+      "stanza": 111,
+      "buckets": [
+        "core_house_rules",
+        "traveler"
+      ],
+      "excerpt": "Stanza 111: If the ninth lord combines favourably with the twelfth or seventh house, long journeys or foreign travel may occur."
+    },
+    {
+      "stanza": 112,
+      "buckets": [
+        "core_house_rules",
+        "traveler"
+      ],
+      "excerpt": "Stanza 112: If afflicted by malefics, travel may be delayed or troublesome. NOTES For travel-related questions examine: 1. Ninth house (long-distance travel) 2. Twelfth house (foreign residence) 3. Seventh house (movement) 4. Moon 5. Relevant significators"
+    },
+    {
+      "stanza": 113,
+      "buckets": [
+        "disputes"
+      ],
+      "excerpt": "Stanza 113: From the tenth house should be judged profession, livelihood, authority, reputation, status, government matters and actions performed in the world."
+    },
+    {
+      "stanza": 114,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 114: If the tenth house and its lord are strong and associated with benefics, success in profession and honour should be predicted."
+    },
+    {
+      "stanza": 115,
+      "buckets": [
+        "core_house_rules",
+        "master_servant",
+        "ships"
+      ],
+      "excerpt": "Stanza 115: If the tenth lord occupies a Kendra or Trikona and receives benefic influence, advancement, recognition and prosperity in work may result. NOTES The tenth house governs: - Career - Profession - Livelihood - Job and business - Reputation - Fame"
+    },
+    {
+      "stanza": 116,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 116: If benefics occupy or aspect the tenth house, honour, success and professional progress should be predicted."
+    },
+    {
+      "stanza": 117,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 117: If the lord of the ascendant combines favourably with the tenth lord, career growth and fulfilment of ambitions may result."
+    },
+    {
+      "stanza": 118,
+      "buckets": [
+        "core_house_rules",
+        "master_servant"
+      ],
+      "excerpt": "Stanza 118: If the tenth lord is afflicted by malefics, combust or debilitated, obstacles in career or loss of status may arise. NOTES Career questions should examine: 1. Tenth house 2. Tenth lord 3. Ascendant lord 4. Sixth house (employment) 5. Eleventh h"
+    },
+    {
+      "stanza": 119,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 119: If benefics influence the tenth house, dealings with authority and government become favourable."
+    },
+    {
+      "stanza": 120,
+      "buckets": [
+        "core_house_rules",
+        "disputes",
+        "ships"
+      ],
+      "excerpt": "Stanza 120: If malefics afflict the tenth house, disputes with superiors or obstacles from authority may arise. NOTES The tenth house also governs: - Bosses - Government offices - Public institutions - Business leadership - Social standing - Public reputat"
+    },
+    {
+      "stanza": 121,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 121: If benefics influence the tenth house and Moon is strong, fame, honour and public appreciation may result."
+    },
+    {
+      "stanza": 122,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 122: If afflicted, criticism, humiliation or damage to reputation may occur. NOTES Public image depends on: 1. Tenth house 2. Tenth lord 3. Moon (public perception) 4. Sun (status) 5. Ascendant Benefic influence gives: - Respect - Recognition - So"
+    },
+    {
+      "stanza": 123,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 123: If the tenth lord connects with the twelfth or eighth house, change in profession or instability may occur."
+    },
+    {
+      "stanza": 124,
+      "buckets": [
+        "core_house_rules",
+        "master_servant"
+      ],
+      "excerpt": "Stanza 124: If the ascendant lord joins the tenth lord favourably after affliction, improvement through career change may result. NOTES Job change questions should examine: 1. Tenth house 2. Sixth house 3. Eighth house (sudden change) 4. Twelfth house (exi"
+    },
+    {
+      "stanza": 125,
+      "buckets": [
+        "core_house_rules",
+        "disputes"
+      ],
+      "excerpt": "Stanza 125: From the eleventh house should be judged gains, fulfilment of desires, profits, friends, elder siblings, prosperity and acquisitions."
+    },
+    {
+      "stanza": 126,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 126: If the eleventh house and its lord are strong and associated with benefics, gains and fulfilment of objectives should be predicted."
+    },
+    {
+      "stanza": 127,
+      "buckets": [
+        "core_house_rules",
+        "ships"
+      ],
+      "excerpt": "Stanza 127: If the eleventh lord occupies a Kendra or Trikona and receives benefic influence, increase in wealth and success in undertakings may result. NOTES The eleventh house governs: - Gains and profits - Income - Fulfilment of desires - Ambitions - El"
+    },
+    {
+      "stanza": 128,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 128: If benefics occupy or aspect the eleventh house, financial gain and prosperity may be expected."
+    },
+    {
+      "stanza": 129,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 129: If the eleventh lord joins the second lord favourably, increase in wealth and savings should be predicted."
+    },
+    {
+      "stanza": 130,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 130: If afflicted by malefics, gains become delayed or reduced. NOTES Financial questions should examine: 1. Eleventh house (gain) 2. Second house (stored wealth) 3. Tenth house (profession) 4. Ascendant lord 5. Moon Strong combinations indicate:"
+    },
+    {
+      "stanza": 131,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 131: If benefics influence the eleventh house, support from friends and associates may be expected."
+    },
+    {
+      "stanza": 132,
+      "buckets": [
+        "core_house_rules",
+        "ships"
+      ],
+      "excerpt": "Stanza 132: If malefics influence the eleventh house, betrayal, misunderstanding or disappointment through friends may arise. NOTES Modern interpretation includes: - Professional networks - Online communities - Mentors - Collaborators - Influential contact"
+    },
+    {
+      "stanza": 133,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 133: If benefics occupy or aspect the eleventh house, welfare and happiness through elder siblings may be predicted."
+    },
+    {
+      "stanza": 134,
+      "buckets": [
+        "core_house_rules",
+        "disputes"
+      ],
+      "excerpt": "Stanza 134: If the eleventh lord is afflicted, suffering, distance or misunderstandings involving elder siblings may arise. NOTES Questions concerning elder brothers or sisters should examine: 1. Eleventh house 2. Eleventh lord 3. Moon 4. Relevant signific"
+    },
+    {
+      "stanza": 135,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 135: If the ascendant lord combines favourably with the eleventh lord, fulfilment of wishes and achievement of goals may result."
+    },
+    {
+      "stanza": 136,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 136: If afflicted by malefics, hopes may be delayed or partially fulfilled. NOTES The eleventh house is often called: \u201cThe house of fulfilment.\u201d Strong benefic combinations support: - Goal achievement - Recognition - Social success - Opportunities"
+    },
+    {
+      "stanza": 137,
+      "buckets": [
+        "disputes",
+        "dreams"
+      ],
+      "excerpt": "Stanza 137: From the twelfth house should be judged expenditure, loss, confinement, foreign residence, sleep, hidden enemies, charity and liberation."
+    },
+    {
+      "stanza": 138,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 138: If the twelfth house and its lord are strong and associated with benefics, expenditure for noble purposes and spiritual growth may result."
+    },
+    {
+      "stanza": 139,
+      "buckets": [
+        "core_house_rules",
+        "dreams",
+        "incarceration"
+      ],
+      "excerpt": "Stanza 139: If the twelfth lord occupies favourable houses and receives benefic influence, foreign travel, peaceful isolation or spiritual progress may occur. NOTES The twelfth house governs: - Expenses - Financial loss - Foreign countries - Isolation - Sl"
+    },
+    {
+      "stanza": 140,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 140: If malefics occupy or afflict the twelfth house, unnecessary expenditure and financial loss may arise."
+    },
+    {
+      "stanza": 141,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 141: If benefics influence the twelfth house, expenses may occur for beneficial or auspicious purposes. NOTES Financial loss questions should examine: 1. Twelfth house (expenses) 2. Second house (wealth) 3. Eleventh house (income) 4. Eighth house (s"
+    },
+    {
+      "stanza": 142,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 142: If the twelfth lord combines favourably with the ninth or seventh lord, foreign travel or residence may occur."
+    },
+    {
+      "stanza": 143,
+      "buckets": [
+        "core_house_rules",
+        "ships",
+        "traveler"
+      ],
+      "excerpt": "Stanza 143: If afflicted by malefics, travel may involve hardship, delay or suffering. NOTES Foreign settlement questions should examine: 1. Twelfth house 2. Ninth house 3. Seventh house 4. Fourth house (leaving homeland) 5. Moon Benefic influence suggest"
+    },
+    {
+      "stanza": 144,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 144: If the twelfth house combines with the sixth and eighth under malefic influence, confinement, illness or suffering may arise."
+    },
+    {
+      "stanza": 145,
+      "buckets": [
+        "core_house_rules",
+        "disputes",
+        "incarceration"
+      ],
+      "excerpt": "Stanza 145: If benefics aspect the ascendant and Moon, relief and recovery should be predicted. NOTES The twelfth house may indicate: - Hospital stays - Imprisonment - Retreats - Solitude - Mental exhaustion - Secret enemies The astrologer should judge ca"
+    },
+    {
+      "stanza": 146,
+      "buckets": [
+        "core_house_rules",
+        "dreams"
+      ],
+      "excerpt": "Stanza 146: If benefics influence the twelfth house, peaceful sleep, meaningful dreams and spiritual inclination may occur."
+    },
+    {
+      "stanza": 147,
+      "buckets": [
+        "core_house_rules",
+        "dreams",
+        "traveler"
+      ],
+      "excerpt": "Stanza 147: If afflicted, disturbed sleep, anxiety or emotional suffering may arise. NOTES The twelfth house is deeply spiritual. Strong benefic influence may indicate: - Meditation - Detachment - Inner peace - Mystical experiences Affliction may indicat"
+    },
+    {
+      "stanza": 1,
+      "buckets": [
+        "core_house_rules",
+        "traveler"
+      ],
+      "excerpt": "Stanza 1: If the lord of the ascendant and the lord of the seventh are in mutual aspect or conjunction, the person who has gone away will return."
+    },
+    {
+      "stanza": 2,
+      "buckets": [
+        "core_house_rules",
+        "traveler"
+      ],
+      "excerpt": "Stanza 2: If benefics influence the ascendant, seventh house or their lords, return should be predicted quickly."
+    },
+    {
+      "stanza": 3,
+      "buckets": [
+        "core_house_rules",
+        "sexual_matters",
+        "ships",
+        "traveler"
+      ],
+      "excerpt": "Stanza 3: If malefics obstruct the ascendant lord, the seventh lord or the Moon, delay in return or obstacles may arise. NOTES Questions concerning a person who has gone away should mainly examine: 1. Ascendant \u2014 the querent 2. Seventh house \u2014 the absent p"
+    },
+    {
+      "stanza": 4,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 4: If benefics aspect the seventh house and Moon is strong, the absent person remains safe."
+    },
+    {
+      "stanza": 5,
+      "buckets": [
+        "core_house_rules",
+        "disputes",
+        "traveler"
+      ],
+      "excerpt": "Stanza 5: If the seventh house and Moon are severely afflicted by malefics, suffering or danger to the person may be indicated. NOTES Safety of the absent person should be judged carefully. Examine: 1. Seventh house 2. Seventh lord 3. Moon 4. Eighth house"
+    },
+    {
+      "stanza": 6,
+      "buckets": [
+        "core_house_rules",
+        "traveler"
+      ],
+      "excerpt": "Stanza 6: If the ascendant lord and seventh lord are approaching conjunction or favourable aspect, the person may return soon."
+    },
+    {
+      "stanza": 7,
+      "buckets": [
+        "core_house_rules",
+        "disputes",
+        "traveler"
+      ],
+      "excerpt": "Stanza 7: If separation between significators is large or obstructed by malefics, delay should be expected. NOTES Timing may be judged from: - Degrees separating significators - Strength of Moon - Nature of signs: Movable signs \u2192 quick result Common sig"
+    },
+    {
+      "stanza": 8,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 8: If the ascendant, Moon and significator are strong and associated with benefics, the absent person is alive."
+    },
+    {
+      "stanza": 9,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 9: If the seventh house and its lord receive benefic influence and avoid severe affliction, safety and continued life should be predicted."
+    },
+    {
+      "stanza": 10,
+      "buckets": [
+        "core_house_rules",
+        "disputes"
+      ],
+      "excerpt": "Stanza 10: If the eighth house, eighth lord and Moon are heavily afflicted by malefics and devoid of benefic influence, danger or death may be feared. NOTES This is one of the most delicate questions in horary astrology. The astrologer must exercise great"
+    },
+    {
+      "stanza": 11,
+      "buckets": [
+        "core_house_rules",
+        "women_enquiry"
+      ],
+      "excerpt": "Stanza 11: If Jupiter or Venus aspect the seventh house or Moon, protection should be predicted."
+    },
+    {
+      "stanza": 12,
+      "buckets": [
+        "core_house_rules",
+        "sexual_matters",
+        "traveler",
+        "women_enquiry"
+      ],
+      "excerpt": "Stanza 12: If the lord of the ascendant combines favourably with the seventh lord, reunion and safety may result. NOTES Jupiter is considered one of the strongest protective influences. Venus also softens difficult combinations. Benefic combinations indic"
+    },
+    {
+      "stanza": 13,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 13: If Saturn, Mars, Rahu or Ketu severely afflict the seventh house, Moon and eighth house, danger becomes stronger."
+    },
+    {
+      "stanza": 14,
+      "buckets": [
+        "core_house_rules",
+        "disputes",
+        "ships",
+        "traveler"
+      ],
+      "excerpt": "Stanza 14: If benefics fail to protect the significators, fear, suffering or loss may occur. NOTES Danger becomes more serious when: - Moon is weak - Ascendant lord is afflicted - Seventh lord is weak - Eighth house is heavily afflicted - Multiple malefics"
+    },
+    {
+      "stanza": 15,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 15: If the ascendant, ascendant lord and Moon are strong and associated with benefics, recovery from illness should be predicted."
+    },
+    {
+      "stanza": 16,
+      "buckets": [
+        "core_house_rules",
+        "ships"
+      ],
+      "excerpt": "Stanza 16: If the sixth house, sixth lord and Moon suffer severe affliction by malefics, disease becomes serious or prolonged."
+    },
+    {
+      "stanza": 17,
+      "buckets": [
+        "core_house_rules",
+        "misc_weather_thought",
+        "ships"
+      ],
+      "excerpt": "Stanza 17: If benefics influence the sixth house while the ascendant remains strong, relief and cure may occur. NOTES In questions relating to disease examine: 1. Ascendant \u2014 body and vitality 2. Ascendant lord 3. Moon \u2014 condition of mind and body 4. Sixth"
+    },
+    {
+      "stanza": 18,
+      "buckets": [
+        "core_house_rules",
+        "disputes",
+        "ships"
+      ],
+      "excerpt": "Stanza 18: The nature of disease should be judged from the planet influencing the sixth house and sixth lord."
+    },
+    {
+      "stanza": 19,
+      "buckets": [
+        "dreams",
+        "ships",
+        "women_enquiry"
+      ],
+      "excerpt": "Stanza 19: The afflicted planet indicates the bodily system affected. NOTES Sun indicates: - Fever - Heart complaints - Eye troubles - Heat-related disease Moon indicates: - Fluid imbalance - Cold disorders - Mental stress - Sleep disturbances Mars indi"
+    },
+    {
+      "stanza": 20,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 20: If benefics aspect the ascendant, Moon and sixth house, recovery should be predicted."
+    },
+    {
+      "stanza": 21,
+      "buckets": [
+        "core_house_rules",
+        "ships"
+      ],
+      "excerpt": "Stanza 21: If the sixth lord becomes weak while the ascendant lord gains strength, disease diminishes."
+    },
+    {
+      "stanza": 22,
+      "buckets": [
+        "core_house_rules",
+        "women_enquiry"
+      ],
+      "excerpt": "Stanza 22: If the eighth house dominates and benefics fail to protect, danger increases. NOTES Signs of recovery: - Strong ascendant - Strong Moon - Benefic aspect from Jupiter or Venus - Weakening of sixth lord - Connection between ascendant lord and bene"
+    },
+    {
+      "stanza": 23,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 23: If the sixth, eighth and twelfth houses combine under malefic influence, confinement, prolonged illness or hospitalisation may occur."
+    },
+    {
+      "stanza": 24,
+      "buckets": [
+        "core_house_rules",
+        "dreams"
+      ],
+      "excerpt": "Stanza 24: If benefics intervene, treatment becomes successful and recovery may follow. NOTES The twelfth house often indicates: - Hospital stay - Isolation - Medical expenditure - Sleep-related weakness Benefic intervention often improves outcomes even i"
+    },
+    {
+      "stanza": 25,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 25: If the ascendant lord approaches favourable aspect with benefics, recovery may happen soon."
+    },
+    {
+      "stanza": 26,
+      "buckets": [
+        "core_house_rules",
+        "disputes",
+        "master_servant"
+      ],
+      "excerpt": "Stanza 26: Movable signs indicate quick recovery, common signs moderate delay and fixed signs prolonged suffering. NOTES Timing may be judged from: - Degrees separating significators - Moon\u2019s movement - Nature of signs Movable signs \u2192 quick result Commo"
+    },
+    {
+      "stanza": 27,
+      "buckets": [
+        "core_house_rules",
+        "master_servant"
+      ],
+      "excerpt": "Stanza 27: If the tenth lord is weak, afflicted or associated with malefics, dissatisfaction or obstacles in employment may arise."
+    },
+    {
+      "stanza": 28,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 28: If the ascendant lord combines favourably with the tenth or eleventh lord, improvement in profession may result."
+    },
+    {
+      "stanza": 29,
+      "buckets": [
+        "core_house_rules",
+        "master_servant"
+      ],
+      "excerpt": "Stanza 29: If the tenth lord connects with the eighth or twelfth house, change in employment or resignation may occur. NOTES Questions concerning job change should examine: 1. Tenth house \u2014 profession 2. Tenth lord 3. Sixth house \u2014 employment and service 4"
+    },
+    {
+      "stanza": 30,
+      "buckets": [
+        "core_house_rules",
+        "master_servant"
+      ],
+      "excerpt": "Stanza 30: If benefics influence the tenth house and the ascendant lord joins favourably with the tenth lord, success in obtaining employment should be predicted."
+    },
+    {
+      "stanza": 31,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 31: If the eleventh lord becomes strong and favourably connected, gain through a new position may occur."
+    },
+    {
+      "stanza": 32,
+      "buckets": [
+        "core_house_rules",
+        "master_servant",
+        "women_enquiry"
+      ],
+      "excerpt": "Stanza 32: If afflicted by malefics, delay, rejection or disappointment may result. NOTES Strong combinations for getting a job: - Connection between 1st and 10th lords - Strong 10th lord - Benefic influence from Jupiter or Venus - Strong Moon - Strong 11t"
+    },
+    {
+      "stanza": 33,
+      "buckets": [
+        "core_house_rules",
+        "master_servant"
+      ],
+      "excerpt": "Stanza 33: If the present employment is afflicted while another favourable combination arises, change may prove beneficial."
+    },
+    {
+      "stanza": 34,
+      "buckets": [
+        "core_house_rules",
+        "master_servant"
+      ],
+      "excerpt": "Stanza 34: If the tenth lord remains strong and benefics support the present position, staying may be advantageous. NOTES Indicators favouring job change: - Strong eleventh house - Favourable future opportunity - Benefic connection to tenth house - Weak pr"
+    },
+    {
+      "stanza": 35,
+      "buckets": [
+        "core_house_rules",
+        "crops_trade"
+      ],
+      "excerpt": "Stanza 35: If Mercury and the seventh house gain strength, trade or independent work may prosper."
+    },
+    {
+      "stanza": 36,
+      "buckets": [
+        "core_house_rules",
+        "crops_trade",
+        "master_servant",
+        "ships"
+      ],
+      "excerpt": "Stanza 36: If Saturn and the sixth house are strong, service or salaried employment may prove favourable. NOTES Mercury + 7th house: - Business - Freelancing - Trade - Consulting - Entrepreneurship Saturn + 6th house: - Stable employment - Corporate work"
+    },
+    {
+      "stanza": 37,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 37: If the ascendant lord approaches favourable aspect with the tenth or eleventh lord, change or opportunity may occur soon."
+    },
+    {
+      "stanza": 38,
+      "buckets": [
+        "core_house_rules",
+        "disputes",
+        "master_servant"
+      ],
+      "excerpt": "Stanza 38: Movable signs indicate quick change, common signs moderate delay and fixed signs prolonged waiting. NOTES Timing depends on: - Degrees between significators - Moon\u2019s movement - Nature of signs Movable signs \u2192 quick result Common signs \u2192 moder"
+    },
+    {
+      "stanza": 39,
+      "buckets": [
+        "core_house_rules",
+        "disputes"
+      ],
+      "excerpt": "Stanza 39: If the ascendant lord is strong and the sixth house is favourable, victory in disputes should be predicted."
+    },
+    {
+      "stanza": 40,
+      "buckets": [
+        "core_house_rules",
+        "disputes"
+      ],
+      "excerpt": "Stanza 40: If benefics influence the sixth house and ascendant, success in litigation may result."
+    },
+    {
+      "stanza": 41,
+      "buckets": [
+        "core_house_rules",
+        "disputes"
+      ],
+      "excerpt": "Stanza 41: If the sixth lord is weak or afflicted, enemies lose strength and the querent gains advantage. NOTES Questions concerning disputes should examine: 1. Ascendant \u2014 querent 2. Ascendant lord 3. Sixth house \u2014 enemies, disputes 4. Sixth lord 5. Seven"
+    },
+    {
+      "stanza": 42,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 42: If the ascendant lord is stronger than the seventh lord, the querent gains victory."
+    },
+    {
+      "stanza": 43,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 43: If the seventh lord becomes stronger and receives benefic support, the opponent may prevail."
+    },
+    {
+      "stanza": 44,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 44: If benefics influence both parties, compromise or settlement may occur. NOTES To determine victory compare: Querent: - Ascendant - Ascendant lord - Moon Opponent: - Seventh house - Seventh lord Victory indicators for the querent: - Strong asc"
+    },
+    {
+      "stanza": 45,
+      "buckets": [
+        "core_house_rules",
+        "disputes"
+      ],
+      "excerpt": "Stanza 45: If the tenth house and sixth house combine favourably, success through legal judgement may result."
+    },
+    {
+      "stanza": 46,
+      "buckets": [
+        "core_house_rules",
+        "disputes"
+      ],
+      "excerpt": "Stanza 46: If malefics dominate the sixth and tenth houses, prolonged litigation and stress may arise. NOTES For court-related matters examine: 1. Sixth house \u2014 dispute 2. Seventh house \u2014 opponent 3. Tenth house \u2014 judgement 4. Eleventh house \u2014 success/gain"
+    },
+    {
+      "stanza": 47,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 47: If Mars and Saturn afflict the sixth house, conflict becomes severe."
+    },
+    {
+      "stanza": 48,
+      "buckets": [
+        "core_house_rules",
+        "disputes"
+      ],
+      "excerpt": "Stanza 48: If Jupiter aspects the ascendant or sixth house, protection and victory may occur. NOTES Mars may indicate: - Aggressive opponents - Heated disputes - Legal confrontation Saturn may indicate: - Long delays - Bureaucratic obstacles - Slow justi"
+    },
+    {
+      "stanza": 49,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 49: If benefics connect the ascendant and seventh houses, reconciliation or compromise may be achieved."
+    },
+    {
+      "stanza": 50,
+      "buckets": [
+        "core_house_rules",
+        "women_enquiry"
+      ],
+      "excerpt": "Stanza 50: If hostile aspects dominate, prolonged conflict may continue. NOTES Settlement is more likely when: - Venus influences the chart - Jupiter aspects both sides - Moon is strong - Benefics dominate angular houses Conflict continues when: - Mars/S"
+    },
+    {
+      "stanza": 51,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 51: If significators move toward favourable aspect, resolution may occur soon."
+    },
+    {
+      "stanza": 52,
+      "buckets": [
+        "core_house_rules",
+        "disputes",
+        "lost_objects"
+      ],
+      "excerpt": "Stanza 52: Movable signs indicate quick judgement, common signs moderate delay and fixed signs prolonged litigation. NOTES Timing depends on: - Degrees between significators - Moon\u2019s movement - Sign quality Movable signs \u2192 fast result Common signs \u2192 mod"
+    },
+    {
+      "stanza": 53,
+      "buckets": [
+        "disputes",
+        "lost_objects"
+      ],
+      "excerpt": "Stanza 53: Questions concerning theft, lost articles and missing valuables should be judged from the second, fourth, seventh and eighth houses."
+    },
+    {
+      "stanza": 54,
+      "buckets": [
+        "core_house_rules",
+        "lost_objects"
+      ],
+      "excerpt": "Stanza 54: If benefics influence the second house and Moon is strong, recovery of lost property may be predicted."
+    },
+    {
+      "stanza": 55,
+      "buckets": [
+        "core_house_rules",
+        "lost_objects",
+        "traveler"
+      ],
+      "excerpt": "Stanza 55: If the second house and its lord are heavily afflicted by malefics, recovery becomes doubtful. NOTES For theft or missing property examine: 1. Second house \u2014 valuables and money 2. Fourth house \u2014 home and property 3. Seventh house \u2014 thief 4. Eig"
+    },
+    {
+      "stanza": 56,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 56: If the lord of the second joins benefics or aspects the ascendant favourably, the lost article may be recovered."
+    },
+    {
+      "stanza": 57,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 57: If the eleventh lord becomes strong and favourably connected, recovery becomes likely."
+    },
+    {
+      "stanza": 58,
+      "buckets": [
+        "core_house_rules",
+        "women_enquiry"
+      ],
+      "excerpt": "Stanza 58: If the eighth house dominates and malefics obstruct the significator, recovery becomes difficult. NOTES Signs favouring recovery: - Strong Moon - Benefic aspect of Jupiter or Venus - Strong second lord - Strong eleventh house - Connection betwee"
+    },
+    {
+      "stanza": 59,
+      "buckets": [
+        "core_house_rules",
+        "disputes",
+        "lost_objects"
+      ],
+      "excerpt": "Stanza 59: The thief should be judged from the seventh house and the planet influencing it."
+    },
+    {
+      "stanza": 60,
+      "buckets": [
+        "crops_trade",
+        "lost_objects",
+        "master_servant",
+        "women_enquiry"
+      ],
+      "excerpt": "Stanza 60: The nature, appearance and status of the thief may be inferred from the influencing planet. NOTES Planetary indications of thief: Sun: - Person of authority - Proud personality - Government-related person - Well-known person Moon: - Emotional p"
+    },
+    {
+      "stanza": 61,
+      "buckets": [
+        "core_house_rules",
+        "lost_objects"
+      ],
+      "excerpt": "Stanza 61: If the seventh house connects with the fourth or ascendant, the thief may be known to the querent."
+    },
+    {
+      "stanza": 62,
+      "buckets": [
+        "core_house_rules",
+        "lost_objects"
+      ],
+      "excerpt": "Stanza 62: If Rahu, Saturn or eighth house dominate, the thief may be a stranger. NOTES Known thief indicators: - Connection between 1st and 7th houses - Fourth house involvement (home/family) - Familiar significators Unknown thief indicators: - Rahu dom"
+    },
+    {
+      "stanza": 63,
+      "buckets": [
+        "disputes",
+        "women_enquiry"
+      ],
+      "excerpt": "Stanza 63: The direction of the missing object may be judged from the sign or planet influencing the significator. NOTES Planetary directions: Sun \u2192 East Moon \u2192 North-West Mars \u2192 South Mercury \u2192 North Jupiter \u2192 North-East Venus \u2192 South-East Sat"
+    },
+    {
+      "stanza": 64,
+      "buckets": [
+        "core_house_rules",
+        "disputes",
+        "lost_objects",
+        "women_enquiry"
+      ],
+      "excerpt": "Stanza 64: The nature of the place should be judged from the sign and planet involved. NOTES Sun: - Bright places - Government offices - Heat/fire-related areas Moon: - Kitchen - Near water - Bedroom Mars: - Tools - Machinery - Heat/fire place - Sharp obj"
+    },
+    {
+      "stanza": 65,
+      "buckets": [
+        "core_house_rules",
+        "disputes",
+        "women_enquiry"
+      ],
+      "excerpt": "Stanza 65: Questions concerning marriage should be judged from the seventh house, seventh lord, Venus and Moon."
+    },
+    {
+      "stanza": 66,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 66: If the seventh house and its lord are strong and associated with benefics, marriage should be predicted."
+    },
+    {
+      "stanza": 67,
+      "buckets": [
+        "core_house_rules",
+        "sexual_matters",
+        "ships",
+        "women_enquiry"
+      ],
+      "excerpt": "Stanza 67: If the lord of the ascendant combines favourably with the seventh lord, marriage or union may take place. NOTES For marriage-related questions examine: 1. Seventh house 2. Seventh lord 3. Venus 4. Moon 5. Ascendant lord 6. Relationship between 1"
+    },
+    {
+      "stanza": 68,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 68: If benefics occupy or aspect the seventh house, marriage becomes likely."
+    },
+    {
+      "stanza": 69,
+      "buckets": [
+        "core_house_rules",
+        "sexual_matters"
+      ],
+      "excerpt": "Stanza 69: If the ascendant lord and seventh lord form favourable aspect or conjunction, the desired union may occur."
+    },
+    {
+      "stanza": 70,
+      "buckets": [
+        "core_house_rules",
+        "women_enquiry"
+      ],
+      "excerpt": "Stanza 70: If malefics obstruct the seventh house or seventh lord, delay or disappointment may result. NOTES Strong indicators for marriage: - Connection between 1st and 7th lords - Venus strong - Moon waxing and unafflicted - Benefics in Kendra or Trikona"
+    },
+    {
+      "stanza": 71,
+      "buckets": [
+        "core_house_rules",
+        "disputes",
+        "ships",
+        "women_enquiry"
+      ],
+      "excerpt": "Stanza 71: The nature and appearance of the spouse should be judged from the seventh house and planet influencing it. NOTES Sun: - Proud - Influential - Authoritative personality Moon: - Attractive - Emotional - Caring nature Mars: - Passionate - Energeti"
+    },
+    {
+      "stanza": 72,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 72: If Saturn influences the seventh house, delay in marriage may occur."
+    },
+    {
+      "stanza": 73,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 73: If Mars and Saturn afflict the seventh house, quarrels or difficulties may arise."
+    },
+    {
+      "stanza": 74,
+      "buckets": [
+        "core_house_rules",
+        "women_enquiry"
+      ],
+      "excerpt": "Stanza 74: If benefics intervene, obstacles are reduced and marriage eventually succeeds. NOTES Common delay factors: - Saturn in or aspecting 7th - Weak Venus - Weak Moon - Seventh lord afflicted - Malefic dominance Benefic intervention may indicate: -"
+    },
+    {
+      "stanza": 75,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 75: If the fifth and seventh houses connect favourably, emotional attachment or love marriage may occur."
+    },
+    {
+      "stanza": 76,
+      "buckets": [
+        "core_house_rules",
+        "women_enquiry"
+      ],
+      "excerpt": "Stanza 76: If family-related houses dominate, traditional arrangements may be indicated. NOTES Love marriage indicators: - 5th \u2194 7th connection - Venus strong - Moon strong - Mercury involvement Traditional marriage indicators: - Strong family houses - J"
+    },
+    {
+      "stanza": 77,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 77: If the ascendant lord and seventh lord approach conjunction or favourable aspect, marriage may occur soon."
+    },
+    {
+      "stanza": 78,
+      "buckets": [
+        "core_house_rules",
+        "sexual_matters",
+        "ships",
+        "women_enquiry"
+      ],
+      "excerpt": "Stanza 78: Movable signs indicate quick marriage, common signs moderate timing and fixed signs delay. NOTES Timing depends on: - Degrees between significators - Moon\u2019s motion - Sign quality Movable signs \u2192 quick marriage Common signs \u2192 moderate delay"
+    },
+    {
+      "stanza": 79,
+      "buckets": [
+        "core_house_rules",
+        "disputes"
+      ],
+      "excerpt": "Stanza 79: Questions concerning childbirth, children and pregnancy should be judged from the fifth house, fifth lord, Jupiter and Moon."
+    },
+    {
+      "stanza": 80,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 80: If the fifth house and its lord are strong and associated with benefics, childbirth should be predicted."
+    },
+    {
+      "stanza": 81,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 81: If the ascendant lord combines favourably with the fifth lord, happiness through children may result. NOTES For child-related questions examine: 1. Fifth house 2. Fifth lord 3. Jupiter (natural significator of children) 4. Moon 5. Ascendant lord"
+    },
+    {
+      "stanza": 79,
+      "buckets": [
+        "core_house_rules",
+        "disputes"
+      ],
+      "excerpt": "Stanza 79: Questions concerning childbirth, children and pregnancy should be judged from the fifth house, fifth lord, Jupiter and Moon."
+    },
+    {
+      "stanza": 80,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 80: If the fifth house and its lord are strong and associated with benefics, childbirth should be predicted."
+    },
+    {
+      "stanza": 81,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 81: If the ascendant lord combines favourably with the fifth lord, happiness through children may result. NOTES For child-related questions examine: 1. Fifth house 2. Fifth lord 3. Jupiter (natural significator of children) 4. Moon 5. Ascendant lord"
+    },
+    {
+      "stanza": 82,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 82: If benefics occupy or aspect the fifth house and Jupiter remains strong, childbirth may occur."
+    },
+    {
+      "stanza": 83,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 83: If the fifth lord is afflicted by malefics, delay or obstacles may arise."
+    },
+    {
+      "stanza": 84,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 84: If benefics support the fifth lord after affliction, eventual success should be predicted. NOTES Strong childbirth indicators: - Jupiter strong - Benefics in the fifth house - Strong Moon - Connection between ascendant and fifth lord Delay indi"
+    },
+    {
+      "stanza": 85,
+      "buckets": [
+        "women_enquiry"
+      ],
+      "excerpt": "Stanza 85: Male planets and masculine signs indicate male child. Female planets and feminine signs indicate female child. NOTES Male indicators: Sun Mars Jupiter Masculine signs: Aries Gemini Leo Libra Sagittarius Aquarius Female indicators: Moon Venu"
+    },
+    {
+      "stanza": 86,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 86: If benefics influence the fifth house, welfare and prosperity of the child may be predicted."
+    },
+    {
+      "stanza": 87,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 87: If malefics afflict the fifth house, illness, suffering or anxiety concerning the child may arise. NOTES For welfare of child examine: 1. Fifth house 2. Fifth lord 3. Jupiter 4. Moon 5. Relevant significators Benefic influence suggests: - Good"
+    },
+    {
+      "stanza": 88,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 88: If benefics repeatedly influence the fifth house, more than one child may result."
+    },
+    {
+      "stanza": 89,
+      "buckets": [
+        "core_house_rules",
+        "women_enquiry"
+      ],
+      "excerpt": "Stanza 89: If Saturn strongly afflicts the fifth house, delay in childbirth may occur. NOTES Jupiter often increases progeny. Saturn often delays but does not always deny. Moon and Venus support fertility. Rahu/Ketu may indicate unusual circumstances, me"
+    },
+    {
+      "stanza": 90,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 90: If the fifth lord approaches favourable aspect with benefics, childbirth may occur soon."
+    },
+    {
+      "stanza": 91,
+      "buckets": [
+        "core_house_rules",
+        "dreams"
+      ],
+      "excerpt": "Stanza 91: Movable signs indicate quick result, common signs moderate delay and fixed signs prolonged waiting. NOTES Timing depends on: - Degrees between significators - Moon\u2019s movement - Nature of signs Movable signs \u2192 quick childbirth Common signs \u2192 m"
+    },
+    {
+      "stanza": 92,
+      "buckets": [
+        "disputes",
+        "dreams"
+      ],
+      "excerpt": "Stanza 92: Questions concerning dreams should be judged from the twelfth house, Moon and the planets influencing them."
+    },
+    {
+      "stanza": 93,
+      "buckets": [
+        "core_house_rules",
+        "dreams"
+      ],
+      "excerpt": "Stanza 93: If benefics influence the Moon and twelfth house, auspicious dreams and favourable outcomes should be predicted."
+    },
+    {
+      "stanza": 94,
+      "buckets": [
+        "core_house_rules",
+        "dreams",
+        "misc_weather_thought"
+      ],
+      "excerpt": "Stanza 94: If malefics influence the Moon or twelfth house, disturbing dreams or mental anxiety may arise. NOTES Dream-related questions should examine: 1. Twelfth house \u2014 dreams and sleep 2. Moon \u2014 mind and imagination 3. Twelfth lord 4. Planets influenci"
+    },
+    {
+      "stanza": 95,
+      "buckets": [
+        "deity_curse",
+        "dreams"
+      ],
+      "excerpt": "Stanza 95: Dreams involving temples, light, flowers, pure water, saints, deities or pleasant surroundings are auspicious."
+    },
+    {
+      "stanza": 96,
+      "buckets": [
+        "dreams"
+      ],
+      "excerpt": "Stanza 96: Dreams involving ascent, gaining ornaments, meeting respected persons or receiving blessings indicate success. NOTES Favourable dream symbols include: - Temples - Gods or saints - Clean water - Flowers - Gold or ornaments - Bright light - Flying"
+    },
+    {
+      "stanza": 97,
+      "buckets": [
+        "dreams"
+      ],
+      "excerpt": "Stanza 97: Dreams involving darkness, falling, dirty water, snakes, fear, crying, blood or destruction may indicate obstacles."
+    },
+    {
+      "stanza": 98,
+      "buckets": [
+        "dreams",
+        "incarceration"
+      ],
+      "excerpt": "Stanza 98: Dreams of imprisonment, quarrels or frightening events may show anxiety or future difficulties. NOTES Unfavourable dream symbols include: - Darkness - Falling from height - Dirty places - Death imagery - Fire destruction - Fear - Crying - Fighti"
+    },
+    {
+      "stanza": 99,
+      "buckets": [
+        "crops_trade",
+        "disputes",
+        "dreams",
+        "women_enquiry"
+      ],
+      "excerpt": "Stanza 99: The nature of dreams should be judged according to the influencing planet. NOTES Sun: - Kings - Authority - Fire - Fame - Power Moon: - Water - Women - Emotions - Family - Travel Mars: - War - Injury - Blood - Conflict - Weapons Mercury: - Com"
+    },
+    {
+      "stanza": 100,
+      "buckets": [
+        "dreams"
+      ],
+      "excerpt": "Stanza 100: Dreams occurring near dawn become more effective and may materialise sooner."
+    },
+    {
+      "stanza": 101,
+      "buckets": [
+        "core_house_rules",
+        "dreams",
+        "planet_house_signification_reference",
+        "purchase_sale"
+      ],
+      "excerpt": "Stanza 101: Dreams seen during disturbed sleep or illness may not carry predictive value. NOTES Traditional rule: Early morning dreams \u2192 stronger effect Dreams during fever, stress or disturbed sleep \u2192 less reliable Repeated dreams \u2192 stronger significanc"
+    },
+    {
+      "stanza": 102,
+      "buckets": [
+        "crops_trade",
+        "disputes",
+        "purchase_sale"
+      ],
+      "excerpt": "Stanza 102: Questions concerning buying, selling and trade should be judged from the second, seventh, tenth and eleventh houses."
+    },
+    {
+      "stanza": 103,
+      "buckets": [
+        "core_house_rules",
+        "crops_trade",
+        "purchase_sale"
+      ],
+      "excerpt": "Stanza 103: If benefics influence the seventh and eleventh houses, profit in trade and favourable transactions should be predicted."
+    },
+    {
+      "stanza": 104,
+      "buckets": [
+        "core_house_rules",
+        "crops_trade",
+        "disputes",
+        "purchase_sale"
+      ],
+      "excerpt": "Stanza 104: If the ascendant lord combines favourably with the seventh or tenth lord, success in commerce may result. NOTES For trade and business questions examine: 1. Second house \u2014 money and assets 2. Seventh house \u2014 trade and agreements 3. Tenth house"
+    },
+    {
+      "stanza": 105,
+      "buckets": [
+        "core_house_rules",
+        "purchase_sale"
+      ],
+      "excerpt": "Stanza 105: If benefics influence the house concerned and Moon is strong, the purchase may prove beneficial."
+    },
+    {
+      "stanza": 106,
+      "buckets": [
+        "core_house_rules",
+        "misc_weather_thought",
+        "purchase_sale"
+      ],
+      "excerpt": "Stanza 106: If malefics afflict the significator, loss or dissatisfaction may result from the purchase. NOTES Questions such as: - Should I buy this property? - Should I purchase this business? - Is this investment good? must examine: 1. Relevant house 2"
+    },
+    {
+      "stanza": 107,
+      "buckets": [
+        "core_house_rules",
+        "purchase_sale"
+      ],
+      "excerpt": "Stanza 107: If the seventh lord and eleventh lord combine favourably, sale may succeed profitably."
+    },
+    {
+      "stanza": 108,
+      "buckets": [
+        "core_house_rules",
+        "purchase_sale"
+      ],
+      "excerpt": "Stanza 108: If afflicted by malefics, delay or reduced value may occur. NOTES Good indicators for successful sale: - Strong seventh house - Strong eleventh house - Strong Moon - Benefic support Poor indicators: - Weak Moon - Saturn delay - Rahu confusion"
+    },
+    {
+      "stanza": 109,
+      "buckets": [
+        "core_house_rules",
+        "crops_trade"
+      ],
+      "excerpt": "Stanza 109: If Mercury and the seventh house are strong, trade and commerce prosper."
+    },
+    {
+      "stanza": 110,
+      "buckets": [
+        "core_house_rules",
+        "purchase_sale",
+        "women_enquiry"
+      ],
+      "excerpt": "Stanza 110: If benefics influence the tenth and eleventh houses, profit and expansion may occur. NOTES Mercury favours: - Trading - Communication business - Commerce - Sales - Brokerage Jupiter favours: - Expansion - Stable profit - Ethical business Ven"
+    },
+    {
+      "stanza": 111,
+      "buckets": [
+        "purchase_sale"
+      ],
+      "excerpt": "Stanza 111: If significators move toward favourable aspect, successful purchase or sale may occur soon."
+    },
+    {
+      "stanza": 112,
+      "buckets": [
+        "core_house_rules",
+        "crops_trade",
+        "disputes",
+        "purchase_sale"
+      ],
+      "excerpt": "Stanza 112: Movable signs indicate quick results, common signs moderate timing and fixed signs delay. NOTES Timing depends on: - Degrees between significators - Moon\u2019s motion - Nature of signs Movable signs \u2192 quick transaction Common signs \u2192 moderate ti"
+    },
+    {
+      "stanza": 113,
+      "buckets": [
+        "core_house_rules",
+        "crops_trade",
+        "disputes",
+        "ships"
+      ],
+      "excerpt": "Stanza 113: Questions concerning crops, agriculture and harvest should be judged from the fourth house, Moon, benefics and seasonal influences."
+    },
+    {
+      "stanza": 114,
+      "buckets": [
+        "core_house_rules",
+        "crops_trade"
+      ],
+      "excerpt": "Stanza 114: If benefics influence the fourth house and Moon is strong, abundance and successful harvest should be predicted."
+    },
+    {
+      "stanza": 115,
+      "buckets": [
+        "core_house_rules",
+        "crops_trade",
+        "misc_weather_thought",
+        "ships"
+      ],
+      "excerpt": "Stanza 115: If malefics afflict the fourth house or Moon, crop damage, shortage or delay may arise. NOTES For agricultural questions examine: 1. Fourth house \u2014 land and cultivation 2. Fourth lord 3. Moon \u2014 moisture and fertility 4. Tenth house \u2014 productivi"
+    },
+    {
+      "stanza": 116,
+      "buckets": [
+        "core_house_rules",
+        "misc_weather_thought"
+      ],
+      "excerpt": "Stanza 116: If Moon and benefics gain strength, favourable rains may occur."
+    },
+    {
+      "stanza": 117,
+      "buckets": [
+        "misc_weather_thought",
+        "ships"
+      ],
+      "excerpt": "Stanza 117: If Saturn, Mars or Rahu afflict the Moon, irregular weather or agricultural suffering may result. NOTES Moon strongly influences: - Water supply - Rainfall - Soil moisture - Agricultural timing Jupiter influence: - Abundance - Prosperity - Se"
+    },
+    {
+      "stanza": 118,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 118: If the fourth lord combines favourably with the eleventh lord, profit through cultivation may result."
+    },
+    {
+      "stanza": 119,
+      "buckets": [
+        "core_house_rules",
+        "crops_trade"
+      ],
+      "excerpt": "Stanza 119: If the eighth or twelfth houses dominate under malefic influence, loss or poor yield may occur. NOTES Strong indicators of successful yield: - Strong fourth house - Strong Moon - Benefic influence - Connection with eleventh house (gain) Poor h"
+    },
+    {
+      "stanza": 120,
+      "buckets": [
+        "core_house_rules",
+        "crops_trade",
+        "disputes",
+        "misc_weather_thought",
+        "ships",
+        "women_enquiry"
+      ],
+      "excerpt": "Stanza 120: The nature and productivity of land should be judged from the sign occupying the fourth house and planets influencing it. NOTES Fertile indications: Moon, Venus, Jupiter influence Dry or difficult land: Saturn, Mars influence Movable signs:"
+    },
+    {
+      "stanza": 1,
+      "buckets": [
+        "core_house_rules",
+        "disputes"
+      ],
+      "excerpt": "Stanza 1: Questions concerning gain of money should be judged from the second house, eleventh house, their lords and benefic influences."
+    },
+    {
+      "stanza": 2,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 2: If the second and eleventh houses are strong and associated with benefics, gain of wealth should be predicted."
+    },
+    {
+      "stanza": 3,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 3: If the lords of the second and eleventh combine favourably, prosperity and fulfilment of financial expectations may result. NOTES For money-related questions examine: 1. Second house \u2014 stored wealth 2. Eleventh house \u2014 gains and profits 3. Tenth"
+    },
+    {
+      "stanza": 4,
+      "buckets": [
+        "disputes"
+      ],
+      "excerpt": "Stanza 4: The overall outcome of any query should be judged from the ascendant, Moon and the relevant house concerned."
+    },
+    {
+      "stanza": 5,
+      "buckets": [
+        "core_house_rules"
+      ],
+      "excerpt": "Stanza 5: If benefics dominate the chart and significators gain strength, success should be predicted."
+    },
+    {
+      "stanza": 6,
+      "buckets": [
+        "core_house_rules",
+        "disputes"
+      ],
+      "excerpt": "Stanza 6: If malefics dominate and significators weaken, obstacles or disappointment may result. NOTES To judge the final outcome examine: 1. Ascendant 2. Ascendant lord 3. Moon 4. Relevant house 5. House lord 6. Benefic or malefic dominance Strong chart"
+    },
+    {
+      "stanza": 7,
+      "buckets": [
+        "disputes",
+        "misc_weather_thought"
+      ],
+      "excerpt": "Stanza 7: The thought in the mind of the querent should be judged from the Moon, ascendant and planets influencing them."
+    },
+    {
+      "stanza": 8,
+      "buckets": [
+        "core_house_rules",
+        "crops_trade",
+        "disputes",
+        "misc_weather_thought",
+        "ships",
+        "women_enquiry"
+      ],
+      "excerpt": "Stanza 8: The astrologer should infer the nature of the query even before it is fully spoken. NOTES Moon is the key to thought reading. The Moon reveals: - Emotional state - Hidden concern - Immediate anxiety - Secret desire Planetary clues: Sun: - Auth"
+    },
+    {
+      "stanza": 9,
+      "buckets": [
+        "core_house_rules",
+        "disputes",
+        "women_enquiry"
+      ],
+      "excerpt": "Stanza 9: Questions concerning women should be judged from Venus, Moon and the seventh house."
+    },
+    {
+      "stanza": 10,
+      "buckets": [
+        "core_house_rules",
+        "ships",
+        "women_enquiry"
+      ],
+      "excerpt": "Stanza 10: Benefic influence indicates harmony while malefic influence indicates difficulty. NOTES Questions involving women may concern: - Marriage - Relationships - Emotional connection - Reconciliation - Trust Strong Venus and Moon indicate: - Harmony"
+    },
+    {
+      "stanza": 11,
+      "buckets": [
+        "crops_trade",
+        "disputes",
+        "misc_weather_thought",
+        "ships"
+      ],
+      "excerpt": "Stanza 11: Questions concerning rainfall, crops and public welfare should be judged from Moon, Jupiter and seasonal indications."
+    },
+    {
+      "stanza": 12,
+      "buckets": [
+        "core_house_rules",
+        "misc_weather_thought",
+        "ships"
+      ],
+      "excerpt": "Stanza 12: Benefic influence indicates prosperity while malefic dominance may indicate scarcity. NOTES Moon: - Rainfall - Public emotion Jupiter: - Prosperity - Abundance Saturn/Mars: - Scarcity - Hardship"
+    },
+    {
+      "stanza": 13,
+      "buckets": [
+        "core_house_rules",
+        "disputes"
+      ],
+      "excerpt": "Stanza 13: Judgement should finally be confirmed through Tajaka aspects and yogas. NOTES Important Tajaka aspects: Conjunction \u2192 0\u00b0 Sextile \u2192 60\u00b0 Square \u2192 90\u00b0 Trine \u2192 120\u00b0 Opposition \u2192 180\u00b0 Important principle: Applying aspect \u2192 event moving towa"
+    }
+  ],
+  "note": "Heuristic keyword-based mapping. Use as implementation planning aid, not as doctrinal authority."
+}

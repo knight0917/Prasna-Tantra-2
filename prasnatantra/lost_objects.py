@@ -1,5 +1,5 @@
-# Lost property / Missing Person recovery calculations based on Shatpanchasika Adhyaya VI
-from .shatpanchasika import get_navamsa_sign, aspects_sign, get_sign
+from .shatpanchasika import get_navamsa_sign, aspects_sign, get_sign, SIGN_LORDS
+from .tajaka import get_planet_relationship
 from .astronomy import get_sign_name
 
 # Directions Map
@@ -183,6 +183,8 @@ def evaluate_lost_property(chart, evaluation=None, query_text=None):
     benefics_aspecting_lagna = []
     
     for b in ["Mercury", "Venus", "Jupiter"]:
+        if b not in chart.planets:
+            continue
         blon = chart.planets[b]["longitude"]
         bsign = get_sign(blon)
         if bsign == lagna_sign:
@@ -201,6 +203,8 @@ def evaluate_lost_property(chart, evaluation=None, query_text=None):
     house_11_sign = (lagna_sign + 10) % 12
     benefics_in_11 = []
     for b in ["Mercury", "Venus", "Jupiter"]:
+        if b not in chart.planets:
+            continue
         blon = chart.planets[b]["longitude"]
         bsign = get_sign(blon)
         if bsign == house_11_sign:
@@ -291,6 +295,107 @@ def evaluate_lost_property(chart, evaluation=None, query_text=None):
     thief_age = PLANET_AGES.get(lagna_lord, "Unknown")
     thief_class = PLANET_CLASSES.get(lagna_lord, "Unknown")
     
+    # ── Prasna Tantra Thief Personality & Hidden Location (Stanzas 60 & 64) ──
+    seventh_sign = (lagna_sign + 6) % 12
+    seventh_occupants = []
+    for p_name, p_data in chart.planets.items():
+        if p_name in ["Ketu"]:
+            continue
+        p_sign = get_sign(p_data["longitude"])
+        if p_sign == seventh_sign:
+            seventh_occupants.append((p_name, get_planet_strength(p_name, p_data, sun_lon)))
+            
+    influencing_p = None
+    influence_reason = ""
+    if seventh_occupants:
+        seventh_occupants.sort(key=lambda x: x[1], reverse=True)
+        influencing_p = seventh_occupants[0][0]
+        influence_reason = f"Planet occupying 7th house: {influencing_p}"
+    else:
+        # Check aspecting
+        aspecting = []
+        for p_name, p_data in chart.planets.items():
+            if p_name in ["Ketu"]:
+                continue
+            if aspects_sign(p_data["longitude"], seventh_sign):
+                aspecting.append((p_name, get_planet_strength(p_name, p_data, sun_lon)))
+        if aspecting:
+            aspecting.sort(key=lambda x: x[1], reverse=True)
+            influencing_p = aspecting[0][0]
+            influence_reason = f"Planet aspecting 7th house: {influencing_p}"
+        else:
+            influencing_p = SIGN_LORDS[seventh_sign]
+            influence_reason = f"7th Lord: {influencing_p} (no planet in or aspecting 7th)"
+            
+    PLANET_THIEF_CHARACTER = {
+        "Sun": "Proud, authoritative, government-related or well-known person",
+        "Moon": "Emotional, woman or caretaker, changeable/hesitant behavior",
+        "Mars": "Aggressive, young male, mechanic/worker/soldier, hot-tempered",
+        "Mercury": "Clever/witty, trader, student, messenger, skilled talker",
+        "Jupiter": "Respectable or educated person, religious, advisor/teacher figure",
+        "Venus": "Attractive, romantic, artist, woman, luxury-loving",
+        "Saturn": "Poor, servant, laborer, elderly or dark-complexioned person, slow-moving",
+        "Rahu": "Secretive, outsider, fraudster, stranger",
+        "Ketu": "Introverted, spiritual, eccentric, detached, or mysterious"
+    }
+    thief_character = PLANET_THIEF_CHARACTER.get(influencing_p, "Unknown characteristics")
+    
+    # Stanzas 61-62: Known vs. Stranger thief logic
+    seventh_lord = SIGN_LORDS[seventh_sign]
+    fourth_lord = SIGN_LORDS[(lagna_sign + 3) % 12]
+    
+    rel_1_7 = None
+    if lagna_lord in chart.planets and seventh_lord in chart.planets:
+        rel_1_7 = get_planet_relationship(lagna_lord, chart.planets[lagna_lord], seventh_lord, chart.planets[seventh_lord])
+    
+    rel_4_7 = None
+    if fourth_lord in chart.planets and seventh_lord in chart.planets:
+        rel_4_7 = get_planet_relationship(fourth_lord, chart.planets[fourth_lord], seventh_lord, chart.planets[seventh_lord])
+    
+    is_known_pt = (rel_1_7 and rel_1_7["is_applying"] and rel_1_7["is_friendly"]) or (rel_4_7 and rel_4_7["is_applying"] and rel_4_7["is_friendly"])
+    
+    # Check Rahu/Saturn dominance
+    rahu_in_7 = False
+    if "Rahu" in chart.planets:
+        rahu_in_7 = get_sign(chart.planets["Rahu"]["longitude"]) == seventh_sign
+    
+    sat_in_7 = False
+    if "Saturn" in chart.planets:
+        sat_in_7 = get_sign(chart.planets["Saturn"]["longitude"]) == seventh_sign
+        
+    is_stranger_pt = rahu_in_7 or sat_in_7 or (influencing_p in ["Rahu", "Saturn"])
+    
+    if is_known_pt:
+        is_insider = True
+        if is_living_entity:
+            thief_source = "Insider / Known Circle (Familiar person in the querent's circle - Prasna Tantra III.61)"
+            thief_loc_desc = "The person/entity is still in a known neighborhood or premises."
+        else:
+            thief_source = "Insider / Known Thief (Known person or associate of the owner - Prasna Tantra III.61)"
+            thief_loc_desc = "The item is still within a familiar premises / property."
+    elif is_stranger_pt:
+        is_insider = False
+        if is_living_entity:
+            thief_source = "Outsider / Stranger (Unknown or foreign element - Prasna Tantra III.62)"
+            thief_loc_desc = "The person/entity is far removed from the querent's circle."
+        else:
+            thief_source = "Outsider / Stranger (Unknown thief or external person - Prasna Tantra III.62)"
+            thief_loc_desc = "The item has been taken to an unfamiliar place."
+            
+    # Stanza 64: Specific search locations
+    PLANET_PLACES = {
+        "Sun": "Bright or well-lit places, government offices, temples, or heat/fire-related areas",
+        "Moon": "Kitchen, near water sources, bathroom, or bedroom",
+        "Mars": "Near tools, machinery, hot/fireplaces, or sharp metal objects",
+        "Mercury": "Library, study table, office desk, bookshelf, or documents cabinet",
+        "Jupiter": "Temple, place of worship, educational area, safe/secured drawer",
+        "Venus": "Bedroom, dressing table, wardrobe, luxury or recreational areas",
+        "Saturn": "Dirty places, dark storage room, old garbage bin, or forgotten corners",
+        "Rahu": "Unusual places, dark/hidden crawlspace, or forgotten container",
+        "Ketu": "Unusual places, spiritual corner, eccentric or dusty spaces"
+    }
+    hidden_location_desc = PLANET_PLACES.get(influencing_p, "Unknown location")
+    
     # Substance from rising Navamsa sign classification dynamically calculated using Shatpanchasika I.7
     is_odd_lagna = lagna_sign in [0, 2, 4, 6, 8, 10]
     substance_map = {
@@ -324,6 +429,9 @@ def evaluate_lost_property(chart, evaluation=None, query_text=None):
         "distance_yojanas": distance_val,
         "thief_age": thief_age,
         "thief_class": thief_class,
+        "thief_character": thief_character,
+        "thief_influence_reason": influence_reason,
+        "hidden_location_desc": hidden_location_desc,
         "substance_type": substance_type,
         "color": color,
         "size": size,

@@ -686,7 +686,12 @@ with st.container(border=True):
             help="Check this to calculate direction, distance, recovery chances, and thief profile for lost objects/persons."
         )
 
-        has_traveler_kw = any(w in question_text.lower() for w in ["travel", "abroad", "return", "journey", "enemy", "war", "battle", "siege", "invad", "soldier", "marching"])
+        ql = question_text.lower()
+        has_ship_kw = any(w in ql for w in ["ship", "voyage", "sea", "boat", "vessel", "cargo"])
+        has_traveler_kw = any(w in ql for w in ["travel", "abroad", "return", "journey", "enemy", "war", "battle", "siege", "invad", "soldier", "marching"])
+        # Avoid overlap noise: pure ship/voyage questions should prefer ships module over traveler module
+        if has_ship_kw and not any(w in ql for w in ["enemy", "war", "battle", "soldier", "marching"]):
+            has_traveler_kw = False
         analyze_traveler = st.checkbox(
             "Traveler & Abroad Analysis (Adhyayas II & V)",
             value=has_traveler_kw,
@@ -1031,13 +1036,13 @@ if st.session_state.chart and st.session_state.evaluation:
                     st.markdown(f"- **Age of Associate:** {lost['thief_age']}")
                     st.markdown(f"- **Class / Caste:** {lost['thief_class']}")
                     st.markdown(f"- **Last seen / inside property:** {lost['drekkana_location']}")
-                    st.markdown(f"- **Description:** Determined by the rising sign and decanate configurations.")
+                    st.markdown(f"- **Description:** {lost['thief_character']}")
                 else:
                     st.markdown("##### 👤 Suspected Thief Profile")
                     st.markdown(f"- **Age:** {lost['thief_age']}")
                     st.markdown(f"- **Class / Caste:** {lost['thief_class']}")
                     st.markdown(f"- **Location inside property:** {lost['drekkana_location']}")
-                    st.markdown(f"- **Description:** Determined by the rising sign and decanate configurations.")
+                    st.markdown(f"- **Description:** {lost['thief_character']}")
                 
             with col_lp_det2:
                 if is_living:
@@ -1045,13 +1050,13 @@ if st.session_state.chart and st.session_state.evaluation:
                     st.markdown(f"- **Entity Type:** {lost['substance_type']}")
                     st.markdown(f"- **Dominant Color:** {lost['color']}")
                     st.markdown(f"- **Physical Size:** {lost['size']} Sign / Navamsa proportions")
-                    st.markdown(f"- **State:** Determined by Lagna Lord's strength and combustion status.")
+                    st.markdown(f"- **Last Known Location:** {lost['hidden_location_desc']}")
                 else:
                     st.markdown("##### 📦 Stolen Substance & Nature")
                     st.markdown(f"- **Substance Type:** {lost['substance_type']}")
                     st.markdown(f"- **Dominant Color:** {lost['color']}")
                     st.markdown(f"- **Physical Size:** {lost['size']} Sign / Navamsa proportions")
-                    st.markdown(f"- **State:** Determined by Lagna Lord's strength and combustion status.")
+                    st.markdown(f"- **Search Location:** {lost['hidden_location_desc']}")
                 
             st.markdown("</div>", unsafe_allow_html=True)
 
@@ -1131,6 +1136,104 @@ if st.session_state.chart and st.session_state.evaluation:
             st.markdown(f"- **Atmospheric Indicators:** {misc['rain_reason']}")
             
         st.markdown("</div>", unsafe_allow_html=True)
+
+    # ------------------ OPTIONAL PANEL: Marriage Analysis (Prasna Tantra Ch III) ------------------
+    marriage = eval_res.get("marriage_analysis")
+    if marriage:
+        with st.expander("💍 Marriage Query Analysis (Prasna Tantra Ch III Stanzas 65–78)", expanded=True):
+            m_verdict = marriage["verdict"]
+            m_color = "#34d399" if "YES" in m_verdict else "#f87171"
+            m_bg = "rgba(52, 211, 153, 0.08)" if "YES" in m_verdict else "rgba(248, 113, 113, 0.08)"
+            
+            st.markdown(f"""
+            <div style="background: {m_bg}; border: 1px solid {m_color}; border-radius: 12px; padding: 1rem; margin-bottom: 1.5rem;">
+                <strong>Marriage Verdict:</strong> <span style="color: {m_color}; font-weight: 700; font-size: 1.1rem;">{m_verdict}</span><br>
+                <small style="color: #cbd5e1; font-style: italic;">{marriage['reason']}</small>
+            </div>
+            """, unsafe_allow_html=True)
+            
+            st.markdown(f"""
+            <div class='lost-property-grid'>
+                <div class='lost-metric-box'>
+                    <div class='lost-metric-label'>💍 Alliance Type</div>
+                    <div class='lost-metric-value' style='color: #f43f5e;'>{marriage['marriage_type']}</div>
+                    <small style='color: #64748b; font-size: 0.75rem;'>{marriage['marriage_type_details']}</small>
+                </div>
+                <div class='lost-metric-box'>
+                    <div class='lost-metric-label'>⏰ Expected Timing</div>
+                    <div class='lost-metric-value' style='color: #38bdf8;'>{marriage['timing_desc']}</div>
+                    <small style='color: #64748b; font-size: 0.75rem;'>{marriage['timing_quality_desc']}</small>
+                </div>
+                <div class='lost-metric-box'>
+                    <div class='lost-metric-label'>🏛️ 7th House / Obstacles</div>
+                    <div class='lost-metric-value' style='color: #a78bfa;'>{marriage['seventh_house_strength']}</div>
+                    <small style='color: #64748b; font-size: 0.75rem;'>Obstacles: {marriage['obstacles']}</small>
+                </div>
+            </div>
+            """, unsafe_allow_html=True)
+                
+            st.markdown("<br>", unsafe_allow_html=True)
+            
+            col_m_det1, col_m_det2 = st.columns(2)
+            with col_m_det1:
+                st.markdown("##### 👤 Spouse Personality & Profile")
+                st.markdown(f"- **Personality:** {marriage['spouse_personality']}")
+                st.markdown(f"- **Appearance:** {marriage['spouse_appearance']}")
+                st.markdown(f"- **Social Status:** {marriage['spouse_status']}")
+                st.markdown(f"- **Influencing Planet:** {marriage['spouse_influencing_planet']} ({marriage['spouse_influence_reason']})")
+                
+            with col_m_det2:
+                st.markdown("##### 🪐 Astrological Significators")
+                st.markdown(f"- **Venus (Marriage Sig):** Strength: {marriage['venus_strength']} | Avastha: {marriage['venus_avastha']}")
+                st.markdown(f"- **Karyesa (7th Lord):** Strength: {marriage['karyesa_strength']} | Avastha: {marriage['karyesa_avastha']}")
+
+    # ------------------ OPTIONAL PANEL: Children & Progeny Analysis (Prasna Tantra Ch III) ------------------
+    children = eval_res.get("children_analysis")
+    if children:
+        with st.expander("👶 Children & Progeny Analysis (Prasna Tantra Ch III Stanzas 79–91)", expanded=True):
+            c_verdict = children["verdict"]
+            c_color = "#34d399" if "YES" in c_verdict else "#f87171"
+            c_bg = "rgba(52, 211, 153, 0.08)" if "YES" in c_verdict else "rgba(248, 113, 113, 0.08)"
+            
+            st.markdown(f"""
+            <div style="background: {c_bg}; border: 1px solid {c_color}; border-radius: 12px; padding: 1rem; margin-bottom: 1.5rem;">
+                <strong>Progeny Verdict:</strong> <span style="color: {c_color}; font-weight: 700; font-size: 1.1rem;">{c_verdict}</span><br>
+                <small style="color: #cbd5e1; font-style: italic;">{children['reason']}</small>
+            </div>
+            """, unsafe_allow_html=True)
+            
+            st.markdown(f"""
+            <div class='lost-property-grid'>
+                <div class='lost-metric-box'>
+                    <div class='lost-metric-label'>👶 Gender Prediction</div>
+                    <div class='lost-metric-value' style='color: #f472b6;'>{children['gender_verdict']}</div>
+                    <small style='color: #64748b; font-size: 0.75rem;'>{children['gender_reason']}</small>
+                </div>
+                <div class='lost-metric-box'>
+                    <div class='lost-metric-label'>⏰ Expected Outcome</div>
+                    <div class='lost-metric-value' style='color: #38bdf8;'>{children['timing_desc']}</div>
+                    <small style='color: #64748b; font-size: 0.75rem;'>{children['timing_quality_desc']}</small>
+                </div>
+                <div class='lost-metric-box'>
+                    <div class='lost-metric-label'>🛡️ Welfare & Progeny</div>
+                    <div class='lost-metric-value' style='color: #a78bfa;'>{children['progeny_multiplicity']}</div>
+                    <small style='color: #64748b; font-size: 0.75rem;'>Obstacles: {children['obstacles']}</small>
+                </div>
+            </div>
+            """, unsafe_allow_html=True)
+                
+            st.markdown("<br>", unsafe_allow_html=True)
+            
+            col_c_det1, col_c_det2 = st.columns(2)
+            with col_c_det1:
+                st.markdown("##### 👶 Child's Welfare & Family Size")
+                st.markdown(f"- **Welfare Status:** {children['progeny_welfare']}")
+                st.markdown(f"- **Family Multiplicity:** {children['progeny_multiplicity']}")
+                
+            with col_c_det2:
+                st.markdown("##### 🪐 Astrological Significators")
+                st.markdown(f"- **Jupiter (Putrakaraka):** Strength: {children['jupiter_strength']} | Avastha: {children['jupiter_avastha']}")
+                st.markdown(f"- **Karyesa (5th Lord):** Avastha: {children['karyesa_avastha']}")
 
 
 
