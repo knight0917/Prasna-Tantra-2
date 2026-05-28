@@ -1353,5 +1353,97 @@ class TestPrasnaTantraMarriageAndChildren(unittest.TestCase):
         self.assertEqual(res["gender_verdict"], "MALE CHILD (BOY) — Highly probable.")
         self.assertIn("good health", res["progeny_welfare"].lower())
 
+class TestPrasnaTantraWealthAndHealth(unittest.TestCase):
+    def test_wealth_query_success(self):
+        class DummyChart:
+            pass
+        dc = DummyChart()
+        dc.lagna_sign = 0  # Aries
+        dc.lagna_sidereal = 15.0
+        dc.lagnapathi = "Mars"
+        dc.planets = {
+            "Sun": {"longitude": 180.0, "speed": 1.0},
+            "Moon": {"longitude": 43.0, "speed": 1.2},
+            "Mars": {"longitude": 282.0, "speed": 1.5},
+            "Mercury": {"longitude": 170.0, "speed": 1.2},
+            "Jupiter": {"longitude": 200.0, "speed": 1.0},
+            "Venus": {"longitude": 45.0, "speed": 1.0},  # Taurus, 2nd house
+            "Saturn": {"longitude": 310.0, "speed": 0.05} # Aquarius, 11th house
+        }
+        
+        from prasnatantra.wealth import evaluate_wealth_query
+        res = evaluate_wealth_query(dc)
+        self.assertIn("YES", res["verdict"])
+        self.assertIn("Stable", res["accumulated_wealth_status"])
+        self.assertIn("Prosperous", res["incoming_gains_status"])
+        
+    def test_wealth_query_loss(self):
+        class DummyChart:
+            pass
+        dc = DummyChart()
+        dc.lagna_sign = 0  # Aries
+        dc.lagna_sidereal = 15.0
+        dc.lagnapathi = "Mars"
+        dc.planets = {
+            "Sun": {"longitude": 45.0, "speed": 1.0},
+            "Moon": {"longitude": 180.0, "speed": 1.2},
+            "Mars": {"longitude": 200.0, "speed": 1.5},
+            "Mercury": {"longitude": 170.0, "speed": 1.2},
+            "Jupiter": {"longitude": 290.0, "speed": 1.0},
+            "Venus": {"longitude": 46.0, "speed": 1.0},  # Combust Venus (2nd lord)
+            "Saturn": {"longitude": 225.0, "speed": 0.05} # Scorpio
+        }
+        
+        from prasnatantra.wealth import evaluate_wealth_query
+        res = evaluate_wealth_query(dc)
+        self.assertIn("NO", res["verdict"])
+        self.assertIn("Weak", res["accumulated_wealth_status"])
+        
+    def test_health_query_recovery(self):
+        class DummyChart:
+            pass
+        dc = DummyChart()
+        dc.lagna_sign = 0  # Aries
+        dc.lagna_sidereal = 15.0
+        dc.lagnapathi = "Mars"
+        dc.planets = {
+            "Sun": {"longitude": 180.0, "speed": 1.0},
+            "Moon": {"longitude": 125.0, "speed": 1.2},
+            "Mars": {"longitude": 42.0, "speed": 1.5},
+            "Mercury": {"longitude": 43.0, "speed": 1.2},
+            "Jupiter": {"longitude": 120.0, "speed": 1.0}, # Leo
+            "Venus": {"longitude": 80.0, "speed": 1.0},
+            "Saturn": {"longitude": 280.0, "speed": 0.05}
+        }
+        
+        from prasnatantra.health import evaluate_health_query
+        res = evaluate_health_query(dc)
+        self.assertIn("YES", res["verdict"])
+        self.assertIn("Excellent", res["vitality_status"])
+        self.assertIn("Quick", res["recovery_timing"])
+        
+    def test_health_query_danger(self):
+        class DummyChart:
+            pass
+        dc = DummyChart()
+        dc.lagna_sign = 0  # Aries
+        dc.lagna_sidereal = 15.0
+        dc.lagnapathi = "Mars"
+        dc.planets = {
+            "Sun": {"longitude": 194.0, "speed": 1.0},
+            "Moon": {"longitude": 190.0, "speed": 1.2}, # Combust Moon
+            "Mars": {"longitude": 195.0, "speed": 1.5}, # Combust Lagna Lord Mars
+            "Mercury": {"longitude": 170.0, "speed": 1.2},
+            "Jupiter": {"longitude": 290.0, "speed": 1.0},
+            "Venus": {"longitude": 80.0, "speed": 1.0},
+            "Saturn": {"longitude": 155.0, "speed": 0.05} # Saturn in Virgo (6th house)
+        }
+        
+        from prasnatantra.health import evaluate_health_query
+        res = evaluate_health_query(dc)
+        self.assertIn("NO", res["verdict"])
+        self.assertIn("Weak", res["vitality_status"])
+        self.assertIn("Severe", res["severity_level"])
+
 if __name__ == "__main__":
     unittest.main()

@@ -247,10 +247,11 @@ def generate_astrological_reading(question: str, chart_details: dict):
         "details": chart_details.get("details"),
         "direct_relationship": chart_details.get("direct_relationship"),
         "yogas": chart_details.get("yogas"),
-        "shatpanchasika_predictions": chart_details.get("shatpanchasika_predictions"),
         "lost_property_analysis": chart_details.get("lost_property_analysis"),
         "traveler_analysis": chart_details.get("traveler_analysis"),
-        "misc_analysis": chart_details.get("misc_analysis")
+        "misc_analysis": chart_details.get("misc_analysis"),
+        "wealth_analysis": chart_details.get("wealth_analysis"),
+        "health_analysis": chart_details.get("health_analysis")
     }
     
     user_prompt = f"""

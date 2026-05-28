@@ -1316,20 +1316,33 @@ class PrasnaChart:
     def _enrich_special_evaluations(self, evaluation, house_num, query_text):
         evaluation["marriage_analysis"] = None
         evaluation["children_analysis"] = None
+        evaluation["wealth_analysis"] = None
+        evaluation["health_analysis"] = None
         
         is_marriage = False
         is_children = False
+        is_wealth = False
+        is_health = False
+        
         if query_text:
             q_lower = query_text.lower()
             if any(w in q_lower for w in ["marry", "marriage", "wedding", "spouse", "wife", "husband", "partner", "union"]):
                 is_marriage = True
             if any(w in q_lower for w in ["child", "baby", "son", "daughter", "progeny", "pregnancy", "pregnant", "conceive"]):
                 is_children = True
+            if any(w in q_lower for w in ["money", "wealth", "finance", "rich", "profit", "gain", "gold", "earning", "asset", "salary"]):
+                is_wealth = True
+            if any(w in q_lower for w in ["health", "illness", "disease", "patient", "sick", "recover", "cure", "medical", "treatment", "pain"]):
+                is_health = True
                 
         if house_num == 7:
             is_marriage = True
         elif house_num == 5:
             is_children = True
+        elif house_num in [2, 11]:
+            is_wealth = True
+        elif house_num == 6:
+            is_health = True
             
         if is_marriage:
             from .marriage import evaluate_marriage_query
@@ -1337,6 +1350,12 @@ class PrasnaChart:
         if is_children:
             from .children import evaluate_children_query
             evaluation["children_analysis"] = evaluate_children_query(self)
+        if is_wealth:
+            from .wealth import evaluate_wealth_query
+            evaluation["wealth_analysis"] = evaluate_wealth_query(self)
+        if is_health:
+            from .health import evaluate_health_query
+            evaluation["health_analysis"] = evaluate_health_query(self)
             
         return evaluation
 

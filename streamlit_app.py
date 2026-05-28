@@ -1235,7 +1235,102 @@ if st.session_state.chart and st.session_state.evaluation:
                 st.markdown(f"- **Jupiter (Putrakaraka):** Strength: {children['jupiter_strength']} | Avastha: {children['jupiter_avastha']}")
                 st.markdown(f"- **Karyesa (5th Lord):** Avastha: {children['karyesa_avastha']}")
 
+    # ------------------ OPTIONAL PANEL: Wealth & Financial Analysis (Prasna Tantra Ch IV & II) ------------------
+    wealth = eval_res.get("wealth_analysis")
+    if wealth:
+        with st.expander("💰 Wealth & Financial Horary Analysis (Prasna Tantra Ch IV & II)", expanded=True):
+            w_verdict = wealth["verdict"]
+            w_color = "#34d399" if "YES" in w_verdict else ("#fbbf24" if "MAYBE" in w_verdict else "#f87171")
+            w_bg = "rgba(52, 211, 153, 0.08)" if "YES" in w_verdict else ("rgba(251, 191, 36, 0.08)" if "MAYBE" in w_verdict else "rgba(248, 113, 113, 0.08)")
+            
+            st.markdown(f"""
+            <div style="background: {w_bg}; border: 1px solid {w_color}; border-radius: 12px; padding: 1rem; margin-bottom: 1.5rem;">
+                <strong>Wealth Verdict:</strong> <span style="color: {w_color}; font-weight: 700; font-size: 1.1rem;">{w_verdict}</span><br>
+                <small style="color: #cbd5e1; font-style: italic;">{wealth['reason']}</small>
+            </div>
+            """, unsafe_allow_html=True)
+            
+            st.markdown(f"""
+            <div class='lost-property-grid'>
+                <div class='lost-metric-box'>
+                    <div class='lost-metric-label'>💰 Financial Gains Status</div>
+                    <div class='lost-metric-value' style='color: #fbbf24;'>{wealth['incoming_gains_status'].split('.')[0]}</div>
+                    <small style='color: #64748b; font-size: 0.75rem;'>{wealth['incoming_gains_status']}</small>
+                </div>
+                <div class='lost-metric-box'>
+                    <div class='lost-metric-label'>⏰ Expected Timing</div>
+                    <div class='lost-metric-value' style='color: #38bdf8;'>{wealth['timing_desc']}</div>
+                    <small style='color: #64748b; font-size: 0.75rem;'>{wealth['timing_quality_desc']}</small>
+                </div>
+                <div class='lost-metric-box'>
+                    <div class='lost-metric-label'>💎 Lost Valuables Recovery</div>
+                    <div class='lost-metric-value' style='color: #a78bfa;'>{wealth['lost_wealth_recovery_verdict']}</div>
+                    <small style='color: #64748b; font-size: 0.75rem;'>{wealth['lost_wealth_recovery_reason']}</small>
+                </div>
+            </div>
+            """, unsafe_allow_html=True)
+                
+            st.markdown("<br>", unsafe_allow_html=True)
+            
+            col_w_det1, col_w_det2 = st.columns(2)
+            with col_w_det1:
+                st.markdown("##### 🪙 Accumulated Assets & Family Speech")
+                st.markdown(f"- **Accumulated Wealth:** {wealth['accumulated_wealth_status']}")
+                st.markdown(f"- **Family & Speech Outcome:** {wealth['family_speech_influence']}")
+                
+            with col_w_det2:
+                st.markdown("##### 🪐 Astrological Significators")
+                st.markdown(f"- **2nd Lord (Assets):** Strength: {wealth['second_lord_strength']} | Avastha: {wealth['second_lord_avastha']}")
+                st.markdown(f"- **11th Lord (Gains):** Strength: {wealth['eleventh_lord_strength']} | Avastha: {wealth['eleventh_lord_avastha']}")
 
+    # ------------------ OPTIONAL PANEL: Health & Recovery Analysis (Prasna Tantra Ch III) ------------------
+    health = eval_res.get("health_analysis")
+    if health:
+        with st.expander("🏥 Health, Diagnosis & Recovery Analysis (Prasna Tantra Ch III)", expanded=True):
+            h_verdict = health["verdict"]
+            h_color = "#34d399" if "YES" in h_verdict else ("#fbbf24" if "MAYBE" in h_verdict else "#f87171")
+            h_bg = "rgba(52, 211, 153, 0.08)" if "YES" in h_verdict else ("rgba(251, 191, 36, 0.08)" if "MAYBE" in h_verdict else "rgba(248, 113, 113, 0.08)")
+            
+            st.markdown(f"""
+            <div style="background: {h_bg}; border: 1px solid {h_color}; border-radius: 12px; padding: 1rem; margin-bottom: 1.5rem;">
+                <strong>Recovery Verdict:</strong> <span style="color: {h_color}; font-weight: 700; font-size: 1.1rem;">{h_verdict}</span><br>
+                <small style="color: #cbd5e1; font-style: italic;">{health['reason']}</small>
+            </div>
+            """, unsafe_allow_html=True)
+            
+            st.markdown(f"""
+            <div class='lost-property-grid'>
+                <div class='lost-metric-box'>
+                    <div class='lost-metric-label'>🏥 Primary Diagnosis</div>
+                    <div class='lost-metric-value' style='color: #f43f5e;'>{health['disease_significator']} Influence</div>
+                    <small style='color: #64748b; font-size: 0.75rem;'>{health['disease_nature']}</small>
+                </div>
+                <div class='lost-metric-box'>
+                    <div class='lost-metric-label'>⏰ Recovery Speed & Timing</div>
+                    <div class='lost-metric-value' style='color: #38bdf8;'>{health['recovery_timing']}</div>
+                    <small style='color: #64748b; font-size: 0.75rem;'>{health['timing_desc']}</small>
+                </div>
+                <div class='lost-metric-box'>
+                    <div class='lost-metric-label'>🚑 Severity & Hospital Risk</div>
+                    <div class='lost-metric-value' style='color: #a78bfa;'>{health['severity_level']}</div>
+                    <small style='color: #64748b; font-size: 0.75rem;'>Confinement Status: {health['hospitalization_risk']}</small>
+                </div>
+            </div>
+            """, unsafe_allow_html=True)
+                
+            st.markdown("<br>", unsafe_allow_html=True)
+            
+            col_h_det1, col_h_det2 = st.columns(2)
+            with col_h_det1:
+                st.markdown("##### 🧬 Patient Vitality & Remedial Guidance")
+                st.markdown(f"- **Patient Vitality Rating:** {health['vitality_status']}")
+                st.markdown(f"- **Vedic Remedial Advice:** {health['remedial_advice']}")
+                
+            with col_h_det2:
+                st.markdown("##### 🪐 Astrological Significators")
+                st.markdown(f"- **Lagna Lord (Patient):** Avastha: {health['lagna_lord_avastha']}")
+                st.markdown(f"- **6th Lord (Disease):** Avastha: {health['sixth_lord_avastha']}")
+                st.markdown(f"- **Moon (Mind & Body):** Afflicted: {'Yes' if health['is_moon_afflicted'] else 'No'}")
 
     # ------------------ DETAILED TABS: Planet Table, Shatpanchasika, Yogas & Combustions ------------------
     tab1, tab2, tab3 = st.tabs(["🪐 Planetary Longitudes & Avasthas", "📜 Shatpanchasika & Special Predictions", "🧬 Aspect & Combustion Logs"])
