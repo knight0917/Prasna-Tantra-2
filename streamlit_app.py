@@ -847,11 +847,19 @@ if st.session_state.chart and st.session_state.evaluation:
     with col_s2:
         st.markdown("##### Astrological Authenticity Breakdown")
         if is_sincere:
-            for r in sinc.get("reasons_sincere", []):
-                st.markdown(f"<div class='indicator-item indicator-sincere'>✓ {r}</div>", unsafe_allow_html=True)
+            reasons_sinc = sinc.get("reasons_sincere", [])
+            if not reasons_sinc:
+                st.markdown("<div class='indicator-item indicator-sincere'>✓ Sincere by default: No negative indicators found in the chart.</div>", unsafe_allow_html=True)
+            else:
+                for r in reasons_sinc:
+                    st.markdown(f"<div class='indicator-item indicator-sincere'>✓ {r}</div>", unsafe_allow_html=True)
         else:
-            for r in sinc.get("reasons_insincere", []):
-                st.markdown(f"<div class='indicator-item indicator-insincere'>✗ {r}</div>", unsafe_allow_html=True)
+            reasons_insinc = sinc.get("reasons_insincere", [])
+            if not reasons_insinc:
+                st.markdown("<div class='indicator-item indicator-insincere'>✗ Question is flagged as insincere/test query.</div>", unsafe_allow_html=True)
+            else:
+                for r in reasons_insinc:
+                    st.markdown(f"<div class='indicator-item indicator-insincere'>✗ {r}</div>", unsafe_allow_html=True)
     st.markdown("</div>", unsafe_allow_html=True)
     
     # ------------------ CENTER PANEL: Evaluation Summary ------------------
