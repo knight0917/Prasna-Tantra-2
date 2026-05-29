@@ -918,42 +918,40 @@ if st.session_state.chart and st.session_state.evaluation:
     try:
         kp = calculate_kalapinda_timing(chart.lagna_sidereal, lat_val)
         with st.expander("🕰️ Prasna Tantra Kalapinda Timing Method (IV.15-19)", expanded=False):
-            st.markdown(f"""
-            <div style="font-size: 0.95rem; line-height: 1.6;">
-                <strong>Equinoctial Midday Shadow:</strong> <span style='color: #22d3ee; font-weight: bold;'>{kp['equinoctial_shadow']:.2f} gnomons</span> (Latitude: {kp['latitude']:.4f}°)<br>
-                <strong>Ascendant Longitude:</strong> {format_longitude(kp['lagna_longitude'])} (in sign: {get_sign_name(chart.lagna_sign)})<br>
-                <strong>Kalapinda (Ascendant in minutes of arc):</strong> <span style='color: #a855f7; font-weight: bold;'>{kp['kalapinda']}</span><br>
-                
-                <h6 style="margin-top: 0.75rem; margin-bottom: 0.25rem; color: #f472b6;">Step-by-Step Calculation:</h6>
-                <ol style="margin-left: 1rem; padding-left: 0; margin-bottom: 0.75rem;">
-                    <li><strong>First Process (Planetary Signification):</strong> 
-                        Product of Kalapinda & Shadow = <code>{kp['first_process']['product']:.2f}</code>. 
-                        Dividing by 7 gives remainder <code>{kp['first_process']['remainder']}</code>, 
-                        corresponding to <strong>{kp['first_process']['planet']}</strong> (Gunaka: <code>{kp['first_process']['gunaka']}</code>).
-                    </li>
-                    <li><strong>Second Process (Gunaka Multiplier):</strong> 
-                        Product of Kalapinda & Gunaka = <code>{kp['second_process']['product']}</code>. 
-                        Divisor (Sum of Gunakas from Sun to {kp['first_process']['planet']}) = <code>{kp['second_process']['divisor']}</code>. 
-                        Dividing gives remainder Y = <code>{kp['second_process']['remainder_y']}</code>.
-                    </li>
-                    <li><strong>Third Process (Planetary Deductions):</strong> 
-                        Deducting planetary factors sequentially: Y leaves <code>{kp['third_process']['leftover_points']}</code> points with <strong>{kp['third_process']['rising_planet']}</strong> (Gunaka: {kp['third_process']['rising_planet_gunaka']}) as the fructifying planet (Benefic: <code>{kp['third_process']['is_benefic']}</code>).
-                    </li>
-                </ol>
-                
-                <div style="
-                    margin-top: 0.75rem;
-                    padding: 0.75rem;
-                    background: rgba(34, 211, 238, 0.1);
-                    border: 1px solid rgba(34, 211, 238, 0.3);
-                    border-radius: 8px;
-                    text-align: center;
-                ">
-                    <strong>Fructification Time:</strong> <span style='color: #22d3ee; font-size: 1.1rem; font-weight: bold;'>{kp['timing']['value']:.2f} / {kp['third_process']['rising_planet_gunaka']} {kp['timing']['unit']}</span><br>
-                    <span style='color: #9ca3af; font-size: 0.85rem;'>Approx. <strong>{kp['timing']['time_in_days']:.1f} days</strong> from query time</span>
-                </div>
-            </div>
-            """, unsafe_allow_html=True)
+            st.markdown(f"""<div style="font-size: 0.95rem; line-height: 1.6;">
+<strong>Equinoctial Midday Shadow:</strong> <span style='color: #22d3ee; font-weight: bold;'>{kp['equinoctial_shadow']:.2f} gnomons</span> (Latitude: {kp['latitude']:.4f}°)<br>
+<strong>Ascendant Longitude:</strong> {format_longitude(kp['lagna_longitude'])} (in sign: {get_sign_name(chart.lagna_sign)})<br>
+<strong>Kalapinda (Ascendant in minutes of arc):</strong> <span style='color: #a855f7; font-weight: bold;'>{kp['kalapinda']}</span><br>
+
+<h6 style="margin-top: 0.75rem; margin-bottom: 0.25rem; color: #f472b6;">Step-by-Step Calculation:</h6>
+<ol style="margin-left: 1rem; padding-left: 0; margin-bottom: 0.75rem;">
+    <li><strong>First Process (Planetary Signification):</strong> 
+        Product of Kalapinda & Shadow = <code>{kp['first_process']['product']:.2f}</code>. 
+        Dividing by 7 gives remainder <code>{kp['first_process']['remainder']}</code>, 
+        corresponding to <strong>{kp['first_process']['planet']}</strong> (Gunaka: <code>{kp['first_process']['gunaka']}</code>).
+    </li>
+    <li><strong>Second Process (Gunaka Multiplier):</strong> 
+        Product of Kalapinda & Gunaka = <code>{kp['second_process']['product']}</code>. 
+        Divisor (Sum of Gunakas from Sun to {kp['first_process']['planet']}) = <code>{kp['second_process']['divisor']}</code>. 
+        Dividing gives remainder Y = <code>{kp['second_process']['remainder_y']}</code>.
+    </li>
+    <li><strong>Third Process (Planetary Deductions):</strong> 
+        Deducting planetary factors sequentially: Y leaves <code>{kp['third_process']['leftover_points']}</code> points with <strong>{kp['third_process']['rising_planet']}</strong> (Gunaka: {kp['third_process']['rising_planet_gunaka']}) as the fructifying planet (Benefic: <code>{kp['third_process']['is_benefic']}</code>).
+    </li>
+</ol>
+
+<div style="
+    margin-top: 0.75rem;
+    padding: 0.75rem;
+    background: rgba(34, 211, 238, 0.1);
+    border: 1px solid rgba(34, 211, 238, 0.3);
+    border-radius: 8px;
+    text-align: center;
+">
+    <strong>Fructification Time:</strong> <span style='color: #22d3ee; font-size: 1.1rem; font-weight: bold;'>{kp['timing']['value']:.2f} / {kp['third_process']['rising_planet_gunaka']} {kp['timing']['unit']}</span><br>
+    <span style='color: #9ca3af; font-size: 0.85rem;'>Approx. <strong>{kp['timing']['time_in_days']:.1f} days</strong> from query time</span>
+</div>
+</div>""", unsafe_allow_html=True)
     except Exception as e:
         st.warning(f"Unable to calculate Kalapinda timing: {str(e)}")
 
