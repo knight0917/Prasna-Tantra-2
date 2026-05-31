@@ -259,6 +259,7 @@ class TestPrasnaTantra(unittest.TestCase):
             self.assertEqual(stronger, "Mercury")
             self.assertIn("faster motional speed", reason)
 
+
             # Scenario 6b: Motional Speed (Venus faster)
             chart.planets = {
                 "Sun": {"longitude": 0.0, "speed": 1.0, "is_retrograde": False},
