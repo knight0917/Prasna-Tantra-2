@@ -150,6 +150,20 @@ class TestPrasnaTantra(unittest.TestCase):
         self.assertEqual(res5["lagnapathi"], "Saturn")
         self.assertEqual(res5["karyesa"], "Saturn")
 
+        # 6th query should wrap back to 1st query reference (Ascendant)
+        res6 = self.chart.evaluate_query(2, query_num=6)
+        self.assertEqual(res6["query_num"], 1)
+        self.assertEqual(res6["ref_point_name"], "Ascendant (Lagna)")
+        self.assertEqual(res6["lagnapathi"], "Mercury")
+        self.assertEqual(res6["karyesa"], "Venus")
+
+        # 7th query should wrap to 2nd query reference (Moon)
+        res7 = self.chart.evaluate_query(2, query_num=7)
+        self.assertEqual(res7["query_num"], 2)
+        self.assertEqual(res7["ref_point_name"], "Moon")
+        self.assertEqual(res7["lagnapathi"], "Moon")
+        self.assertEqual(res7["karyesa"], "Sun")
+
     def test_mercury_venus_relative_strength_tie_breakers(self):
         from unittest.mock import patch
         

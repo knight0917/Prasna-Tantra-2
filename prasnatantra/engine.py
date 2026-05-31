@@ -572,28 +572,38 @@ class PrasnaChart:
         """
         Evaluates a query corresponding to a specific house.
         house_num: 1 to 12
-        query_num: 1 to 5 (sequential query number for multiple queries)
+        query_num: sequential query number for multiple queries.
+                   Values wrap in a 1..5 cycle (e.g., 6->1, 7->2).
         special_category: string (optional, e.g. "deity_curse", "sports")
         query_text: string (optional, original query text for contextual overrides)
         """
         if house_num < 1 or house_num > 12:
             raise ValueError("House number must be between 1 and 12.")
             
-        # Determine the reference "Lagna" point based on the query number
-        if query_num == 1:
+        # Normalize query number to strict 1..5 classical cycle
+        try:
+            qn = int(query_num)
+        except Exception:
+            qn = 1
+        if qn <= 0:
+            qn = 1
+        query_num_normalized = ((qn - 1) % 5) + 1
+
+        # Determine the reference "Lagna" point based on normalized query number
+        if query_num_normalized == 1:
             ref_sign = self.lagna_sign
             ref_point_name = "Ascendant (Lagna)"
-        elif query_num == 2:
+        elif query_num_normalized == 2:
             ref_sign = get_sign(self.planets["Moon"]["longitude"])
             ref_point_name = "Moon"
-        elif query_num == 3:
+        elif query_num_normalized == 3:
             ref_sign = get_sign(self.planets["Sun"]["longitude"])
             ref_point_name = "Sun"
-        elif query_num == 4:
+        elif query_num_normalized == 4:
             ref_sign = get_sign(self.planets["Jupiter"]["longitude"])
             ref_point_name = "Jupiter"
         else:
-            # 5th query onwards: stronger between Mercury and Venus
+            # 5th query: stronger between Mercury and Venus
             stronger_planet, strength_reason = self._get_stronger_mercury_venus()
             ref_sign = get_sign(self.planets[stronger_planet]["longitude"])
             ref_point_name = f"{stronger_planet} (stronger: {strength_reason})"
@@ -610,7 +620,7 @@ class PrasnaChart:
         
         evaluation = {
             "house": house_num,
-            "query_num": query_num,
+            "query_num": query_num_normalized,
             "ref_point_name": ref_point_name,
             "ref_sign_name": get_sign_name(ref_sign),
             "query_sign_name": get_sign_name(query_sign),
