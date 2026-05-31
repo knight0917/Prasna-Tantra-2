@@ -880,6 +880,12 @@ def evaluate_women_enquiry(chart):
             "rule": "Women Enquiry: Venus/Moon affliction"
         })
         score_adj -= 10
+    else:
+        predictions.append({
+            "category": "Emotional Climate",
+            "prediction": "Mixed emotional climate; progress is possible with patience and clear communication.",
+            "rule": "Women Enquiry: Mixed Venus/Moon condition"
+        })
 
     if rel_1_ven and rel_1_ven["is_applying"] and rel_1_ven["is_friendly"]:
         details.append("Women Enquiry: Lagnapathi has friendly applying tie with Venus.")

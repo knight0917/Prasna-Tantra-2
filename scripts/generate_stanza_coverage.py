@@ -24,7 +24,9 @@ RULE_BUCKETS = {
         r"wealth", r"siblings", r"children", r"property", r"domestic", r"education",
         r"lord of the ascendant", r"third lord", r"fifth and seventh", r"seventh house",
         r"tenth lord", r"twelfth lord", r"eleventh lord", r"sixth lord", r"resolution may occur soon",
-        r"gain through a new position"
+        r"gain through a new position", r"matter under consideration", r"lagna, moon, and the lord",
+        r"occupy exaltation, own sign, or friendly signs", r"occupies the 6th house",
+        r"planet occupying its own navamsa", r"fixed lagna"
     ],
     "deity_curse": [r"curse", r"deit", r"divine anger"],
     "master_servant": [r"employment", r"job", r"service", r"master", r"servant"],
