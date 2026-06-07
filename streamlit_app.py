@@ -48,48 +48,57 @@ st.set_page_config(
 # Custom Premium Styling
 st.markdown("""
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap');
-
-
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Outfit:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap');
 
 /* Main Streamlit container background and stars effect */
 .stApp {
-    background-color: #080711;
+    background-color: #060713;
     background-image: 
-        radial-gradient(1px 1px at 20px 30px, #ffffff, rgba(0,0,0,0)),
-        radial-gradient(1.5px 1.5px at 40px 70px, #ffffff, rgba(0,0,0,0)),
-        radial-gradient(1px 1px at 50px 160px, #dddddd, rgba(0,0,0,0)),
-        radial-gradient(2px 2px at 80px 120px, #ffffff, rgba(0,0,0,0)),
-        radial-gradient(1px 1px at 110px 220px, #cccccc, rgba(0,0,0,0)),
-        radial-gradient(1.5px 1.5px at 150px 50px, #ffffff, rgba(0,0,0,0));
+        radial-gradient(1px 1px at 20px 30px, rgba(212, 175, 55, 0.15), rgba(0,0,0,0)),
+        radial-gradient(1.5px 1.5px at 40px 70px, rgba(255, 255, 255, 0.12), rgba(0,0,0,0)),
+        radial-gradient(1px 1px at 50px 160px, rgba(212, 175, 55, 0.1), rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 80px 120px, rgba(255, 255, 255, 0.15), rgba(0,0,0,0)),
+        radial-gradient(1px 1px at 110px 220px, rgba(212, 175, 55, 0.12), rgba(0,0,0,0)),
+        radial-gradient(1.5px 1.5px at 150px 50px, rgba(255, 255, 255, 0.15), rgba(0,0,0,0));
     background-repeat: repeat;
-    background-size: 300px 300px;
-    color: #f3f4f6;
+    background-size: 350px 350px;
+    color: #f8fafc;
     font-family: 'Plus Jakarta Sans', sans-serif;
 }
 
 /* Custom fonts */
-h1, h2, h3, h4, h5, h6 {
-    font-family: 'Outfit', sans-serif !important;
+h1, .glow-text, .verdict-title {
+    font-family: 'Cinzel', serif !important;
     font-weight: 700 !important;
+    letter-spacing: 0.05em;
+}
+h2, h3, h4, h5, h6 {
+    font-family: 'Outfit', sans-serif !important;
+    font-weight: 600 !important;
 }
 
 /* Custom glass cards */
 .glass-card {
-    background: rgba(15, 14, 30, 0.6);
-    border: 1px solid rgba(255, 255, 255, 0.07);
+    background: rgba(13, 16, 38, 0.7);
+    border: 1px solid rgba(212, 175, 55, 0.12);
     border-radius: 16px;
     padding: 1.5rem;
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4), inset 0 0 12px rgba(212, 175, 55, 0.03);
     margin-bottom: 1.5rem;
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.glass-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(212, 175, 55, 0.35);
+    box-shadow: 0 12px 36px 0 rgba(0, 0, 0, 0.45), 0 0 15px rgba(212, 175, 55, 0.08), inset 0 0 12px rgba(212, 175, 55, 0.03);
 }
 
-/* Glowing text */
+/* Glowing gold text */
 .glow-text {
-    text-shadow: 0 0 10px rgba(129, 140, 248, 0.6), 0 0 20px rgba(192, 132, 252, 0.4);
-    background: linear-gradient(135deg, #818cf8 0%, #c084fc 100%);
+    text-shadow: 0 0 8px rgba(212, 175, 55, 0.25), 0 0 16px rgba(245, 158, 11, 0.15);
+    background: linear-gradient(135deg, #f59e0b 0%, #d4af37 50%, #f97316 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
@@ -97,21 +106,23 @@ h1, h2, h3, h4, h5, h6 {
 /* Sincerity status badge */
 .badge {
     display: inline-block;
-    padding: 0.25rem 0.75rem;
+    padding: 0.3rem 0.8rem;
     border-radius: 20px;
-    font-weight: bold;
-    font-size: 0.85rem;
+    font-weight: 700;
+    font-size: 0.82rem;
     text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-family: 'Outfit', sans-serif;
 }
 .badge-sincere {
-    background-color: rgba(52, 211, 153, 0.15);
+    background-color: rgba(16, 185, 129, 0.1);
     color: #34d399;
-    border: 1px solid #34d399;
+    border: 1px solid rgba(16, 185, 129, 0.3);
 }
 .badge-insincere {
-    background-color: rgba(248, 113, 113, 0.15);
+    background-color: rgba(239, 68, 68, 0.15);
     color: #f87171;
-    border: 1px solid #f87171;
+    border: 1px solid rgba(239, 68, 68, 0.3);
 }
 
 /* Indicators Lists */
@@ -120,27 +131,29 @@ h1, h2, h3, h4, h5, h6 {
     border-radius: 8px;
     margin-bottom: 0.5rem;
     font-size: 0.9rem;
-    border-left: 3px solid;
+    border: 1px solid;
+    font-family: 'Outfit', sans-serif;
 }
 .indicator-sincere {
-    background: rgba(52, 211, 153, 0.08);
-    border-left-color: #34d399;
+    background: rgba(16, 185, 129, 0.05);
+    border-color: rgba(16, 185, 129, 0.2);
     color: #34d399;
 }
 .indicator-insincere {
-    background: rgba(248, 113, 113, 0.08);
-    border-left-color: #f87171;
+    background: rgba(239, 68, 68, 0.05);
+    border-color: rgba(239, 68, 68, 0.2);
     color: #f87171;
 }
 
 /* Timing and Details Layout */
 .timing-highlight {
-    background: linear-gradient(90deg, rgba(129, 140, 248, 0.15) 0%, rgba(192, 132, 252, 0.15) 100%);
-    border: 1px solid rgba(129, 140, 248, 0.3);
-    border-radius: 8px;
-    padding: 0.75rem 1rem;
+    background: linear-gradient(90deg, rgba(212, 175, 55, 0.12) 0%, rgba(245, 158, 11, 0.08) 100%);
+    border: 1px solid rgba(212, 175, 55, 0.25);
+    border-radius: 10px;
+    padding: 0.85rem 1.15rem;
     font-size: 1.05rem;
     margin-bottom: 1rem;
+    color: #f8fafc;
 }
 
 .details-list {
@@ -148,28 +161,30 @@ h1, h2, h3, h4, h5, h6 {
     padding-left: 0;
 }
 .details-list li {
-    padding: 0.4rem 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    padding: 0.5rem 0;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.08);
     font-size: 0.92rem;
+    color: #cbd5e1;
 }
 
 /* SVG Container */
 .kundali-container {
-    background: rgba(5, 4, 12, 0.5);
-    border-radius: 12px;
-    padding: 0.5rem;
-    border: 1px solid rgba(255, 255, 255, 0.03);
+    background: rgba(13, 16, 38, 0.5);
+    border-radius: 16px;
+    padding: 1rem;
+    border: 1px solid rgba(212, 175, 55, 0.15);
     display: flex;
     justify-content: center;
     align-items: center;
-    max-width: 420px;
+    max-width: 440px;
     margin: 0 auto;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.35), inset 0 0 15px rgba(212, 175, 55, 0.03);
 }
 
 /* AI stream box styling */
 .ai-stream-box {
     background: rgba(10, 8, 20, 0.8);
-    border: 1px solid rgba(129, 140, 248, 0.2);
+    border: 1px solid rgba(212, 175, 55, 0.2);
     border-radius: 12px;
     padding: 1.5rem;
     font-size: 1rem;
@@ -185,17 +200,18 @@ h1, h2, h3, h4, h5, h6 {
     margin-top: 1rem;
 }
 .lost-metric-box {
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    background: rgba(13, 16, 38, 0.45);
+    border: 1px solid rgba(212, 175, 55, 0.12);
     border-radius: 12px;
     padding: 1.25rem 1rem;
     text-align: center;
     box-shadow: 0 4px 15px rgba(0,0,0,0.25);
-    transition: transform 0.2s ease, border-color 0.2s ease;
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 }
 .lost-metric-box:hover {
     transform: translateY(-2px);
-    border-color: rgba(255, 255, 255, 0.12);
+    border-color: rgba(212, 175, 55, 0.35);
+    box-shadow: 0 6px 20px rgba(212, 175, 55, 0.08);
 }
 .lost-metric-label {
     font-size: 0.78rem;
@@ -213,14 +229,70 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Style specifically the container that has the input anchor to match the cosmic glassmorphism theme */
 div[data-testid="stVerticalBlockBorderWrapper"]:has(#input-section-anchor) {
-    background: rgba(15, 14, 30, 0.6) !important;
-    border: 1px solid rgba(255, 255, 255, 0.07) !important;
+    background: rgba(13, 16, 38, 0.7) !important;
+    border: 1px solid rgba(212, 175, 55, 0.12) !important;
     border-radius: 16px !important;
     padding: 1.5rem !important;
-    backdrop-filter: blur(12px) !important;
-    -webkit-backdrop-filter: blur(12px) !important;
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37) !important;
+    backdrop-filter: blur(14px) !important;
+    -webkit-backdrop-filter: blur(14px) !important;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4) !important;
     margin-bottom: 1.5rem !important;
+    transition: border-color 0.3s ease;
+}
+div[data-testid="stVerticalBlockBorderWrapper"]:has(#input-section-anchor):hover {
+    border-color: rgba(212, 175, 55, 0.3) !important;
+}
+
+/* Primary Button - Gold Gradient */
+div.stButton > button[kind="primary"] {
+    background: linear-gradient(135deg, #fbbf24 0%, #d4af37 100%) !important;
+    color: #070814 !important;
+    font-weight: 700 !important;
+    border: none !important;
+    border-radius: 30px !important;
+    padding: 0.6rem 1.8rem !important;
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.25) !important;
+    transition: all 0.3s ease-in-out !important;
+    font-family: 'Outfit', sans-serif !important;
+}
+div.stButton > button[kind="primary"]:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 20px rgba(212, 175, 55, 0.45) !important;
+    background: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%) !important;
+}
+div.stButton > button[kind="primary"]:active {
+    transform: translateY(1px) !important;
+}
+
+/* Secondary Button - Glass & Gold Border */
+div.stButton > button[kind="secondary"] {
+    background: rgba(13, 16, 38, 0.5) !important;
+    color: #cbd5e1 !important;
+    font-weight: 600 !important;
+    border: 1px solid rgba(212, 175, 55, 0.25) !important;
+    border-radius: 30px !important;
+    padding: 0.5rem 1.5rem !important;
+    transition: all 0.3s ease-in-out !important;
+    font-family: 'Outfit', sans-serif !important;
+}
+div.stButton > button[kind="secondary"]:hover {
+    color: #d4af37 !important;
+    border-color: #d4af37 !important;
+    background: rgba(212, 175, 55, 0.08) !important;
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.1) !important;
+    transform: translateY(-1px) !important;
+}
+
+/* Override Streamlit native inputs */
+.stTextInput input, .stDateInput input, div[data-baseweb="select"] {
+    background-color: rgba(13, 16, 38, 0.6) !important;
+    color: #f8fafc !important;
+    border: 1px solid rgba(212, 175, 55, 0.15) !important;
+    border-radius: 8px !important;
+}
+.stTextInput input:focus, .stDateInput input:focus {
+    border-color: #d4af37 !important;
+    box-shadow: 0 0 8px rgba(212, 175, 55, 0.25) !important;
 }
 
 /* Responsive adjustments for mobile/phone views */
@@ -269,17 +341,17 @@ div[data-testid="stVerticalBlockBorderWrapper"]:has(#input-section-anchor) {
 .premium-footer {
     margin-top: 4rem;
     padding: 2rem 1.5rem;
-    background: rgba(15, 14, 30, 0.45);
-    border-top: 1px solid rgba(129, 140, 248, 0.1);
+    background: rgba(13, 16, 38, 0.55);
+    border-top: 1px solid rgba(212, 175, 55, 0.15);
     border-radius: 16px;
     text-align: center;
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    box-shadow: 0 -8px 32px 0 rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    box-shadow: 0 -8px 32px 0 rgba(0, 0, 0, 0.35);
 }
 .premium-footer-title {
     font-size: 0.95rem;
-    color: #9ca3af;
+    color: #cbd5e1;
     margin-bottom: 0.75rem;
     letter-spacing: 1px;
 }
@@ -289,10 +361,10 @@ div[data-testid="stVerticalBlockBorderWrapper"]:has(#input-section-anchor) {
     justify-content: center;
     gap: 0.5rem;
     padding: 0.6rem 1.5rem;
-    background: rgba(129, 140, 248, 0.08);
-    border: 1px solid rgba(129, 140, 248, 0.25);
+    background: rgba(212, 175, 55, 0.08);
+    border: 1px solid rgba(212, 175, 55, 0.25);
     border-radius: 30px;
-    color: #818cf8;
+    color: #d4af37;
     text-decoration: none;
     font-weight: 600;
     font-size: 0.9rem;
@@ -301,11 +373,11 @@ div[data-testid="stVerticalBlockBorderWrapper"]:has(#input-section-anchor) {
     margin-top: 0.5rem;
 }
 .premium-footer-button:hover {
-    background: rgba(168, 85, 247, 0.15);
-    border-color: rgba(168, 85, 247, 0.45);
-    color: #c084fc;
+    background: rgba(245, 158, 11, 0.15);
+    border-color: rgba(245, 158, 11, 0.45);
+    color: #fbbf24;
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(168, 85, 247, 0.3);
+    box-shadow: 0 6px 20px rgba(245, 158, 11, 0.3);
 }
 </style>
 """, unsafe_allow_html=True)
@@ -364,13 +436,13 @@ def generate_kundali_svg(chart):
     svg = f"""
     <svg viewBox="0 0 400 400" width="100%" height="100%">
         <style>
-            .chart-border {{ fill: none; stroke: #818cf8; stroke-width: 2.5; filter: drop-shadow(0 0 6px rgba(129, 140, 248, 0.3)); }}
-            .chart-line {{ fill: none; stroke: rgba(129, 140, 248, 0.5); stroke-width: 1.5; }}
-            .house-label {{ fill: #6b7280; font-family: 'Outfit', sans-serif; font-size: 11px; font-weight: 600; text-anchor: middle; }}
-            .sign-number {{ fill: #c084fc; font-family: 'Outfit', sans-serif; font-size: 12px; font-weight: 700; text-anchor: middle; }}
-            .planet-txt {{ font-family: 'Plus Jakarta Sans', sans-serif; font-size: 10.5px; font-weight: 500; text-anchor: middle; }}
-            .planet-txt.benefic {{ fill: #22d3ee; }}
-            .planet-txt.malefic {{ fill: #f87171; }}
+            .chart-border {{ fill: none; stroke: #d4af37; stroke-width: 2.5; filter: drop-shadow(0 0 6px rgba(212, 175, 55, 0.4)); }}
+            .chart-line {{ fill: none; stroke: rgba(212, 175, 55, 0.3); stroke-width: 1.5; }}
+            .house-label {{ fill: #8e90a6; font-family: 'Outfit', sans-serif; font-size: 11px; font-weight: 600; text-anchor: middle; }}
+            .sign-number {{ fill: #f59e0b; font-family: 'Outfit', sans-serif; font-size: 12px; font-weight: 700; text-anchor: middle; }}
+            .planet-txt {{ font-family: 'Plus Jakarta Sans', sans-serif; font-size: 11px; font-weight: 700; text-anchor: middle; }}
+            .planet-txt.benefic {{ fill: #34d399; filter: drop-shadow(0 0 2px rgba(52, 211, 153, 0.5)); }}
+            .planet-txt.malefic {{ fill: #f87171; filter: drop-shadow(0 0 2px rgba(248, 113, 113, 0.5)); }}
         </style>
         <rect x="10" y="10" width="380" height="380" class="chart-border" />
         <line x1="10" y1="10" x2="390" y2="390" class="chart-line" />
@@ -796,7 +868,7 @@ if st.session_state.chart and st.session_state.evaluation:
     chart = st.session_state.chart
     eval_res = st.session_state.evaluation
     
-    # ------------------ QUERY COUNTER & REFERENCE INDICATOR ------------------
+    # ---------------    # ------------------ QUERY COUNTER & REFERENCE INDICATOR ------------------
     q_num = eval_res.get("query_num", 1)
     ref_pt = eval_res.get("ref_point_name", "Ascendant (Lagna)")
     ref_sign = eval_res.get("ref_sign_name", "Aries")
@@ -811,119 +883,123 @@ if st.session_state.chart and st.session_state.evaluation:
     }
     rule_note = query_rules.get(q_num, f"Q{q_num}+ → Stronger of Mercury/Venus: For 5th query onwards, the stronger (by Avastha) of Mercury or Venus sets the reference point.")
     
-    st.markdown(f"""
-    <div class='glass-card' style='margin-bottom: 1rem; border-left: 5px solid #22d3ee; padding: 1.25rem 1.5rem;'>
-        <div style='display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 0.75rem;'>
-            <div style='flex: 1; min-width: 220px;'>
-                <div style='display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.5rem;'>
-                    <span style='background: #22d3ee; color: #080711; font-weight: 800; padding: 0.2rem 0.65rem; border-radius: 20px; font-size: 0.9rem; font-family: "Outfit", sans-serif; white-space: nowrap;'>Question #{q_num}</span>
-                    <h4 style='margin: 0; color: #f3f4f6; font-family: "Outfit", sans-serif; font-size: 1.05rem;'>Prasna Analysis</h4>
-                </div>
-                <p style='margin: 0 0 0.5rem 0; color: #cbd5e1; font-size: 0.93rem; line-height: 1.5;'>
-                    🏠 Houses counted from: <strong style='color: #22d3ee;'>{ref_pt}</strong> &nbsp;|&nbsp;
-                    ♈ Sign: <strong style='color: #a78bfa;'>{ref_sign}</strong> &nbsp;|&nbsp;
-                    🎯 Queried House: <strong style='color: #fb923c;'>House {house_num}</strong>
-                </p>
-                <p style='margin: 0; color: #64748b; font-size: 0.82rem; font-style: italic; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 0.5rem;'>
-                    📜 {rule_note}
-                </p>
+    # ------------------ QUERY INFO & SINCERITY DASHBOARD ------------------
+    col_header1, col_header2 = st.columns([1.1, 1.3])
+    
+    with col_header1:
+        st.markdown(f"""
+        <div class='glass-card' style='height: 100%; min-height: 195px; border-left: 5px solid #d4af37;'>
+            <div style='display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.5rem;'>
+                <span style='background: linear-gradient(135deg, #fbbf24 0%, #d4af37 100%); color: #070814; font-weight: 800; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.85rem; font-family: "Outfit", sans-serif; white-space: nowrap;'>Question #{q_num}</span>
+                <h4 style='margin: 0; color: #f8fafc; font-size: 1.15rem; font-family: "Outfit", sans-serif;'>Prasna Analysis</h4>
             </div>
+            <p style='margin: 0 0 0.5rem 0; color: #cbd5e1; font-size: 0.95rem; line-height: 1.6;'>
+                🏠 Houses counted from: <strong style='color: #d4af37;'>{ref_pt}</strong><br>
+                ♈ Sign: <strong style='color: #f59e0b;'>{ref_sign}</strong> &nbsp;|&nbsp;
+                🎯 Queried House: <strong style='color: #f97316;'>House {house_num}</strong>
+            </p>
+            <p style='margin: 0; color: #8e90a6; font-size: 0.82rem; font-style: italic; border-top: 1px solid rgba(212,175,55,0.1); padding-top: 0.5rem;'>
+                📜 {rule_note}
+            </p>
         </div>
-    </div>
-    """, unsafe_allow_html=True)
-    
-    # ------------------ TOP PANEL: Genuinity/Sincerity Card ------------------
-    sinc = eval_res.get("sincerity", {"is_sincere": True})
-    is_sincere = sinc.get("is_sincere", True)
-    
-    st.markdown("<div class='glass-card'>", unsafe_allow_html=True)
-    col_s1, col_s2 = st.columns([1, 4])
-    with col_s1:
-        st.markdown("<h5>Genuinity / Sincerity</h5>", unsafe_allow_html=True)
-        if is_sincere:
-            st.markdown("<span class='badge badge-sincere'>✦ Sincere Query ✦</span>", unsafe_allow_html=True)
-        else:
-            st.markdown("<span class='badge badge-insincere'>✦ Insincere / Test ✦</span>", unsafe_allow_html=True)
-    with col_s2:
-        st.markdown("##### Astrological Authenticity Breakdown")
-        if is_sincere:
-            reasons_sinc = sinc.get("reasons_sincere", [])
-            if not reasons_sinc:
-                st.markdown("<div class='indicator-item indicator-sincere'>✓ Sincere by default: No negative indicators found in the chart.</div>", unsafe_allow_html=True)
+        """, unsafe_allow_html=True)
+        
+    with col_header2:
+        sinc = eval_res.get("sincerity", {"is_sincere": True})
+        is_sincere = sinc.get("is_sincere", True)
+        
+        st.markdown("<div class='glass-card' style='height: 100%; min-height: 195px;'>", unsafe_allow_html=True)
+        col_s1, col_s2 = st.columns([1, 2.2])
+        with col_s1:
+            st.markdown("<h5 style='margin-top:0; margin-bottom:0.75rem;'>Genuinity</h5>", unsafe_allow_html=True)
+            if is_sincere:
+                st.markdown("<span class='badge badge-sincere'>✦ Sincere Query ✦</span>", unsafe_allow_html=True)
             else:
-                for r in reasons_sinc:
-                    st.markdown(f"<div class='indicator-item indicator-sincere'>✓ {r}</div>", unsafe_allow_html=True)
-        else:
-            reasons_insinc = sinc.get("reasons_insincere", [])
-            if not reasons_insinc:
-                st.markdown("<div class='indicator-item indicator-insincere'>✗ Question is flagged as insincere/test query.</div>", unsafe_allow_html=True)
+                st.markdown("<span class='badge badge-insincere'>✦ Insincere / Test ✦</span>", unsafe_allow_html=True)
+        with col_s2:
+            st.markdown("<h5 style='margin-top:0; margin-bottom:0.75rem;'>Authenticity Breakdown</h5>", unsafe_allow_html=True)
+            if is_sincere:
+                reasons_sinc = sinc.get("reasons_sincere", [])
+                if not reasons_sinc:
+                    st.markdown("<div class='indicator-item indicator-sincere'>✓ Sincere by default: No negative indicators found in the chart.</div>", unsafe_allow_html=True)
+                else:
+                    for r in reasons_sinc:
+                        st.markdown(f"<div class='indicator-item indicator-sincere'>✓ {r}</div>", unsafe_allow_html=True)
             else:
-                for r in reasons_insinc:
-                    st.markdown(f"<div class='indicator-item indicator-insincere'>✗ {r}</div>", unsafe_allow_html=True)
-    st.markdown("</div>", unsafe_allow_html=True)
-    
-    # ------------------ CENTER PANEL: Evaluation Summary ------------------
-    st.markdown("<div class='glass-card'>", unsafe_allow_html=True)
-    st.markdown("<h4>✦ Evaluation Summary</h4>", unsafe_allow_html=True)
-
-    # ── Classical Verdict Banner (the primary answer) ──────────────────────
+                reasons_insinc = sinc.get("reasons_insincere", [])
+                if not reasons_insinc:
+                    st.markdown("<div class='indicator-item indicator-insincere'>✗ Question is flagged as insincere/test query.</div>", unsafe_allow_html=True)
+                else:
+                    for r in reasons_insinc:
+                        st.markdown(f"<div class='indicator-item indicator-insincere'>✗ {r}</div>", unsafe_allow_html=True)
+        st.markdown("</div>", unsafe_allow_html=True)
+        
+    # ── Classical Verdict Banner styling variables ──────────────────────
     verdict = eval_res.get("verdict", "MAYBE")
     verdict_reason = eval_res.get("verdict_reason", "")
 
     VERDICT_STYLES = {
-        "YES":                    ("✅", "#00c853", "#0a2e1a", "YES — The matter will succeed"),
-        "YES, but partially":     ("🟡", "#ffd600", "#1a1500", "YES (Partial) — Partial success likely"),
-        "YES, with struggle":     ("⚠️", "#ff9100", "#1a0d00", "YES (with struggle) — Success after obstacles"),
-        "YES, through intermediary": ("🔄", "#00bcd4", "#001a1f", "YES (via intermediary) — Through a third party"),
-        "MAYBE":                  ("🔮", "#9c27b0", "#12001a", "MAYBE — Outcome uncertain"),
-        "NO":                     ("❌", "#f44336", "#1a0000", "NO — The matter will not succeed"),
-        "CANNOT BE ANSWERED":     ("🚫", "#607d8b", "#0a0f12", "CANNOT BE ANSWERED — Query is insincere/test"),
+        "YES":                    ("✅", "#10b981", "rgba(16, 185, 129, 0.08)", "YES — The matter will succeed"),
+        "YES, but partially":     ("🟡", "#f59e0b", "rgba(245, 158, 11, 0.08)", "YES (Partial) — Partial success likely"),
+        "YES, with struggle":     ("⚠️", "#f97316", "rgba(249, 115, 22, 0.08)", "YES (with struggle) — Success after obstacles"),
+        "YES, through intermediary": ("🔄", "#3b82f6", "rgba(59, 130, 246, 0.08)", "YES (via intermediary) — Through a third party"),
+        "MAYBE":                  ("🔮", "#a855f7", "rgba(168, 85, 247, 0.08)", "MAYBE — Outcome uncertain"),
+        "NO":                     ("❌", "#ef4444", "rgba(239, 68, 68, 0.08)", "NO — The matter will not succeed"),
+        "CANNOT BE ANSWERED":     ("🚫", "#6b7280", "rgba(107, 114, 128, 0.08)", "CANNOT BE ANSWERED — Query is insincere/test"),
     }
-    icon, color, bg, label = VERDICT_STYLES.get(verdict, ("🔮", "#9c27b0", "#12001a", verdict))
+    icon, color, bg, label = VERDICT_STYLES.get(verdict, ("🔮", "#a855f7", "rgba(168, 85, 247, 0.08)", verdict))
 
-    st.markdown(f"""
-    <div style="
-        background: {bg};
-        border: 2px solid {color};
-        border-radius: 16px;
-        padding: 1.4rem 2rem;
-        margin-bottom: 1.2rem;
-        text-align: center;
-    ">
-        <div style="font-size: 3rem; line-height: 1;">{icon}</div>
-        <div style="font-size: 2rem; font-weight: 900; color: {color}; letter-spacing: 0.05em; margin-top: 0.4rem;">
-            {label}
+    # ------------------ TWO-COLUMN MAIN RESULTS DASHBOARD ------------------
+    col_left, col_right = st.columns([1.3, 1.0])
+    
+    with col_left:
+        # Verdict Banner
+        st.markdown(f"""
+        <div class='glass-card' style='border: 1px solid {color}; background: {bg}; box-shadow: 0 0 24px {color}18, inset 0 0 12px {color}08; text-align: center; padding: 1.5rem 2rem;'>
+            <div style="font-size: 3.2rem; line-height: 1;">{icon}</div>
+            <div class='verdict-title' style="font-size: 1.8rem; font-weight: 800; color: {color}; margin-top: 0.5rem; text-shadow: 0 0 10px {color}30;">
+                {label}
+            </div>
+            <p style="font-size: 0.95rem; color: #cbd5e1; margin-top: 0.6rem; font-style: italic; border-top: 1px solid rgba(212, 175, 55, 0.08); padding-top: 0.6rem; margin-bottom: 0;">
+                {verdict_reason}
+            </p>
         </div>
-        <div style="font-size: 0.85rem; color: #aaa; margin-top: 0.6rem; font-style: italic;">
-            {verdict_reason}
-        </div>
-    </div>
-    """, unsafe_allow_html=True)
+        """, unsafe_allow_html=True)
+        
+        # Supporting metrics
+        col_m1, col_m2 = st.columns(2)
+        with col_m1:
+            st.markdown(f"""
+            <div class='glass-card' style='text-align: center; padding: 1.15rem 0.5rem; margin-bottom: 1.2rem;'>
+                <div class='lost-metric-label'>Success Chance</div>
+                <div style='font-size: 1.6rem; font-weight: 800; color: #fbbf24; font-family: "Outfit", sans-serif;'>{eval_res.get("success_probability", "Medium")}</div>
+            </div>
+            """, unsafe_allow_html=True)
+        with col_m2:
+            st.markdown(f"""
+            <div class='glass-card' style='text-align: center; padding: 1.15rem 0.5rem; margin-bottom: 1.2rem;'>
+                <div class='lost-metric-label'>Score Percentage</div>
+                <div style='font-size: 1.6rem; font-weight: 800; color: #fbbf24; font-family: "Outfit", sans-serif;'>{eval_res.get("score_pct", 50)}%</div>
+            </div>
+            """, unsafe_allow_html=True)
+            
+        # Timing highlight
+        st.markdown(f"<div class='timing-highlight'>⏰ <strong>Estimated Timing:</strong> {eval_res.get('timing', 'N/A')}</div>", unsafe_allow_html=True)
+        
+        # Kalapinda Timing Method
+        from prasnatantra.astronomy import parse_coord
+        from prasnatantra.timing import calculate_kalapinda_timing
 
-    # Display Supporting Metrics
-    col_m1, col_m2 = st.columns(2)
-    with col_m1:
-        st.metric(label="Success Chance", value=eval_res.get("success_probability", "Medium"))
-    with col_m2:
-        st.metric(label="Score Percentage", value=f"{eval_res.get('score_pct', 50)}%")
-
-    # Display Timing
-    st.markdown(f"<div class='timing-highlight'>⏰ <strong>Estimated Timing:</strong> {eval_res.get('timing', 'N/A')}</div>", unsafe_allow_html=True)
-
-    # Calculate and Display Kalapinda Timing Method
-    from prasnatantra.astronomy import parse_coord
-    from prasnatantra.timing import calculate_kalapinda_timing
-
-    lat_val = parse_coord(str(st.session_state.latitude))
-    try:
-        kp = calculate_kalapinda_timing(chart.lagna_sidereal, lat_val)
-        with st.expander("🕰️ Prasna Tantra Kalapinda Timing Method (IV.15-19)", expanded=False):
-            st.markdown(f"""<div style="font-size: 0.95rem; line-height: 1.6;">
-<strong>Equinoctial Midday Shadow:</strong> <span style='color: #22d3ee; font-weight: bold;'>{kp['equinoctial_shadow']:.2f} gnomons</span> (Latitude: {kp['latitude']:.4f}°)<br>
+        lat_val = parse_coord(str(st.session_state.latitude))
+        try:
+            kp = calculate_kalapinda_timing(chart.lagna_sidereal, lat_val)
+            with st.expander("🕰️ Prasna Tantra Kalapinda Timing Method (IV.15-19)", expanded=False):
+                st.markdown(f"""<div style="font-size: 0.92rem; line-height: 1.6;">
+<strong>Equinoctial Midday Shadow:</strong> <span style='color: #d4af37; font-weight: bold;'>{kp['equinoctial_shadow']:.2f} gnomons</span> (Latitude: {kp['latitude']:.4f}°)<br>
 <strong>Ascendant Longitude:</strong> {format_longitude(kp['lagna_longitude'])} (in sign: {get_sign_name(chart.lagna_sign)})<br>
-<strong>Kalapinda (Ascendant in minutes of arc):</strong> <span style='color: #a855f7; font-weight: bold;'>{kp['kalapinda']}</span><br>
+<strong>Kalapinda (Ascendant in minutes of arc):</strong> <span style='color: #f59e0b; font-weight: bold;'>{kp['kalapinda']}</span><br>
 
-<h6 style="margin-top: 0.75rem; margin-bottom: 0.25rem; color: #f472b6;">Step-by-Step Calculation:</h6>
+<h6 style="margin-top: 0.75rem; margin-bottom: 0.25rem; color: #fbbf24; font-family: 'Outfit', sans-serif;">Step-by-Step Calculation:</h6>
 <ol style="margin-left: 1rem; padding-left: 0; margin-bottom: 0.75rem;">
     <li><strong>First Process (Planetary Signification):</strong> 
         Product of Kalapinda & Shadow = <code>{kp['first_process']['product']:.2f}</code>. 
@@ -943,24 +1019,37 @@ if st.session_state.chart and st.session_state.evaluation:
 <div style="
     margin-top: 0.75rem;
     padding: 0.75rem;
-    background: rgba(34, 211, 238, 0.1);
-    border: 1px solid rgba(34, 211, 238, 0.3);
+    background: rgba(212, 175, 55, 0.08);
+    border: 1px solid rgba(212, 175, 55, 0.2);
     border-radius: 8px;
     text-align: center;
 ">
-    <strong>Fructification Time:</strong> <span style='color: #22d3ee; font-size: 1.1rem; font-weight: bold;'>{kp['timing']['value']:.2f} / {kp['third_process']['rising_planet_gunaka']} {kp['timing']['unit']}</span><br>
-    <span style='color: #9ca3af; font-size: 0.85rem;'>Approx. <strong>{kp['timing']['time_in_days']:.1f} days</strong> from query time</span>
+    <strong>Fructification Time:</strong> <span style='color: #d4af37; font-size: 1.05rem; font-weight: bold;'>{kp['timing']['value']:.2f} / {kp['third_process']['rising_planet_gunaka']} {kp['timing']['unit']}</span><br>
+    <span style='color: #cbd5e1; font-size: 0.82rem;'>Approx. <strong>{kp['timing']['time_in_days']:.1f} days</strong> from query time</span>
 </div>
 </div>""", unsafe_allow_html=True)
-    except Exception as e:
-        st.warning(f"Unable to calculate Kalapinda timing: {str(e)}")
+        except Exception as e:
+            st.warning(f"Unable to calculate Kalapinda timing: {str(e)}")
+            
+    with col_right:
+        # Render Kundali Chart
+        st.markdown("<h4 style='text-align: center; margin-top: 0; color: #cbd5e1; font-family: \"Outfit\", sans-serif;'>✦ Prasna Kundali (Sidereal) ✦</h4>", unsafe_allow_html=True)
+        svg_chart = generate_kundali_svg(chart)
+        st.markdown(f"<div class='kundali-container'>{svg_chart}</div>", unsafe_allow_html=True)
+        
+        # Ayanamsha and Lagna info below chart
+        st.markdown(f"""
+        <div style='text-align: center; margin-top: 1.25rem; font-size: 0.85rem; color: #8e90a6; line-height: 1.6;'>
+            <strong>Ayanamsha ({chart.ayanamsha_mode}):</strong> <code>{format_longitude(chart.ayanamsha)}</code><br>
+            <strong>Lagna:</strong> <code>{format_longitude(chart.lagna_sidereal)}</code> in <strong>{get_sign_name(chart.lagna_sign)}</strong>
+        </div>
+        """, unsafe_allow_html=True)
 
-    # Coordinates details
-    st.markdown(f"**Ayanamsha ({chart.ayanamsha_mode}):** `{format_longitude(chart.ayanamsha)}` | **Lagna:** `{format_longitude(chart.lagna_sidereal)}` in **{get_sign_name(chart.lagna_sign)}**", unsafe_allow_html=True)
-    st.markdown("<br>", unsafe_allow_html=True)
-
+    st.markdown("<hr style='margin: 1.5rem 0; border: 0; border-top: 1px solid rgba(212, 175, 55, 0.15);'>", unsafe_allow_html=True)
+    
     # Astrological Rationale Details
-    st.markdown("##### Astrological Rationale Details")
+    st.markdown("<div class='glass-card'>", unsafe_allow_html=True)
+    st.markdown("<h5>✦ Astrological Rationale Details</h5>", unsafe_allow_html=True)
     st.markdown("<ul class='details-list'>", unsafe_allow_html=True)
     for detail in eval_res.get("details", []):
         st.markdown(f"<li>✦ {detail}</li>", unsafe_allow_html=True)
