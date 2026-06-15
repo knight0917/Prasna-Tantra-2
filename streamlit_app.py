@@ -4,6 +4,7 @@ import urllib.parse
 from datetime import datetime, date, time
 import requests
 import streamlit as st
+import streamlit.components.v1 as components
 import pandas as pd
 
 # Force reload of local prasnatantra submodules to ensure Streamlit picks up code updates
@@ -1035,7 +1036,48 @@ if st.session_state.chart and st.session_state.evaluation:
         # Render Kundali Chart
         st.markdown("<h4 style='text-align: center; margin-top: 0; color: #cbd5e1; font-family: \"Outfit\", sans-serif;'>✦ Prasna Kundali (Sidereal) ✦</h4>", unsafe_allow_html=True)
         svg_chart = generate_kundali_svg(chart)
-        st.markdown(f"<div class='kundali-container'>{svg_chart}</div>", unsafe_allow_html=True)
+        components.html(
+            f"""
+            <html>
+            <head>
+                <style>
+                    html, body {{
+                        margin: 0;
+                        padding: 0;
+                        background: transparent;
+                        overflow: hidden;
+                    }}
+                    .kundali-container {{
+                        width: min(100%, 560px);
+                        height: 560px;
+                        margin: 0 auto;
+                        padding: 0.75rem;
+                        background: rgba(10, 10, 24, 0.78);
+                        border: 1px solid rgba(212, 175, 55, 0.18);
+                        border-radius: 18px;
+                        box-sizing: border-box;
+                    }}
+                    .kundali-container svg {{
+                        display: block;
+                        width: 100%;
+                        height: 100%;
+                    }}
+                    @media (max-width: 640px) {{
+                        .kundali-container {{
+                            height: 360px;
+                            padding: 0.5rem;
+                        }}
+                    }}
+                </style>
+            </head>
+            <body>
+                <div class="kundali-container">{svg_chart}</div>
+            </body>
+            </html>
+            """,
+            height=590,
+            scrolling=False,
+        )
         
         # Ayanamsha and Lagna info below chart
         st.markdown(f"""
